@@ -1,0 +1,44 @@
+aid: flatfile
+name: Flatfile
+description: >-
+  Flatfile provides a data onboarding platform with APIs for importing,
+  transforming, and validating data from any source.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - API
+  - Data Import
+  - ETL
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/flatfile/refs/heads/main/apis.yml
+created: '2026-03-16'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+apis:
+  - aid: flatfile:flatfile
+    name: Flatfile API
+    description: >-
+      The Flatfile API enables data import and onboarding with transformation,
+      validation, and collaboration features.
+    humanURL: https://flatfile.com/docs/
+    baseURL: https://api.flatfile.com/v1
+    tags:
+      - Data Import
+      - ETL
+    properties:
+      - type: Documentation
+        url: https://flatfile.com/docs/
+      - type: Getting Started
+        url: https://flatfile.com/docs/quickstart
+common:
+  - type: Website
+    url: https://flatfile.com/
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: Getting Started
+    url: https://flatfile.com/docs/quickstart
+  - type: Sign Up
+    url: https://flatfile.com/account/sign-up/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

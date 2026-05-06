@@ -1,0 +1,3465 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference
+  description: API Reference API capability.
+  tags:
+  - Flatfile
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference HTTP API.
+    authentication:
+      type: bearer
+      token: '{{FLATFILE_TOKEN}}'
+    resources:
+    - name: accounts-current
+      path: /accounts/current
+      operations:
+      - name: get-current
+        method: GET
+        description: Get the current account
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-current
+        method: PATCH
+        description: Update the current account
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: actions
+      path: /actions
+      operations:
+      - name: create
+        method: POST
+        description: Create an action
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+          required: true
+          description: The Space ID for which to create the Action.
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-all
+        method: GET
+        description: Get all actions for the space
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+          required: true
+          description: The Space ID for which to get the Actions.
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: actions-bulk
+      path: /actions/bulk
+      operations:
+      - name: bulk-create
+        method: POST
+        description: Create several actions
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+          required: true
+          description: The Space ID for which to create the Actions.
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: actions-actionid
+      path: /actions/{actionId}
+      operations:
+      - name: get
+        method: GET
+        description: Get an action
+        inputParameters:
+        - name: actionId
+          in: path
+          type: string
+          required: true
+          description: The id of the action to return
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update
+        method: PATCH
+        description: Update an action
+        inputParameters:
+        - name: actionId
+          in: path
+          type: string
+          required: true
+          description: The id of the action to patch
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete
+        method: DELETE
+        description: Delete an action
+        inputParameters:
+        - name: actionId
+          in: path
+          type: string
+          required: true
+          description: The id of the action to delete
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agent-exports
+      path: /agent-exports
+      operations:
+      - name: list
+        method: GET
+        description: List agent exports
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+        - name: agentId
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageNumber
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agent-exports-agentexportid
+      path: /agent-exports/{agentExportId}
+      operations:
+      - name: get
+        method: GET
+        description: Get an agent export
+        inputParameters:
+        - name: agentExportId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete
+        method: DELETE
+        description: Delete an agent export
+        inputParameters:
+        - name: agentExportId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agent-exports-agentexportid-download
+      path: /agent-exports/{agentExportId}/download
+      operations:
+      - name: download
+        method: GET
+        description: Download an agent export
+        inputParameters:
+        - name: agentExportId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents
+      path: /agents
+      operations:
+      - name: list
+        method: GET
+        description: List agents
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: isSystem
+          in: query
+          type: boolean
+        - name: search
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageNumber
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create
+        method: POST
+        description: Create an agent
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents-agentid
+      path: /agents/{agentId}
+      operations:
+      - name: get
+        method: GET
+        description: Get an agent
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete
+        method: DELETE
+        description: Delete an agent
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: query
+          type: string
+          description: This environment variable is no longer needed or used
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents-agentid-versions
+      path: /agents/{agentId}/versions
+      operations:
+      - name: list-versions
+        method: GET
+        description: List agent versions for an agent
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents-agentid-versions-agentversionid-revert
+      path: /agents/{agentId}/versions/{agentVersionId}/revert
+      operations:
+      - name: revert
+        method: GET
+        description: Revert to a specific agent version
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: agentVersionId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents-agentid-roles
+      path: /agents/{agentId}/roles
+      operations:
+      - name: list-agent-roles
+        method: GET
+        description: List Agent Roles
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+          description: The agent id
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: assign-agent-role
+        method: POST
+        description: Assign Role to Agent
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+          description: The agent id
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents-agentid-roles-actorroleid
+      path: /agents/{agentId}/roles/{actorRoleId}
+      operations:
+      - name: delete-agent-role
+        method: DELETE
+        description: Remove Role from Agent
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+          description: The agent id
+        - name: actorRoleId
+          in: path
+          type: string
+          required: true
+          description: The actor role id
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents-agentid-logs
+      path: /agents/{agentId}/logs
+      operations:
+      - name: get-agent-logs
+        method: GET
+        description: Get logs for an agent
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents-log-eventid
+      path: /agents/log/{eventId}
+      operations:
+      - name: get-agent-log
+        method: GET
+        description: Get an agent log
+        inputParameters:
+        - name: eventId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents-logs
+      path: /agents/logs
+      operations:
+      - name: get-environment-agent-logs
+        method: GET
+        description: Get all agent logs in your environment
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: spaceId
+          in: query
+          type: string
+        - name: success
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageNumber
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agents-executions
+      path: /agents/executions
+      operations:
+      - name: get-environment-agent-executions
+        method: GET
+        description: Get all executions in your environment
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: agentId
+          in: query
+          type: string
+        - name: spaceId
+          in: query
+          type: string
+        - name: success
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageNumber
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: apps
+      path: /apps
+      operations:
+      - name: list
+        method: GET
+        description: List apps
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create
+        method: POST
+        description: Create an app
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: apps-appid
+      path: /apps/{appId}
+      operations:
+      - name: get
+        method: GET
+        description: Get an app
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of app
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update
+        method: PATCH
+        description: Update an app
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of app
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete
+        method: DELETE
+        description: Delete an app
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of app to delete
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: apps-appid-constraints
+      path: /apps/{appId}/constraints
+      operations:
+      - name: get-constraints
+        method: GET
+        description: Get constraints
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of the app
+        - name: includeBuiltins
+          in: query
+          type: boolean
+          description: Whether to include built-in constraints
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-constraint
+        method: POST
+        description: Create constraint
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of the app
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: apps-appid-constraints-constraintid
+      path: /apps/{appId}/constraints/{constraintId}
+      operations:
+      - name: get-constraint-by-id
+        method: GET
+        description: Get constraint by ID
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of the app
+        - name: constraintId
+          in: path
+          type: string
+          required: true
+          description: ID of the constraint
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-constraint
+        method: PATCH
+        description: Update constraint
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of the app
+        - name: constraintId
+          in: path
+          type: string
+          required: true
+          description: ID of the constraint
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-constraint
+        method: DELETE
+        description: Delete constraint
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of the app
+        - name: constraintId
+          in: path
+          type: string
+          required: true
+          description: ID of the constraint
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: apps-appid-constraints-constraintid-versions
+      path: /apps/{appId}/constraints/{constraintId}/versions
+      operations:
+      - name: get-constraint-versions
+        method: GET
+        description: Get constraint versions
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of the app
+        - name: constraintId
+          in: path
+          type: string
+          required: true
+          description: ID of the constraint
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: apps-appid-constraints-constraintid-versions-ver
+      path: /apps/{appId}/constraints/{constraintId}/versions/{version}
+      operations:
+      - name: get-constraint-version
+        method: GET
+        description: Get constraint version
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+          description: ID of the app
+        - name: constraintId
+          in: path
+          type: string
+          required: true
+          description: ID of the constraint
+        - name: version
+          in: path
+          type: integer
+          required: true
+          description: Version of the constraint
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: prompts
+      path: //prompts
+      operations:
+      - name: list
+        method: GET
+        description: List prompts
+        inputParameters:
+        - name: promptType
+          in: query
+          type: string
+          description: Type of prompt (default AI_ASSIST)
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of prompts to return in a page (default 7)
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Based on pageSize, which page of prompts to return
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create
+        method: POST
+        description: Create a prompt
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: prompts-promptid
+      path: //prompts/{promptId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a prompt
+        inputParameters:
+        - name: promptId
+          in: path
+          type: string
+          required: true
+          description: ID of prompts
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update
+        method: PATCH
+        description: Update a prompt
+        inputParameters:
+        - name: promptId
+          in: path
+          type: string
+          required: true
+          description: ID of prompts
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete
+        method: DELETE
+        description: Delete a prompts
+        inputParameters:
+        - name: promptId
+          in: path
+          type: string
+          required: true
+          description: ID of prompts
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: auth-publishable-key
+      path: /auth/publishable-key
+      operations:
+      - name: get-publishable-key
+        method: GET
+        description: Obtain the publishable key for a specific environment
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+          description: ID of environment to search
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: auth-sftp-credentials
+      path: /auth/sftp-credentials
+      operations:
+      - name: get-sftp-credentials
+        method: GET
+        description: Get SFTP credentials for Space
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+          required: true
+          description: ID of space to get credentials for
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: canvas-areas
+      path: /canvas-areas
+      operations:
+      - name: list
+        method: GET
+        description: List canvas areas
+        inputParameters:
+        - name: canvasId
+          in: query
+          type: string
+          description: ID of the canvas to filter areas by
+        - name: parentId
+          in: query
+          type: string
+          description: ID of the parent canvas area to filter by
+        - name: spaceId
+          in: query
+          type: string
+          description: ID of the space to filter areas by
+        - name: environmentId
+          in: query
+          type: string
+          description: ID of the environment to filter areas by
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of areas to return in a page (default 20)
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Based on pageSize, which page of areas to return
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create
+        method: POST
+        description: Create a canvas area
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: canvas-areas-canvasareaid
+      path: /canvas-areas/{canvasAreaId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a canvas area
+        inputParameters:
+        - name: canvasAreaId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update
+        method: PATCH
+        description: Update a canvas area
+        inputParameters:
+        - name: canvasAreaId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete
+        method: DELETE
+        description: Delete a canvas area
+        inputParameters:
+        - name: canvasAreaId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: commits-commitid
+      path: /commits/{commitId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a commit version
+        inputParameters:
+        - name: commitId
+          in: path
+          type: string
+          required: true
+          description: ID of the commit version to return
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: commits-commitid-complete
+      path: /commits/{commitId}/complete
+      operations:
+      - name: complete
+        method: POST
+        description: Complete a commit version
+        inputParameters:
+        - name: commitId
+          in: path
+          type: string
+          required: true
+          description: ID of the commit version to complete
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: commits-commitid-replay
+      path: /commits/{commitId}/replay
+      operations:
+      - name: replay
+        method: POST
+        description: Replay a commit version
+        inputParameters:
+        - name: commitId
+          in: path
+          type: string
+          required: true
+          description: ID of the commit version to re-emit a commit:created event for
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-clips
+      path: /data-clips
+      operations:
+      - name: create
+        method: POST
+        description: Create
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list
+        method: GET
+        description: List
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+        - name: sheetId
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-clips-dataclipid
+      path: /data-clips/{dataClipId}
+      operations:
+      - name: update
+        method: PATCH
+        description: Update
+        inputParameters:
+        - name: dataClipId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete
+        method: DELETE
+        description: Delete
+        inputParameters:
+        - name: dataClipId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get
+        method: GET
+        description: Get
+        inputParameters:
+        - name: dataClipId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-clips-dataclipid-add-records
+      path: /data-clips/{dataClipId}/add-records
+      operations:
+      - name: add-records-to-clip
+        method: POST
+        description: Add Records To Clip
+        inputParameters:
+        - name: dataClipId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-clips-dataclipid-resolutions
+      path: /data-clips/{dataClipId}/resolutions
+      operations:
+      - name: get-resolutions
+        method: GET
+        description: Get Resolutions
+        inputParameters:
+        - name: dataClipId
+          in: path
+          type: string
+          required: true
+        - name: includeRecords
+          in: query
+          type: boolean
+          description: Include records in the response. Default is true
+        - name: includeSummary
+          in: query
+          type: boolean
+          description: Include summary in the response. Default is false
+        - name: filterColumn
+          in: query
+          type: string
+          description: The column to filter by.
+        - name: filterConflicts
+          in: query
+          type: boolean
+          description: Whether to filter only conflicts. Default is false
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of resolutions to return in a page. Default is 1000
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Page number of resolutions to return
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-resolution
+        method: PATCH
+        description: Update Resolution
+        inputParameters:
+        - name: dataClipId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: Bearer authentication
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: flatfile-rest
+    description: REST adapter for API Reference.
+    resources:
+    - path: /accounts/current
+      name: get-current
+      operations:
+      - method: GET
+        name: get-current
+        description: Get the current account
+        call: flatfile.get-current
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /accounts/current
+      name: update-current
+      operations:
+      - method: PATCH
+        name: update-current
+        description: Update the current account
+        call: flatfile.update-current
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /actions
+      name: create
+      operations:
+      - method: POST
+        name: create
+        description: Create an action
+        call: flatfile.create
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /actions
+      name: get-all
+      operations:
+      - method: GET
+        name: get-all
+        description: Get all actions for the space
+        call: flatfile.get-all
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /actions/bulk
+      name: bulk-create
+      operations:
+      - method: POST
+        name: bulk-create
+        description: Create several actions
+        call: flatfile.bulk-create
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /actions/{actionId}
+      name: get
+      operations:
+      - method: GET
+        name: get
+        description: Get an action
+        call: flatfile.get
+        with:
+          actionId: rest.actionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /actions/{actionId}
+      name: update
+      operations:
+      - method: PATCH
+        name: update
+        description: Update an action
+        call: flatfile.update
+        with:
+          actionId: rest.actionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /actions/{actionId}
+      name: delete
+      operations:
+      - method: DELETE
+        name: delete
+        description: Delete an action
+        call: flatfile.delete
+        with:
+          actionId: rest.actionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agent-exports
+      name: list
+      operations:
+      - method: GET
+        name: list
+        description: List agent exports
+        call: flatfile.list
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agent-exports/{agentExportId}
+      name: get
+      operations:
+      - method: GET
+        name: get
+        description: Get an agent export
+        call: flatfile.get
+        with:
+          agentExportId: rest.agentExportId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agent-exports/{agentExportId}
+      name: delete
+      operations:
+      - method: DELETE
+        name: delete
+        description: Delete an agent export
+        call: flatfile.delete
+        with:
+          agentExportId: rest.agentExportId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agent-exports/{agentExportId}/download
+      name: download
+      operations:
+      - method: GET
+        name: download
+        description: Download an agent export
+        call: flatfile.download
+        with:
+          agentExportId: rest.agentExportId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents
+      name: list
+      operations:
+      - method: GET
+        name: list
+        description: List agents
+        call: flatfile.list
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents
+      name: create
+      operations:
+      - method: POST
+        name: create
+        description: Create an agent
+        call: flatfile.create
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/{agentId}
+      name: get
+      operations:
+      - method: GET
+        name: get
+        description: Get an agent
+        call: flatfile.get
+        with:
+          agentId: rest.agentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/{agentId}
+      name: delete
+      operations:
+      - method: DELETE
+        name: delete
+        description: Delete an agent
+        call: flatfile.delete
+        with:
+          agentId: rest.agentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/{agentId}/versions
+      name: list-versions
+      operations:
+      - method: GET
+        name: list-versions
+        description: List agent versions for an agent
+        call: flatfile.list-versions
+        with:
+          agentId: rest.agentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/{agentId}/versions/{agentVersionId}/revert
+      name: revert
+      operations:
+      - method: GET
+        name: revert
+        description: Revert to a specific agent version
+        call: flatfile.revert
+        with:
+          agentId: rest.agentId
+          agentVersionId: rest.agentVersionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/{agentId}/roles
+      name: list-agent-roles
+      operations:
+      - method: GET
+        name: list-agent-roles
+        description: List Agent Roles
+        call: flatfile.list-agent-roles
+        with:
+          agentId: rest.agentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/{agentId}/roles
+      name: assign-agent-role
+      operations:
+      - method: POST
+        name: assign-agent-role
+        description: Assign Role to Agent
+        call: flatfile.assign-agent-role
+        with:
+          agentId: rest.agentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/{agentId}/roles/{actorRoleId}
+      name: delete-agent-role
+      operations:
+      - method: DELETE
+        name: delete-agent-role
+        description: Remove Role from Agent
+        call: flatfile.delete-agent-role
+        with:
+          agentId: rest.agentId
+          actorRoleId: rest.actorRoleId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/{agentId}/logs
+      name: get-agent-logs
+      operations:
+      - method: GET
+        name: get-agent-logs
+        description: Get logs for an agent
+        call: flatfile.get-agent-logs
+        with:
+          agentId: rest.agentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/log/{eventId}
+      name: get-agent-log
+      operations:
+      - method: GET
+        name: get-agent-log
+        description: Get an agent log
+        call: flatfile.get-agent-log
+        with:
+          eventId: rest.eventId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/logs
+      name: get-environment-agent-logs
+      operations:
+      - method: GET
+        name: get-environment-agent-logs
+        description: Get all agent logs in your environment
+        call: flatfile.get-environment-agent-logs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agents/executions
+      name: get-environment-agent-executions
+      operations:
+      - method: GET
+        name: get-environment-agent-executions
+        description: Get all executions in your environment
+        call: flatfile.get-environment-agent-executions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps
+      name: list
+      operations:
+      - method: GET
+        name: list
+        description: List apps
+        call: flatfile.list
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps
+      name: create
+      operations:
+      - method: POST
+        name: create
+        description: Create an app
+        call: flatfile.create
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}
+      name: get
+      operations:
+      - method: GET
+        name: get
+        description: Get an app
+        call: flatfile.get
+        with:
+          appId: rest.appId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}
+      name: update
+      operations:
+      - method: PATCH
+        name: update
+        description: Update an app
+        call: flatfile.update
+        with:
+          appId: rest.appId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}
+      name: delete
+      operations:
+      - method: DELETE
+        name: delete
+        description: Delete an app
+        call: flatfile.delete
+        with:
+          appId: rest.appId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}/constraints
+      name: get-constraints
+      operations:
+      - method: GET
+        name: get-constraints
+        description: Get constraints
+        call: flatfile.get-constraints
+        with:
+          appId: rest.appId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}/constraints
+      name: create-constraint
+      operations:
+      - method: POST
+        name: create-constraint
+        description: Create constraint
+        call: flatfile.create-constraint
+        with:
+          appId: rest.appId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}/constraints/{constraintId}
+      name: get-constraint-by-id
+      operations:
+      - method: GET
+        name: get-constraint-by-id
+        description: Get constraint by ID
+        call: flatfile.get-constraint-by-id
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}/constraints/{constraintId}
+      name: update-constraint
+      operations:
+      - method: PATCH
+        name: update-constraint
+        description: Update constraint
+        call: flatfile.update-constraint
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}/constraints/{constraintId}
+      name: delete-constraint
+      operations:
+      - method: DELETE
+        name: delete-constraint
+        description: Delete constraint
+        call: flatfile.delete-constraint
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}/constraints/{constraintId}/versions
+      name: get-constraint-versions
+      operations:
+      - method: GET
+        name: get-constraint-versions
+        description: Get constraint versions
+        call: flatfile.get-constraint-versions
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /apps/{appId}/constraints/{constraintId}/versions/{version}
+      name: get-constraint-version
+      operations:
+      - method: GET
+        name: get-constraint-version
+        description: Get constraint version
+        call: flatfile.get-constraint-version
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+          version: rest.version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: //prompts
+      name: list
+      operations:
+      - method: GET
+        name: list
+        description: List prompts
+        call: flatfile.list
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: //prompts
+      name: create
+      operations:
+      - method: POST
+        name: create
+        description: Create a prompt
+        call: flatfile.create
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: //prompts/{promptId}
+      name: get
+      operations:
+      - method: GET
+        name: get
+        description: Get a prompt
+        call: flatfile.get
+        with:
+          promptId: rest.promptId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: //prompts/{promptId}
+      name: update
+      operations:
+      - method: PATCH
+        name: update
+        description: Update a prompt
+        call: flatfile.update
+        with:
+          promptId: rest.promptId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: //prompts/{promptId}
+      name: delete
+      operations:
+      - method: DELETE
+        name: delete
+        description: Delete a prompts
+        call: flatfile.delete
+        with:
+          promptId: rest.promptId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /auth/publishable-key
+      name: get-publishable-key
+      operations:
+      - method: GET
+        name: get-publishable-key
+        description: Obtain the publishable key for a specific environment
+        call: flatfile.get-publishable-key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /auth/sftp-credentials
+      name: get-sftp-credentials
+      operations:
+      - method: GET
+        name: get-sftp-credentials
+        description: Get SFTP credentials for Space
+        call: flatfile.get-sftp-credentials
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /canvas-areas
+      name: list
+      operations:
+      - method: GET
+        name: list
+        description: List canvas areas
+        call: flatfile.list
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /canvas-areas
+      name: create
+      operations:
+      - method: POST
+        name: create
+        description: Create a canvas area
+        call: flatfile.create
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /canvas-areas/{canvasAreaId}
+      name: get
+      operations:
+      - method: GET
+        name: get
+        description: Get a canvas area
+        call: flatfile.get
+        with:
+          canvasAreaId: rest.canvasAreaId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /canvas-areas/{canvasAreaId}
+      name: update
+      operations:
+      - method: PATCH
+        name: update
+        description: Update a canvas area
+        call: flatfile.update
+        with:
+          canvasAreaId: rest.canvasAreaId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /canvas-areas/{canvasAreaId}
+      name: delete
+      operations:
+      - method: DELETE
+        name: delete
+        description: Delete a canvas area
+        call: flatfile.delete
+        with:
+          canvasAreaId: rest.canvasAreaId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /commits/{commitId}
+      name: get
+      operations:
+      - method: GET
+        name: get
+        description: Get a commit version
+        call: flatfile.get
+        with:
+          commitId: rest.commitId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /commits/{commitId}/complete
+      name: complete
+      operations:
+      - method: POST
+        name: complete
+        description: Complete a commit version
+        call: flatfile.complete
+        with:
+          commitId: rest.commitId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /commits/{commitId}/replay
+      name: replay
+      operations:
+      - method: POST
+        name: replay
+        description: Replay a commit version
+        call: flatfile.replay
+        with:
+          commitId: rest.commitId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /data-clips
+      name: create
+      operations:
+      - method: POST
+        name: create
+        description: Create
+        call: flatfile.create
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /data-clips
+      name: list
+      operations:
+      - method: GET
+        name: list
+        description: List
+        call: flatfile.list
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /data-clips/{dataClipId}
+      name: update
+      operations:
+      - method: PATCH
+        name: update
+        description: Update
+        call: flatfile.update
+        with:
+          dataClipId: rest.dataClipId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /data-clips/{dataClipId}
+      name: delete
+      operations:
+      - method: DELETE
+        name: delete
+        description: Delete
+        call: flatfile.delete
+        with:
+          dataClipId: rest.dataClipId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /data-clips/{dataClipId}
+      name: get
+      operations:
+      - method: GET
+        name: get
+        description: Get
+        call: flatfile.get
+        with:
+          dataClipId: rest.dataClipId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /data-clips/{dataClipId}/add-records
+      name: add-records-to-clip
+      operations:
+      - method: POST
+        name: add-records-to-clip
+        description: Add Records To Clip
+        call: flatfile.add-records-to-clip
+        with:
+          dataClipId: rest.dataClipId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /data-clips/{dataClipId}/resolutions
+      name: get-resolutions
+      operations:
+      - method: GET
+        name: get-resolutions
+        description: Get Resolutions
+        call: flatfile.get-resolutions
+        with:
+          dataClipId: rest.dataClipId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /data-clips/{dataClipId}/resolutions
+      name: update-resolution
+      operations:
+      - method: PATCH
+        name: update-resolution
+        description: Update Resolution
+        call: flatfile.update-resolution
+        with:
+          dataClipId: rest.dataClipId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: flatfile-mcp
+    transport: http
+    description: MCP adapter for API Reference for AI agent use.
+    tools:
+    - name: get-current
+      description: Get the current account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-current
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-current
+      description: Update the current account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.update-current
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create
+      description: Create an action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.create
+      with:
+        spaceId: tools.spaceId
+      inputParameters:
+      - name: spaceId
+        type: string
+        description: The Space ID for which to create the Action.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all
+      description: Get all actions for the space
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-all
+      with:
+        spaceId: tools.spaceId
+      inputParameters:
+      - name: spaceId
+        type: string
+        description: The Space ID for which to get the Actions.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: bulk-create
+      description: Create several actions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.bulk-create
+      with:
+        spaceId: tools.spaceId
+      inputParameters:
+      - name: spaceId
+        type: string
+        description: The Space ID for which to create the Actions.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get
+      description: Get an action
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get
+      with:
+        actionId: tools.actionId
+      inputParameters:
+      - name: actionId
+        type: string
+        description: The id of the action to return
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update
+      description: Update an action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.update
+      with:
+        actionId: tools.actionId
+      inputParameters:
+      - name: actionId
+        type: string
+        description: The id of the action to patch
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete
+      description: Delete an action
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile.delete
+      with:
+        actionId: tools.actionId
+      inputParameters:
+      - name: actionId
+        type: string
+        description: The id of the action to delete
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list
+      description: List agent exports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.list
+      with:
+        environmentId: tools.environmentId
+        agentId: tools.agentId
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+      inputParameters:
+      - name: environmentId
+        type: string
+        description: environmentId
+      - name: agentId
+        type: string
+        description: agentId
+      - name: pageSize
+        type: string
+        description: pageSize
+      - name: pageNumber
+        type: string
+        description: pageNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get
+      description: Get an agent export
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get
+      with:
+        agentExportId: tools.agentExportId
+      inputParameters:
+      - name: agentExportId
+        type: string
+        description: agentExportId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete
+      description: Delete an agent export
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile.delete
+      with:
+        agentExportId: tools.agentExportId
+      inputParameters:
+      - name: agentExportId
+        type: string
+        description: agentExportId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download
+      description: Download an agent export
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.download
+      with:
+        agentExportId: tools.agentExportId
+      inputParameters:
+      - name: agentExportId
+        type: string
+        description: agentExportId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list
+      description: List agents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.list
+      with:
+        environmentId: tools.environmentId
+        isSystem: tools.isSystem
+        search: tools.search
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+      inputParameters:
+      - name: environmentId
+        type: string
+        description: environmentId
+        required: true
+      - name: isSystem
+        type: boolean
+        description: isSystem
+      - name: search
+        type: string
+        description: search
+      - name: pageSize
+        type: string
+        description: pageSize
+      - name: pageNumber
+        type: string
+        description: pageNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create
+      description: Create an agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.create
+      with:
+        environmentId: tools.environmentId
+      inputParameters:
+      - name: environmentId
+        type: string
+        description: environmentId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get
+      description: Get an agent
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get
+      with:
+        agentId: tools.agentId
+        environmentId: tools.environmentId
+      inputParameters:
+      - name: agentId
+        type: string
+        description: agentId
+        required: true
+      - name: environmentId
+        type: string
+        description: environmentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete
+      description: Delete an agent
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile.delete
+      with:
+        agentId: tools.agentId
+        environmentId: tools.environmentId
+      inputParameters:
+      - name: agentId
+        type: string
+        description: agentId
+        required: true
+      - name: environmentId
+        type: string
+        description: This environment variable is no longer needed or used
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-versions
+      description: List agent versions for an agent
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.list-versions
+      with:
+        agentId: tools.agentId
+      inputParameters:
+      - name: agentId
+        type: string
+        description: agentId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revert
+      description: Revert to a specific agent version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.revert
+      with:
+        agentId: tools.agentId
+        agentVersionId: tools.agentVersionId
+      inputParameters:
+      - name: agentId
+        type: string
+        description: agentId
+        required: true
+      - name: agentVersionId
+        type: string
+        description: agentVersionId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-agent-roles
+      description: List Agent Roles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.list-agent-roles
+      with:
+        agentId: tools.agentId
+      inputParameters:
+      - name: agentId
+        type: string
+        description: The agent id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assign-agent-role
+      description: Assign Role to Agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.assign-agent-role
+      with:
+        agentId: tools.agentId
+      inputParameters:
+      - name: agentId
+        type: string
+        description: The agent id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-agent-role
+      description: Remove Role from Agent
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile.delete-agent-role
+      with:
+        agentId: tools.agentId
+        actorRoleId: tools.actorRoleId
+      inputParameters:
+      - name: agentId
+        type: string
+        description: The agent id
+        required: true
+      - name: actorRoleId
+        type: string
+        description: The actor role id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-logs
+      description: Get logs for an agent
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-agent-logs
+      with:
+        agentId: tools.agentId
+        environmentId: tools.environmentId
+      inputParameters:
+      - name: agentId
+        type: string
+        description: agentId
+        required: true
+      - name: environmentId
+        type: string
+        description: environmentId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-log
+      description: Get an agent log
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-agent-log
+      with:
+        eventId: tools.eventId
+        environmentId: tools.environmentId
+      inputParameters:
+      - name: eventId
+        type: string
+        description: eventId
+        required: true
+      - name: environmentId
+        type: string
+        description: environmentId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment-agent-logs
+      description: Get all agent logs in your environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-environment-agent-logs
+      with:
+        environmentId: tools.environmentId
+        spaceId: tools.spaceId
+        success: tools.success
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+      inputParameters:
+      - name: environmentId
+        type: string
+        description: environmentId
+        required: true
+      - name: spaceId
+        type: string
+        description: spaceId
+      - name: success
+        type: string
+        description: success
+      - name: pageSize
+        type: string
+        description: pageSize
+      - name: pageNumber
+        type: string
+        description: pageNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment-agent-executions
+      description: Get all executions in your environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-environment-agent-executions
+      with:
+        environmentId: tools.environmentId
+        agentId: tools.agentId
+        spaceId: tools.spaceId
+        success: tools.success
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+      inputParameters:
+      - name: environmentId
+        type: string
+        description: environmentId
+        required: true
+      - name: agentId
+        type: string
+        description: agentId
+      - name: spaceId
+        type: string
+        description: spaceId
+      - name: success
+        type: string
+        description: success
+      - name: pageSize
+        type: string
+        description: pageSize
+      - name: pageNumber
+        type: string
+        description: pageNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list
+      description: List apps
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.list
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create
+      description: Create an app
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.create
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get
+      description: Get an app
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get
+      with:
+        appId: tools.appId
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of app
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update
+      description: Update an app
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.update
+      with:
+        appId: tools.appId
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of app
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete
+      description: Delete an app
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile.delete
+      with:
+        appId: tools.appId
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of app to delete
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-constraints
+      description: Get constraints
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-constraints
+      with:
+        appId: tools.appId
+        includeBuiltins: tools.includeBuiltins
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of the app
+        required: true
+      - name: includeBuiltins
+        type: boolean
+        description: Whether to include built-in constraints
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-constraint
+      description: Create constraint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.create-constraint
+      with:
+        appId: tools.appId
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of the app
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-constraint-by-id
+      description: Get constraint by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-constraint-by-id
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of the app
+        required: true
+      - name: constraintId
+        type: string
+        description: ID of the constraint
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-constraint
+      description: Update constraint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.update-constraint
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of the app
+        required: true
+      - name: constraintId
+        type: string
+        description: ID of the constraint
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-constraint
+      description: Delete constraint
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile.delete-constraint
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of the app
+        required: true
+      - name: constraintId
+        type: string
+        description: ID of the constraint
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-constraint-versions
+      description: Get constraint versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-constraint-versions
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of the app
+        required: true
+      - name: constraintId
+        type: string
+        description: ID of the constraint
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-constraint-version
+      description: Get constraint version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-constraint-version
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+        version: tools.version
+      inputParameters:
+      - name: appId
+        type: string
+        description: ID of the app
+        required: true
+      - name: constraintId
+        type: string
+        description: ID of the constraint
+        required: true
+      - name: version
+        type: integer
+        description: Version of the constraint
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list
+      description: List prompts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.list
+      with:
+        promptType: tools.promptType
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+      inputParameters:
+      - name: promptType
+        type: string
+        description: Type of prompt (default AI_ASSIST)
+      - name: pageSize
+        type: integer
+        description: Number of prompts to return in a page (default 7)
+      - name: pageNumber
+        type: integer
+        description: Based on pageSize, which page of prompts to return
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create
+      description: Create a prompt
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.create
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get
+      description: Get a prompt
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get
+      with:
+        promptId: tools.promptId
+      inputParameters:
+      - name: promptId
+        type: string
+        description: ID of prompts
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update
+      description: Update a prompt
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.update
+      with:
+        promptId: tools.promptId
+      inputParameters:
+      - name: promptId
+        type: string
+        description: ID of prompts
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete
+      description: Delete a prompts
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile.delete
+      with:
+        promptId: tools.promptId
+      inputParameters:
+      - name: promptId
+        type: string
+        description: ID of prompts
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-publishable-key
+      description: Obtain the publishable key for a specific environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-publishable-key
+      with:
+        environmentId: tools.environmentId
+      inputParameters:
+      - name: environmentId
+        type: string
+        description: ID of environment to search
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sftp-credentials
+      description: Get SFTP credentials for Space
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-sftp-credentials
+      with:
+        spaceId: tools.spaceId
+      inputParameters:
+      - name: spaceId
+        type: string
+        description: ID of space to get credentials for
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list
+      description: List canvas areas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.list
+      with:
+        canvasId: tools.canvasId
+        parentId: tools.parentId
+        spaceId: tools.spaceId
+        environmentId: tools.environmentId
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+      inputParameters:
+      - name: canvasId
+        type: string
+        description: ID of the canvas to filter areas by
+      - name: parentId
+        type: string
+        description: ID of the parent canvas area to filter by
+      - name: spaceId
+        type: string
+        description: ID of the space to filter areas by
+      - name: environmentId
+        type: string
+        description: ID of the environment to filter areas by
+      - name: pageSize
+        type: integer
+        description: Number of areas to return in a page (default 20)
+      - name: pageNumber
+        type: integer
+        description: Based on pageSize, which page of areas to return
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create
+      description: Create a canvas area
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.create
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get
+      description: Get a canvas area
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get
+      with:
+        canvasAreaId: tools.canvasAreaId
+      inputParameters:
+      - name: canvasAreaId
+        type: string
+        description: canvasAreaId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update
+      description: Update a canvas area
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.update
+      with:
+        canvasAreaId: tools.canvasAreaId
+      inputParameters:
+      - name: canvasAreaId
+        type: string
+        description: canvasAreaId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete
+      description: Delete a canvas area
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile.delete
+      with:
+        canvasAreaId: tools.canvasAreaId
+      inputParameters:
+      - name: canvasAreaId
+        type: string
+        description: canvasAreaId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get
+      description: Get a commit version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get
+      with:
+        commitId: tools.commitId
+      inputParameters:
+      - name: commitId
+        type: string
+        description: ID of the commit version to return
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: complete
+      description: Complete a commit version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.complete
+      with:
+        commitId: tools.commitId
+      inputParameters:
+      - name: commitId
+        type: string
+        description: ID of the commit version to complete
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: replay
+      description: Replay a commit version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.replay
+      with:
+        commitId: tools.commitId
+      inputParameters:
+      - name: commitId
+        type: string
+        description: ID of the commit version to re-emit a commit:created event for
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create
+      description: Create
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.create
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list
+      description: List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.list
+      with:
+        spaceId: tools.spaceId
+        sheetId: tools.sheetId
+        status: tools.status
+      inputParameters:
+      - name: spaceId
+        type: string
+        description: spaceId
+      - name: sheetId
+        type: string
+        description: sheetId
+      - name: status
+        type: string
+        description: status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update
+      description: Update
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.update
+      with:
+        dataClipId: tools.dataClipId
+      inputParameters:
+      - name: dataClipId
+        type: string
+        description: dataClipId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete
+      description: Delete
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile.delete
+      with:
+        dataClipId: tools.dataClipId
+      inputParameters:
+      - name: dataClipId
+        type: string
+        description: dataClipId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get
+      description: Get
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get
+      with:
+        dataClipId: tools.dataClipId
+      inputParameters:
+      - name: dataClipId
+        type: string
+        description: dataClipId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-records-to-clip
+      description: Add Records To Clip
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.add-records-to-clip
+      with:
+        dataClipId: tools.dataClipId
+      inputParameters:
+      - name: dataClipId
+        type: string
+        description: dataClipId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resolutions
+      description: Get Resolutions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile.get-resolutions
+      with:
+        dataClipId: tools.dataClipId
+        includeRecords: tools.includeRecords
+        includeSummary: tools.includeSummary
+        filterColumn: tools.filterColumn
+        filterConflicts: tools.filterConflicts
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+      inputParameters:
+      - name: dataClipId
+        type: string
+        description: dataClipId
+        required: true
+      - name: includeRecords
+        type: boolean
+        description: Include records in the response. Default is true
+      - name: includeSummary
+        type: boolean
+        description: Include summary in the response. Default is false
+      - name: filterColumn
+        type: string
+        description: The column to filter by.
+      - name: filterConflicts
+        type: boolean
+        description: Whether to filter only conflicts. Default is false
+      - name: pageSize
+        type: integer
+        description: Number of resolutions to return in a page. Default is 1000
+      - name: pageNumber
+        type: integer
+        description: Page number of resolutions to return
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-resolution
+      description: Update Resolution
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile.update-resolution
+      with:
+        dataClipId: tools.dataClipId
+      inputParameters:
+      - name: dataClipId
+        type: string
+        description: dataClipId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    FLATFILE_TOKEN: FLATFILE_TOKEN

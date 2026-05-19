@@ -1,0 +1,562 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_users
+  description: 'API Reference — subpackage_users. 9 operations. Lead operation: List users. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-users
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_users business capability. Self-contained, no shared references.
+    resources:
+    - name: users
+      path: /users
+      operations:
+      - name: list
+        method: GET
+        description: List users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: query
+          type: string
+          description: Email of guest to return
+        - name: search
+          in: query
+          type: string
+          description: String to search for users by name and email
+        - name: sortField
+          in: query
+          type: string
+          description: Field to sort users by
+        - name: sortDirection
+          in: query
+          type: string
+          description: Direction of sorting
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of users to return in a page (default 20)
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Based on pageSize, which page of users to return
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: users-invite
+      path: /users/invite
+      operations:
+      - name: createandinvite
+        method: POST
+        description: Create and Invite User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: users-userId
+      path: /users/{userId}
+      operations:
+      - name: update
+        method: PATCH
+        description: Update a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The user id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: get
+        method: GET
+        description: Get a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The user id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The user id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: users-userId-resend-invite
+      path: /users/{userId}/resend-invite
+      operations:
+      - name: resendinvite
+        method: POST
+        description: Resend User Invite
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The user id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: users-userId-roles
+      path: /users/{userId}/roles
+      operations:
+      - name: listuserroles
+        method: GET
+        description: List User Roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The user id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: assignuserrole
+        method: POST
+        description: Assign Role to User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The user id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: users-userId-roles-actorRoleId
+      path: /users/{userId}/roles/{actorRoleId}
+      operations:
+      - name: deleteuserrole
+        method: DELETE
+        description: Remove Role from User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The user id
+          required: true
+        - name: actorRoleId
+          in: path
+          type: string
+          description: The actor role id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-users-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_users. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/users
+      name: users
+      description: REST surface for users.
+      operations:
+      - method: GET
+        name: list
+        description: List users
+        call: flatfile-subpackage-users.list
+        with:
+          email: rest.email
+          search: rest.search
+          sortField: rest.sortField
+          sortDirection: rest.sortDirection
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/invite
+      name: users-invite
+      description: REST surface for users-invite.
+      operations:
+      - method: POST
+        name: createandinvite
+        description: Create and Invite User
+        call: flatfile-subpackage-users.createandinvite
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{userid}
+      name: users-userid
+      description: REST surface for users-userId.
+      operations:
+      - method: PATCH
+        name: update
+        description: Update a user
+        call: flatfile-subpackage-users.update
+        with:
+          userId: rest.userId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get
+        description: Get a user
+        call: flatfile-subpackage-users.get
+        with:
+          userId: rest.userId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a user
+        call: flatfile-subpackage-users.delete
+        with:
+          userId: rest.userId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{userid}/resend-invite
+      name: users-userid-resend-invite
+      description: REST surface for users-userId-resend-invite.
+      operations:
+      - method: POST
+        name: resendinvite
+        description: Resend User Invite
+        call: flatfile-subpackage-users.resendinvite
+        with:
+          userId: rest.userId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{userid}/roles
+      name: users-userid-roles
+      description: REST surface for users-userId-roles.
+      operations:
+      - method: GET
+        name: listuserroles
+        description: List User Roles
+        call: flatfile-subpackage-users.listuserroles
+        with:
+          userId: rest.userId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: assignuserrole
+        description: Assign Role to User
+        call: flatfile-subpackage-users.assignuserrole
+        with:
+          userId: rest.userId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{userid}/roles/{actorroleid}
+      name: users-userid-roles-actorroleid
+      description: REST surface for users-userId-roles-actorRoleId.
+      operations:
+      - method: DELETE
+        name: deleteuserrole
+        description: Remove Role from User
+        call: flatfile-subpackage-users.deleteuserrole
+        with:
+          userId: rest.userId
+          actorRoleId: rest.actorRoleId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_users. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-users
+      description: List users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-users.list
+      with:
+        email: tools.email
+        search: tools.search
+        sortField: tools.sortField
+        sortDirection: tools.sortDirection
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-and-invite-user
+      description: Create and Invite User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-users.createandinvite
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user
+      description: Update a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-users.update
+      with:
+        userId: tools.userId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user
+      description: Get a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-users.get
+      with:
+        userId: tools.userId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-user
+      description: Delete a user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-users.delete
+      with:
+        userId: tools.userId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resend-user-invite
+      description: Resend User Invite
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-users.resendinvite
+      with:
+        userId: tools.userId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-user-roles
+      description: List User Roles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-users.listuserroles
+      with:
+        userId: tools.userId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assign-role-user
+      description: Assign Role to User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-users.assignuserrole
+      with:
+        userId: tools.userId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-role-user
+      description: Remove Role from User
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-users.deleteuserrole
+      with:
+        userId: tools.userId
+        actorRoleId: tools.actorRoleId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

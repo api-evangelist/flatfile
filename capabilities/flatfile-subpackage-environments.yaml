@@ -1,0 +1,717 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_environments
+  description: 'API Reference — subpackage_environments. 12 operations. Lead operation: List environments. Self-contained
+    Naftiko capability covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_environments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-environments
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_environments business capability. Self-contained, no shared references.
+    resources:
+    - name: environments
+      path: /environments
+      operations:
+      - name: list
+        method: GET
+        description: List environments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of environments to return in a page (default 10)
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Based on pageSize, which page of environments to return
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create an environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: environments-subscription-token
+      path: /environments/subscription-token
+      operations:
+      - name: getenvironmenteventtoken
+        method: GET
+        description: Get environment subscription credentials
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          description: ID of environment to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: environments-environmentId
+      path: /environments/{environmentId}
+      operations:
+      - name: get
+        method: GET
+        description: Get an environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: ID of the environment to return. To fetch the current environment, pass `current`
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update an environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: ID of the environment to update
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete an environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: ID of the environment to delete
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: environments-environmentId-guides
+      path: /environments/{environmentId}/guides
+      operations:
+      - name: listguides
+        method: GET
+        description: List guides
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: ID of the environment
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: createguide
+        method: POST
+        description: Create a guide
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: ID of the environment
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: environments-environmentId-guides-guideId
+      path: /environments/{environmentId}/guides/{guideId}
+      operations:
+      - name: getguide
+        method: GET
+        description: Get a guide
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: ID of the environment
+          required: true
+        - name: guideId
+          in: path
+          type: string
+          description: ID of guide
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: updateguide
+        method: PATCH
+        description: Update a guide
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: ID of the environment
+          required: true
+        - name: guideId
+          in: path
+          type: string
+          description: ID of guide
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deleteguide
+        method: DELETE
+        description: Delete a guide
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: ID of the environment
+          required: true
+        - name: guideId
+          in: path
+          type: string
+          description: ID of guide to delete
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: environments-environmentId-guides-guideId-versions-version
+      path: /environments/{environmentId}/guides/{guideId}/versions/{version}
+      operations:
+      - name: getguideversion
+        method: GET
+        description: Get guide version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: path
+          type: string
+          description: ID of the environment
+          required: true
+        - name: guideId
+          in: path
+          type: string
+          description: ID of the guide
+          required: true
+        - name: version
+          in: path
+          type: integer
+          description: Version of the guide
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-environments-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_environments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/environments
+      name: environments
+      description: REST surface for environments.
+      operations:
+      - method: GET
+        name: list
+        description: List environments
+        call: flatfile-subpackage-environments.list
+        with:
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create an environment
+        call: flatfile-subpackage-environments.create
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/subscription-token
+      name: environments-subscription-token
+      description: REST surface for environments-subscription-token.
+      operations:
+      - method: GET
+        name: getenvironmenteventtoken
+        description: Get environment subscription credentials
+        call: flatfile-subpackage-environments.getenvironmenteventtoken
+        with:
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{environmentid}
+      name: environments-environmentid
+      description: REST surface for environments-environmentId.
+      operations:
+      - method: GET
+        name: get
+        description: Get an environment
+        call: flatfile-subpackage-environments.get
+        with:
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update an environment
+        call: flatfile-subpackage-environments.update
+        with:
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete an environment
+        call: flatfile-subpackage-environments.delete
+        with:
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{environmentid}/guides
+      name: environments-environmentid-guides
+      description: REST surface for environments-environmentId-guides.
+      operations:
+      - method: GET
+        name: listguides
+        description: List guides
+        call: flatfile-subpackage-environments.listguides
+        with:
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createguide
+        description: Create a guide
+        call: flatfile-subpackage-environments.createguide
+        with:
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{environmentid}/guides/{guideid}
+      name: environments-environmentid-guides-guideid
+      description: REST surface for environments-environmentId-guides-guideId.
+      operations:
+      - method: GET
+        name: getguide
+        description: Get a guide
+        call: flatfile-subpackage-environments.getguide
+        with:
+          environmentId: rest.environmentId
+          guideId: rest.guideId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateguide
+        description: Update a guide
+        call: flatfile-subpackage-environments.updateguide
+        with:
+          environmentId: rest.environmentId
+          guideId: rest.guideId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteguide
+        description: Delete a guide
+        call: flatfile-subpackage-environments.deleteguide
+        with:
+          environmentId: rest.environmentId
+          guideId: rest.guideId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{environmentid}/guides/{guideid}/versions/{version}
+      name: environments-environmentid-guides-guideid-versions-version
+      description: REST surface for environments-environmentId-guides-guideId-versions-version.
+      operations:
+      - method: GET
+        name: getguideversion
+        description: Get guide version
+        call: flatfile-subpackage-environments.getguideversion
+        with:
+          environmentId: rest.environmentId
+          guideId: rest.guideId
+          version: rest.version
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-environments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_environments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-environments
+      description: List environments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-environments.list
+      with:
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-environment
+      description: Create an environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-environments.create
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment-subscription-credentials
+      description: Get environment subscription credentials
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-environments.getenvironmenteventtoken
+      with:
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment
+      description: Get an environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-environments.get
+      with:
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-environment
+      description: Update an environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-environments.update
+      with:
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-environment
+      description: Delete an environment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-environments.delete
+      with:
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-guides
+      description: List guides
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-environments.listguides
+      with:
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-guide
+      description: Create a guide
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-environments.createguide
+      with:
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-guide
+      description: Get a guide
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-environments.getguide
+      with:
+        environmentId: tools.environmentId
+        guideId: tools.guideId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-guide
+      description: Update a guide
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-environments.updateguide
+      with:
+        environmentId: tools.environmentId
+        guideId: tools.guideId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-guide
+      description: Delete a guide
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-environments.deleteguide
+      with:
+        environmentId: tools.environmentId
+        guideId: tools.guideId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-guide-version
+      description: Get guide version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-environments.getguideversion
+      with:
+        environmentId: tools.environmentId
+        guideId: tools.guideId
+        version: tools.version
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

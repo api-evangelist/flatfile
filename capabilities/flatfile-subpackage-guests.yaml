@@ -1,0 +1,599 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_guests
+  description: 'API Reference — subpackage_guests. 10 operations. Lead operation: List guests. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_guests
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-guests
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_guests business capability. Self-contained, no shared references.
+    resources:
+    - name: guests
+      path: /guests
+      operations:
+      - name: list
+        method: GET
+        description: List guests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+          description: ID of space to return
+          required: true
+        - name: email
+          in: query
+          type: string
+          description: Email of guest to return
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create a guest
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: guests-guestId
+      path: /guests/{guestId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a guest
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: guestId
+          in: path
+          type: string
+          description: ID of guest to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete a guest
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: guestId
+          in: path
+          type: string
+          description: ID of guest to return
+          required: true
+        - name: spaceId
+          in: query
+          type: string
+          description: ID of space to remove guest access from. If not provided, guest will be completely deleted.
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update a guest
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: guestId
+          in: path
+          type: string
+          description: ID of guest to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: guests-guestId-roles
+      path: /guests/{guestId}/roles
+      operations:
+      - name: listguestroles
+        method: GET
+        description: List Guest Roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: guestId
+          in: path
+          type: string
+          description: The guest id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: assignguestrole
+        method: POST
+        description: Assign Role to Guest
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: guestId
+          in: path
+          type: string
+          description: The guest id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: guests-guestId-roles-actorRoleId
+      path: /guests/{guestId}/roles/{actorRoleId}
+      operations:
+      - name: deleteguestrole
+        method: DELETE
+        description: Remove Role from Guest
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: guestId
+          in: path
+          type: string
+          description: The guest id
+          required: true
+        - name: actorRoleId
+          in: path
+          type: string
+          description: The actor role id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: guests-guestId-token
+      path: /guests/{guestId}/token
+      operations:
+      - name: getguesttoken
+        method: GET
+        description: Get guest token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: guestId
+          in: path
+          type: string
+          description: ID of guest to return
+          required: true
+        - name: spaceId
+          in: query
+          type: string
+          description: ID of space to return
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: invitations
+      path: /invitations
+      operations:
+      - name: invite
+        method: POST
+        description: Invite guests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-guests-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_guests. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/guests
+      name: guests
+      description: REST surface for guests.
+      operations:
+      - method: GET
+        name: list
+        description: List guests
+        call: flatfile-subpackage-guests.list
+        with:
+          spaceId: rest.spaceId
+          email: rest.email
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create a guest
+        call: flatfile-subpackage-guests.create
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/guests/{guestid}
+      name: guests-guestid
+      description: REST surface for guests-guestId.
+      operations:
+      - method: GET
+        name: get
+        description: Get a guest
+        call: flatfile-subpackage-guests.get
+        with:
+          guestId: rest.guestId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a guest
+        call: flatfile-subpackage-guests.delete
+        with:
+          guestId: rest.guestId
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update a guest
+        call: flatfile-subpackage-guests.update
+        with:
+          guestId: rest.guestId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/guests/{guestid}/roles
+      name: guests-guestid-roles
+      description: REST surface for guests-guestId-roles.
+      operations:
+      - method: GET
+        name: listguestroles
+        description: List Guest Roles
+        call: flatfile-subpackage-guests.listguestroles
+        with:
+          guestId: rest.guestId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: assignguestrole
+        description: Assign Role to Guest
+        call: flatfile-subpackage-guests.assignguestrole
+        with:
+          guestId: rest.guestId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/guests/{guestid}/roles/{actorroleid}
+      name: guests-guestid-roles-actorroleid
+      description: REST surface for guests-guestId-roles-actorRoleId.
+      operations:
+      - method: DELETE
+        name: deleteguestrole
+        description: Remove Role from Guest
+        call: flatfile-subpackage-guests.deleteguestrole
+        with:
+          guestId: rest.guestId
+          actorRoleId: rest.actorRoleId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/guests/{guestid}/token
+      name: guests-guestid-token
+      description: REST surface for guests-guestId-token.
+      operations:
+      - method: GET
+        name: getguesttoken
+        description: Get guest token
+        call: flatfile-subpackage-guests.getguesttoken
+        with:
+          guestId: rest.guestId
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/invitations
+      name: invitations
+      description: REST surface for invitations.
+      operations:
+      - method: POST
+        name: invite
+        description: Invite guests
+        call: flatfile-subpackage-guests.invite
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-guests-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_guests. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-guests
+      description: List guests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-guests.list
+      with:
+        spaceId: tools.spaceId
+        email: tools.email
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-guest
+      description: Create a guest
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-guests.create
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-guest
+      description: Get a guest
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-guests.get
+      with:
+        guestId: tools.guestId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-guest
+      description: Delete a guest
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-guests.delete
+      with:
+        guestId: tools.guestId
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-guest
+      description: Update a guest
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-guests.update
+      with:
+        guestId: tools.guestId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-guest-roles
+      description: List Guest Roles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-guests.listguestroles
+      with:
+        guestId: tools.guestId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assign-role-guest
+      description: Assign Role to Guest
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-guests.assignguestrole
+      with:
+        guestId: tools.guestId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-role-guest
+      description: Remove Role from Guest
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-guests.deleteguestrole
+      with:
+        guestId: tools.guestId
+        actorRoleId: tools.actorRoleId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-guest-token
+      description: Get guest token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-guests.getguesttoken
+      with:
+        guestId: tools.guestId
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: invite-guests
+      description: Invite guests
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-guests.invite
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,304 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_runbooks
+  description: 'API Reference — subpackage_runbooks. 5 operations. Lead operation: List runbooks. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_runbooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-runbooks
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_runbooks business capability. Self-contained, no shared references.
+    resources:
+    - name: runbooks
+      path: /runbooks
+      operations:
+      - name: list
+        method: GET
+        description: List runbooks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: query
+          type: string
+        - name: environmentId
+          in: query
+          type: string
+        - name: spaceId
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create a runbook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: runbooks-runbookId
+      path: /runbooks/{runbookId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a runbook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: runbookId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update a runbook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: runbookId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a runbook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: runbookId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-runbooks-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_runbooks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/runbooks
+      name: runbooks
+      description: REST surface for runbooks.
+      operations:
+      - method: GET
+        name: list
+        description: List runbooks
+        call: flatfile-subpackage-runbooks.list
+        with:
+          appId: rest.appId
+          environmentId: rest.environmentId
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create a runbook
+        call: flatfile-subpackage-runbooks.create
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/runbooks/{runbookid}
+      name: runbooks-runbookid
+      description: REST surface for runbooks-runbookId.
+      operations:
+      - method: GET
+        name: get
+        description: Get a runbook
+        call: flatfile-subpackage-runbooks.get
+        with:
+          runbookId: rest.runbookId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update a runbook
+        call: flatfile-subpackage-runbooks.update
+        with:
+          runbookId: rest.runbookId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a runbook
+        call: flatfile-subpackage-runbooks.delete
+        with:
+          runbookId: rest.runbookId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-runbooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_runbooks. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-runbooks
+      description: List runbooks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-runbooks.list
+      with:
+        appId: tools.appId
+        environmentId: tools.environmentId
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-runbook
+      description: Create a runbook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-runbooks.create
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-runbook
+      description: Get a runbook
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-runbooks.get
+      with:
+        runbookId: tools.runbookId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-runbook
+      description: Update a runbook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-runbooks.update
+      with:
+        runbookId: tools.runbookId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-runbook
+      description: Delete a runbook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-runbooks.delete
+      with:
+        runbookId: tools.runbookId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

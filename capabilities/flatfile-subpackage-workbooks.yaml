@@ -1,0 +1,396 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_workbooks
+  description: 'API Reference — subpackage_workbooks. 6 operations. Lead operation: List workbooks. Self-contained Naftiko
+    capability covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_workbooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-workbooks
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_workbooks business capability. Self-contained, no shared references.
+    resources:
+    - name: workbooks
+      path: /workbooks
+      operations:
+      - name: list
+        method: GET
+        description: List workbooks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+          description: The associated Space ID of the Workbook.
+        - name: name
+          in: query
+          type: string
+          description: Filter by name. Precede with - to negate the filter
+        - name: namespace
+          in: query
+          type: string
+          description: Filter by namespace. Precede with - to negate the filter
+        - name: label
+          in: query
+          type: string
+          description: Filter by label. Precede with - to negate the filter
+        - name: treatment
+          in: query
+          type: string
+          description: Filter by treatment.
+        - name: includeSheets
+          in: query
+          type: boolean
+          description: Include sheets for the workbook (default true)
+        - name: includeCounts
+          in: query
+          type: boolean
+          description: Include counts for the workbook. **DEPRECATED** Counts will return 0s. Use GET /sheets/:sheetId/counts
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create a workbook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: workbooks-workbookId
+      path: /workbooks/{workbookId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a workbook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workbookId
+          in: path
+          type: string
+          description: ID of workbook to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete a workbook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workbookId
+          in: path
+          type: string
+          description: ID of workbook to delete
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update a workbook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workbookId
+          in: path
+          type: string
+          description: ID of workbook to update
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: workbooks-workbookId-commits
+      path: /workbooks/{workbookId}/commits
+      operations:
+      - name: getworkbookcommits
+        method: GET
+        description: Get commits for a workbook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workbookId
+          in: path
+          type: string
+          description: ID of workbook
+          required: true
+        - name: completed
+          in: query
+          type: boolean
+          description: If true, only return commits that have been completed. If false, only return commits that have not
+            been completed. If not provided, return all commits.
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-workbooks-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_workbooks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/workbooks
+      name: workbooks
+      description: REST surface for workbooks.
+      operations:
+      - method: GET
+        name: list
+        description: List workbooks
+        call: flatfile-subpackage-workbooks.list
+        with:
+          spaceId: rest.spaceId
+          name: rest.name
+          namespace: rest.namespace
+          label: rest.label
+          treatment: rest.treatment
+          includeSheets: rest.includeSheets
+          includeCounts: rest.includeCounts
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create a workbook
+        call: flatfile-subpackage-workbooks.create
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workbooks/{workbookid}
+      name: workbooks-workbookid
+      description: REST surface for workbooks-workbookId.
+      operations:
+      - method: GET
+        name: get
+        description: Get a workbook
+        call: flatfile-subpackage-workbooks.get
+        with:
+          workbookId: rest.workbookId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a workbook
+        call: flatfile-subpackage-workbooks.delete
+        with:
+          workbookId: rest.workbookId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update a workbook
+        call: flatfile-subpackage-workbooks.update
+        with:
+          workbookId: rest.workbookId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workbooks/{workbookid}/commits
+      name: workbooks-workbookid-commits
+      description: REST surface for workbooks-workbookId-commits.
+      operations:
+      - method: GET
+        name: getworkbookcommits
+        description: Get commits for a workbook
+        call: flatfile-subpackage-workbooks.getworkbookcommits
+        with:
+          workbookId: rest.workbookId
+          completed: rest.completed
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-workbooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_workbooks. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-workbooks
+      description: List workbooks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-workbooks.list
+      with:
+        spaceId: tools.spaceId
+        name: tools.name
+        namespace: tools.namespace
+        label: tools.label
+        treatment: tools.treatment
+        includeSheets: tools.includeSheets
+        includeCounts: tools.includeCounts
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-workbook
+      description: Create a workbook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-workbooks.create
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-workbook
+      description: Get a workbook
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-workbooks.get
+      with:
+        workbookId: tools.workbookId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-workbook
+      description: Delete a workbook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-workbooks.delete
+      with:
+        workbookId: tools.workbookId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-workbook
+      description: Update a workbook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-workbooks.update
+      with:
+        workbookId: tools.workbookId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-commits-workbook
+      description: Get commits for a workbook
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-workbooks.getworkbookcommits
+      with:
+        workbookId: tools.workbookId
+        completed: tools.completed
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,93 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_versions
+  description: 'API Reference — subpackage_versions. 1 operations. Lead operation: Create Id. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_versions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-versions
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_versions business capability. Self-contained, no shared references.
+    resources:
+    - name: versions
+      path: /versions
+      operations:
+      - name: createid
+        method: POST
+        description: Create Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-versions-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_versions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/versions
+      name: versions
+      description: REST surface for versions.
+      operations:
+      - method: POST
+        name: createid
+        description: Create Id
+        call: flatfile-subpackage-versions.createid
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-versions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_versions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-id
+      description: Create Id
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-versions.createid
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

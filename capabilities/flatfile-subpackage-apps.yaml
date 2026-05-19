@@ -1,0 +1,718 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_apps
+  description: 'API Reference — subpackage_apps. 12 operations. Lead operation: List apps. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_apps
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-apps
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_apps business capability. Self-contained, no shared references.
+    resources:
+    - name: apps
+      path: /apps
+      operations:
+      - name: list
+        method: GET
+        description: List apps
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create an app
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: apps-appId
+      path: /apps/{appId}
+      operations:
+      - name: get
+        method: GET
+        description: Get an app
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of app
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update an app
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of app
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete an app
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of app to delete
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: apps-appId-constraints
+      path: /apps/{appId}/constraints
+      operations:
+      - name: getconstraints
+        method: GET
+        description: Get constraints
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of the app
+          required: true
+        - name: includeBuiltins
+          in: query
+          type: boolean
+          description: Whether to include built-in constraints
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: createconstraint
+        method: POST
+        description: Create constraint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of the app
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: apps-appId-constraints-constraintId
+      path: /apps/{appId}/constraints/{constraintId}
+      operations:
+      - name: getconstraintbyid
+        method: GET
+        description: Get constraint by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of the app
+          required: true
+        - name: constraintId
+          in: path
+          type: string
+          description: ID of the constraint
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: updateconstraint
+        method: PATCH
+        description: Update constraint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of the app
+          required: true
+        - name: constraintId
+          in: path
+          type: string
+          description: ID of the constraint
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deleteconstraint
+        method: DELETE
+        description: Delete constraint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of the app
+          required: true
+        - name: constraintId
+          in: path
+          type: string
+          description: ID of the constraint
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: apps-appId-constraints-constraintId-versions
+      path: /apps/{appId}/constraints/{constraintId}/versions
+      operations:
+      - name: getconstraintversions
+        method: GET
+        description: Get constraint versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of the app
+          required: true
+        - name: constraintId
+          in: path
+          type: string
+          description: ID of the constraint
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: apps-appId-constraints-constraintId-versions-version
+      path: /apps/{appId}/constraints/{constraintId}/versions/{version}
+      operations:
+      - name: getconstraintversion
+        method: GET
+        description: Get constraint version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          description: ID of the app
+          required: true
+        - name: constraintId
+          in: path
+          type: string
+          description: ID of the constraint
+          required: true
+        - name: version
+          in: path
+          type: integer
+          description: Version of the constraint
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-apps-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_apps. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/apps
+      name: apps
+      description: REST surface for apps.
+      operations:
+      - method: GET
+        name: list
+        description: List apps
+        call: flatfile-subpackage-apps.list
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create an app
+        call: flatfile-subpackage-apps.create
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apps/{appid}
+      name: apps-appid
+      description: REST surface for apps-appId.
+      operations:
+      - method: GET
+        name: get
+        description: Get an app
+        call: flatfile-subpackage-apps.get
+        with:
+          appId: rest.appId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update an app
+        call: flatfile-subpackage-apps.update
+        with:
+          appId: rest.appId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete an app
+        call: flatfile-subpackage-apps.delete
+        with:
+          appId: rest.appId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apps/{appid}/constraints
+      name: apps-appid-constraints
+      description: REST surface for apps-appId-constraints.
+      operations:
+      - method: GET
+        name: getconstraints
+        description: Get constraints
+        call: flatfile-subpackage-apps.getconstraints
+        with:
+          appId: rest.appId
+          includeBuiltins: rest.includeBuiltins
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createconstraint
+        description: Create constraint
+        call: flatfile-subpackage-apps.createconstraint
+        with:
+          appId: rest.appId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apps/{appid}/constraints/{constraintid}
+      name: apps-appid-constraints-constraintid
+      description: REST surface for apps-appId-constraints-constraintId.
+      operations:
+      - method: GET
+        name: getconstraintbyid
+        description: Get constraint by ID
+        call: flatfile-subpackage-apps.getconstraintbyid
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateconstraint
+        description: Update constraint
+        call: flatfile-subpackage-apps.updateconstraint
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteconstraint
+        description: Delete constraint
+        call: flatfile-subpackage-apps.deleteconstraint
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apps/{appid}/constraints/{constraintid}/versions
+      name: apps-appid-constraints-constraintid-versions
+      description: REST surface for apps-appId-constraints-constraintId-versions.
+      operations:
+      - method: GET
+        name: getconstraintversions
+        description: Get constraint versions
+        call: flatfile-subpackage-apps.getconstraintversions
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apps/{appid}/constraints/{constraintid}/versions/{version}
+      name: apps-appid-constraints-constraintid-versions-version
+      description: REST surface for apps-appId-constraints-constraintId-versions-version.
+      operations:
+      - method: GET
+        name: getconstraintversion
+        description: Get constraint version
+        call: flatfile-subpackage-apps.getconstraintversion
+        with:
+          appId: rest.appId
+          constraintId: rest.constraintId
+          version: rest.version
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-apps-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_apps. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-apps
+      description: List apps
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-apps.list
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-app
+      description: Create an app
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-apps.create
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-app
+      description: Get an app
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-apps.get
+      with:
+        appId: tools.appId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-app
+      description: Update an app
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-apps.update
+      with:
+        appId: tools.appId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-app
+      description: Delete an app
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-apps.delete
+      with:
+        appId: tools.appId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-constraints
+      description: Get constraints
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-apps.getconstraints
+      with:
+        appId: tools.appId
+        includeBuiltins: tools.includeBuiltins
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-constraint
+      description: Create constraint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-apps.createconstraint
+      with:
+        appId: tools.appId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-constraint-id
+      description: Get constraint by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-apps.getconstraintbyid
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-constraint
+      description: Update constraint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-apps.updateconstraint
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-constraint
+      description: Delete constraint
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-apps.deleteconstraint
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-constraint-versions
+      description: Get constraint versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-apps.getconstraintversions
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-constraint-version
+      description: Get constraint version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-apps.getconstraintversion
+      with:
+        appId: tools.appId
+        constraintId: tools.constraintId
+        version: tools.version
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

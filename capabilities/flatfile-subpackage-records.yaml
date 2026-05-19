@@ -1,0 +1,689 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_records
+  description: 'API Reference — subpackage_records. 7 operations. Lead operation: Finds and replaces field values matching
+    search criteria. Self-contained Naftiko capability covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_records
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-records
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_records business capability. Self-contained, no shared references.
+    resources:
+    - name: sheets-sheetId-find-replace
+      path: /sheets/{sheetId}/find-replace
+      operations:
+      - name: findandreplace
+        method: PUT
+        description: Finds and replaces field values matching search criteria
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: filter
+          in: query
+          type: string
+        - name: filterField
+          in: query
+          type: string
+          description: Name of field by which to filter records
+        - name: searchValue
+          in: query
+          type: string
+        - name: searchField
+          in: query
+          type: string
+        - name: ids
+          in: query
+          type: string
+          description: The Record Ids param (ids) is a list of record ids that can be passed to several record endpoints allowing
+            the user to identify specific records to INCLUDE in t
+        - name: q
+          in: query
+          type: string
+          description: An FFQL query used to filter the result set
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: sheets-sheetId-records
+      path: /sheets/{sheetId}/records
+      operations:
+      - name: get
+        method: GET
+        description: Get records
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: versionId
+          in: query
+          type: string
+          description: Deprecated, use `commitId` instead.
+        - name: commitId
+          in: query
+          type: string
+        - name: sinceVersionId
+          in: query
+          type: string
+          description: Deprecated, use `sinceCommitId` instead.
+        - name: sinceCommitId
+          in: query
+          type: string
+        - name: sortField
+          in: query
+          type: string
+        - name: sortDirection
+          in: query
+          type: string
+        - name: filter
+          in: query
+          type: string
+        - name: filterField
+          in: query
+          type: string
+          description: Name of field by which to filter records
+        - name: searchValue
+          in: query
+          type: string
+        - name: searchField
+          in: query
+          type: string
+        - name: ids
+          in: query
+          type: string
+          description: The Record Ids param (ids) is a list of record ids that can be passed to several record endpoints allowing
+            the user to identify specific records to INCLUDE in t
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of records to return in a page (default 10,000)
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Based on pageSize, which page of records to return (Note - numbers start at 1)
+        - name: includeCounts
+          in: query
+          type: boolean
+          description: '**DEPRECATED** Use GET /sheets/:sheetId/counts'
+        - name: includeLength
+          in: query
+          type: boolean
+          description: The length of the record result set, returned as counts.total
+        - name: includeLinks
+          in: query
+          type: boolean
+          description: If true, linked records will be included in the results. Defaults to false.
+        - name: includeMessages
+          in: query
+          type: boolean
+          description: Include error messages, defaults to false.
+        - name: fields
+          in: query
+          type: string
+          description: A list of field keys to include in the response. If not provided, all fields will be included.
+        - name: for
+          in: query
+          type: string
+          description: if "for" is provided, the query parameters will be pulled from the event payload
+        - name: q
+          in: query
+          type: string
+          description: An FFQL query used to filter the result set
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PUT
+        description: Update records
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: insert
+        method: POST
+        description: Insert records
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete records
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: ids
+          in: query
+          type: string
+          description: A list of record IDs to delete. Maximum of 100 allowed.
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: sheets-sheetId-records-bulk-update
+      path: /sheets/{sheetId}/records/bulk-update
+      operations:
+      - name: bulkupdate
+        method: PATCH
+        description: Bulk update records with field values
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: filter
+          in: query
+          type: string
+        - name: filterField
+          in: query
+          type: string
+          description: Name of field by which to filter records
+        - name: searchValue
+          in: query
+          type: string
+        - name: searchField
+          in: query
+          type: string
+        - name: sortField
+          in: query
+          type: string
+        - name: sortDirection
+          in: query
+          type: string
+        - name: ids
+          in: query
+          type: string
+          description: The Record Ids param (ids) is a list of record ids that can be passed to several record endpoints allowing
+            the user to identify specific records to INCLUDE in t
+        - name: q
+          in: query
+          type: string
+          description: An FFQL query used to filter the result set
+        - name: silent
+          in: query
+          type: boolean
+          description: Whether to suppress events for this bulk update
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: sheets-sheetId-records-indices
+      path: /sheets/{sheetId}/records/indices
+      operations:
+      - name: indices
+        method: GET
+        description: Get record Indices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: commitId
+          in: query
+          type: string
+        - name: sinceCommitId
+          in: query
+          type: string
+        - name: sortField
+          in: query
+          type: string
+        - name: sortDirection
+          in: query
+          type: string
+        - name: filter
+          in: query
+          type: string
+        - name: filterField
+          in: query
+          type: string
+          description: Name of field by which to filter records
+        - name: searchValue
+          in: query
+          type: string
+        - name: searchField
+          in: query
+          type: string
+        - name: ids
+          in: query
+          type: string
+          description: List of record IDs to include in the query. Limit 100.
+          required: true
+        - name: q
+          in: query
+          type: string
+          description: An FFQL query used to filter the result set
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-records-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_records. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/sheets/{sheetid}/find-replace
+      name: sheets-sheetid-find-replace
+      description: REST surface for sheets-sheetId-find-replace.
+      operations:
+      - method: PUT
+        name: findandreplace
+        description: Finds and replaces field values matching search criteria
+        call: flatfile-subpackage-records.findandreplace
+        with:
+          sheetId: rest.sheetId
+          filter: rest.filter
+          filterField: rest.filterField
+          searchValue: rest.searchValue
+          searchField: rest.searchField
+          ids: rest.ids
+          q: rest.q
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/records
+      name: sheets-sheetid-records
+      description: REST surface for sheets-sheetId-records.
+      operations:
+      - method: GET
+        name: get
+        description: Get records
+        call: flatfile-subpackage-records.get
+        with:
+          sheetId: rest.sheetId
+          versionId: rest.versionId
+          commitId: rest.commitId
+          sinceVersionId: rest.sinceVersionId
+          sinceCommitId: rest.sinceCommitId
+          sortField: rest.sortField
+          sortDirection: rest.sortDirection
+          filter: rest.filter
+          filterField: rest.filterField
+          searchValue: rest.searchValue
+          searchField: rest.searchField
+          ids: rest.ids
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          includeCounts: rest.includeCounts
+          includeLength: rest.includeLength
+          includeLinks: rest.includeLinks
+          includeMessages: rest.includeMessages
+          fields: rest.fields
+          for: rest.for
+          q: rest.q
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: update
+        description: Update records
+        call: flatfile-subpackage-records.update
+        with:
+          sheetId: rest.sheetId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: insert
+        description: Insert records
+        call: flatfile-subpackage-records.insert
+        with:
+          sheetId: rest.sheetId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete records
+        call: flatfile-subpackage-records.delete
+        with:
+          sheetId: rest.sheetId
+          ids: rest.ids
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/records/bulk-update
+      name: sheets-sheetid-records-bulk-update
+      description: REST surface for sheets-sheetId-records-bulk-update.
+      operations:
+      - method: PATCH
+        name: bulkupdate
+        description: Bulk update records with field values
+        call: flatfile-subpackage-records.bulkupdate
+        with:
+          sheetId: rest.sheetId
+          filter: rest.filter
+          filterField: rest.filterField
+          searchValue: rest.searchValue
+          searchField: rest.searchField
+          sortField: rest.sortField
+          sortDirection: rest.sortDirection
+          ids: rest.ids
+          q: rest.q
+          silent: rest.silent
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/records/indices
+      name: sheets-sheetid-records-indices
+      description: REST surface for sheets-sheetId-records-indices.
+      operations:
+      - method: GET
+        name: indices
+        description: Get record Indices
+        call: flatfile-subpackage-records.indices
+        with:
+          sheetId: rest.sheetId
+          commitId: rest.commitId
+          sinceCommitId: rest.sinceCommitId
+          sortField: rest.sortField
+          sortDirection: rest.sortDirection
+          filter: rest.filter
+          filterField: rest.filterField
+          searchValue: rest.searchValue
+          searchField: rest.searchField
+          ids: rest.ids
+          q: rest.q
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-records-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_records. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: finds-and-replaces-field-values
+      description: Finds and replaces field values matching search criteria
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-records.findandreplace
+      with:
+        sheetId: tools.sheetId
+        filter: tools.filter
+        filterField: tools.filterField
+        searchValue: tools.searchValue
+        searchField: tools.searchField
+        ids: tools.ids
+        q: tools.q
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-records
+      description: Get records
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-records.get
+      with:
+        sheetId: tools.sheetId
+        versionId: tools.versionId
+        commitId: tools.commitId
+        sinceVersionId: tools.sinceVersionId
+        sinceCommitId: tools.sinceCommitId
+        sortField: tools.sortField
+        sortDirection: tools.sortDirection
+        filter: tools.filter
+        filterField: tools.filterField
+        searchValue: tools.searchValue
+        searchField: tools.searchField
+        ids: tools.ids
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        includeCounts: tools.includeCounts
+        includeLength: tools.includeLength
+        includeLinks: tools.includeLinks
+        includeMessages: tools.includeMessages
+        fields: tools.fields
+        for: tools.for
+        q: tools.q
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-records
+      description: Update records
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-records.update
+      with:
+        sheetId: tools.sheetId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: insert-records
+      description: Insert records
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-records.insert
+      with:
+        sheetId: tools.sheetId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-records
+      description: Delete records
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-records.delete
+      with:
+        sheetId: tools.sheetId
+        ids: tools.ids
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: bulk-update-records-field-values
+      description: Bulk update records with field values
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-records.bulkupdate
+      with:
+        sheetId: tools.sheetId
+        filter: tools.filter
+        filterField: tools.filterField
+        searchValue: tools.searchValue
+        searchField: tools.searchField
+        sortField: tools.sortField
+        sortDirection: tools.sortDirection
+        ids: tools.ids
+        q: tools.q
+        silent: tools.silent
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-record-indices
+      description: Get record Indices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-records.indices
+      with:
+        sheetId: tools.sheetId
+        commitId: tools.commitId
+        sinceCommitId: tools.sinceCommitId
+        sortField: tools.sortField
+        sortDirection: tools.sortDirection
+        filter: tools.filter
+        filterField: tools.filterField
+        searchValue: tools.searchValue
+        searchField: tools.searchField
+        ids: tools.ids
+        q: tools.q
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,1043 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_spaces
+  description: 'API Reference — subpackage_spaces. 17 operations. Lead operation: List spaces. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_spaces
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-spaces
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_spaces business capability. Self-contained, no shared references.
+    resources:
+    - name: spaces
+      path: /spaces
+      operations:
+      - name: list
+        method: GET
+        description: List spaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          description: The ID of the environment.
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of spaces to return in a page (default 10)
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Based on pageSize, which page of records to return
+        - name: app
+          in: query
+          type: string
+          description: Filter by appId
+        - name: search
+          in: query
+          type: string
+          description: Search query for spaces
+        - name: namespace
+          in: query
+          type: string
+          description: Search by namespace
+        - name: archived
+          in: query
+          type: boolean
+          description: Flag to include archived spaces
+        - name: sortField
+          in: query
+          type: string
+          description: Field to sort spaces by; requires `sortDirection` if provided.
+        - name: sortDirection
+          in: query
+          type: string
+          description: Direction of sorting; requires `sortField` if provided.
+        - name: isCollaborative
+          in: query
+          type: boolean
+          description: Flag for collaborative (project) spaces
+        - name: appId
+          in: query
+          type: string
+          description: (Deprecated!) Use `app` query parameter
+        - name: isAppTemplate
+          in: query
+          type: boolean
+          description: Flag for app templates
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: bulkdelete
+        method: DELETE
+        description: Delete spaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceIds
+          in: query
+          type: string
+          description: List of ids for the spaces to be deleted
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: spaces-spaceId
+      path: /spaces/{spaceId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to delete
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to update
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: spaces-spaceId-archive
+      path: /spaces/{spaceId}/archive
+      operations:
+      - name: archivespace
+        method: POST
+        description: Archives a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to archive
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: spaces-spaceId-drafts
+      path: /spaces/{spaceId}/drafts
+      operations:
+      - name: createdraft
+        method: POST
+        description: Create a draft of a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to create draft of
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: listspacedrafts
+        method: GET
+        description: List drafts for a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to list drafts for
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: spaces-spaceId-drafts-draftSpaceId-merge
+      path: /spaces/{spaceId}/drafts/{draftSpaceId}/merge
+      operations:
+      - name: getspacedraft
+        method: GET
+        description: Get a draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to get draft for
+          required: true
+        - name: draftSpaceId
+          in: path
+          type: string
+          description: ID of draft space to get
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: mergedraft
+        method: POST
+        description: Merge a draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to merge draft into
+          required: true
+        - name: draftSpaceId
+          in: path
+          type: string
+          description: ID of draft space to merge
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: spaces-spaceId-guidance
+      path: /spaces/{spaceId}/guidance
+      operations:
+      - name: createguidance
+        method: POST
+        description: Create a new guidance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of the space
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: listguidance
+        method: GET
+        description: List guidances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of the space
+          required: true
+        - name: includeGuide
+          in: query
+          type: boolean
+          description: Include the guide with the guidance, default is false
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: spaces-spaceId-guidance-guidanceId
+      path: /spaces/{spaceId}/guidance/{guidanceId}
+      operations:
+      - name: getguidance
+        method: GET
+        description: Get a guidance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of the space
+          required: true
+        - name: guidanceId
+          in: path
+          type: string
+          description: ID of the guidance
+          required: true
+        - name: includeGuide
+          in: query
+          type: boolean
+          description: Include the guide with the guidance, default is false
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: updateguidance
+        method: PATCH
+        description: Update a guidance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of the space
+          required: true
+        - name: guidanceId
+          in: path
+          type: string
+          description: ID of the guidance
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deleteguidance
+        method: DELETE
+        description: Delete a guidance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of the space
+          required: true
+        - name: guidanceId
+          in: path
+          type: string
+          description: ID of the guidance
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: spaces-spaceId-unarchive
+      path: /spaces/{spaceId}/unarchive
+      operations:
+      - name: unarchivespace
+        method: POST
+        description: Unarchives a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to unarchive
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-spaces-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_spaces. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/spaces
+      name: spaces
+      description: REST surface for spaces.
+      operations:
+      - method: GET
+        name: list
+        description: List spaces
+        call: flatfile-subpackage-spaces.list
+        with:
+          environmentId: rest.environmentId
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          app: rest.app
+          search: rest.search
+          namespace: rest.namespace
+          archived: rest.archived
+          sortField: rest.sortField
+          sortDirection: rest.sortDirection
+          isCollaborative: rest.isCollaborative
+          appId: rest.appId
+          isAppTemplate: rest.isAppTemplate
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create a space
+        call: flatfile-subpackage-spaces.create
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: bulkdelete
+        description: Delete spaces
+        call: flatfile-subpackage-spaces.bulkdelete
+        with:
+          spaceIds: rest.spaceIds
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}
+      name: spaces-spaceid
+      description: REST surface for spaces-spaceId.
+      operations:
+      - method: GET
+        name: get
+        description: Get a space
+        call: flatfile-subpackage-spaces.get
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a space
+        call: flatfile-subpackage-spaces.delete
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update a space
+        call: flatfile-subpackage-spaces.update
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}/archive
+      name: spaces-spaceid-archive
+      description: REST surface for spaces-spaceId-archive.
+      operations:
+      - method: POST
+        name: archivespace
+        description: Archives a space
+        call: flatfile-subpackage-spaces.archivespace
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}/drafts
+      name: spaces-spaceid-drafts
+      description: REST surface for spaces-spaceId-drafts.
+      operations:
+      - method: POST
+        name: createdraft
+        description: Create a draft of a space
+        call: flatfile-subpackage-spaces.createdraft
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listspacedrafts
+        description: List drafts for a space
+        call: flatfile-subpackage-spaces.listspacedrafts
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}/drafts/{draftspaceid}/merge
+      name: spaces-spaceid-drafts-draftspaceid-merge
+      description: REST surface for spaces-spaceId-drafts-draftSpaceId-merge.
+      operations:
+      - method: GET
+        name: getspacedraft
+        description: Get a draft
+        call: flatfile-subpackage-spaces.getspacedraft
+        with:
+          spaceId: rest.spaceId
+          draftSpaceId: rest.draftSpaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: mergedraft
+        description: Merge a draft
+        call: flatfile-subpackage-spaces.mergedraft
+        with:
+          spaceId: rest.spaceId
+          draftSpaceId: rest.draftSpaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}/guidance
+      name: spaces-spaceid-guidance
+      description: REST surface for spaces-spaceId-guidance.
+      operations:
+      - method: POST
+        name: createguidance
+        description: Create a new guidance
+        call: flatfile-subpackage-spaces.createguidance
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listguidance
+        description: List guidances
+        call: flatfile-subpackage-spaces.listguidance
+        with:
+          spaceId: rest.spaceId
+          includeGuide: rest.includeGuide
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}/guidance/{guidanceid}
+      name: spaces-spaceid-guidance-guidanceid
+      description: REST surface for spaces-spaceId-guidance-guidanceId.
+      operations:
+      - method: GET
+        name: getguidance
+        description: Get a guidance
+        call: flatfile-subpackage-spaces.getguidance
+        with:
+          spaceId: rest.spaceId
+          guidanceId: rest.guidanceId
+          includeGuide: rest.includeGuide
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateguidance
+        description: Update a guidance
+        call: flatfile-subpackage-spaces.updateguidance
+        with:
+          spaceId: rest.spaceId
+          guidanceId: rest.guidanceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteguidance
+        description: Delete a guidance
+        call: flatfile-subpackage-spaces.deleteguidance
+        with:
+          spaceId: rest.spaceId
+          guidanceId: rest.guidanceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}/unarchive
+      name: spaces-spaceid-unarchive
+      description: REST surface for spaces-spaceId-unarchive.
+      operations:
+      - method: POST
+        name: unarchivespace
+        description: Unarchives a space
+        call: flatfile-subpackage-spaces.unarchivespace
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-spaces-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_spaces. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-spaces
+      description: List spaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-spaces.list
+      with:
+        environmentId: tools.environmentId
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        app: tools.app
+        search: tools.search
+        namespace: tools.namespace
+        archived: tools.archived
+        sortField: tools.sortField
+        sortDirection: tools.sortDirection
+        isCollaborative: tools.isCollaborative
+        appId: tools.appId
+        isAppTemplate: tools.isAppTemplate
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-space
+      description: Create a space
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-spaces.create
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-spaces
+      description: Delete spaces
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-spaces.bulkdelete
+      with:
+        spaceIds: tools.spaceIds
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-space
+      description: Get a space
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-spaces.get
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-space
+      description: Delete a space
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-spaces.delete
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-space
+      description: Update a space
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-spaces.update
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: archives-space
+      description: Archives a space
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-spaces.archivespace
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-draft-space
+      description: Create a draft of a space
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-spaces.createdraft
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-drafts-space
+      description: List drafts for a space
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-spaces.listspacedrafts
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-draft
+      description: Get a draft
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-spaces.getspacedraft
+      with:
+        spaceId: tools.spaceId
+        draftSpaceId: tools.draftSpaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: merge-draft
+      description: Merge a draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-spaces.mergedraft
+      with:
+        spaceId: tools.spaceId
+        draftSpaceId: tools.draftSpaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-guidance
+      description: Create a new guidance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-spaces.createguidance
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-guidances
+      description: List guidances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-spaces.listguidance
+      with:
+        spaceId: tools.spaceId
+        includeGuide: tools.includeGuide
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-guidance
+      description: Get a guidance
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-spaces.getguidance
+      with:
+        spaceId: tools.spaceId
+        guidanceId: tools.guidanceId
+        includeGuide: tools.includeGuide
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-guidance
+      description: Update a guidance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-spaces.updateguidance
+      with:
+        spaceId: tools.spaceId
+        guidanceId: tools.guidanceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-guidance
+      description: Delete a guidance
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-spaces.deleteguidance
+      with:
+        spaceId: tools.spaceId
+        guidanceId: tools.guidanceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unarchives-space
+      description: Unarchives a space
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-spaces.unarchivespace
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

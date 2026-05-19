@@ -1,0 +1,352 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_events
+  description: 'API Reference — subpackage_events. 5 operations. Lead operation: List events. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-events
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_events business capability. Self-contained, no shared references.
+    resources:
+    - name: events
+      path: /events
+      operations:
+      - name: list
+        method: GET
+        description: List events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          description: Filter by environment
+        - name: spaceId
+          in: query
+          type: string
+          description: Filter by space
+        - name: domain
+          in: query
+          type: string
+          description: Filter by event domain
+        - name: topic
+          in: query
+          type: string
+          description: Filter by event topic
+        - name: since
+          in: query
+          type: string
+          description: Filter by event timestamp
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of results to return in a page (default 10)
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Based on pageSize, which page of results to return
+        - name: includeAcknowledged
+          in: query
+          type: boolean
+          description: Include acknowledged events
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create an event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: events-eventId
+      path: /events/{eventId}
+      operations:
+      - name: get
+        method: GET
+        description: Get an event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventId
+          in: path
+          type: string
+          description: The event id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: events-eventId-ack
+      path: /events/{eventId}/ack
+      operations:
+      - name: ack
+        method: POST
+        description: Acknowledge an event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventId
+          in: path
+          type: string
+          description: The event id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: subscription
+      path: /subscription
+      operations:
+      - name: geteventtoken
+        method: GET
+        description: Get subscription credentials
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: scope
+          in: query
+          type: string
+          description: The resource ID of the event stream (space or environment id)
+        - name: spaceId
+          in: query
+          type: string
+          description: The space ID of the event stream
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-events-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_events. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/events
+      name: events
+      description: REST surface for events.
+      operations:
+      - method: GET
+        name: list
+        description: List events
+        call: flatfile-subpackage-events.list
+        with:
+          environmentId: rest.environmentId
+          spaceId: rest.spaceId
+          domain: rest.domain
+          topic: rest.topic
+          since: rest.since
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          includeAcknowledged: rest.includeAcknowledged
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create an event
+        call: flatfile-subpackage-events.create
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/events/{eventid}
+      name: events-eventid
+      description: REST surface for events-eventId.
+      operations:
+      - method: GET
+        name: get
+        description: Get an event
+        call: flatfile-subpackage-events.get
+        with:
+          eventId: rest.eventId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/events/{eventid}/ack
+      name: events-eventid-ack
+      description: REST surface for events-eventId-ack.
+      operations:
+      - method: POST
+        name: ack
+        description: Acknowledge an event
+        call: flatfile-subpackage-events.ack
+        with:
+          eventId: rest.eventId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/subscription
+      name: subscription
+      description: REST surface for subscription.
+      operations:
+      - method: GET
+        name: geteventtoken
+        description: Get subscription credentials
+        call: flatfile-subpackage-events.geteventtoken
+        with:
+          scope: rest.scope
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_events. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-events
+      description: List events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-events.list
+      with:
+        environmentId: tools.environmentId
+        spaceId: tools.spaceId
+        domain: tools.domain
+        topic: tools.topic
+        since: tools.since
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        includeAcknowledged: tools.includeAcknowledged
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-event
+      description: Create an event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-events.create
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-event
+      description: Get an event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-events.get
+      with:
+        eventId: tools.eventId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge-event
+      description: Acknowledge an event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-events.ack
+      with:
+        eventId: tools.eventId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-subscription-credentials
+      description: Get subscription credentials
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-events.geteventtoken
+      with:
+        scope: tools.scope
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

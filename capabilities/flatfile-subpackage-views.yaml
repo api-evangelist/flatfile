@@ -1,0 +1,311 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_views
+  description: 'API Reference — subpackage_views. 5 operations. Lead operation: List views by Sheet. Self-contained Naftiko
+    capability covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_views
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-views
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_views business capability. Self-contained, no shared references.
+    resources:
+    - name: views
+      path: /views
+      operations:
+      - name: list
+        method: GET
+        description: List views by Sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: query
+          type: string
+          description: The associated sheet ID of the view.
+          required: true
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of prompts to return in a page (default 10)
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Based on pageSize, which page of prompts to return
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create a view
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: views-viewId
+      path: /views/{viewId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a view
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: viewId
+          in: path
+          type: string
+          description: ID of view to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update a view
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: viewId
+          in: path
+          type: string
+          description: ID of view to update
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a view
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: viewId
+          in: path
+          type: string
+          description: ID of view to delete
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-views-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_views. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/views
+      name: views
+      description: REST surface for views.
+      operations:
+      - method: GET
+        name: list
+        description: List views by Sheet
+        call: flatfile-subpackage-views.list
+        with:
+          sheetId: rest.sheetId
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create a view
+        call: flatfile-subpackage-views.create
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/views/{viewid}
+      name: views-viewid
+      description: REST surface for views-viewId.
+      operations:
+      - method: GET
+        name: get
+        description: Get a view
+        call: flatfile-subpackage-views.get
+        with:
+          viewId: rest.viewId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update a view
+        call: flatfile-subpackage-views.update
+        with:
+          viewId: rest.viewId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a view
+        call: flatfile-subpackage-views.delete
+        with:
+          viewId: rest.viewId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-views-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_views. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-views-sheet
+      description: List views by Sheet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-views.list
+      with:
+        sheetId: tools.sheetId
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-view
+      description: Create a view
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-views.create
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-view
+      description: Get a view
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-views.get
+      with:
+        viewId: tools.viewId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-view
+      description: Update a view
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-views.update
+      with:
+        viewId: tools.viewId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-view
+      description: Delete a view
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-views.delete
+      with:
+        viewId: tools.viewId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

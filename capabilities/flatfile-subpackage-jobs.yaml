@@ -1,0 +1,1047 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_jobs
+  description: 'API Reference — subpackage_jobs. 17 operations. Lead operation: List jobs. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_jobs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-jobs
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_jobs business capability. Self-contained, no shared references.
+    resources:
+    - name: jobs
+      path: /jobs
+      operations:
+      - name: list
+        method: GET
+        description: List jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          description: When provided, only jobs for the given environment will be returned
+        - name: spaceId
+          in: query
+          type: string
+          description: When provided, only jobs for the given space will be returned
+        - name: workbookId
+          in: query
+          type: string
+          description: When provided, only jobs for the given workbook will be returned
+        - name: fileId
+          in: query
+          type: string
+          description: When provided, only jobs for the given file will be returned
+        - name: parentId
+          in: query
+          type: string
+          description: When provided, only jobs that are parts of the given job will be returned
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of jobs to return in a page (default 20)
+        - name: pageNumber
+          in: query
+          type: integer
+          description: Based on pageSize, which page of jobs to return
+        - name: sortDirection
+          in: query
+          type: string
+          description: Sort direction - asc (ascending) or desc (descending)
+        - name: excludeChildJobs
+          in: query
+          type: boolean
+          description: When true, only top-level jobs will be returned unless a parentId is specified
+        - name: source
+          in: query
+          type: string
+          description: When provided, only jobs with the given source will be returned
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: jobs-preview-mutation
+      path: /jobs/preview-mutation
+      operations:
+      - name: previewmutation
+        method: POST
+        description: Preview a mutation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: jobs-jobId
+      path: /jobs/{jobId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The id of the job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The id of the job to patch
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The id of the job to delete
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: jobs-jobId-ack
+      path: /jobs/{jobId}/ack
+      operations:
+      - name: ack
+        method: POST
+        description: Acknowledge a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: jobs-jobId-cancel
+      path: /jobs/{jobId}/cancel
+      operations:
+      - name: cancel
+        method: POST
+        description: Cancel a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: jobs-jobId-complete
+      path: /jobs/{jobId}/complete
+      operations:
+      - name: complete
+        method: POST
+        description: Complete a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: jobs-jobId-execute
+      path: /jobs/{jobId}/execute
+      operations:
+      - name: execute
+        method: POST
+        description: Execute a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: jobs-jobId-fail
+      path: /jobs/{jobId}/fail
+      operations:
+      - name: fail
+        method: POST
+        description: Fail a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: jobs-jobId-outcome-ack
+      path: /jobs/{jobId}/outcome/ack
+      operations:
+      - name: ackoutcome
+        method: POST
+        description: Acknowledge a job outcome
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: jobs-jobId-plan
+      path: /jobs/{jobId}/plan
+      operations:
+      - name: getexecutionplan
+        method: GET
+        description: Get a job's execution plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: updateexecutionplan
+        method: PUT
+        description: Replace a job's plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: updateexecutionplanfields
+        method: PATCH
+        description: Update a job's plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: jobs-jobId-retry
+      path: /jobs/{jobId}/retry
+      operations:
+      - name: retry
+        method: POST
+        description: Retry a failed job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: jobs-jobId-split
+      path: /jobs/{jobId}/split
+      operations:
+      - name: split
+        method: POST
+        description: Split a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: ID of job to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-jobs-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_jobs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/jobs
+      name: jobs
+      description: REST surface for jobs.
+      operations:
+      - method: GET
+        name: list
+        description: List jobs
+        call: flatfile-subpackage-jobs.list
+        with:
+          environmentId: rest.environmentId
+          spaceId: rest.spaceId
+          workbookId: rest.workbookId
+          fileId: rest.fileId
+          parentId: rest.parentId
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          sortDirection: rest.sortDirection
+          excludeChildJobs: rest.excludeChildJobs
+          source: rest.source
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create a job
+        call: flatfile-subpackage-jobs.create
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/preview-mutation
+      name: jobs-preview-mutation
+      description: REST surface for jobs-preview-mutation.
+      operations:
+      - method: POST
+        name: previewmutation
+        description: Preview a mutation
+        call: flatfile-subpackage-jobs.previewmutation
+        with:
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}
+      name: jobs-jobid
+      description: REST surface for jobs-jobId.
+      operations:
+      - method: GET
+        name: get
+        description: Get a job
+        call: flatfile-subpackage-jobs.get
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update a job
+        call: flatfile-subpackage-jobs.update
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a job
+        call: flatfile-subpackage-jobs.delete
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/ack
+      name: jobs-jobid-ack
+      description: REST surface for jobs-jobId-ack.
+      operations:
+      - method: POST
+        name: ack
+        description: Acknowledge a job
+        call: flatfile-subpackage-jobs.ack
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/cancel
+      name: jobs-jobid-cancel
+      description: REST surface for jobs-jobId-cancel.
+      operations:
+      - method: POST
+        name: cancel
+        description: Cancel a job
+        call: flatfile-subpackage-jobs.cancel
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/complete
+      name: jobs-jobid-complete
+      description: REST surface for jobs-jobId-complete.
+      operations:
+      - method: POST
+        name: complete
+        description: Complete a job
+        call: flatfile-subpackage-jobs.complete
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/execute
+      name: jobs-jobid-execute
+      description: REST surface for jobs-jobId-execute.
+      operations:
+      - method: POST
+        name: execute
+        description: Execute a job
+        call: flatfile-subpackage-jobs.execute
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/fail
+      name: jobs-jobid-fail
+      description: REST surface for jobs-jobId-fail.
+      operations:
+      - method: POST
+        name: fail
+        description: Fail a job
+        call: flatfile-subpackage-jobs.fail
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/outcome/ack
+      name: jobs-jobid-outcome-ack
+      description: REST surface for jobs-jobId-outcome-ack.
+      operations:
+      - method: POST
+        name: ackoutcome
+        description: Acknowledge a job outcome
+        call: flatfile-subpackage-jobs.ackoutcome
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/plan
+      name: jobs-jobid-plan
+      description: REST surface for jobs-jobId-plan.
+      operations:
+      - method: GET
+        name: getexecutionplan
+        description: Get a job's execution plan
+        call: flatfile-subpackage-jobs.getexecutionplan
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateexecutionplan
+        description: Replace a job's plan
+        call: flatfile-subpackage-jobs.updateexecutionplan
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateexecutionplanfields
+        description: Update a job's plan
+        call: flatfile-subpackage-jobs.updateexecutionplanfields
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/retry
+      name: jobs-jobid-retry
+      description: REST surface for jobs-jobId-retry.
+      operations:
+      - method: POST
+        name: retry
+        description: Retry a failed job
+        call: flatfile-subpackage-jobs.retry
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/split
+      name: jobs-jobid-split
+      description: REST surface for jobs-jobId-split.
+      operations:
+      - method: POST
+        name: split
+        description: Split a job
+        call: flatfile-subpackage-jobs.split
+        with:
+          jobId: rest.jobId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-jobs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_jobs. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-jobs
+      description: List jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-jobs.list
+      with:
+        environmentId: tools.environmentId
+        spaceId: tools.spaceId
+        workbookId: tools.workbookId
+        fileId: tools.fileId
+        parentId: tools.parentId
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        sortDirection: tools.sortDirection
+        excludeChildJobs: tools.excludeChildJobs
+        source: tools.source
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-job
+      description: Create a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.create
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: preview-mutation
+      description: Preview a mutation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.previewmutation
+      with:
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job
+      description: Get a job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-jobs.get
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-job
+      description: Update a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-jobs.update
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-job
+      description: Delete a job
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-jobs.delete
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge-job
+      description: Acknowledge a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.ack
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-job
+      description: Cancel a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.cancel
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: complete-job
+      description: Complete a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.complete
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: execute-job
+      description: Execute a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.execute
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fail-job
+      description: Fail a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.fail
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge-job-outcome
+      description: Acknowledge a job outcome
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.ackoutcome
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-s-execution-plan
+      description: Get a job's execution plan
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-jobs.getexecutionplan
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: replace-job-s-plan
+      description: Replace a job's plan
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-jobs.updateexecutionplan
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-job-s-plan
+      description: Update a job's plan
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-jobs.updateexecutionplanfields
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retry-failed-job
+      description: Retry a failed job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.retry
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: split-job
+      description: Split a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-jobs.split
+      with:
+        jobId: tools.jobId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

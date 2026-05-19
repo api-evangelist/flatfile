@@ -1,0 +1,837 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_agents
+  description: 'API Reference — subpackage_agents. 13 operations. Lead operation: List agents. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_agents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-agents
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_agents business capability. Self-contained, no shared references.
+    resources:
+    - name: agents
+      path: /agents
+      operations:
+      - name: list
+        method: GET
+        description: List agents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: isSystem
+          in: query
+          type: boolean
+        - name: search
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageNumber
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create an agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: agents-executions
+      path: /agents/executions
+      operations:
+      - name: getenvironmentagentexecutions
+        method: GET
+        description: Get all executions in your environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: agentId
+          in: query
+          type: string
+        - name: spaceId
+          in: query
+          type: string
+        - name: success
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageNumber
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: agents-log-eventId
+      path: /agents/log/{eventId}
+      operations:
+      - name: getagentlog
+        method: GET
+        description: Get an agent log
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: eventId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: agents-logs
+      path: /agents/logs
+      operations:
+      - name: getenvironmentagentlogs
+        method: GET
+        description: Get all agent logs in your environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: spaceId
+          in: query
+          type: string
+        - name: success
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: string
+        - name: pageNumber
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: agents-agentId
+      path: /agents/{agentId}
+      operations:
+      - name: get
+        method: GET
+        description: Get an agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: query
+          type: string
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete an agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: query
+          type: string
+          description: This environment variable is no longer needed or used
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: agents-agentId-logs
+      path: /agents/{agentId}/logs
+      operations:
+      - name: getagentlogs
+        method: GET
+        description: Get logs for an agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: query
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: agents-agentId-roles
+      path: /agents/{agentId}/roles
+      operations:
+      - name: listagentroles
+        method: GET
+        description: List Agent Roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          description: The agent id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: assignagentrole
+        method: POST
+        description: Assign Role to Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          description: The agent id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: agents-agentId-roles-actorRoleId
+      path: /agents/{agentId}/roles/{actorRoleId}
+      operations:
+      - name: deleteagentrole
+        method: DELETE
+        description: Remove Role from Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          description: The agent id
+          required: true
+        - name: actorRoleId
+          in: path
+          type: string
+          description: The actor role id
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: agents-agentId-versions
+      path: /agents/{agentId}/versions
+      operations:
+      - name: listversions
+        method: GET
+        description: List agent versions for an agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: agents-agentId-versions-agentVersionId-revert
+      path: /agents/{agentId}/versions/{agentVersionId}/revert
+      operations:
+      - name: revert
+        method: GET
+        description: Revert to a specific agent version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agentId
+          in: path
+          type: string
+          required: true
+        - name: agentVersionId
+          in: path
+          type: string
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-agents-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_agents. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/agents
+      name: agents
+      description: REST surface for agents.
+      operations:
+      - method: GET
+        name: list
+        description: List agents
+        call: flatfile-subpackage-agents.list
+        with:
+          environmentId: rest.environmentId
+          isSystem: rest.isSystem
+          search: rest.search
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create an agent
+        call: flatfile-subpackage-agents.create
+        with:
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/executions
+      name: agents-executions
+      description: REST surface for agents-executions.
+      operations:
+      - method: GET
+        name: getenvironmentagentexecutions
+        description: Get all executions in your environment
+        call: flatfile-subpackage-agents.getenvironmentagentexecutions
+        with:
+          environmentId: rest.environmentId
+          agentId: rest.agentId
+          spaceId: rest.spaceId
+          success: rest.success
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/log/{eventid}
+      name: agents-log-eventid
+      description: REST surface for agents-log-eventId.
+      operations:
+      - method: GET
+        name: getagentlog
+        description: Get an agent log
+        call: flatfile-subpackage-agents.getagentlog
+        with:
+          eventId: rest.eventId
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/logs
+      name: agents-logs
+      description: REST surface for agents-logs.
+      operations:
+      - method: GET
+        name: getenvironmentagentlogs
+        description: Get all agent logs in your environment
+        call: flatfile-subpackage-agents.getenvironmentagentlogs
+        with:
+          environmentId: rest.environmentId
+          spaceId: rest.spaceId
+          success: rest.success
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/{agentid}
+      name: agents-agentid
+      description: REST surface for agents-agentId.
+      operations:
+      - method: GET
+        name: get
+        description: Get an agent
+        call: flatfile-subpackage-agents.get
+        with:
+          agentId: rest.agentId
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete an agent
+        call: flatfile-subpackage-agents.delete
+        with:
+          agentId: rest.agentId
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/{agentid}/logs
+      name: agents-agentid-logs
+      description: REST surface for agents-agentId-logs.
+      operations:
+      - method: GET
+        name: getagentlogs
+        description: Get logs for an agent
+        call: flatfile-subpackage-agents.getagentlogs
+        with:
+          agentId: rest.agentId
+          environmentId: rest.environmentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/{agentid}/roles
+      name: agents-agentid-roles
+      description: REST surface for agents-agentId-roles.
+      operations:
+      - method: GET
+        name: listagentroles
+        description: List Agent Roles
+        call: flatfile-subpackage-agents.listagentroles
+        with:
+          agentId: rest.agentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: assignagentrole
+        description: Assign Role to Agent
+        call: flatfile-subpackage-agents.assignagentrole
+        with:
+          agentId: rest.agentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/{agentid}/roles/{actorroleid}
+      name: agents-agentid-roles-actorroleid
+      description: REST surface for agents-agentId-roles-actorRoleId.
+      operations:
+      - method: DELETE
+        name: deleteagentrole
+        description: Remove Role from Agent
+        call: flatfile-subpackage-agents.deleteagentrole
+        with:
+          agentId: rest.agentId
+          actorRoleId: rest.actorRoleId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/{agentid}/versions
+      name: agents-agentid-versions
+      description: REST surface for agents-agentId-versions.
+      operations:
+      - method: GET
+        name: listversions
+        description: List agent versions for an agent
+        call: flatfile-subpackage-agents.listversions
+        with:
+          agentId: rest.agentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/{agentid}/versions/{agentversionid}/revert
+      name: agents-agentid-versions-agentversionid-revert
+      description: REST surface for agents-agentId-versions-agentVersionId-revert.
+      operations:
+      - method: GET
+        name: revert
+        description: Revert to a specific agent version
+        call: flatfile-subpackage-agents.revert
+        with:
+          agentId: rest.agentId
+          agentVersionId: rest.agentVersionId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-agents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_agents. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-agents
+      description: List agents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-agents.list
+      with:
+        environmentId: tools.environmentId
+        isSystem: tools.isSystem
+        search: tools.search
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-agent
+      description: Create an agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-agents.create
+      with:
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-executions-your-environment
+      description: Get all executions in your environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-agents.getenvironmentagentexecutions
+      with:
+        environmentId: tools.environmentId
+        agentId: tools.agentId
+        spaceId: tools.spaceId
+        success: tools.success
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-log
+      description: Get an agent log
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-agents.getagentlog
+      with:
+        eventId: tools.eventId
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-agent-logs-your
+      description: Get all agent logs in your environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-agents.getenvironmentagentlogs
+      with:
+        environmentId: tools.environmentId
+        spaceId: tools.spaceId
+        success: tools.success
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent
+      description: Get an agent
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-agents.get
+      with:
+        agentId: tools.agentId
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-agent
+      description: Delete an agent
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-agents.delete
+      with:
+        agentId: tools.agentId
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-logs-agent
+      description: Get logs for an agent
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-agents.getagentlogs
+      with:
+        agentId: tools.agentId
+        environmentId: tools.environmentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-agent-roles
+      description: List Agent Roles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-agents.listagentroles
+      with:
+        agentId: tools.agentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assign-role-agent
+      description: Assign Role to Agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-agents.assignagentrole
+      with:
+        agentId: tools.agentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-role-agent
+      description: Remove Role from Agent
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-agents.deleteagentrole
+      with:
+        agentId: tools.agentId
+        actorRoleId: tools.actorRoleId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-agent-versions-agent
+      description: List agent versions for an agent
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-agents.listversions
+      with:
+        agentId: tools.agentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revert-specific-agent-version
+      description: Revert to a specific agent version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-agents.revert
+      with:
+        agentId: tools.agentId
+        agentVersionId: tools.agentVersionId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

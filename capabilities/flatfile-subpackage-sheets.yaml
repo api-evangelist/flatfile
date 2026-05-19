@@ -1,0 +1,1012 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_sheets
+  description: 'API Reference — subpackage_sheets. 13 operations. Lead operation: List sheets. Self-contained Naftiko capability
+    covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_sheets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-sheets
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_sheets business capability. Self-contained, no shared references.
+    resources:
+    - name: sheets
+      path: /sheets
+      operations:
+      - name: list
+        method: GET
+        description: List sheets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workbookId
+          in: query
+          type: string
+          description: ID of workbook
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: sheets-sheetId
+      path: /sheets/{sheetId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete a sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: updatesheet
+        method: PATCH
+        description: Update a sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: sheets-sheetId-calculations
+      path: /sheets/{sheetId}/calculations
+      operations:
+      - name: getcalculations
+        method: GET
+        description: List calculations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: versionId
+          in: query
+          type: string
+          description: Returns records that were changed in that version and only those records.
+        - name: sinceVersionId
+          in: query
+          type: string
+          description: Deprecated, use `sinceCommitId` instead.
+        - name: commitId
+          in: query
+          type: string
+          description: Returns records that were changed in that version in addition to any records from versions after that
+            version.
+        - name: sinceCommitId
+          in: query
+          type: string
+          description: Listing a commit ID here will return all records since the specified commit.
+        - name: filter
+          in: query
+          type: string
+          description: Options to filter records
+        - name: filterField
+          in: query
+          type: string
+          description: The field to filter the data on.
+        - name: searchValue
+          in: query
+          type: string
+          description: The value to search for data on.
+        - name: searchField
+          in: query
+          type: string
+          description: The field to search for data on.
+        - name: byField
+          in: query
+          type: boolean
+          description: If true, the counts for each field will also be returned
+        - name: q
+          in: query
+          type: string
+          description: An FFQL query used to filter the result set to be counted
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: sheets-sheetId-cells
+      path: /sheets/{sheetId}/cells
+      operations:
+      - name: getcellvalues
+        method: GET
+        description: Get record cells by field
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: fieldKey
+          in: query
+          type: string
+        - name: sortField
+          in: query
+          type: string
+        - name: sortDirection
+          in: query
+          type: string
+        - name: filter
+          in: query
+          type: string
+        - name: filterField
+          in: query
+          type: string
+          description: Name of field by which to filter records
+        - name: pageSize
+          in: query
+          type: string
+          description: Number of records to return in a page (default 1000 if pageNumber included)
+        - name: pageNumber
+          in: query
+          type: string
+          description: Based on pageSize, which page of records to return
+        - name: distinct
+          in: query
+          type: string
+          description: Must be set to true
+          required: true
+        - name: includeCounts
+          in: query
+          type: string
+        - name: searchValue
+          in: query
+          type: string
+          description: A value to find for a given field in a sheet. Wrap the value in "" for exact match
+        - name: q
+          in: query
+          type: string
+          description: An FFQL query used to filter the records to be queried
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: sheets-sheetId-commits
+      path: /sheets/{sheetId}/commits
+      operations:
+      - name: getsheetcommits
+        method: GET
+        description: Get commit versions for a sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: completed
+          in: query
+          type: boolean
+          description: If true, only return commits that have been completed. If false, only return commits that have not
+            been completed. If not provided, return all commits.
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: sheets-sheetId-counts
+      path: /sheets/{sheetId}/counts
+      operations:
+      - name: getrecordcounts
+        method: GET
+        description: Get record counts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: versionId
+          in: query
+          type: string
+          description: Returns records that were changed in that version and only those records.
+        - name: sinceVersionId
+          in: query
+          type: string
+          description: Deprecated, use `sinceCommitId` instead.
+        - name: commitId
+          in: query
+          type: string
+          description: Returns records that were changed in that version in addition to any records from versions after that
+            version.
+        - name: sinceCommitId
+          in: query
+          type: string
+          description: Listing a commit ID here will return all records since the specified commit.
+        - name: filter
+          in: query
+          type: string
+          description: Options to filter records
+        - name: filterField
+          in: query
+          type: string
+          description: The field to filter the data on.
+        - name: searchValue
+          in: query
+          type: string
+          description: The value to search for data on.
+        - name: searchField
+          in: query
+          type: string
+          description: The field to search for data on.
+        - name: byField
+          in: query
+          type: boolean
+          description: If true, the counts for each field will also be returned
+        - name: q
+          in: query
+          type: string
+          description: An FFQL query used to filter the result set to be counted
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: sheets-sheetId-download
+      path: /sheets/{sheetId}/download
+      operations:
+      - name: getrecordsascsv
+        method: GET
+        description: Download records as a CSV file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: versionId
+          in: query
+          type: string
+          description: Deprecated, use `sinceCommitId` instead.
+        - name: commitId
+          in: query
+          type: string
+          description: Returns records that were changed in that version  in that version and only those records.
+        - name: sinceVersionId
+          in: query
+          type: string
+          description: Deprecated, use `sinceCommitId` instead.
+        - name: sinceCommitId
+          in: query
+          type: string
+          description: Returns records that were changed in that version in addition to any records from versions after that
+            version.
+        - name: sortField
+          in: query
+          type: string
+          description: The field to sort the data on.
+        - name: sortDirection
+          in: query
+          type: string
+          description: Sort direction - asc (ascending) or desc (descending)
+        - name: filter
+          in: query
+          type: string
+          description: Options to filter records
+        - name: filterField
+          in: query
+          type: string
+          description: The field to filter the data on.
+        - name: searchValue
+          in: query
+          type: string
+          description: The value to search for data on.
+        - name: searchField
+          in: query
+          type: string
+          description: The field to search for data on.
+        - name: ids
+          in: query
+          type: string
+          description: The Record Ids param (ids) is a list of record ids that can be passed to several record endpoints allowing
+            the user to identify specific records to INCLUDE in t
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: sheets-sheetId-duplicate
+      path: /sheets/{sheetId}/duplicate
+      operations:
+      - name: duplicatesheet
+        method: POST
+        description: Duplicate a sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet to duplicate
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: sheets-sheetId-lock
+      path: /sheets/{sheetId}/lock
+      operations:
+      - name: locksheet
+        method: POST
+        description: Lock a sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: sheets-sheetId-unlock
+      path: /sheets/{sheetId}/unlock
+      operations:
+      - name: unlocksheet
+        method: POST
+        description: Unlock a sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: sheets-sheetId-validate
+      path: /sheets/{sheetId}/validate
+      operations:
+      - name: validate
+        method: POST
+        description: Validate a sheet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sheetId
+          in: path
+          type: string
+          description: ID of sheet
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-sheets-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_sheets. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/sheets
+      name: sheets
+      description: REST surface for sheets.
+      operations:
+      - method: GET
+        name: list
+        description: List sheets
+        call: flatfile-subpackage-sheets.list
+        with:
+          workbookId: rest.workbookId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}
+      name: sheets-sheetid
+      description: REST surface for sheets-sheetId.
+      operations:
+      - method: GET
+        name: get
+        description: Get a sheet
+        call: flatfile-subpackage-sheets.get
+        with:
+          sheetId: rest.sheetId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a sheet
+        call: flatfile-subpackage-sheets.delete
+        with:
+          sheetId: rest.sheetId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatesheet
+        description: Update a sheet
+        call: flatfile-subpackage-sheets.updatesheet
+        with:
+          sheetId: rest.sheetId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/calculations
+      name: sheets-sheetid-calculations
+      description: REST surface for sheets-sheetId-calculations.
+      operations:
+      - method: GET
+        name: getcalculations
+        description: List calculations
+        call: flatfile-subpackage-sheets.getcalculations
+        with:
+          sheetId: rest.sheetId
+          versionId: rest.versionId
+          sinceVersionId: rest.sinceVersionId
+          commitId: rest.commitId
+          sinceCommitId: rest.sinceCommitId
+          filter: rest.filter
+          filterField: rest.filterField
+          searchValue: rest.searchValue
+          searchField: rest.searchField
+          byField: rest.byField
+          q: rest.q
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/cells
+      name: sheets-sheetid-cells
+      description: REST surface for sheets-sheetId-cells.
+      operations:
+      - method: GET
+        name: getcellvalues
+        description: Get record cells by field
+        call: flatfile-subpackage-sheets.getcellvalues
+        with:
+          sheetId: rest.sheetId
+          fieldKey: rest.fieldKey
+          sortField: rest.sortField
+          sortDirection: rest.sortDirection
+          filter: rest.filter
+          filterField: rest.filterField
+          pageSize: rest.pageSize
+          pageNumber: rest.pageNumber
+          distinct: rest.distinct
+          includeCounts: rest.includeCounts
+          searchValue: rest.searchValue
+          q: rest.q
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/commits
+      name: sheets-sheetid-commits
+      description: REST surface for sheets-sheetId-commits.
+      operations:
+      - method: GET
+        name: getsheetcommits
+        description: Get commit versions for a sheet
+        call: flatfile-subpackage-sheets.getsheetcommits
+        with:
+          sheetId: rest.sheetId
+          completed: rest.completed
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/counts
+      name: sheets-sheetid-counts
+      description: REST surface for sheets-sheetId-counts.
+      operations:
+      - method: GET
+        name: getrecordcounts
+        description: Get record counts
+        call: flatfile-subpackage-sheets.getrecordcounts
+        with:
+          sheetId: rest.sheetId
+          versionId: rest.versionId
+          sinceVersionId: rest.sinceVersionId
+          commitId: rest.commitId
+          sinceCommitId: rest.sinceCommitId
+          filter: rest.filter
+          filterField: rest.filterField
+          searchValue: rest.searchValue
+          searchField: rest.searchField
+          byField: rest.byField
+          q: rest.q
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/download
+      name: sheets-sheetid-download
+      description: REST surface for sheets-sheetId-download.
+      operations:
+      - method: GET
+        name: getrecordsascsv
+        description: Download records as a CSV file
+        call: flatfile-subpackage-sheets.getrecordsascsv
+        with:
+          sheetId: rest.sheetId
+          versionId: rest.versionId
+          commitId: rest.commitId
+          sinceVersionId: rest.sinceVersionId
+          sinceCommitId: rest.sinceCommitId
+          sortField: rest.sortField
+          sortDirection: rest.sortDirection
+          filter: rest.filter
+          filterField: rest.filterField
+          searchValue: rest.searchValue
+          searchField: rest.searchField
+          ids: rest.ids
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/duplicate
+      name: sheets-sheetid-duplicate
+      description: REST surface for sheets-sheetId-duplicate.
+      operations:
+      - method: POST
+        name: duplicatesheet
+        description: Duplicate a sheet
+        call: flatfile-subpackage-sheets.duplicatesheet
+        with:
+          sheetId: rest.sheetId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/lock
+      name: sheets-sheetid-lock
+      description: REST surface for sheets-sheetId-lock.
+      operations:
+      - method: POST
+        name: locksheet
+        description: Lock a sheet
+        call: flatfile-subpackage-sheets.locksheet
+        with:
+          sheetId: rest.sheetId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/unlock
+      name: sheets-sheetid-unlock
+      description: REST surface for sheets-sheetId-unlock.
+      operations:
+      - method: POST
+        name: unlocksheet
+        description: Unlock a sheet
+        call: flatfile-subpackage-sheets.unlocksheet
+        with:
+          sheetId: rest.sheetId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sheets/{sheetid}/validate
+      name: sheets-sheetid-validate
+      description: REST surface for sheets-sheetId-validate.
+      operations:
+      - method: POST
+        name: validate
+        description: Validate a sheet
+        call: flatfile-subpackage-sheets.validate
+        with:
+          sheetId: rest.sheetId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-sheets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_sheets. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-sheets
+      description: List sheets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-sheets.list
+      with:
+        workbookId: tools.workbookId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sheet
+      description: Get a sheet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-sheets.get
+      with:
+        sheetId: tools.sheetId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-sheet
+      description: Delete a sheet
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-sheets.delete
+      with:
+        sheetId: tools.sheetId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-sheet
+      description: Update a sheet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-sheets.updatesheet
+      with:
+        sheetId: tools.sheetId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-calculations
+      description: List calculations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-sheets.getcalculations
+      with:
+        sheetId: tools.sheetId
+        versionId: tools.versionId
+        sinceVersionId: tools.sinceVersionId
+        commitId: tools.commitId
+        sinceCommitId: tools.sinceCommitId
+        filter: tools.filter
+        filterField: tools.filterField
+        searchValue: tools.searchValue
+        searchField: tools.searchField
+        byField: tools.byField
+        q: tools.q
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-record-cells-field
+      description: Get record cells by field
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-sheets.getcellvalues
+      with:
+        sheetId: tools.sheetId
+        fieldKey: tools.fieldKey
+        sortField: tools.sortField
+        sortDirection: tools.sortDirection
+        filter: tools.filter
+        filterField: tools.filterField
+        pageSize: tools.pageSize
+        pageNumber: tools.pageNumber
+        distinct: tools.distinct
+        includeCounts: tools.includeCounts
+        searchValue: tools.searchValue
+        q: tools.q
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-commit-versions-sheet
+      description: Get commit versions for a sheet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-sheets.getsheetcommits
+      with:
+        sheetId: tools.sheetId
+        completed: tools.completed
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-record-counts
+      description: Get record counts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-sheets.getrecordcounts
+      with:
+        sheetId: tools.sheetId
+        versionId: tools.versionId
+        sinceVersionId: tools.sinceVersionId
+        commitId: tools.commitId
+        sinceCommitId: tools.sinceCommitId
+        filter: tools.filter
+        filterField: tools.filterField
+        searchValue: tools.searchValue
+        searchField: tools.searchField
+        byField: tools.byField
+        q: tools.q
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-records-csv-file
+      description: Download records as a CSV file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-sheets.getrecordsascsv
+      with:
+        sheetId: tools.sheetId
+        versionId: tools.versionId
+        commitId: tools.commitId
+        sinceVersionId: tools.sinceVersionId
+        sinceCommitId: tools.sinceCommitId
+        sortField: tools.sortField
+        sortDirection: tools.sortDirection
+        filter: tools.filter
+        filterField: tools.filterField
+        searchValue: tools.searchValue
+        searchField: tools.searchField
+        ids: tools.ids
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: duplicate-sheet
+      description: Duplicate a sheet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-sheets.duplicatesheet
+      with:
+        sheetId: tools.sheetId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lock-sheet
+      description: Lock a sheet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-sheets.locksheet
+      with:
+        sheetId: tools.sheetId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unlock-sheet
+      description: Unlock a sheet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-sheets.unlocksheet
+      with:
+        sheetId: tools.sheetId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: validate-sheet
+      description: Validate a sheet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-sheets.validate
+      with:
+        sheetId: tools.sheetId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

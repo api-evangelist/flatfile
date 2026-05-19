@@ -1,0 +1,368 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_actions
+  description: 'API Reference — subpackage_actions. 6 operations. Lead operation: Create an action. Self-contained Naftiko
+    capability covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_actions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-actions
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_actions business capability. Self-contained, no shared references.
+    resources:
+    - name: actions
+      path: /actions
+      operations:
+      - name: create
+        method: POST
+        description: Create an action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+          description: The Space ID for which to create the Action.
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: getall
+        method: GET
+        description: Get all actions for the space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+          description: The Space ID for which to get the Actions.
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    - name: actions-bulk
+      path: /actions/bulk
+      operations:
+      - name: bulkcreate
+        method: POST
+        description: Create several actions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: query
+          type: string
+          description: The Space ID for which to create the Actions.
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: actions-actionId
+      path: /actions/{actionId}
+      operations:
+      - name: get
+        method: GET
+        description: Get an action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: actionId
+          in: path
+          type: string
+          description: The id of the action to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update an action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: actionId
+          in: path
+          type: string
+          description: The id of the action to patch
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete an action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: actionId
+          in: path
+          type: string
+          description: The id of the action to delete
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-actions-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_actions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/actions
+      name: actions
+      description: REST surface for actions.
+      operations:
+      - method: POST
+        name: create
+        description: Create an action
+        call: flatfile-subpackage-actions.create
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getall
+        description: Get all actions for the space
+        call: flatfile-subpackage-actions.getall
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/actions/bulk
+      name: actions-bulk
+      description: REST surface for actions-bulk.
+      operations:
+      - method: POST
+        name: bulkcreate
+        description: Create several actions
+        call: flatfile-subpackage-actions.bulkcreate
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/actions/{actionid}
+      name: actions-actionid
+      description: REST surface for actions-actionId.
+      operations:
+      - method: GET
+        name: get
+        description: Get an action
+        call: flatfile-subpackage-actions.get
+        with:
+          actionId: rest.actionId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update an action
+        call: flatfile-subpackage-actions.update
+        with:
+          actionId: rest.actionId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete an action
+        call: flatfile-subpackage-actions.delete
+        with:
+          actionId: rest.actionId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-actions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_actions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-action
+      description: Create an action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-actions.create
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-actions-space
+      description: Get all actions for the space
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-actions.getall
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-several-actions
+      description: Create several actions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-actions.bulkcreate
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-action
+      description: Get an action
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-actions.get
+      with:
+        actionId: tools.actionId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-action
+      description: Update an action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-actions.update
+      with:
+        actionId: tools.actionId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-action
+      description: Delete an action
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-actions.delete
+      with:
+        actionId: tools.actionId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

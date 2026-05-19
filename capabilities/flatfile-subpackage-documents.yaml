@@ -1,0 +1,327 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — subpackage_documents
+  description: 'API Reference — subpackage_documents. 5 operations. Lead operation: List documents. Self-contained Naftiko
+    capability covering one Flatfile business surface.'
+  tags:
+  - Flatfile
+  - subpackage_documents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FLATFILE_API_KEY: FLATFILE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: flatfile-subpackage-documents
+    baseUri: https://api.x.flatfile.com/v1
+    description: API Reference — subpackage_documents business capability. Self-contained, no shared references.
+    resources:
+    - name: spaces-spaceId-documents
+      path: /spaces/{spaceId}/documents
+      operations:
+      - name: list
+        method: GET
+        description: List documents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create a document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: spaces-spaceId-documents-documentId
+      path: /spaces/{spaceId}/documents/{documentId}
+      operations:
+      - name: get
+        method: GET
+        description: Get a document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to return
+          required: true
+        - name: documentId
+          in: path
+          type: string
+          description: ID of document to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+      - name: update
+        method: PATCH
+        description: Update a document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to return
+          required: true
+        - name: documentId
+          in: path
+          type: string
+          description: ID of document to return
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: spaceId
+          in: path
+          type: string
+          description: ID of space to return
+          required: true
+        - name: documentId
+          in: path
+          type: string
+          description: ID of document to delete
+          required: true
+        - name: Authorization
+          in: header
+          type: string
+          description: Bearer authentication
+          required: true
+        - name: X-Disable-Hooks
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.FLATFILE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: flatfile-subpackage-documents-rest
+    port: 8080
+    description: REST adapter for API Reference — subpackage_documents. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/spaces/{spaceid}/documents
+      name: spaces-spaceid-documents
+      description: REST surface for spaces-spaceId-documents.
+      operations:
+      - method: GET
+        name: list
+        description: List documents
+        call: flatfile-subpackage-documents.list
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create a document
+        call: flatfile-subpackage-documents.create
+        with:
+          spaceId: rest.spaceId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}/documents/{documentid}
+      name: spaces-spaceid-documents-documentid
+      description: REST surface for spaces-spaceId-documents-documentId.
+      operations:
+      - method: GET
+        name: get
+        description: Get a document
+        call: flatfile-subpackage-documents.get
+        with:
+          spaceId: rest.spaceId
+          documentId: rest.documentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update
+        description: Update a document
+        call: flatfile-subpackage-documents.update
+        with:
+          spaceId: rest.spaceId
+          documentId: rest.documentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a document
+        call: flatfile-subpackage-documents.delete
+        with:
+          spaceId: rest.spaceId
+          documentId: rest.documentId
+          Authorization: rest.Authorization
+          X-Disable-Hooks: rest.X-Disable-Hooks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: flatfile-subpackage-documents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — subpackage_documents. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-documents
+      description: List documents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-documents.list
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-document
+      description: Create a document
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: flatfile-subpackage-documents.create
+      with:
+        spaceId: tools.spaceId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-document
+      description: Get a document
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-documents.get
+      with:
+        spaceId: tools.spaceId
+        documentId: tools.documentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-document
+      description: Update a document
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: flatfile-subpackage-documents.update
+      with:
+        spaceId: tools.spaceId
+        documentId: tools.documentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-document
+      description: Delete a document
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: flatfile-subpackage-documents.delete
+      with:
+        spaceId: tools.spaceId
+        documentId: tools.documentId
+        Authorization: tools.Authorization
+        X-Disable-Hooks: tools.X-Disable-Hooks
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -6,7 +6,7 @@ description: >-
   agents, environments, users, guests, and related primitives for building automated data onboarding and ingestion
   workflows.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 position: Consumer
 tags:

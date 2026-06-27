@@ -73,7 +73,7 @@ common:
     url: https://reference.flatfile.com/openapi.json
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
-  - type: SignUp
+  - type: Signup
     url: https://flatfile.com/account/sign-up/
   - type: Pricing
     url: https://flatfile.com/pricing/

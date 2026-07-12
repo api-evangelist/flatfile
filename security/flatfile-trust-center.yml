@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://flatfile.com/security
+url: https://flatfile.com/security
+certifications:
+- SOC 2
+- HIPAA
+- GDPR
+evidence:
+- source: https://flatfile.com/security
+  keywords:
+  - soc 2
+  - hipaa
+  - gdpr

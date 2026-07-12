@@ -61,6 +61,12 @@ apis:
       - type: GettingStarted
         url: https://flatfile.com/docs/quickstart
 common:
+  - type: TrustCenter
+    url: security/flatfile-trust-center.yml
+  - type: DomainSecurity
+    url: security/flatfile-domain-security.yml
+  - type: Authentication
+    url: authentication/flatfile-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/flatfile
   - type: Website

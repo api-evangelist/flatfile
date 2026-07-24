@@ -1,0 +1,232 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_commits API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_commits
+paths:
+  /commits/{commitId}:
+    get:
+      operationId: get
+      summary: Get a commit version
+      description: Returns the details of a commit version
+      tags:
+      - subpackage_commits
+      parameters:
+      - name: commitId
+        in: path
+        description: ID of the commit version to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commits:CommitResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /commits/{commitId}/complete:
+    post:
+      operationId: complete
+      summary: Complete a commit version
+      description: Completes a commit version. This marks the commit as complete and acknowledges that the changes have been applied to the sheet.
+      tags:
+      - subpackage_commits
+      parameters:
+      - name: commitId
+        in: path
+        description: ID of the commit version to complete
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /commits/{commitId}/replay:
+    post:
+      operationId: replay
+      summary: Replay a commit version
+      description: Replays a commit:created event.
+      tags:
+      - subpackage_commits
+      parameters:
+      - name: commitId
+        in: path
+        description: ID of the commit version to re-emit a commit:created event for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commits:Commit:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:CommitId'
+        sheetId:
+          $ref: '#/components/schemas/type_commons:SheetId'
+        createdBy:
+          type: string
+          description: The actor (user or system) who created the commit
+        completedBy:
+          type: string
+          description: The actor (user or system) who completed the commit
+        createdAt:
+          type: string
+          format: date-time
+          description: The time the commit was created
+        completedAt:
+          type: string
+          format: date-time
+          description: The time the commit was acknowledged
+      required:
+      - id
+      - sheetId
+      - createdBy
+      - createdAt
+      description: A commit version
+      title: Commit
+    type_commons:CommitId:
+      type: string
+      description: Commit ID
+      title: CommitId
+    type_commons:SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_commits:CommitResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commits:Commit'
+      required:
+      - data
+      title: CommitResponse
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

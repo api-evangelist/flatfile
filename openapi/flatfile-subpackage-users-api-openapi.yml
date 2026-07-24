@@ -1,0 +1,749 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_users API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_users
+paths:
+  /users:
+    get:
+      operationId: list
+      summary: List users
+      description: Gets a list of users
+      tags:
+      - subpackage_users
+      parameters:
+      - name: email
+        in: query
+        description: Email of guest to return
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: String to search for users by name and email
+        required: false
+        schema:
+          type: string
+      - name: sortField
+        in: query
+        description: Field to sort users by
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_users:ListUsersSortField'
+      - name: sortDirection
+        in: query
+        description: Direction of sorting
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SortDirection'
+      - name: pageSize
+        in: query
+        description: Number of users to return in a page (default 20)
+        required: false
+        schema:
+          type: integer
+      - name: pageNumber
+        in: query
+        description: Based on pageSize, which page of users to return
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:ListUsersResponse'
+  /users/invite:
+    post:
+      operationId: create-and-invite
+      summary: Create and Invite User
+      description: Creates and invites a new user to your account.
+      tags:
+      - subpackage_users
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:UserWithRolesResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users:UserCreateAndInviteRequest'
+  /users/{userId}/resend-invite:
+    post:
+      operationId: resend-invite
+      summary: Resend User Invite
+      description: Resends an invite to a user for your account.
+      tags:
+      - subpackage_users
+      parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+  /users/{userId}:
+    patch:
+      operationId: update
+      summary: Update a user
+      description: Updates a user
+      tags:
+      - subpackage_users
+      parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:UserResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                dashboard:
+                  type: integer
+    get:
+      operationId: get
+      summary: Get a user
+      description: Gets a user
+      tags:
+      - subpackage_users
+      parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:UserResponse'
+    delete:
+      operationId: delete
+      summary: Delete a user
+      description: Deletes a user
+      tags:
+      - subpackage_users
+      parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+  /users/{userId}/roles:
+    get:
+      operationId: list-user-roles
+      summary: List User Roles
+      description: Lists roles assigned to a user.
+      tags:
+      - subpackage_users
+      parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_roles:ListActorRolesResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: assign-user-role
+      summary: Assign Role to User
+      description: Assigns a role to a user.
+      tags:
+      - subpackage_users
+      parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_roles:AssignRoleResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_roles:AssignActorRoleRequest'
+  /users/{userId}/roles/{actorRoleId}:
+    delete:
+      operationId: delete-user-role
+      summary: Remove Role from User
+      description: Removes a role from a user.
+      tags:
+      - subpackage_users
+      parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: actorRoleId
+        in: path
+        description: The actor role id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:ActorRoleId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_users:UserWithRolesResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users:UserWithRoles'
+      required:
+      - data
+      title: UserWithRolesResponse
+    type_users:User:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        id:
+          $ref: '#/components/schemas/type_commons:UserId'
+        idp:
+          type: string
+        idpRef:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        lastSeenAt:
+          type: string
+          format: date-time
+        dashboard:
+          type: integer
+      required:
+      - email
+      - name
+      - accountId
+      - id
+      - idp
+      - metadata
+      - createdAt
+      - updatedAt
+      description: Configurations for the user
+      title: User
+    type_users:UserResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users:User'
+      required:
+      - data
+      title: UserResponse
+    type_users:ListUsersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:User'
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+      required:
+      - data
+      title: ListUsersResponse
+    type_roles:ActorRoleResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons:RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons:ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: ActorRoleResponse
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons:ActorRoleId:
+      type: string
+      description: Actor Role ID
+      title: ActorRoleId
+    type_commons:RoleId:
+      type: string
+      description: Role ID
+      title: RoleId
+    type_users:UserCreateAndInviteRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        actorRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles:AssignActorRoleRequest'
+      required:
+      - email
+      - name
+      - actorRoles
+      description: Properties used to create a new user
+      title: UserCreateAndInviteRequest
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_users:UserWithRoles:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        id:
+          $ref: '#/components/schemas/type_commons:UserId'
+        idp:
+          type: string
+        idpRef:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        lastSeenAt:
+          type: string
+          format: date-time
+        dashboard:
+          type: integer
+        actorRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles:ActorRoleResponse'
+      required:
+      - email
+      - name
+      - accountId
+      - id
+      - idp
+      - metadata
+      - createdAt
+      - updatedAt
+      - actorRoles
+      title: UserWithRoles
+    type_commons:GuestId:
+      type: string
+      description: Guest ID
+      title: GuestId
+    type_roles:AssignActorRoleRequest:
+      type: object
+      properties:
+        roleId:
+          $ref: '#/components/schemas/type_commons:RoleId'
+        resourceId:
+          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+      required:
+      - roleId
+      - resourceId
+      title: AssignActorRoleRequest
+    type_commons:Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_commons:SortDirection:
+      type: string
+      enum:
+      - asc
+      - desc
+      description: Sort direction - asc (ascending) or desc (descending)
+      title: SortDirection
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons:AgentId:
+      type: string
+      description: Agent ID
+      title: AgentId
+    type_roles:AssignRoleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_roles:AssignRoleResponseData'
+      required:
+      - data
+      title: AssignRoleResponse
+    type_roles:AssignRoleResponseData:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons:RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons:ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: AssignRoleResponseData
+    type_users:ListUsersSortField:
+      type: string
+      enum:
+      - email
+      - name
+      - id
+      - idp
+      - idp_ref
+      - created_at
+      - updated_at
+      - last_seen_at
+      - dashboard
+      title: ListUsersSortField
+    type_commons:UserId:
+      type: string
+      description: User ID
+      title: UserId
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_roles:ListActorRolesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles:ActorRoleResponse'
+      required:
+      - data
+      title: ListActorRolesResponse
+    type_roles:ResourceIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons:AccountId'
+      - $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - $ref: '#/components/schemas/type_commons:SpaceId'
+      title: ResourceIdUnion
+    type_commons:ActorIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons:UserId'
+      - $ref: '#/components/schemas/type_commons:AgentId'
+      - $ref: '#/components/schemas/type_commons:GuestId'
+      title: ActorIdUnion
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

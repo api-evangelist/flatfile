@@ -1,0 +1,419 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_flags API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_flags
+paths:
+  /v1/workbooks/{workbookId}/flags:
+    post:
+      operationId: create
+      summary: Create
+      description: Creates a new flag for the workbook
+      tags:
+      - subpackage_flags
+      parameters:
+      - name: workbookId
+        in: path
+        description: The workbook ID to manage flags for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_flags:FlagResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_flags:CreateFlagRequest'
+    get:
+      operationId: list
+      summary: List
+      description: Gets all flags for the workbook
+      tags:
+      - subpackage_flags
+      parameters:
+      - name: workbookId
+        in: path
+        description: The workbook ID to manage flags for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/type_flags:FlagResponse'
+  /v1/workbooks/{workbookId}/flags/{slug}:
+    get:
+      operationId: get
+      summary: Get
+      description: Gets a specific flag by its slug
+      tags:
+      - subpackage_flags
+      parameters:
+      - name: workbookId
+        in: path
+        description: The workbook ID to manage flags for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+      - name: slug
+        in: path
+        description: The flag slug to retrieve
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_flags:FlagResponse'
+    patch:
+      operationId: update
+      summary: Update
+      description: Updates an existing flag
+      tags:
+      - subpackage_flags
+      parameters:
+      - name: workbookId
+        in: path
+        description: The workbook ID to manage flags for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+      - name: slug
+        in: path
+        description: The flag slug to update
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_flags:FlagResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_flags:UpdateFlagRequest'
+    delete:
+      operationId: delete
+      summary: Delete
+      description: Deletes a flag
+      tags:
+      - subpackage_flags
+      parameters:
+      - name: workbookId
+        in: path
+        description: The workbook ID to manage flags for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+      - name: slug
+        in: path
+        description: The flag slug to delete
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+  /v1/workbooks/{workbookId}/flags/bulk-mutate:
+    post:
+      operationId: bulk-mutate
+      summary: Bulk Mutate
+      description: Performs bulk flag operations on records
+      tags:
+      - subpackage_flags
+      parameters:
+      - name: workbookId
+        in: path
+        description: The workbook ID to manage flags for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_flags:BulkMutateFlagsResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_flags:BulkMutateFlagsRequest'
+components:
+  schemas:
+    type_flags:FlagMutationData:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The flag label
+        colorHex:
+          type: string
+          description: The flag color in hex format
+      description: Flag data for mutation operations
+      title: FlagMutationData
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_flags:BulkMutateFlagsRequest:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/type_flags:FlagOperation'
+          description: The operation to perform
+        slug:
+          type: string
+          description: The flag slug to operate on
+        flag:
+          $ref: '#/components/schemas/type_flags:FlagMutationData'
+          description: Flag data for apply/update operations
+        exceptions:
+          type: array
+          items:
+            type: string
+          description: Record IDs to exclude from the operation
+        query:
+          type: string
+          description: Query string to filter records
+        filter:
+          description: Filter object to apply to records
+        filterField:
+          type: string
+          description: Field to filter on
+        searchValue:
+          type: string
+          description: Value to search for
+        searchField:
+          type: string
+          description: Field to search in
+        q:
+          type: string
+          description: General search query
+        ids:
+          type: array
+          items:
+            type: string
+          description: Specific record IDs to target
+        snapshotLabel:
+          type: string
+          description: Label for snapshot before mutation
+      required:
+      - operation
+      - slug
+      description: Request to perform bulk flag operations
+      title: BulkMutateFlagsRequest
+    type_commons:WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_flags:FlagOperation:
+      type: string
+      enum:
+      - apply
+      - update
+      - delete
+      - replace
+      description: The type of flag operation to perform
+      title: FlagOperation
+    type_flags:CreateFlagRequest:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: The unique identifier for the flag
+        label:
+          type: string
+          description: The human-readable name for the flag
+        colorHex:
+          type: string
+          description: The hex color code for the flag (e.g., "#0090FF")
+      required:
+      - slug
+      - label
+      - colorHex
+      description: Request to create a new flag
+      title: CreateFlagRequest
+    type_flags:UpdateFlagRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The new label for the flag
+        colorHex:
+          type: string
+          description: The new hex color code for the flag
+        newSlug:
+          type: string
+          description: The new slug for the flag
+      description: Request to update an existing flag
+      title: UpdateFlagRequest
+    type_flags:FlagResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the flag
+        slug:
+          type: string
+          description: The flag slug
+        label:
+          type: string
+          description: The flag label
+        colorHex:
+          type: string
+          description: The hex color code for the flag
+        workbookId:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+          description: The workbook this flag belongs to
+        createdAt:
+          type: string
+          format: date-time
+          description: When the flag was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the flag was last updated
+      required:
+      - id
+      - slug
+      - label
+      - colorHex
+      - workbookId
+      - createdAt
+      - updatedAt
+      description: A flag object
+      title: FlagResponse
+    type_flags:BulkMutateFlagsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successfully queued
+        jobId:
+          type: string
+          description: The ID of the job handling the bulk mutation
+      required:
+      - success
+      - jobId
+      description: Response from bulk flag mutation
+      title: BulkMutateFlagsResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_versions API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_versions
+paths:
+  /versions:
+    post:
+      operationId: create-id
+      summary: Create Id
+      tags:
+      - subpackage_versions
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_versions:VersionResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sheetId:
+                  $ref: '#/components/schemas/type_commons:SheetId'
+                  description: The ID of the Sheet.
+                parentVersionId:
+                  $ref: '#/components/schemas/type_commons:VersionId'
+                  description: Deprecated, creating or updating a group of records together will automatically generate a commitId to group those record changes together.
+components:
+  schemas:
+    type_commons:SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_versions:Version:
+      type: object
+      properties:
+        versionId:
+          $ref: '#/components/schemas/type_commons:VersionId'
+      required:
+      - versionId
+      title: Version
+    type_versions:VersionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_versions:Version'
+      required:
+      - data
+      title: VersionResponse
+    type_commons:VersionId:
+      type: string
+      description: Version ID
+      title: VersionId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

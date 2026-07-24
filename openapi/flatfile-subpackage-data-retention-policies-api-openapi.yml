@@ -1,0 +1,356 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_data-retention-policies API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_data-retention-policies
+paths:
+  /data-retention-policies:
+    get:
+      operationId: list
+      summary: List data retention policies
+      description: Returns all data retention policies on an account matching a filter for environmentId
+      tags:
+      - subpackage_data-retention-policies
+      parameters:
+      - name: environmentId
+        in: query
+        description: The associated Environment ID of the policy.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_data-retention-policies:ListDataRetentionPoliciesResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: create
+      summary: Create a data retention policy
+      description: Add a new data retention policy to the space
+      tags:
+      - subpackage_data-retention-policies
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_data-retention-policies:DataRetentionPolicyResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_data-retention-policies:DataRetentionPolicyConfig'
+  /data-retention-policies/{id}:
+    get:
+      operationId: get
+      summary: Get a data retention policy
+      description: Returns a single data retention policy
+      tags:
+      - subpackage_data-retention-policies
+      parameters:
+      - name: id
+        in: path
+        description: ID of data retention policy to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataRetentionPolicyId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_data-retention-policies:DataRetentionPolicyResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update
+      summary: Update a data retention policy
+      description: Updates a single data retention policy
+      tags:
+      - subpackage_data-retention-policies
+      parameters:
+      - name: id
+        in: path
+        description: ID of data retention policy to update
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataRetentionPolicyId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_data-retention-policies:DataRetentionPolicyResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_data-retention-policies:DataRetentionPolicyConfig'
+    delete:
+      operationId: delete
+      summary: Delete a data retention policy
+      description: Deletes a single data retention policy
+      tags:
+      - subpackage_data-retention-policies
+      parameters:
+      - name: id
+        in: path
+        description: ID of data retention policy to delete
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataRetentionPolicyId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_data-retention-policies:DataRetentionPolicy:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_data-retention-policies:DataRetentionPolicyEnum'
+        period:
+          type: integer
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        id:
+          $ref: '#/components/schemas/type_commons:DataRetentionPolicyId'
+        createdAt:
+          type: string
+          format: date-time
+          description: Date the policy was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date the policy was last updated
+      required:
+      - type
+      - period
+      - environmentId
+      - id
+      - createdAt
+      - updatedAt
+      description: A data retention policy belonging to an environment
+      title: DataRetentionPolicy
+    type_data-retention-policies:DataRetentionPolicyResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_data-retention-policies:DataRetentionPolicy'
+      required:
+      - data
+      title: DataRetentionPolicyResponse
+    type_data-retention-policies:DataRetentionPolicyEnum:
+      type: string
+      enum:
+      - lastActivity
+      - sinceCreated
+      description: The type of data retention policy on an environment
+      title: DataRetentionPolicyEnum
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_data-retention-policies:DataRetentionPolicyConfig:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_data-retention-policies:DataRetentionPolicyEnum'
+        period:
+          type: integer
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      required:
+      - type
+      - period
+      - environmentId
+      title: DataRetentionPolicyConfig
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons:DataRetentionPolicyId:
+      type: string
+      description: Data Retention Policy ID
+      title: DataRetentionPolicyId
+    type_data-retention-policies:ListDataRetentionPoliciesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_data-retention-policies:DataRetentionPolicy'
+      required:
+      - data
+      title: ListDataRetentionPoliciesResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

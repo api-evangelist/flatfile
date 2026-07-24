@@ -1,0 +1,774 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_guests API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_guests
+paths:
+  /guests:
+    get:
+      operationId: list
+      summary: List guests
+      description: Returns all guests
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: spaceId
+        in: query
+        description: ID of space to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: email
+        in: query
+        description: Email of guest to return
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_guests:ListGuestsResponse'
+    post:
+      operationId: create
+      summary: Create a guest
+      description: Guests are only there to upload, edit, and download files and perform their tasks in a specific Space.
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_guests:CreateGuestResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/type_guests:GuestConfig'
+  /guests/{guestId}:
+    get:
+      operationId: get
+      summary: Get a guest
+      description: Returns a single guest
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: guestId
+        in: path
+        description: ID of guest to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuestId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_guests:GuestResponse'
+    delete:
+      operationId: delete
+      summary: Delete a guest
+      description: Deletes a single guest or removes guest access from a specific space
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: guestId
+        in: path
+        description: ID of guest to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuestId'
+      - name: spaceId
+        in: query
+        description: ID of space to remove guest access from. If not provided, guest will be completely deleted.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+    patch:
+      operationId: update
+      summary: Update a guest
+      description: Updates a single guest, for example to change name or email
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: guestId
+        in: path
+        description: ID of guest to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuestId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_guests:GuestResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_guests:GuestConfigUpdate'
+  /guests/{guestId}/token:
+    get:
+      operationId: get-guest-token
+      summary: Get guest token
+      description: Returns a single guest token
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: guestId
+        in: path
+        description: ID of guest to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuestId'
+      - name: spaceId
+        in: query
+        description: ID of space to return
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_guests:GuestTokenResponse'
+  /guests/{guestId}/roles:
+    get:
+      operationId: list-guest-roles
+      summary: List Guest Roles
+      description: Lists roles assigned to a guest.
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: guestId
+        in: path
+        description: The guest id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuestId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_roles:ListActorRolesResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: assign-guest-role
+      summary: Assign Role to Guest
+      description: Assigns a role to a guest.
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: guestId
+        in: path
+        description: The guest id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuestId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_roles:AssignRoleResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_roles:AssignActorRoleRequest'
+  /guests/{guestId}/roles/{actorRoleId}:
+    delete:
+      operationId: delete-guest-role
+      summary: Remove Role from Guest
+      description: Removes a role from a guest.
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: guestId
+        in: path
+        description: The guest id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuestId'
+      - name: actorRoleId
+        in: path
+        description: The actor role id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:ActorRoleId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /invitations:
+    post:
+      operationId: invite
+      summary: Invite guests
+      description: Guests can be created as a named guest on the Space or there’s a global link that will let anonymous guests into the space.
+      tags:
+      - subpackage_guests
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/type_guests:Invite'
+components:
+  schemas:
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_guests:GuestSheet:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      required:
+      - id
+      title: GuestSheet
+    type_guests:GuestTokenResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_guests:GuestToken'
+      required:
+      - data
+      title: GuestTokenResponse
+    type_commons:WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_commons:SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_roles:ActorRoleResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons:RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons:ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: ActorRoleResponse
+    type_guests:GuestWorkbook:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+      required:
+      - id
+      title: GuestWorkbook
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons:ActorRoleId:
+      type: string
+      description: Actor Role ID
+      title: ActorRoleId
+    type_commons:RoleId:
+      type: string
+      description: Role ID
+      title: RoleId
+    type_guests:Guest:
+      type: object
+      properties:
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        email:
+          type: string
+        name:
+          type: string
+        spaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests:GuestSpace'
+        id:
+          $ref: '#/components/schemas/type_commons:GuestId'
+        createdAt:
+          type: string
+          format: date-time
+          description: Date the guest object was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date the guest object was last updated
+      required:
+      - environmentId
+      - email
+      - name
+      - spaces
+      - id
+      - createdAt
+      - updatedAt
+      title: Guest
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_guests:GuestResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_guests:Guest'
+      required:
+      - data
+      title: GuestResponse
+    type_guests:GuestConfigUpdate:
+      type: object
+      properties:
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        email:
+          type: string
+        name:
+          type: string
+        spaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests:GuestSpace'
+      description: Properties used to update an existing guest
+      title: GuestConfigUpdate
+    type_commons:ActorIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons:UserId'
+      - $ref: '#/components/schemas/type_commons:AgentId'
+      - $ref: '#/components/schemas/type_commons:GuestId'
+      title: ActorIdUnion
+    type_guests:CreateGuestResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests:Guest'
+      required:
+      - data
+      title: CreateGuestResponse
+    type_commons:GuestId:
+      type: string
+      description: Guest ID
+      title: GuestId
+    type_guests:Invite:
+      type: object
+      properties:
+        guestId:
+          $ref: '#/components/schemas/type_commons:GuestId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        fromName:
+          type: string
+          description: The name of the person or company sending the invitation
+        message:
+          type: string
+          description: Message to send with the invite
+      required:
+      - guestId
+      - spaceId
+      title: Invite
+    type_roles:AssignActorRoleRequest:
+      type: object
+      properties:
+        roleId:
+          $ref: '#/components/schemas/type_commons:RoleId'
+        resourceId:
+          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+      required:
+      - roleId
+      - resourceId
+      title: AssignActorRoleRequest
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons:AgentId:
+      type: string
+      description: Agent ID
+      title: AgentId
+    type_guests:GuestSpace:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        workbooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests:GuestWorkbook'
+        sheets:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests:GuestSheet'
+        lastAccessed:
+          type: string
+          format: date-time
+      required:
+      - id
+      title: GuestSpace
+    type_roles:AssignRoleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_roles:AssignRoleResponseData'
+      required:
+      - data
+      title: AssignRoleResponse
+    type_roles:AssignRoleResponseData:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons:RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons:ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: AssignRoleResponseData
+    type_guests:ListGuestsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests:Guest'
+      required:
+      - data
+      title: ListGuestsResponse
+    type_commons:UserId:
+      type: string
+      description: User ID
+      title: UserId
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_roles:ListActorRolesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles:ActorRoleResponse'
+      required:
+      - data
+      title: ListActorRolesResponse
+    type_roles:ResourceIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons:AccountId'
+      - $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - $ref: '#/components/schemas/type_commons:SpaceId'
+      title: ResourceIdUnion
+    type_guests:GuestConfig:
+      type: object
+      properties:
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        email:
+          type: string
+        name:
+          type: string
+        spaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests:GuestSpace'
+      required:
+      - environmentId
+      - email
+      - name
+      - spaces
+      description: Configurations for the guests
+      title: GuestConfig
+    type_guests:GuestToken:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The token used to authenticate the guest
+        valid:
+          type: boolean
+      required:
+      - token
+      - valid
+      title: GuestToken
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

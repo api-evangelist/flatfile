@@ -1,0 +1,2428 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_sheets API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_sheets
+paths:
+  /sheets:
+    get:
+      operationId: list
+      summary: List sheets
+      description: Returns sheets in a workbook
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: workbookId
+        in: query
+        description: ID of workbook
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_sheets:ListSheetsResponse'
+  /sheets/{sheetId}:
+    get:
+      operationId: get
+      summary: Get a sheet
+      description: Returns a sheet in a workbook
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_sheets:SheetResponse'
+    delete:
+      operationId: delete
+      summary: Delete a sheet
+      description: Deletes a specific sheet from a workbook
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update-sheet
+      summary: Update a sheet
+      description: Updates Sheet
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_sheets:SheetResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_sheets:SheetUpdateRequest'
+  /sheets/{sheetId}/duplicate:
+    post:
+      operationId: duplicate-sheet
+      summary: Duplicate a sheet
+      description: Creates a copy of a sheet including all its data within the same workbook
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet to duplicate
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_sheets:SheetResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Custom name for the duplicated sheet. Defaults to "Copy of [original name]"
+                slug:
+                  type: string
+                  description: Custom slug for the duplicated sheet. Defaults to "[original slug]-copy-[timestamp]"
+  /sheets/{sheetId}/validate:
+    post:
+      operationId: validate
+      summary: Validate a sheet
+      description: Trigger data hooks and validation to run on a sheet
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /sheets/{sheetId}/download:
+    get:
+      operationId: get-records-as-csv
+      summary: Download records as a CSV file
+      description: Returns records from a sheet in a workbook as a csv file
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: versionId
+        in: query
+        description: Deprecated, use `sinceCommitId` instead.
+        required: false
+        schema:
+          type: string
+      - name: commitId
+        in: query
+        description: Returns records that were changed in that version  in that version and only those records.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      - name: sinceVersionId
+        in: query
+        description: Deprecated, use `sinceCommitId` instead.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:VersionId'
+      - name: sinceCommitId
+        in: query
+        description: Returns records that were changed in that version in addition to any records from versions after that version.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      - name: sortField
+        in: query
+        description: The field to sort the data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SortField'
+      - name: sortDirection
+        in: query
+        description: Sort direction - asc (ascending) or desc (descending)
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SortDirection'
+      - name: filter
+        in: query
+        description: Options to filter records
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:Filter'
+      - name: filterField
+        in: query
+        description: The field to filter the data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:FilterField'
+      - name: searchValue
+        in: query
+        description: The value to search for data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SearchValue'
+      - name: searchField
+        in: query
+        description: The field to search for data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SearchField'
+      - name: ids
+        in: query
+        description: The Record Ids param (ids) is a list of record ids that can be passed to several record endpoints allowing the user to identify specific records to INCLUDE in the query, or specific records to EXCLUDE, depending on whether or not filters are being applied. When passing a query param that filters the record dataset, such as 'searchValue', or a 'filter' of 'valid' | 'error' | 'all', the 'ids' param will EXCLUDE those records from the filtered results. For basic queries that do not filter the dataset, passing record ids in the 'ids' param will limit the dataset to INCLUDE just those specific records
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:RecordId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /sheets/{sheetId}/counts:
+    get:
+      operationId: get-record-counts
+      summary: Get record counts
+      description: Returns counts of records from a sheet
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: versionId
+        in: query
+        description: Returns records that were changed in that version and only those records.
+        required: false
+        schema:
+          type: string
+      - name: sinceVersionId
+        in: query
+        description: Deprecated, use `sinceCommitId` instead.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:VersionId'
+      - name: commitId
+        in: query
+        description: Returns records that were changed in that version in addition to any records from versions after that version.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      - name: sinceCommitId
+        in: query
+        description: Listing a commit ID here will return all records since the specified commit.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      - name: filter
+        in: query
+        description: Options to filter records
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:Filter'
+      - name: filterField
+        in: query
+        description: The field to filter the data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:FilterField'
+      - name: searchValue
+        in: query
+        description: The value to search for data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SearchValue'
+      - name: searchField
+        in: query
+        description: The field to search for data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SearchField'
+      - name: byField
+        in: query
+        description: If true, the counts for each field will also be returned
+        required: false
+        schema:
+          type: boolean
+      - name: q
+        in: query
+        description: An FFQL query used to filter the result set to be counted
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_sheets:RecordCountsResponse'
+  /sheets/{sheetId}/calculations:
+    get:
+      operationId: get-calculations
+      summary: List calculations
+      description: Returns all calculations for a sheet
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: versionId
+        in: query
+        description: Returns records that were changed in that version and only those records.
+        required: false
+        schema:
+          type: string
+      - name: sinceVersionId
+        in: query
+        description: Deprecated, use `sinceCommitId` instead.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:VersionId'
+      - name: commitId
+        in: query
+        description: Returns records that were changed in that version in addition to any records from versions after that version.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      - name: sinceCommitId
+        in: query
+        description: Listing a commit ID here will return all records since the specified commit.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      - name: filter
+        in: query
+        description: Options to filter records
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:Filter'
+      - name: filterField
+        in: query
+        description: The field to filter the data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:FilterField'
+      - name: searchValue
+        in: query
+        description: The value to search for data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SearchValue'
+      - name: searchField
+        in: query
+        description: The field to search for data on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SearchField'
+      - name: byField
+        in: query
+        description: If true, the counts for each field will also be returned
+        required: false
+        schema:
+          type: boolean
+      - name: q
+        in: query
+        description: An FFQL query used to filter the result set to be counted
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_sheets:ListCalculationsResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /sheets/{sheetId}/commits:
+    get:
+      operationId: get-sheet-commits
+      summary: Get commit versions for a sheet
+      description: Returns the commit versions for a sheet
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: completed
+        in: query
+        description: If true, only return commits that have been completed. If false, only return commits that have not been completed. If not provided, return all commits.
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commits:ListCommitsResponse'
+  /sheets/{sheetId}/lock:
+    post:
+      operationId: lock-sheet
+      summary: Lock a sheet
+      description: Locks a sheet
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /sheets/{sheetId}/unlock:
+    post:
+      operationId: unlock-sheet
+      summary: Unlock a sheet
+      description: Removes a lock from a sheet
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /sheets/{sheetId}/cells:
+    get:
+      operationId: get-cell-values
+      summary: Get record cells by field
+      description: Returns record cell values grouped by all fields in the sheet
+      tags:
+      - subpackage_sheets
+      parameters:
+      - name: sheetId
+        in: path
+        description: ID of sheet
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: fieldKey
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_sheets:FieldKey'
+      - name: sortField
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SortField'
+      - name: sortDirection
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SortDirection'
+      - name: filter
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:Filter'
+      - name: filterField
+        in: query
+        description: Name of field by which to filter records
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:FilterField'
+      - name: pageSize
+        in: query
+        description: Number of records to return in a page (default 1000 if pageNumber included)
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageSize'
+      - name: pageNumber
+        in: query
+        description: Based on pageSize, which page of records to return
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageNumber'
+      - name: distinct
+        in: query
+        description: Must be set to true
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_sheets:Distinct'
+      - name: includeCounts
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_sheets:IncludeCounts'
+      - name: searchValue
+        in: query
+        description: A value to find for a given field in a sheet. Wrap the value in "" for exact match
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SearchValue'
+      - name: q
+        in: query
+        description: An FFQL query used to filter the records to be queried
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_sheets:CellsResponse'
+components:
+  schemas:
+    type_property:FieldAppearance:
+      type: object
+      properties:
+        size:
+          $ref: '#/components/schemas/type_property:FieldSize'
+      description: Control the appearance of this field when it's displayed in a table or input
+      title: FieldAppearance
+    type_records:ValidationSource:
+      type: string
+      enum:
+      - required-constraint
+      - unique-constraint
+      - custom-logic
+      - unlinked
+      - invalid-option
+      - is-artifact
+      title: ValidationSource
+    type_sheets:CellsResponseData:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/type_sheets:CellValueWithCounts'
+      description: Cell values grouped by field key
+      title: CellsResponseData
+    type_records:ValidationType:
+      type: string
+      enum:
+      - error
+      - warn
+      - info
+      title: ValidationType
+    type_commits:Commit:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:CommitId'
+        sheetId:
+          $ref: '#/components/schemas/type_commons:SheetId'
+        createdBy:
+          type: string
+          description: The actor (user or system) who created the commit
+        completedBy:
+          type: string
+          description: The actor (user or system) who completed the commit
+        createdAt:
+          type: string
+          format: date-time
+          description: The time the commit was created
+        completedAt:
+          type: string
+          format: date-time
+          description: The time the commit was acknowledged
+      required:
+      - id
+      - sheetId
+      - createdBy
+      - createdAt
+      description: A commit version
+      title: Commit
+    type_property:ReferenceFilter:
+      type: object
+      properties:
+        refField:
+          type: string
+          description: The field key of the reference sheet to filter with
+        recordField:
+          type: string
+          description: The field key of the record used to filter the reference field
+      required:
+      - refField
+      - recordField
+      description: If provided, the reference filter will narrow the set of records in the reference sheet used as the set of valid values for the record. Only rows where the value in the reference sheet's refField matches the value in this record's recordField will be used.
+      title: ReferenceFilter
+    type_commons:Filter:
+      type: string
+      enum:
+      - valid
+      - error
+      - all
+      - none
+      description: Options to filter records
+      title: Filter
+    type_commons:ActionMessage:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:ActionMessageType'
+        content:
+          type: string
+      required:
+      - type
+      - content
+      title: ActionMessage
+    type_property:StringConfig:
+      type: object
+      properties:
+        size:
+          $ref: '#/components/schemas/type_property:StringConfigOptions'
+      required:
+      - size
+      title: StringConfig
+    type_sheets:RecordCountsResponseData:
+      type: object
+      properties:
+        counts:
+          $ref: '#/components/schemas/type_records:RecordCounts'
+        success:
+          type: boolean
+      required:
+      - counts
+      - success
+      title: RecordCountsResponseData
+    type_sheets:Distinct:
+      type: boolean
+      description: When true, excludes duplicate values
+      title: Distinct
+    type_commons:ActionConstraint:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasAllValid
+            description: 'Discriminator value: hasAllValid'
+          ignoreSelection:
+            type: boolean
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasSelection
+            description: 'Discriminator value: hasSelection'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasData
+            description: 'Discriminator value: hasData'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasColumnEnabled
+            description: 'Discriminator value: hasColumnEnabled'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionConstraint
+    type_commons:ActionMount:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - sheet
+            description: 'Discriminator value: sheet'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - workbook
+            description: 'Discriminator value: workbook'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - field
+            description: 'Discriminator value: field'
+          keys:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - document
+            description: 'Discriminator value: document'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - file
+            description: 'Discriminator value: file'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionMount
+    type_commons:InputEnumPropertyOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A visual label for this option, defaults to value if not provided
+        description:
+          type: string
+          description: A short description for this option
+        color:
+          type: string
+          description: An optional color to assign this option
+        icon:
+          type: string
+          description: A reference pointer to a previously registered icon
+        meta:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: An arbitrary JSON object to be associated with this option and made available to hooks
+        value:
+          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
+      required:
+      - value
+      title: InputEnumPropertyOption
+    type_commits:ListCommitsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commits:Commit'
+      required:
+      - data
+      title: ListCommitsResponse
+    type_commons:SortDirection:
+      type: string
+      enum:
+      - asc
+      - desc
+      description: Sort direction - asc (ascending) or desc (descending)
+      title: SortDirection
+    type_property:Constraint:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - required
+            description: 'Discriminator value: required'
+          config:
+            $ref: '#/components/schemas/type_property:RequiredConstraintConfig'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - unique
+            description: 'Discriminator value: unique'
+          config:
+            $ref: '#/components/schemas/type_property:UniqueConstraintConfig'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - computed
+            description: 'Discriminator value: computed'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - external
+            description: 'Discriminator value: external'
+          validator:
+            type: string
+          description:
+            type: string
+            description: A full description of what this constraint configuration does
+          label:
+            type: string
+            description: A short description of what this constraint constraint should do, example - values between 1 and 100
+          config:
+            description: Any type
+        required:
+        - type
+        - validator
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - stored
+            description: 'Discriminator value: stored'
+          validator:
+            type: string
+            description: Must match the constraint validator name.
+          version:
+            type: integer
+            description: The version of the stored constraint to use. (Defaults to version 1.)
+          description:
+            type: string
+            description: A full description of what this constraint configuration does
+          label:
+            type: string
+            description: A short description of what this constraint constraint should do, example - values between 1 and 100
+          config:
+            description: Any type
+        required:
+        - type
+        - validator
+      discriminator:
+        propertyName: type
+      title: Constraint
+    type_records:CellValueUnion:
+      oneOf:
+      - type: string
+      - type: integer
+      - type: integer
+        format: int64
+      - type: number
+        format: double
+      - type: boolean
+      - type: string
+        format: date
+      - type: string
+        format: date-time
+      - type: array
+        items:
+          type: string
+      title: CellValueUnion
+    type_sheets:CellValueWithCounts:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_records:ValidationMessage'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Deprecated, use record level metadata instead.
+        value:
+          $ref: '#/components/schemas/type_records:CellValueUnion'
+        layer:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        counts:
+          $ref: '#/components/schemas/type_records:RecordCounts'
+      title: CellValueWithCounts
+    type_sheets:SheetConfig:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of your Sheet as it will appear to your end users.
+        description:
+          type: string
+          description: A sentence or two describing the purpose of your Sheet.
+        slug:
+          type: string
+          description: A unique identifier for your Sheet.
+        readonly:
+          type: boolean
+          description: A boolean specifying whether or not this sheet is read only. Read only sheets are not editable by end users.
+        allowAdditionalFields:
+          type: boolean
+          description: Allow end users to add fields during mapping.
+        mappingConfidenceThreshold:
+          type: number
+          format: double
+          description: The minimum confidence required to automatically map a field
+        access:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_sheets:SheetAccess'
+          description: Control Sheet-level access for all users.
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_property:Property'
+          description: Where you define your Sheet's data schema.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Action'
+          description: An array of actions that end users can perform on this Sheet.
+        metadata:
+          description: Useful for any contextual metadata regarding the schema. Store any valid json
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_sheets:SheetConstraint'
+          description: An array of constraints that end users can perform on this Sheet.
+        treatments:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_sheets:SheetTreatments'
+          description: An array of treatments that define the behavior of the sheet.
+        collection:
+          type: string
+          description: Collection in which to group the sheet
+      required:
+      - name
+      - fields
+      description: Describes shape of data as well as behavior
+      title: SheetConfig
+    type_commons:PageSize:
+      type: integer
+      description: Number of logs to return in a page (default 20)
+      title: PageSize
+    type_property:FieldSize:
+      type: string
+      enum:
+      - xs
+      - s
+      - m
+      - l
+      - xl
+      description: The default visual sizing. This sizing may be overridden by a user
+      title: FieldSize
+    type_commons:InputConstraintType:
+      type: string
+      enum:
+      - required
+      title: InputConstraintType
+    type_sheets:FieldKey:
+      type: string
+      description: Returns results from the given field only. Otherwise all field cells are returned
+      title: FieldKey
+    type_commons:RecordId:
+      type: string
+      description: Record ID
+      title: RecordId
+    type_commons:SearchValue:
+      type: string
+      description: Search for the given value, returning matching rows. For exact matches, wrap the value in double quotes ("Bob"). To search for null values, send empty double quotes ("")
+      title: SearchValue
+    type_sheets:CompositeUniqueConstraintStrategy:
+      type: string
+      enum:
+      - hash
+      - concat
+      title: CompositeUniqueConstraintStrategy
+    type_sheets:Sheet:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:SheetId'
+          description: The ID of the Sheet.
+        workbookId:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+          description: The ID of the Workbook.
+        name:
+          type: string
+          description: The name of the Sheet.
+        slug:
+          type: string
+          description: The slug of the Sheet.
+        config:
+          $ref: '#/components/schemas/type_sheets:SheetConfig'
+          description: Describes shape of data as well as behavior
+        metadata:
+          description: Useful for any contextual metadata regarding the sheet. Store any valid json
+        namespace:
+          type: string
+          description: The scoped namespace of the Sheet.
+        lockedBy:
+          type: string
+          description: The actor who locked the Sheet.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date the sheet was last updated
+        createdAt:
+          type: string
+          format: date-time
+          description: Date the sheet was created
+        lockedAt:
+          type: string
+          format: date-time
+          description: The time the Sheet was locked.
+        recordCounts:
+          $ref: '#/components/schemas/type_records:RecordCounts'
+          description: The precomputed counts of records in the Sheet (may not exist).
+        createdFrom:
+          $ref: '#/components/schemas/type_commons:SheetId'
+          description: The sheet id of the template that was used to create this sheet
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time the sheet template configuration was propagated to this sheet
+        treatments:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_sheets:SheetTreatments'
+          description: An array of treatments that define the behavior of the sheet.
+        collection:
+          type: string
+          description: Collection in which to group the sheet
+      required:
+      - id
+      - workbookId
+      - name
+      - slug
+      - config
+      - updatedAt
+      - createdAt
+      description: A place to store tabular data
+      title: Sheet
+    type_commons:ActionId:
+      type: string
+      description: Action ID
+      title: ActionId
+    type_commons:PageNumber:
+      type: integer
+      description: Based on pageSize, which page of records to return
+      title: PageNumber
+    type_commons:InputField:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key for a Field.
+        label:
+          type: string
+          description: Visible name of a Field.
+        description:
+          type: string
+          description: Brief description below the name of the Field.
+        type:
+          type: string
+          description: Field Types inform the user interface how to sort and display data.
+        defaultValue:
+          description: Default value for a Field.
+        config:
+          $ref: '#/components/schemas/type_commons:InputConfig'
+          description: Additional configuration for enum Fields.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputConstraint'
+          description: Indicate additional validations that will be applied to the Field.
+      required:
+      - key
+      - label
+      - type
+      title: InputField
+    type_sheets:SheetResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_sheets:Sheet'
+      required:
+      - data
+      title: SheetResponse
+    type_commons:SortField:
+      type: string
+      description: Name of field by which to sort records
+      title: SortField
+    type_records:FieldRecordCounts:
+      type: object
+      properties:
+        total:
+          type: integer
+        valid:
+          type: integer
+        error:
+          type: integer
+        empty:
+          type: integer
+      required:
+      - total
+      - valid
+      - error
+      - empty
+      title: FieldRecordCounts
+    type_records:RecordCounts:
+      type: object
+      properties:
+        total:
+          type: integer
+        valid:
+          type: integer
+        error:
+          type: integer
+        errorsByField:
+          type: object
+          additionalProperties:
+            type: integer
+        byField:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/type_records:FieldRecordCounts'
+          description: Counts for valid, error, and total records grouped by field key
+      required:
+      - total
+      - valid
+      - error
+      title: RecordCounts
+    type_sheets:CellsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_sheets:CellsResponseData'
+      required:
+      - data
+      title: CellsResponse
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons:CommitId:
+      type: string
+      description: Commit ID
+      title: CommitId
+    type_sheets:ListSheetsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_sheets:Sheet'
+      required:
+      - data
+      title: ListSheetsResponse
+    type_property:EnumPropertyOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A visual label for this option
+        description:
+          type: string
+          description: A short description for this option
+        color:
+          type: string
+          description: An optional color to assign this option
+        icon:
+          type: string
+          description: A reference pointer to a previously registered icon
+        meta:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: An arbitrary JSON object to be associated with this option and made available to hooks
+        value:
+          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
+        alternativeNames:
+          type: array
+          items:
+            type: string
+          description: Alternative names to match this enum option to
+        ordinal:
+          type: integer
+          description: The order of this option in the list. SortBy must be set to `ordinal` to use this.
+      required:
+      - value
+      title: EnumPropertyOption
+    type_commons:Guide:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guidance for this action
+      required:
+      - content
+      title: Guide
+    type_property:NumberConfig:
+      type: object
+      properties:
+        decimalPlaces:
+          type: integer
+          description: Number of decimal places to round data to
+      title: NumberConfig
+    type_property:RequiredConstraintConfig:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Custom validation message to display when the constraint fails
+        level:
+          $ref: '#/components/schemas/type_records:ValidationType'
+          description: Validation level (error, warn, info). Defaults to error.
+      title: RequiredConstraintConfig
+    type_sheets:SheetConstraint:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - unique
+            description: 'Discriminator value: unique'
+          name:
+            type: string
+            description: The name of the constraint
+          fields:
+            type: array
+            items:
+              type: string
+            description: The fields that must be unique together
+          requiredFields:
+            type: array
+            items:
+              type: string
+            description: Fields that, when empty, will cause this unique constraint to be ignored
+          strategy:
+            $ref: '#/components/schemas/type_sheets:CompositeUniqueConstraintStrategy'
+          config:
+            $ref: '#/components/schemas/type_sheets:CompositeUniqueConstraintConfig'
+            description: Configuration options for the composite unique constraint
+        required:
+        - type
+        - name
+        - fields
+        - strategy
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - external
+            description: 'Discriminator value: external'
+          validator:
+            type: string
+          fields:
+            type: array
+            items:
+              type: string
+            description: The fields that must be unique together
+          config:
+            description: Any type
+        required:
+        - type
+        - validator
+      discriminator:
+        propertyName: type
+      title: SheetConstraint
+    type_commons:ActionMessageType:
+      type: string
+      enum:
+      - error
+      - info
+      title: ActionMessageType
+    type_commons:SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_commons:CalculationId:
+      type: string
+      description: Calculation ID
+      title: CalculationId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_sheets:SheetUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Sheet.
+        slug:
+          type: string
+          description: The slug of the Sheet.
+        metadata:
+          description: Useful for any contextual metadata regarding the sheet. Store any valid json
+      description: Changes to make to an existing sheet
+      title: SheetUpdateRequest
+    type_commons:InputFormType:
+      type: string
+      enum:
+      - simple
+      title: InputFormType
+    type_commons:InputConfig:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputEnumPropertyOption'
+      required:
+      - options
+      title: InputConfig
+    type_commons:SearchField:
+      type: string
+      description: Use this to narrow the searchValue results to a specific field
+      title: SearchField
+    type_property:BooleanPropertyConfig:
+      type: object
+      properties:
+        allowIndeterminate:
+          type: boolean
+          description: Allow a neither true or false state to be stored as `null`
+      required:
+      - allowIndeterminate
+      title: BooleanPropertyConfig
+    type_commons:Action:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: '**This is deprecated. Use `operation` instead.**'
+        operation:
+          type: string
+          description: This will become the job operation that is triggered
+        mode:
+          $ref: '#/components/schemas/type_commons:ActionMode'
+          description: Foreground and toolbarBlocking action mode will prevent interacting with the resource until complete
+        tooltip:
+          type: string
+          description: A tooltip that appears when hovering the action button
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ActionMessage'
+        type:
+          type: string
+          description: '**This is deprecated.**'
+        description:
+          type: string
+          description: The text that appears in the dialog after the action is clicked.
+        schedule:
+          $ref: '#/components/schemas/type_commons:ActionSchedule'
+          description: Determines if the action should happen on a regular cadence.
+        primary:
+          type: boolean
+          description: A primary action will be more visibly present, whether in Sheet or Workbook.
+        confirm:
+          type: boolean
+          description: Whether to show a modal to confirm the action
+        icon:
+          type: string
+          description: Icon will work on primary actions. It will only accept an already existing Flatfile design system icon.
+        requireAllValid:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        requireSelection:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        inputForm:
+          $ref: '#/components/schemas/type_commons:InputForm'
+          description: Adds an input form for this action after it is clicked.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ActionConstraint'
+          description: A limitation or restriction on the action.
+        mount:
+          $ref: '#/components/schemas/type_commons:ActionMount'
+        guide:
+          $ref: '#/components/schemas/type_commons:Guide'
+        guardrail:
+          $ref: '#/components/schemas/type_commons:Guardrail'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons:ActionId'
+          description: The action that this action was cloned from
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time this action was propagated to a workbook
+        deletedAt:
+          type: string
+          format: date-time
+          description: The time this action was deleted
+        invalidConditionalMessaging:
+          type: boolean
+          description: When enabled, shows dynamic confirmation messages based on record validation status instead of the static description
+        validRecordsMessage:
+          type: string
+          description: Custom message to show when all records are valid (only used when invalidConditionalMessaging is true)
+        invalidRecordsMessage:
+          type: string
+          description: Custom message to show when there are invalid records (only used when invalidConditionalMessaging is true)
+        label:
+          type: string
+          description: The text on the Button itself
+      required:
+      - label
+      title: Action
+    type_property:ReferencePropertyRelationship:
+      type: string
+      enum:
+      - has-one
+      - has-many
+      title: ReferencePropertyRelationship
+    type_commons:JSONPathString:
+      type: string
+      description: A JSONPath string - https://www.rfc-editor.org/rfc/rfc9535
+      title: JSONPathString
+    type_property:EnumPropertySortBy:
+      type: string
+      enum:
+      - label
+      - value
+      - ordinal
+      title: EnumPropertySortBy
+    type_property:ReferenceListPropertyConfig:
+      type: object
+      properties:
+        ref:
+          type: string
+          description: Full path reference to a sheet configuration. Must be in the same workbook.
+        key:
+          type: string
+          description: Key of the property to use as the reference key. Defaults to `id`
+        filter:
+          $ref: '#/components/schemas/type_property:ReferenceFilter'
+          description: Optional filter to narrow the set of records in the reference sheet used as valid values
+      required:
+      - ref
+      - key
+      title: ReferenceListPropertyConfig
+    type_commons:VersionId:
+      type: string
+      description: Version ID
+      title: VersionId
+    type_commons:FilterField:
+      type: string
+      description: Use this to narrow the valid/error filter results to a specific field
+      title: FilterField
+    type_sheets:IncludeCounts:
+      type: boolean
+      description: When both distinct and includeCounts are true, the count of distinct field values will be returned
+      title: IncludeCounts
+    type_commons:ActionMode:
+      type: string
+      enum:
+      - foreground
+      - background
+      - toolbarBlocking
+      description: Foreground actions will prevent interacting with the resource until complete
+      title: ActionMode
+    type_commons:WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_commons:ActionSchedule:
+      type: string
+      enum:
+      - weekly
+      - daily
+      - hourly
+      title: ActionSchedule
+    type_sheets:SheetAccess:
+      type: string
+      enum:
+      - '*'
+      - add
+      - edit
+      - delete
+      - import
+      title: SheetAccess
+    type_property:StringConfigOptions:
+      type: string
+      enum:
+      - tiny
+      - normal
+      - medium
+      - long
+      description: How much text should be storeable in this field
+      title: StringConfigOptions
+    type_property:UniqueConstraintConfig:
+      type: object
+      properties:
+        caseSensitive:
+          type: boolean
+          description: Ignore casing when determining uniqueness
+        ignoreEmpty:
+          type: boolean
+          description: Do not flag empty values as duplicate
+        message:
+          type: string
+          description: Custom validation message to display when the constraint fails
+        level:
+          $ref: '#/components/schemas/type_records:ValidationType'
+          description: Validation level (error, warn, info). Defaults to error.
+      title: UniqueConstraintConfig
+    type_commons:InputConstraint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:InputConstraintType'
+      required:
+      - type
+      title: InputConstraint
+    type_commons:InputForm:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:InputFormType'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputField'
+      required:
+      - type
+      - fields
+      title: InputForm
+    type_sheets:Calculation:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:CalculationId'
+          description: Unique identifier for the calculation
+        workbookId:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+          description: ID of the workbook this calculation belongs to
+        sheetId:
+          $ref: '#/components/schemas/type_commons:SheetId'
+          description: ID of the sheet this calculation belongs to
+        fieldKey:
+          type: string
+          description: Field key this calculation is performed on
+        type:
+          $ref: '#/components/schemas/type_sheets:CalculationType'
+          description: Type of calculation being performed
+        value:
+          type: number
+          format: double
+          description: Result of the calculation
+      required:
+      - id
+      - workbookId
+      - sheetId
+      - fieldKey
+      - type
+      title: Calculation
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_property:EnumPropertyConfig:
+      type: object
+      properties:
+        allowCustom:
+          type: boolean
+          description: Permit the user to create new options for this specific field.
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_property:EnumPropertyOption'
+        sortBy:
+          $ref: '#/components/schemas/type_property:EnumPropertySortBy'
+          description: Sort the options by the value of this property. Defaults to `label`.
+      required:
+      - options
+      title: EnumPropertyConfig
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_sheets:SheetTreatments:
+      type: string
+      enum:
+      - CLIPPED_FROM_SHEET
+      - ENUM_REFERENCE
+      title: SheetTreatments
+    type_sheets:CalculationType:
+      type: string
+      enum:
+      - COUNT_EMPTY
+      - COUNT_NON_EMPTY
+      - PERCENT_EMPTY
+      - PERCENT_NON_EMPTY
+      - COUNT_CHANGED
+      - PERCENT_CHANGED
+      - SUM
+      - AVERAGE
+      - MIN
+      - MAX
+      title: CalculationType
+    type_property:ReferencePropertyConfig:
+      type: object
+      properties:
+        ref:
+          type: string
+          description: Full path reference to a sheet configuration. Must be in the same workbook.
+        key:
+          type: string
+          description: Key of the property to use as the reference key. Defaults to `id`
+        filter:
+          $ref: '#/components/schemas/type_property:ReferenceFilter'
+          description: Optional filter to narrow the set of records in the reference sheet used as valid values
+        relationship:
+          $ref: '#/components/schemas/type_property:ReferencePropertyRelationship'
+          description: The type of relationship this defines
+      required:
+      - ref
+      - key
+      title: ReferencePropertyConfig
+    type_sheets:CompositeUniqueConstraintConfig:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Custom validation message to display when the constraint fails
+        level:
+          $ref: '#/components/schemas/type_records:ValidationType'
+          description: Validation level (error, warn, info). Defaults to error.
+      title: CompositeUniqueConstraintConfig
+    type_commons:Guardrail:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guardrail for this action
+      required:
+      - content
+      title: Guardrail
+    type_records:ValidationMessage:
+      type: object
+      properties:
+        field:
+          type: string
+        type:
+          $ref: '#/components/schemas/type_records:ValidationType'
+        source:
+          $ref: '#/components/schemas/type_records:ValidationSource'
+        message:
+          type: string
+        path:
+          $ref: '#/components/schemas/type_commons:JSONPathString'
+          description: This JSONPath is based on the root of mapped cell object.
+      description: Record data validation messages
+      title: ValidationMessage
+    type_property:Property:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - string
+            description: 'Discriminator value: string'
+          key:
+            type: string
+          label:
+            type: string
+            description: User friendly field name
+          description:
+            type: string
+            description: A short description of the field. Markdown syntax is supported.
+          constraints:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_property:Constraint'
+            description: A list of constraints that should be applied to this field. This is limited to a maximum of 10 constraints and all external and stored constraints must have unique validator values.
+          readonly:
+            type: boolean
+          appearance:
+            $ref: '#/components/schemas/type_property:FieldAppearance'
+          actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_commons:Action'
+            description: An array of actions that end users can perform on this Column.
+          metadata:
+            description: Useful for any contextual metadata regarding the schema. Store any valid json here.
+          treatments:
+            type: array
+            items:
+              type: string
+            description: A unique presentation for a field in the UI.
+          alternativeNames:
+            type: array
+            items:
+              type: string
+          config:
+            $ref: '#/components/schemas/type_property:StringConfig'
+        required:
+        - type
+        - key
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - number
+            description: 'Discriminator value: number'
+          key:
+            type: string
+          label:
+            type: string
+            description: User friendly field name
+          description:
+            type: string
+            description: A short description of the field. Markdown syntax is supported.
+          constraints:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_property:Constraint'
+            description: A list of constraints that should be applied to this field. This is limited to a maximum of 10 constraints and all external and stored constraints must have unique validator values.
+          readonly:
+            type: boolean
+          appearance:
+            $ref: '#/components/schemas/type_property:FieldAppearance'
+          actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_commons:Action'
+            description: An array of actions that end users can perform on this Column.
+          metadata:
+            description: Useful for any contextual metadata regarding the schema. Store any valid json here.
+          treatments:
+            type: array
+            items:
+              type: string
+            description: A unique presentation for a field in the UI.
+          alternativeNames:
+            type: array
+            items:
+              type: string
+          isArray:
+            type: boolean
+            description: Will allow multiple values and store as an array. Use enum-list type instead.
+          config:
+            $ref: '#/components/schemas/type_property:NumberConfig'
+        required:
+        - type
+        - key
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - boolean
+            description: 'Discriminator value: boolean'
+          key:
+            type: string
+          label:
+            type: string
+            description: User friendly field name
+          description:
+            type: string
+            description: A short description of the field. Markdown syntax is supported.
+          constraints:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_property:Constraint'
+            description: A list of constraints that should be applied to this field. This is limited to a maximum of 10 constraints and all external and stored constraints must have unique validator values.
+          readonly:
+            type: boolean
+          appearance:
+            $ref: '#/components/schemas/type_property:FieldAppearance'
+          actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_commons:Action'
+            description: An array of actions that end users can perform on this Column.
+          metadata:
+            description: Useful for any contextual metadata regarding the schema. Store any valid json here.
+          treatments:
+            type: array
+            items:
+              type: string
+            description: A unique presentation for a field in the UI.
+          alternativeNames:
+            type: array
+            items:
+              type: string
+          config:
+            $ref: '#/components/schemas/type_property:BooleanPropertyConfig'
+        required:
+        - type
+        - key
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - date
+            description: 'Discriminator value: date'
+          key:
+            type: string
+          label:
+            type: string
+            description: User friendly field name
+          description:
+            type: string
+            description: A short description of the field. Markdown syntax is supported.
+          constraints:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_property:Constraint'
+            description: A list of constraints that should be applied to this field. This is limited to a maximum of 10 constraints and all external and stored constraints must have unique validator values.
+          readonly:
+            type: boolean
+          appearance:
+            $ref: '#/components/schemas/type_property:FieldAppearance'
+          actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_commons:Action'
+            description: An array of actions that end users can perform on this Column.
+          metadata:
+            description: Useful for any contextual metadata regarding the schema. Store any valid json here.
+          treatments:
+            type: array
+            items:
+              type: string
+            description: A unique presentation for a field in the UI.
+          alternativeNames:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+        - key
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - enum
+            description: 'Discriminator value: enum'
+          key:
+            type: string
+          label:
+            type: string
+            description: User friendly field name
+          description:
+            type: string
+            description: A short description of the field. Markdown syntax is supported.
+          constraints:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_property:Constraint'
+            description: A list of constraints that should be applied to this field. This is limited to a maximum of 10 constraints and all external and stored constraints must have unique validator values.
+          readonly:
+            type: boolean
+          appearance:
+            $ref: '#/components/schemas/type_property:FieldAppearance'
+          actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_commons:Action'
+            description: An array of actions that end users can perform on this Column.
+          metadata:
+            description: Useful for any contextual metadata regarding the schema. Store any valid json here.
+          treatments:
+            type: array
+            items:
+              type: string
+            description: A unique presentation for a field in the UI.
+          alternativeNames:
+            type: array
+            items:
+              type: string
+          isArray:
+            type: boolean
+            description: Will allow multiple values and store as an array. Use enum-list type instead.
+          multi:
+            type: boolean
+            description: Will allow multiple values and store / provide the values in an array if set. Not all field types support arrays. Use enum-list type instead.
+          config:
+            $ref: '#/components/schemas/type_property:EnumPropertyConfig'
+        required:
+        - type
+        - key
+        - config
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - reference
+            description: 'Discriminator value: reference'
+          key:
+            type: string
+          label:
+            type: string
+            description: User friendly field name
+          description:
+            type: string
+            description: A short description of the field. Markdown syntax is supported.
+          constraints:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_property:Constraint'
+            description: A list of constraints that should be applied to this field. This is limited to a maximum of 10 constraints and all external and stored constraints must have unique validator values.
+          readonly:
+            type: boolean
+          appearance:
+            $ref: '#/components/schemas/type_property:FieldAppearance'
+          actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_commons:Action'
+            description: An array of actions that end users can perform on this Column.
+          metadata:
+            description: Useful for any contextual metadata regarding the schema. Store any valid json here.
+          treatments:
+            type: array
+            items:
+              type: string
+            description: A unique presentation for a field in the UI.
+          alternativeNames:
+            type: array
+            items:
+              type: string
+          isArray:
+            type: boolean
+            description: Will allow multiple values and store as an array. Use enum-list type instead.
+          config:
+            $ref: '#/components/schemas/type_property:ReferencePropertyConfig'
+        required:
+        - type
+        - key
+        - config
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - reference-list
+            description: 'Discriminator value: reference-list'
+          key:
+            type: string
+          label:
+            type: string
+            description: User friendly field name
+          description:
+            type: string
+            description: A short description of the field. Markdown syntax is supported.
+          constraints:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_property:Constraint'
+            description: A list of constraints that should be applied to this field. This is limited to a maximum of 10 constraints and all external and stored constraints must have unique validator values.
+          readonly:
+            type: boolean
+          appearance:
+            $ref: '#/components/schemas/type_property:FieldAppearance'
+          actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_commons:Action'
+            description: An array of actions that end users can perform on this Column.
+          metadata:
+            description: Useful for any contextual metadata regarding the schema. Store any valid json here.
+          treatments:
+            type: array
+            items:
+              type: string
+            description: A unique presentation for a field in the UI.
+          alternativeNames:
+            type: array
+            items:
+              type: string
+          isArray:
+            type: boolean
+            description: Will allow multiple values and store as an array. Use enum-list type instead.
+          config:
+            $ref: '#/components/schemas/type_property:ReferenceListPropertyConfig'
+        required:
+        - type
+        - key
+        - config
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - string-list
+            description: 'Discriminator value: string-list'
+          key:
+            type: string
+          label:
+            type: string
+            description: User friendly field name
+          description:
+            type: string
+            description: A short description of the field. Markdown syntax is supported.
+          constraints:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_property:Constraint'
+            description: A list of constraints that should be applied to this field. This is limited to a maximum of 10 constraints and all external and stored constraints must have unique validator values.
+          readonly:
+            type: boolean
+          appearance:
+            $ref: '#/components/schemas/type_property:FieldAppearance'
+          actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_commons:Action'
+            description: An array of actions that end users can perform on this Column.
+          metadata:
+            description: Useful for any contextual metadata regarding the schema. Store any valid json here.
+          treatments:
+            type: array
+            items:
+              type: string
+            description: A unique presentation for a field in the UI.
+          alternativeNames:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+        - key
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - enum-list
+            description: 'Discriminator value: enum-list'
+          key:
+            type: string
+          label:
+            type: string
+            description: User friendly field name
+          description:
+            type: string
+            description: A short description of the field. Markdown syntax is supported.
+          constraints:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_property:Constraint'
+            description: A list of constraints that should be applied to this field. This is limited to a maximum of 10 constraints and all external and stored constraints must have unique validator values.
+          readonly:
+            type: boolean
+          appearance:
+            $ref: '#/components/schemas/type_property:FieldAppearance'
+          actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_commons:Action'
+            description: An array of actions that end users can perform on this Column.
+          metadata:
+            description: Useful for any contextual metadata regarding the schema. Store any valid json here.
+          treatments:
+            type: array
+            items:
+              type: string
+            description: A unique presentation for a field in the UI.
+          alternativeNames:
+            type: array
+            items:
+              type: string
+          config:
+            $ref: '#/components/schemas/type_property:EnumPropertyConfig'
+        required:
+        - type
+        - key
+        - config
+      discriminator:
+        propertyName: type
+      title: Property
+    type_sheets:ListCalculationsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_sheets:Calculation'
+      required:
+      - data
+      title: ListCalculationsResponse
+    type_sheets:RecordCountsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_sheets:RecordCountsResponseData'
+      required:
+      - data
+      title: RecordCountsResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

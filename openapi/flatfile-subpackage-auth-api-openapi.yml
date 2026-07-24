@@ -1,0 +1,223 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_auth API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_auth
+paths:
+  /auth/publishable-key:
+    get:
+      operationId: get-publishable-key
+      summary: Obtain the publishable key for a specific environment
+      tags:
+      - subpackage_auth
+      parameters:
+      - name: environmentId
+        in: query
+        description: ID of environment to search
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_auth:PublishableKeyResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /auth/sftp-credentials:
+    get:
+      operationId: get-sftp-credentials
+      summary: Get SFTP credentials for Space
+      tags:
+      - subpackage_auth
+      parameters:
+      - name: spaceId
+        in: query
+        description: ID of space to get credentials for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_auth:SftpCredentials'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_auth:ApiKeyOperation:
+      type: object
+      properties:
+        path:
+          type: string
+        method:
+          type: string
+      required:
+      - path
+      - method
+      title: ApiKeyOperation
+    type_auth:SftpCredentials:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        host:
+          type: string
+        port:
+          type: string
+      required:
+      - username
+      - password
+      - host
+      - port
+      description: Credentials being used to login to SFTP with host and port
+      title: SftpCredentials
+    type_auth:PublishableKeyResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_auth:ApiKey'
+      required:
+      - data
+      title: PublishableKeyResponse
+    type_auth:RawKey:
+      type: string
+      description: Raw Api Key
+      title: RawKey
+    type_auth:ApiKeyId:
+      type: string
+      description: Api Key ID
+      title: ApiKeyId
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_auth:ApiKeyType:
+      type: string
+      enum:
+      - PUBLISHABLE
+      - SECRET
+      title: ApiKeyType
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_auth:ApiKey:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_auth:ApiKeyId'
+        rawKey:
+          $ref: '#/components/schemas/type_auth:RawKey'
+        type:
+          $ref: '#/components/schemas/type_auth:ApiKeyType'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        operations:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_auth:ApiKeyOperation'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+        secret:
+          type: string
+      required:
+      - id
+      - type
+      - operations
+      - createdAt
+      description: API Key used for authenticating against our APIs
+      title: ApiKey
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

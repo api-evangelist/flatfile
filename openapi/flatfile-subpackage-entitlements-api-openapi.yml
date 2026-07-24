@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_entitlements API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_entitlements
+paths:
+  /entitlements:
+    get:
+      operationId: list
+      summary: List entitlements
+      description: Returns all entitlements matching a filter for resourceId
+      tags:
+      - subpackage_entitlements
+      parameters:
+      - name: resourceId
+        in: query
+        description: The associated Resource ID for the entitlements.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_entitlements:ListEntitlementsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_entitlements:Entitlement:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Short name for the entitlement
+        metadata:
+          description: Contains conditions or limits for an entitlement
+      required:
+      - key
+      - metadata
+      description: An entitlement belonging to a resource
+      title: Entitlement
+    type_entitlements:ListEntitlementsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_entitlements:Entitlement'
+      required:
+      - data
+      title: ListEntitlementsResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_accounts
+paths:
+  /accounts/current:
+    get:
+      operationId: get-current
+      summary: Get the current account
+      description: Get the current account
+      tags:
+      - subpackage_accounts
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_accounts:AccountResponse'
+    patch:
+      operationId: update-current
+      summary: Update the current account
+      description: Update the current account
+      tags:
+      - subpackage_accounts
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_accounts:AccountResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_accounts:AccountPatch'
+components:
+  schemas:
+    type_accounts:AccountResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_accounts:Account'
+      required:
+      - data
+      title: AccountResponse
+    type_accounts:Account:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        name:
+          type: string
+        primaryDomain:
+          type: string
+        subdomain:
+          type: string
+        vanityDomainDashboard:
+          type: string
+        vanityDomainSpaces:
+          type: string
+        embeddedDomainWhitelist:
+          type: array
+          items:
+            type: string
+        customFromEmail:
+          type: string
+        stripeCustomerId:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        defaultAppId:
+          $ref: '#/components/schemas/type_commons:AppId'
+        dashboard:
+          type: integer
+      required:
+      - id
+      - name
+      - metadata
+      - createdAt
+      - updatedAt
+      description: An account
+      title: Account
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_commons:AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_accounts:AccountPatch:
+      type: object
+      properties:
+        name:
+          type: string
+        defaultAppId:
+          $ref: '#/components/schemas/type_commons:AppId'
+      description: Properties used to update an account
+      title: AccountPatch
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

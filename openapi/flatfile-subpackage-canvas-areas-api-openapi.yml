@@ -1,0 +1,485 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_canvas-areas API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_canvas-areas
+paths:
+  /canvas-areas:
+    get:
+      operationId: list
+      summary: List canvas areas
+      description: Returns a list of canvas areas filtered by canvas, space, or environment
+      tags:
+      - subpackage_canvas-areas
+      parameters:
+      - name: canvasId
+        in: query
+        description: ID of the canvas to filter areas by
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CanvasId'
+      - name: parentId
+        in: query
+        description: ID of the parent canvas area to filter by
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+      - name: spaceId
+        in: query
+        description: ID of the space to filter areas by
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: environmentId
+        in: query
+        description: ID of the environment to filter areas by
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: pageSize
+        in: query
+        description: Number of areas to return in a page (default 20)
+        required: false
+        schema:
+          type: integer
+      - name: pageNumber
+        in: query
+        description: Based on pageSize, which page of areas to return
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_canvas-areas:ListCanvasAreasResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: create
+      summary: Create a canvas area
+      description: Creates a new canvas area
+      tags:
+      - subpackage_canvas-areas
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_canvas-areas:CanvasAreaResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                canvasId:
+                  $ref: '#/components/schemas/type_commons:CanvasId'
+                type:
+                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaType'
+                position:
+                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaPosition'
+                visibility:
+                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaVisibility'
+                layout:
+                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaLayout'
+                overlay:
+                  description: Any type
+                config:
+                  description: Any type
+                metadata:
+                  description: Any type
+                parentId:
+                  $ref: '#/components/schemas/type_commons:CanvasAreaId'
+              required:
+              - canvasId
+              - type
+              - position
+  /canvas-areas/{canvasAreaId}:
+    get:
+      operationId: get
+      summary: Get a canvas area
+      description: Returns a specific canvas area by ID
+      tags:
+      - subpackage_canvas-areas
+      parameters:
+      - name: canvasAreaId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_canvas-areas:CanvasAreaResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update
+      summary: Update a canvas area
+      description: Updates an existing canvas area
+      tags:
+      - subpackage_canvas-areas
+      parameters:
+      - name: canvasAreaId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_canvas-areas:CanvasAreaResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaType'
+                position:
+                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaPosition'
+                visibility:
+                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaVisibility'
+                layout:
+                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaLayout'
+                overlay:
+                  description: Any type
+                config:
+                  description: Any type
+                metadata:
+                  description: Any type
+                parentId:
+                  $ref: '#/components/schemas/type_commons:CanvasAreaId'
+                canvasId:
+                  $ref: '#/components/schemas/type_commons:CanvasId'
+    delete:
+      operationId: delete
+      summary: Delete a canvas area
+      description: Deletes a specific canvas area
+      tags:
+      - subpackage_canvas-areas
+      parameters:
+      - name: canvasAreaId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_canvas-areas:CanvasAreaLayout:
+      type: string
+      enum:
+      - split
+      - drawer
+      - modal
+      title: CanvasAreaLayout
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_canvas-areas:CanvasArea:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+        canvasId:
+          $ref: '#/components/schemas/type_commons:CanvasId'
+          description: ID of the canvas this area belongs to
+        parentId:
+          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+          description: ID of the parent canvas area, if this is a nested area
+        config:
+          description: Additional configuration data for the canvas area
+        metadata:
+          description: Metadata associated with the canvas area
+        layout:
+          $ref: '#/components/schemas/type_canvas-areas:CanvasAreaLayout'
+          description: Layout configuration for the canvas area
+        overlay:
+          description: Overlay configuration for the canvas area
+        type:
+          $ref: '#/components/schemas/type_canvas-areas:CanvasAreaType'
+          description: Type of the canvas area
+        position:
+          $ref: '#/components/schemas/type_canvas-areas:CanvasAreaPosition'
+          description: Position of the canvas area within the canvas
+        visibility:
+          $ref: '#/components/schemas/type_canvas-areas:CanvasAreaVisibility'
+          description: Visibility of the canvas area
+        createdAt:
+          type: string
+          format: date-time
+          description: When the canvas area was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the canvas area was last updated
+        deletedAt:
+          type: string
+          format: date-time
+          description: When the canvas area was deleted, if applicable
+      required:
+      - id
+      - canvasId
+      - config
+      - metadata
+      - layout
+      - overlay
+      - type
+      - position
+      - visibility
+      - createdAt
+      - updatedAt
+      description: A canvas area represents a section within a canvas for organizing content
+      title: CanvasArea
+    type_canvas-areas:ListCanvasAreasResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_canvas-areas:CanvasArea'
+      required:
+      - data
+      title: ListCanvasAreasResponse
+    type_commons:CanvasId:
+      type: string
+      description: Canvas ID
+      title: CanvasId
+    type_canvas-areas:CanvasAreaPosition:
+      type: string
+      enum:
+      - top
+      - left
+      - right
+      - middle
+      - bottom
+      title: CanvasAreaPosition
+    type_canvas-areas:CanvasAreaType:
+      type: string
+      enum:
+      - mapping
+      - header
+      - agent
+      - form
+      - sheet
+      - sheets
+      - workbook
+      - document
+      - file
+      - iframe
+      title: CanvasAreaType
+    type_commons:Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_canvas-areas:CanvasAreaResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_canvas-areas:CanvasArea'
+      required:
+      - data
+      title: CanvasAreaResponse
+    type_canvas-areas:CanvasAreaVisibility:
+      type: string
+      enum:
+      - visible
+      - hidden
+      - optional
+      - skeleton
+      title: CanvasAreaVisibility
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons:CanvasAreaId:
+      type: string
+      description: Canvas Area ID
+      title: CanvasAreaId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

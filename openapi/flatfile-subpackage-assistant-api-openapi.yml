@@ -1,0 +1,345 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_assistant API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_assistant
+paths:
+  //prompts:
+    get:
+      operationId: list
+      summary: List prompts
+      description: Returns prompts created by user
+      tags:
+      - subpackage_assistant
+      parameters:
+      - name: promptType
+        in: query
+        description: Type of prompt (default AI_ASSIST)
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_assistant:PromptTypeQueryEnum'
+      - name: pageSize
+        in: query
+        description: Number of prompts to return in a page (default 7)
+        required: false
+        schema:
+          type: integer
+      - name: pageNumber
+        in: query
+        description: Based on pageSize, which page of prompts to return
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_assistant:PromptsResponse'
+    post:
+      operationId: create
+      summary: Create a prompt
+      description: Creates a prompt
+      tags:
+      - subpackage_assistant
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_assistant:PromptResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_assistant:PromptCreate'
+  //prompts/{promptId}:
+    get:
+      operationId: get
+      summary: Get a prompt
+      description: Returns a prompt
+      tags:
+      - subpackage_assistant
+      parameters:
+      - name: promptId
+        in: path
+        description: ID of prompts
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:PromptId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_assistant:PromptResponse'
+    patch:
+      operationId: update
+      summary: Update a prompt
+      description: Updates a prompt
+      tags:
+      - subpackage_assistant
+      parameters:
+      - name: promptId
+        in: path
+        description: ID of prompts
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:PromptId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_assistant:PromptResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_assistant:PromptPatch'
+    delete:
+      operationId: delete
+      summary: Delete a prompts
+      description: Deletes a prompts
+      tags:
+      - subpackage_assistant
+      parameters:
+      - name: promptId
+        in: path
+        description: ID of prompts
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:PromptId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+components:
+  schemas:
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_assistant:PromptCreate:
+      type: object
+      properties:
+        promptType:
+          $ref: '#/components/schemas/type_assistant:PromptTypeEnum'
+          description: Type of prompt; Defaults to AI_ASSIST
+        prompt:
+          type: string
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      required:
+      - prompt
+      - environmentId
+      - spaceId
+      description: Create a prompts
+      title: PromptCreate
+    type_assistant:PromptsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_assistant:Prompt'
+      required:
+      - data
+      title: PromptsResponse
+    type_assistant:PromptResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_assistant:Prompt'
+      required:
+      - data
+      title: PromptResponse
+    type_assistant:Prompt:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:PromptId'
+        createdById:
+          type: string
+          description: ID of the user/guest who created the prompt
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        promptType:
+          $ref: '#/components/schemas/type_assistant:PromptTypeEnum'
+          description: Type of prompt
+        prompt:
+          type: string
+          description: Text for prompts for AI Assist
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - createdById
+      - accountId
+      - promptType
+      - prompt
+      - createdAt
+      - updatedAt
+      title: Prompt
+    type_assistant:PromptTypeEnum:
+      type: string
+      enum:
+      - AI_ASSIST
+      - CONSTRAINT_GENERATION
+      title: PromptTypeEnum
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_commons:Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_assistant:PromptPatch:
+      type: object
+      properties:
+        prompt:
+          type: string
+      required:
+      - prompt
+      description: Update a prompts
+      title: PromptPatch
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:PromptId:
+      type: string
+      description: Prompt ID
+      title: PromptId
+    type_assistant:PromptTypeQueryEnum:
+      type: string
+      enum:
+      - ALL
+      - AI_ASSIST
+      - CONSTRAINT_GENERATION
+      title: PromptTypeQueryEnum
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

@@ -1,0 +1,1521 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_agents API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_agents
+paths:
+  /agents:
+    get:
+      operationId: list
+      summary: List agents
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: environmentId
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: isSystem
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageSize'
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageNumber'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:ListAgentsResponse'
+    post:
+      operationId: create
+      summary: Create an agent
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: environmentId
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:AgentResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_agents:AgentConfig'
+  /agents/{agentId}:
+    get:
+      operationId: get
+      summary: Get an agent
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: agentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: environmentId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:AgentResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    delete:
+      operationId: delete
+      summary: Delete an agent
+      description: Deletes a single agent
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: agentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: environmentId
+        in: query
+        description: This environment variable is no longer needed or used
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /agents/{agentId}/versions:
+    get:
+      operationId: list-versions
+      summary: List agent versions for an agent
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: agentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:ListAgentVersionsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /agents/{agentId}/versions/{agentVersionId}/revert:
+    get:
+      operationId: revert
+      summary: Revert to a specific agent version
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: agentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: agentVersionId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentVersionId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:AgentVersionResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /agents/{agentId}/roles:
+    get:
+      operationId: list-agent-roles
+      summary: List Agent Roles
+      description: Lists roles assigned to an agent.
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_roles:ListActorRolesResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: assign-agent-role
+      summary: Assign Role to Agent
+      description: Assigns a role to a agent.
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_roles:AssignRoleResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_roles:AssignActorRoleRequest'
+  /agents/{agentId}/roles/{actorRoleId}:
+    delete:
+      operationId: delete-agent-role
+      summary: Remove Role from Agent
+      description: Removes a role from an agent.
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: actorRoleId
+        in: path
+        description: The actor role id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:ActorRoleId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /agents/{agentId}/logs:
+    get:
+      operationId: get-agent-logs
+      summary: Get logs for an agent
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: agentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: environmentId
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:GetAgentLogsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /agents/log/{eventId}:
+    get:
+      operationId: get-agent-log
+      summary: Get an agent log
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EventId'
+      - name: environmentId
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:GetDetailedAgentLogResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /agents/logs:
+    get:
+      operationId: get-environment-agent-logs
+      summary: Get all agent logs in your environment
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: environmentId
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: spaceId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: success
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SuccessQueryParameter'
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageSize'
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageNumber'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:GetDetailedAgentLogsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /agents/executions:
+    get:
+      operationId: get-environment-agent-executions
+      summary: Get all executions in your environment
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: environmentId
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: agentId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: spaceId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: success
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SuccessQueryParameter'
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageSize'
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageNumber'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:GetExecutionsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_commons:EventId:
+      type: string
+      description: Event ID
+      title: EventId
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_agents:Compiler:
+      type: string
+      enum:
+      - js
+      description: The compiler of the agent
+      title: Compiler
+    type_commons:PageSize:
+      type: integer
+      description: Number of logs to return in a page (default 20)
+      title: PageSize
+    type_agents:AgentVersionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agents:AgentVersion'
+      title: AgentVersionResponse
+    type_agents:Execution:
+      type: object
+      properties:
+        eventId:
+          $ref: '#/components/schemas/type_commons:EventId'
+        success:
+          type: boolean
+          description: Whether the agent execution was successful
+        spaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+          description: The space ID associated with this execution
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          description: The duration of the agent execution
+        requestTime:
+          type: integer
+          description: The amount of time the agent spent making http requests
+        requestCount:
+          type: integer
+          description: The number of requests made by the agent
+        memoryUsage:
+          type: integer
+          description: The memory usage of the agent
+        topic:
+          type: string
+          description: The topics of the agent execution
+      required:
+      - eventId
+      - success
+      - createdAt
+      - completedAt
+      - duration
+      - topic
+      description: An execution of an agent
+      title: Execution
+    type_roles:ActorRoleResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons:RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons:ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: ActorRoleResponse
+    type_commons:SuccessQueryParameter:
+      type: boolean
+      description: Boolean
+      title: SuccessQueryParameter
+    type_events:EventTopic:
+      type: string
+      enum:
+      - agent:created
+      - agent:updated
+      - agent:deleted
+      - space:created
+      - space:updated
+      - space:deleted
+      - space:archived
+      - space:unarchived
+      - space:expired
+      - space:guestAdded
+      - space:guestRemoved
+      - document:created
+      - document:updated
+      - document:deleted
+      - workbook:created
+      - workbook:updated
+      - workbook:deleted
+      - workbook:expired
+      - workbook:thawed
+      - flag:created
+      - flag:updated
+      - flag:deleted
+      - sheet:created
+      - sheet:updated
+      - sheet:deleted
+      - sheet:counts-updated
+      - sheet:calculation-updated
+      - snapshot:created
+      - records:created
+      - records:updated
+      - records:deleted
+      - file:created
+      - file:updated
+      - file:deleted
+      - file:expired
+      - job:created
+      - job:updated
+      - job:deleted
+      - job:completed
+      - job:ready
+      - job:scheduled
+      - job:outcome-acknowledged
+      - job:parts-completed
+      - job:failed
+      - program:created
+      - program:updated
+      - program:recomputing
+      - program:recomputed
+      - commit:created
+      - commit:updated
+      - commit:completed
+      - layer:created
+      - secret:created
+      - secret:updated
+      - secret:deleted
+      - cron:5-minutes
+      - cron:hourly
+      - cron:daily
+      - cron:weekly
+      - environment:created
+      - environment:updated
+      - environment:deleted
+      - environment:autobuild-created
+      - action:created
+      - action:updated
+      - action:deleted
+      - data-clip:created
+      - data-clip:updated
+      - data-clip:deleted
+      - data-clip:collaborator-updated
+      - data-clip:resolutions-created
+      - data-clip:resolutions-updated
+      - data-clip:resolutions-refreshed
+      - canvas:created
+      - canvas:updated
+      - canvas:deleted
+      - canvas-area:created
+      - canvas-area:updated
+      - canvas-area:deleted
+      - thread:created
+      - thread:updated
+      - thread:deleted
+      description: The topic of the event
+      title: EventTopic
+    type_agents:TemplateOptions:
+      oneOf:
+      - type: object
+        properties:
+          template:
+            type: string
+            enum:
+            - constraints
+            description: 'Discriminator value: constraints'
+          namespace:
+            type: string
+        required:
+        - template
+      - type: object
+        properties:
+          template:
+            type: string
+            enum:
+            - autobuild
+            description: 'Discriminator value: autobuild'
+          namespace:
+            type: string
+          autobuildId:
+            type: string
+        required:
+        - template
+        - autobuildId
+      - type: object
+        properties:
+          template:
+            type: string
+            enum:
+            - autocast
+            description: 'Discriminator value: autocast'
+          namespace:
+            type: string
+          sheetSlug:
+            type: string
+          fieldFilters:
+            type: array
+            items:
+              type: string
+          options:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - template
+        - sheetSlug
+      - type: object
+        properties:
+          template:
+            type: string
+            enum:
+            - webhook-egress
+            description: 'Discriminator value: webhook-egress'
+          namespace:
+            type: string
+          jobName:
+            type: string
+          url:
+            type: string
+        required:
+        - template
+        - jobName
+        - url
+      - type: object
+        properties:
+          template:
+            type: string
+            enum:
+            - action-listener
+            description: 'Discriminator value: action-listener'
+          namespace:
+            type: string
+          jobName:
+            type: string
+          actionFunction:
+            type: string
+        required:
+        - template
+        - jobName
+        - actionFunction
+      - type: object
+        properties:
+          template:
+            type: string
+            enum:
+            - automap
+            description: 'Discriminator value: automap'
+          namespace:
+            type: string
+          options:
+            $ref: '#/components/schemas/type_agents:AutomapOptions'
+        required:
+        - template
+        - options
+      discriminator:
+        propertyName: template
+      description: The options for a templated agent.
+      title: TemplateOptions
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:ActorRoleId:
+      type: string
+      description: Actor Role ID
+      title: ActorRoleId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_agents:AgentVersion:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events:EventTopic'
+          description: The topics the agent should listen for
+        compiler:
+          $ref: '#/components/schemas/type_agents:Compiler'
+          description: The compiler of the agent
+        source:
+          type: string
+          description: The source of the agent
+        sourceMap:
+          type: string
+          description: The source map of the agent
+        slug:
+          type: string
+          description: The slug of the agent
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
+        template:
+          $ref: '#/components/schemas/type_agents:AgentTemplateEnum'
+          description: The template of the agent; Template options are required for templated agents.
+        templateOptions:
+          $ref: '#/components/schemas/type_agents:TemplateOptions'
+          description: The options for a templated agent. Must be provided if `template` is provided.
+        isSystem:
+          type: boolean
+          description: Whether the agent is a system agent. This should be false for all agents created by users.
+        namespace:
+          type: string
+          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
+        packageVersions:
+          type: object
+          additionalProperties:
+            type: string
+          description: Package versions information for the agent
+        commitInfo:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Commit information for the agent
+        id:
+          $ref: '#/components/schemas/type_commons:AgentVersionId'
+        version:
+          type: integer
+        origin:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        agent_id:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      required:
+      - id
+      - version
+      - origin
+      - createdAt
+      - updatedAt
+      - agent_id
+      title: AgentVersion
+    type_commons:RoleId:
+      type: string
+      description: Role ID
+      title: RoleId
+    type_commons:AgentLogId:
+      type: string
+      description: Agent Log ID
+      title: AgentLogId
+    type_commons:PageNumber:
+      type: integer
+      description: Based on pageSize, which page of records to return
+      title: PageNumber
+    type_agents:GetExecutionsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents:Execution'
+      required:
+      - data
+      title: GetExecutionsResponse
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_agents:AgentLog:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:AgentLogId'
+        agentId:
+          $ref: '#/components/schemas/type_commons:AgentId'
+        eventId:
+          $ref: '#/components/schemas/type_commons:EventId'
+        success:
+          type: boolean
+          description: Whether the agent execution was successful
+        createdAt:
+          type: string
+        completedAt:
+          type: string
+        log:
+          type: string
+          description: The log of the agent execution
+        queueLag:
+          type: integer
+          description: The time difference between when the event was created and when the agent started processing it
+        namespaces:
+          type: array
+          items:
+            type: string
+          description: The namespaces associated with the event
+        context:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The context of the agent execution
+        topic:
+          type: string
+          description: The topic of the agent execution
+        duration:
+          type: integer
+          description: The duration of the agent execution in milliseconds
+        memoryUsage:
+          type: integer
+          description: The memory usage of the agent execution in bytes
+        requestTime:
+          type: integer
+          description: The amount of time the agent spent making HTTP requests in milliseconds
+        requestCount:
+          type: integer
+          description: The number of HTTP requests made by the agent
+        bytesReceived:
+          type: integer
+          description: The total amount of data received by the agent during execution in bytes
+        bytesSent:
+          type: integer
+          description: The total amount of data sent by the agent during execution in bytes
+      required:
+      - id
+      - agentId
+      - eventId
+      - success
+      - createdAt
+      - completedAt
+      description: A log of an agent execution
+      title: AgentLog
+    type_agents:GetAgentLogsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents:AgentLog'
+      title: GetAgentLogsResponse
+    type_agents:AutomapOptions:
+      type: object
+      properties:
+        accuracy:
+          type: string
+        defaultTargetSheet:
+          type: string
+        matchFilename:
+          type: string
+      required:
+      - accuracy
+      - defaultTargetSheet
+      - matchFilename
+      title: AutomapOptions
+    type_agents:DetailedAgentLog:
+      type: object
+      properties:
+        eventId:
+          $ref: '#/components/schemas/type_commons:EventId'
+        success:
+          type: boolean
+          description: Whether the agent execution was successful
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          description: The duration of the agent execution
+        topic:
+          type: string
+          description: The topics of the agent execution
+        context:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The context of the agent execution
+        log:
+          type: string
+          description: The log of the agent execution
+      required:
+      - eventId
+      - success
+      - createdAt
+      - completedAt
+      - duration
+      - topic
+      - context
+      description: A log of an agent execution
+      title: DetailedAgentLog
+    type_agents:AgentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agents:Agent'
+      title: AgentResponse
+    type_agents:GetDetailedAgentLogsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents:DetailedAgentLog'
+      required:
+      - data
+      title: GetDetailedAgentLogsResponse
+    type_agents:ListAgentVersionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents:AgentVersion'
+      title: ListAgentVersionsResponse
+    type_commons:Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons:GuestId:
+      type: string
+      description: Guest ID
+      title: GuestId
+    type_roles:AssignActorRoleRequest:
+      type: object
+      properties:
+        roleId:
+          $ref: '#/components/schemas/type_commons:RoleId'
+        resourceId:
+          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+      required:
+      - roleId
+      - resourceId
+      title: AssignActorRoleRequest
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_agents:AgentConfig:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events:EventTopic'
+          description: The topics the agent should listen for
+        compiler:
+          $ref: '#/components/schemas/type_agents:Compiler'
+          description: The compiler of the agent
+        source:
+          type: string
+          description: The source of the agent
+        sourceMap:
+          type: string
+          description: The source map of the agent
+        slug:
+          type: string
+          description: The slug of the agent
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
+        template:
+          $ref: '#/components/schemas/type_agents:AgentTemplateEnum'
+          description: The template of the agent; Template options are required for templated agents.
+        templateOptions:
+          $ref: '#/components/schemas/type_agents:TemplateOptions'
+          description: The options for a templated agent. Must be provided if `template` is provided.
+        isSystem:
+          type: boolean
+          description: Whether the agent is a system agent. This should be false for all agents created by users.
+        namespace:
+          type: string
+          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
+        packageVersions:
+          type: object
+          additionalProperties:
+            type: string
+          description: Package versions information for the agent
+        commitInfo:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Commit information for the agent
+      description: Properties used to create a new agent
+      title: AgentConfig
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons:AgentId:
+      type: string
+      description: Agent ID
+      title: AgentId
+    type_agents:Agent:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events:EventTopic'
+          description: The topics the agent should listen for
+        compiler:
+          $ref: '#/components/schemas/type_agents:Compiler'
+          description: The compiler of the agent
+        source:
+          type: string
+          description: The source of the agent
+        sourceMap:
+          type: string
+          description: The source map of the agent
+        slug:
+          type: string
+          description: The slug of the agent
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
+        template:
+          $ref: '#/components/schemas/type_agents:AgentTemplateEnum'
+          description: The template of the agent; Template options are required for templated agents.
+        templateOptions:
+          $ref: '#/components/schemas/type_agents:TemplateOptions'
+          description: The options for a templated agent. Must be provided if `template` is provided.
+        isSystem:
+          type: boolean
+          description: Whether the agent is a system agent. This should be false for all agents created by users.
+        namespace:
+          type: string
+          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
+        packageVersions:
+          type: object
+          additionalProperties:
+            type: string
+          description: Package versions information for the agent
+        commitInfo:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Commit information for the agent
+        id:
+          $ref: '#/components/schemas/type_commons:AgentId'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons:AgentId'
+          description: The agent id of the template that was used to create this agent
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time the agent template configuration was propagated to this agent
+      required:
+      - id
+      - createdAt
+      - updatedAt
+      - accountId
+      - environmentId
+      title: Agent
+    type_roles:AssignRoleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_roles:AssignRoleResponseData'
+      required:
+      - data
+      title: AssignRoleResponse
+    type_commons:AgentVersionId:
+      type: string
+      description: Agent version ID
+      title: AgentVersionId
+    type_roles:AssignRoleResponseData:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons:RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons:ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: AssignRoleResponseData
+    type_agents:GetDetailedAgentLogResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agents:DetailedAgentLog'
+      required:
+      - data
+      title: GetDetailedAgentLogResponse
+    type_commons:UserId:
+      type: string
+      description: User ID
+      title: UserId
+    type_agents:AgentTemplateEnum:
+      type: string
+      enum:
+      - constraints
+      - autobuild
+      - autocast
+      - webhook-egress
+      - action-listener
+      - automap
+      description: The template of the agent
+      title: AgentTemplateEnum
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_roles:ListActorRolesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles:ActorRoleResponse'
+      required:
+      - data
+      title: ListActorRolesResponse
+    type_roles:ResourceIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons:AccountId'
+      - $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - $ref: '#/components/schemas/type_commons:SpaceId'
+      title: ResourceIdUnion
+    type_commons:ActorIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons:UserId'
+      - $ref: '#/components/schemas/type_commons:AgentId'
+      - $ref: '#/components/schemas/type_commons:GuestId'
+      title: ActorIdUnion
+    type_agents:ListAgentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents:Agent'
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+      title: ListAgentsResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

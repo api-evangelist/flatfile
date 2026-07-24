@@ -1,0 +1,738 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_apps API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_apps
+paths:
+  /apps:
+    get:
+      operationId: list
+      summary: List apps
+      description: Returns apps in an account
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:AppsResponse'
+    post:
+      operationId: create
+      summary: Create an app
+      description: Creates an app
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:AppResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_apps:AppCreate'
+  /apps/{appId}:
+    get:
+      operationId: get
+      summary: Get an app
+      description: Returns an app
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of app
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:AppResponse'
+    patch:
+      operationId: update
+      summary: Update an app
+      description: Updates an app
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of app
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:AppResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_apps:AppPatch'
+    delete:
+      operationId: delete
+      summary: Delete an app
+      description: Deletes an app
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of app to delete
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:SuccessResponse'
+  /apps/{appId}/constraints:
+    get:
+      operationId: get-constraints
+      summary: Get constraints
+      description: Returns constraints for an app
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of the app
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: includeBuiltins
+        in: query
+        description: Whether to include built-in constraints
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:ConstraintsResponse'
+    post:
+      operationId: create-constraint
+      summary: Create constraint
+      description: Creates a new constraint for an app
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of the app
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:ConstraintResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_apps:ConstraintCreate'
+  /apps/{appId}/constraints/{constraintId}:
+    get:
+      operationId: get-constraint-by-id
+      summary: Get constraint by ID
+      description: Returns a specific constraint
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of the app
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: constraintId
+        in: path
+        description: ID of the constraint
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:ConstraintId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:ConstraintResponse'
+    patch:
+      operationId: update-constraint
+      summary: Update constraint
+      description: Updates a specific constraint
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of the app
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: constraintId
+        in: path
+        description: ID of the constraint
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:ConstraintId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:ConstraintResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_apps:ConstraintUpdate'
+    delete:
+      operationId: delete-constraint
+      summary: Delete constraint
+      description: Deletes a specific constraint
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of the app
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: constraintId
+        in: path
+        description: ID of the constraint
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:ConstraintId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:SuccessResponse'
+  /apps/{appId}/constraints/{constraintId}/versions:
+    get:
+      operationId: get-constraint-versions
+      summary: Get constraint versions
+      description: Returns the versions of a specific constraint
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of the app
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: constraintId
+        in: path
+        description: ID of the constraint
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:ConstraintId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:ConstraintVersionsResponse'
+  /apps/{appId}/constraints/{constraintId}/versions/{version}:
+    get:
+      operationId: get-constraint-version
+      summary: Get constraint version
+      description: Returns a specified version of a specific constraint
+      tags:
+      - subpackage_apps
+      parameters:
+      - name: appId
+        in: path
+        description: ID of the app
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: constraintId
+        in: path
+        description: ID of the constraint
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:ConstraintId'
+      - name: version
+        in: path
+        description: Version of the constraint
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_apps:ConstraintVersionResponse'
+components:
+  schemas:
+    type_apps:ConstraintResource:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:ConstraintId'
+        appId:
+          $ref: '#/components/schemas/type_commons:AppId'
+        validator:
+          type: string
+        description:
+          type: string
+        function:
+          type: string
+        options:
+          description: Any type
+        label:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - appId
+      - validator
+      - createdAt
+      - updatedAt
+      title: ConstraintResource
+    type_apps:ConstraintCreate:
+      type: object
+      properties:
+        description:
+          type: string
+        function:
+          type: string
+        options:
+          description: Any type
+        label:
+          type: string
+        validator:
+          type: string
+        appId:
+          $ref: '#/components/schemas/type_commons:AppId'
+      title: ConstraintCreate
+    type_apps:AppResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_apps:App'
+      required:
+      - data
+      title: AppResponse
+    type_apps:ConstraintUpdate:
+      type: object
+      properties:
+        description:
+          type: string
+        function:
+          type: string
+        options:
+          description: Any type
+        label:
+          type: string
+      title: ConstraintUpdate
+    type_apps:AppCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        type:
+          $ref: '#/components/schemas/type_apps:AppType'
+        entity:
+          type: string
+        entityPlural:
+          type: string
+        icon:
+          type: string
+        metadata:
+          description: Any type
+        environmentFilters:
+          description: Any type
+        blueprint:
+          description: Any type
+      required:
+      - name
+      - namespace
+      - type
+      description: Create an app
+      title: AppCreate
+    type_apps:ConstraintVersionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_apps:ConstraintVersionResource'
+      required:
+      - data
+      title: ConstraintVersionResponse
+    type_apps:App:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:AppId'
+        name:
+          type: string
+        namespace:
+          type: string
+        type:
+          $ref: '#/components/schemas/type_apps:AppType'
+        entity:
+          type: string
+        entityPlural:
+          type: string
+        icon:
+          type: string
+        metadata:
+          description: Any type
+        environmentFilters:
+          description: Any type
+        blueprint:
+          description: Any type
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+        activatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - namespace
+      - type
+      - entity
+      - entityPlural
+      - metadata
+      - environmentFilters
+      - createdAt
+      - updatedAt
+      description: An app
+      title: App
+    type_apps:ConstraintVersionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_apps:ConstraintVersionResource'
+      required:
+      - data
+      title: ConstraintVersionsResponse
+    type_apps:ConstraintResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_apps:ConstraintResource'
+      required:
+      - data
+      title: ConstraintResponse
+    type_commons:ConstraintId:
+      type: string
+      description: Constraint ID
+      title: ConstraintId
+    type_apps:SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessResponse
+    type_apps:AppType:
+      type: string
+      enum:
+      - PORTAL
+      - PROJECTS
+      - MAPPING
+      - WORKBOOKS
+      - CUSTOM
+      title: AppType
+    type_apps:AppPatch:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        entity:
+          type: string
+        entityPlural:
+          type: string
+        icon:
+          type: string
+        metadata:
+          description: Any type
+        environmentFilters:
+          description: Any type
+        blueprint:
+          description: Any type
+        activatedAt:
+          type: string
+          format: date-time
+      description: Update an app
+      title: AppPatch
+    type_commons:AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_apps:ConstraintsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_apps:ConstraintResource'
+      required:
+      - data
+      title: ConstraintsResponse
+    type_apps:AppsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_apps:App'
+      required:
+      - data
+      title: AppsResponse
+    type_apps:ConstraintVersionResource:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:ConstraintId'
+        appId:
+          $ref: '#/components/schemas/type_commons:AppId'
+        validator:
+          type: string
+        description:
+          type: string
+        function:
+          type: string
+        options:
+          description: Any type
+        label:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        version:
+          type: integer
+        prompt:
+          type: string
+      required:
+      - id
+      - appId
+      - validator
+      - createdAt
+      - updatedAt
+      - version
+      title: ConstraintVersionResource
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

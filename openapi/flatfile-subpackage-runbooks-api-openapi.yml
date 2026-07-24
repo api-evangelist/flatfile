@@ -1,0 +1,449 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_runbooks API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_runbooks
+paths:
+  /runbooks:
+    get:
+      operationId: list
+      summary: List runbooks
+      description: Returns a list of runbooks
+      tags:
+      - subpackage_runbooks
+      parameters:
+      - name: appId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: environmentId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: spaceId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_runbooks:RunbooksResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: create
+      summary: Create a runbook
+      description: Creates a new runbook
+      tags:
+      - subpackage_runbooks
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_runbooks:RunbookResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_runbooks:CreateRunbookRequest'
+  /runbooks/{runbookId}:
+    get:
+      operationId: get
+      summary: Get a runbook
+      description: Returns a runbook
+      tags:
+      - subpackage_runbooks
+      parameters:
+      - name: runbookId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:RunbookId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_runbooks:RunbookResponse'
+    patch:
+      operationId: update
+      summary: Update a runbook
+      description: Updates a runbook
+      tags:
+      - subpackage_runbooks
+      parameters:
+      - name: runbookId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:RunbookId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_runbooks:RunbookResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_runbooks:UpdateRunbookRequest'
+    delete:
+      operationId: delete
+      summary: Delete a runbook
+      description: Deletes a runbook
+      tags:
+      - subpackage_runbooks
+      parameters:
+      - name: runbookId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:RunbookId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_runbooks:Runbook:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:RunbookId'
+          description: The ID of the Runbook.
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        appId:
+          $ref: '#/components/schemas/type_commons:AppId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        name:
+          type: string
+          description: The name of the Runbook.
+        config:
+          $ref: '#/components/schemas/type_runbooks:RunbookConfig'
+          description: The configuration of the Runbook.
+        status:
+          $ref: '#/components/schemas/type_runbooks:RunbookStatus'
+          description: The status of the Runbook.
+        type:
+          $ref: '#/components/schemas/type_runbooks:RunbookType'
+          description: The type of the Runbook.
+        createdBy:
+          type: string
+          description: The entity which created the Runbook.
+        createdAt:
+          type: string
+          format: date-time
+          description: Date the sheet was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date the sheet was last updated
+      required:
+      - id
+      - accountId
+      - appId
+      - environmentId
+      - spaceId
+      - name
+      - config
+      - status
+      - type
+      - createdBy
+      - createdAt
+      - updatedAt
+      description: Runbook
+      title: Runbook
+    type_runbooks:SheetTransformConfig:
+      type: object
+      properties:
+        sourceSheetIds:
+          type: array
+          items:
+            type: string
+          description: The ids of the sourceSheets to transform
+        destinationSheetIds:
+          type: array
+          items:
+            type: string
+          description: The id of the destinationSheet to transform
+      required:
+      - sourceSheetIds
+      - destinationSheetIds
+      title: SheetTransformConfig
+    type_runbooks:RunbookStatus:
+      type: string
+      enum:
+      - CREATED
+      - RECORDING
+      - EXECUTING
+      - WAITING
+      - COMPLETED
+      - FAILED
+      - CANCELED
+      title: RunbookStatus
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons:RunbookId:
+      type: string
+      description: Runbook ID
+      title: RunbookId
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_runbooks:RunbookConfig:
+      oneOf:
+      - $ref: '#/components/schemas/type_runbooks:SheetTransformConfig'
+      title: RunbookConfig
+    type_runbooks:RunbookType:
+      type: string
+      enum:
+      - SHEET_TOOL
+      - PREPROCESSING
+      title: RunbookType
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_runbooks:UpdateRunbookRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Runbook.
+        status:
+          $ref: '#/components/schemas/type_runbooks:RunbookStatus'
+          description: The status of the Runbook.
+        config:
+          $ref: '#/components/schemas/type_runbooks:RunbookConfig'
+          description: The configuration of the Runbook.
+      title: UpdateRunbookRequest
+    type_runbooks:RunbookResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_runbooks:Runbook'
+      required:
+      - data
+      title: RunbookResponse
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_runbooks:CreateRunbookRequest:
+      type: object
+      properties:
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        appId:
+          $ref: '#/components/schemas/type_commons:AppId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        name:
+          type: string
+          description: The name of the Runbook.
+        config:
+          $ref: '#/components/schemas/type_runbooks:RunbookConfig'
+          description: The configuration of the Runbook.
+        status:
+          $ref: '#/components/schemas/type_runbooks:RunbookStatus'
+          description: The status of the Runbook.
+        type:
+          $ref: '#/components/schemas/type_runbooks:RunbookType'
+          description: The type of the Runbook.
+      required:
+      - accountId
+      - appId
+      - environmentId
+      - spaceId
+      - name
+      - config
+      - status
+      - type
+      title: CreateRunbookRequest
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_runbooks:RunbooksResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_runbooks:Runbook'
+      required:
+      - data
+      title: RunbooksResponse
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

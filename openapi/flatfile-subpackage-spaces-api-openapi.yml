@@ -1,0 +1,1882 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_spaces API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_spaces
+paths:
+  /spaces:
+    get:
+      operationId: list
+      summary: List spaces
+      description: Returns all spaces for an account or environment
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: environmentId
+        in: query
+        description: The ID of the environment.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: pageSize
+        in: query
+        description: Number of spaces to return in a page (default 10)
+        required: false
+        schema:
+          type: integer
+      - name: pageNumber
+        in: query
+        description: Based on pageSize, which page of records to return
+        required: false
+        schema:
+          type: integer
+      - name: app
+        in: query
+        description: Filter by appId
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: search
+        in: query
+        description: Search query for spaces
+        required: false
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Search by namespace
+        required: false
+        schema:
+          type: string
+      - name: archived
+        in: query
+        description: Flag to include archived spaces
+        required: false
+        schema:
+          type: boolean
+      - name: sortField
+        in: query
+        description: Field to sort spaces by; requires `sortDirection` if provided.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_spaces:GetSpacesSortField'
+      - name: sortDirection
+        in: query
+        description: Direction of sorting; requires `sortField` if provided.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SortDirection'
+      - name: isCollaborative
+        in: query
+        description: Flag for collaborative (project) spaces
+        required: false
+        schema:
+          type: boolean
+      - name: appId
+        in: query
+        description: (Deprecated!) Use `app` query parameter
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:AppId'
+      - name: isAppTemplate
+        in: query
+        description: Flag for app templates
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:ListSpacesResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: create
+      summary: Create a space
+      description: Creates a new space based on an existing Space Config
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:SpaceResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_spaces:SpaceConfig'
+    delete:
+      operationId: bulk-delete
+      summary: Delete spaces
+      description: Delete multiple spaces by id
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceIds
+        in: query
+        description: List of ids for the spaces to be deleted
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /spaces/{spaceId}:
+    get:
+      operationId: get
+      summary: Get a space
+      description: Returns a single space
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:SpaceResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    delete:
+      operationId: delete
+      summary: Delete a space
+      description: Delete a space
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to delete
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update
+      summary: Update a space
+      description: Update a space, to change the name for example
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to update
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:SpaceResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_spaces:SpaceConfig'
+  /spaces/{spaceId}/archive:
+    post:
+      operationId: archive-space
+      summary: Archives a space
+      description: Sets archivedAt timestamp on a space
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to archive
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /spaces/{spaceId}/unarchive:
+    post:
+      operationId: unarchive-space
+      summary: Unarchives a space
+      description: Sets archivedAt timestamp on a space to null
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to unarchive
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /spaces/{spaceId}/guidance:
+    post:
+      operationId: create-guidance
+      summary: Create a new guidance
+      description: Creates a new guidance
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of the space
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:GuidanceResource'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_spaces:GuidanceApiCreateData'
+    get:
+      operationId: list-guidance
+      summary: List guidances
+      description: Lists guidances
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of the space
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: includeGuide
+        in: query
+        description: Include the guide with the guidance, default is false
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:GuidanceListResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /spaces/{spaceId}/guidance/{guidanceId}:
+    get:
+      operationId: get-guidance
+      summary: Get a guidance
+      description: Retrieves a guidance by its id
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of the space
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: guidanceId
+        in: path
+        description: ID of the guidance
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuidanceId'
+      - name: includeGuide
+        in: query
+        description: Include the guide with the guidance, default is false
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:GuidanceResource'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update-guidance
+      summary: Update a guidance
+      description: Updates a guidance with the given id
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of the space
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: guidanceId
+        in: path
+        description: ID of the guidance
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuidanceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:GuidanceResource'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_spaces:GuidanceApiUpdateData'
+    delete:
+      operationId: delete-guidance
+      summary: Delete a guidance
+      description: Deletes a guidance by its id
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of the space
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: guidanceId
+        in: path
+        description: ID of the guidance
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuidanceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /spaces/{spaceId}/drafts:
+    post:
+      operationId: create-draft
+      summary: Create a draft of a space
+      description: Creates a draft of a space
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to create draft of
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:SpaceDraftResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    get:
+      operationId: list-space-drafts
+      summary: List drafts for a space
+      description: Lists drafts for a space
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to list drafts for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:SpaceDraftListResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /spaces/{spaceId}/drafts/{draftSpaceId}/merge:
+    get:
+      operationId: get-space-draft
+      summary: Get a draft
+      description: Gets a draft by the space id and draft space id
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to get draft for
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: draftSpaceId
+        in: path
+        description: ID of draft space to get
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:SpaceDraftMergeOperationsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: merge-draft
+      summary: Merge a draft
+      description: Merges a draft into a space
+      tags:
+      - subpackage_spaces
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to merge draft into
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: draftSpaceId
+        in: path
+        description: ID of draft space to merge
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_spaces:GuidanceOptions:
+      type: object
+      properties:
+        target:
+          type: string
+        trigger:
+          $ref: '#/components/schemas/type_spaces:TriggerEnum'
+        type:
+          $ref: '#/components/schemas/type_spaces:TypeEnum'
+        role:
+          $ref: '#/components/schemas/type_spaces:RoleEnum'
+          description: The role for which this guidance should be displayed. If not specified, guidance will be shown to both admin and guest users.
+      required:
+      - target
+      - trigger
+      - type
+      title: GuidanceOptions
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons:SpaceConfigId:
+      type: string
+      description: Space Config ID
+      title: SpaceConfigId
+    type_spaces:SpaceConfig:
+      type: object
+      properties:
+        spaceConfigId:
+          $ref: '#/components/schemas/type_commons:SpaceConfigId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        primaryWorkbookId:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+          description: The ID of the primary workbook for the space. This should not be included in create space requests.
+        metadata:
+          description: Metadata for the space
+        settings:
+          $ref: '#/components/schemas/type_spaces:SpaceSettings'
+          description: The Space settings.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Action'
+        access:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceAccess'
+        autoConfigure:
+          type: boolean
+          description: Only used during creation - will be ignored on update
+        namespace:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        translationsPath:
+          type: string
+        languageOverride:
+          type: string
+        archivedAt:
+          type: string
+          format: date-time
+          description: Date when space was archived
+        appId:
+          $ref: '#/components/schemas/type_commons:AppId'
+          description: The ID of the App that space is associated with
+        isAppTemplate:
+          type: boolean
+          description: Whether the space is an app template. Only one space per app can be an app template.
+        name:
+          type: string
+          description: The name of the space
+        displayOrder:
+          type: integer
+          description: The display order
+        guestAuthentication:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments:GuestAuthenticationEnum'
+      description: Properties used to create a new Space
+      title: SpaceConfig
+    type_spaces:TypeEnum:
+      type: string
+      enum:
+      - sidebar
+      - popout
+      - tooltip
+      title: TypeEnum
+    type_commons:Guide:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guidance for this action
+      required:
+      - content
+      title: Guide
+    type_spaces:ListSpacesResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:Space'
+      required:
+      - data
+      description: List of Space objects
+      title: ListSpacesResponse
+    type_spaces:SpaceDraft:
+      type: object
+      properties:
+        sourceSpaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        draftSpaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        mergedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+      required:
+      - sourceSpaceId
+      - draftSpaceId
+      - createdAt
+      - updatedAt
+      title: SpaceDraft
+    type_commons:InputConstraintType:
+      type: string
+      enum:
+      - required
+      title: InputConstraintType
+    type_spaces:Space:
+      type: object
+      properties:
+        spaceConfigId:
+          $ref: '#/components/schemas/type_commons:SpaceConfigId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        primaryWorkbookId:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+          description: The ID of the primary workbook for the space. This should not be included in create space requests.
+        metadata:
+          description: Metadata for the space
+        settings:
+          $ref: '#/components/schemas/type_spaces:SpaceSettings'
+          description: The Space settings.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Action'
+        access:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceAccess'
+        autoConfigure:
+          type: boolean
+          description: Only used during creation - will be ignored on update
+        namespace:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        translationsPath:
+          type: string
+        languageOverride:
+          type: string
+        archivedAt:
+          type: string
+          format: date-time
+          description: Date when space was archived
+        appId:
+          $ref: '#/components/schemas/type_commons:AppId'
+          description: The ID of the App that space is associated with
+        isAppTemplate:
+          type: boolean
+          description: Whether the space is an app template. Only one space per app can be an app template.
+        id:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        workbooksCount:
+          type: integer
+          description: Amount of workbooks in the space
+        filesCount:
+          type: integer
+          description: Amount of files in the space
+        createdByUserId:
+          $ref: '#/components/schemas/type_commons:UserId'
+        createdByUserName:
+          type: string
+          description: User name who created space
+        createdAt:
+          type: string
+          format: date-time
+          description: Date when space was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date when space was updated
+        expiredAt:
+          type: string
+          format: date-time
+          description: Date when space was expired
+        lastActivityAt:
+          type: string
+          format: date-time
+          description: This date marks the most recent activity within the space, tracking actions to the second. Activities include creating or updating records in a sheet, uploading files, or modifying a workbook's configuration.
+        guestLink:
+          type: string
+          description: Guest link to the space
+        name:
+          type: string
+          description: The name of the space
+        displayOrder:
+          type: integer
+          description: The display order
+        accessToken:
+          type: string
+          description: Access token for the space
+        isCollaborative:
+          type: boolean
+          description: Flag for collaborative (project) spaces
+        size:
+          $ref: '#/components/schemas/type_spaces:SpaceSize'
+          description: Size information for the space
+        upgradedAt:
+          type: string
+          format: date-time
+          description: Date when the space was upgraded
+        guestAuthentication:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments:GuestAuthenticationEnum'
+          description: Type of guest authentication
+        createdFrom:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+          description: The space id of the template that was used to create this space
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time the space template configuration was propagated to this space
+      required:
+      - id
+      - createdAt
+      - updatedAt
+      - name
+      - guestAuthentication
+      description: A place to store your workbooks
+      title: Space
+    type_spaces:SpaceDraftMergeOperations:
+      type: object
+      properties:
+        space:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceDraftMergeOperation'
+        workbook:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceDraftMergeOperation'
+        sheet:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceDraftMergeOperation'
+        guidance:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceDraftMergeOperation'
+        document:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceDraftMergeOperation'
+        action:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceDraftMergeOperation'
+        agent:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceDraftMergeOperation'
+      required:
+      - space
+      - workbook
+      - sheet
+      - guidance
+      - document
+      - action
+      - agent
+      title: SpaceDraftMergeOperations
+    type_spaces:JSONPatchOperation:
+      type: object
+      properties:
+        op:
+          $ref: '#/components/schemas/type_spaces:JSONPatchOperationType'
+        from:
+          type: string
+        path:
+          type: string
+        value:
+          description: Any type
+      required:
+      - op
+      title: JSONPatchOperation
+    type_spaces:SpaceDraftListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:SpaceDraft'
+      required:
+      - data
+      title: SpaceDraftListResponse
+    type_spaces:SpaceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_spaces:Space'
+      required:
+      - data
+      title: SpaceResponse
+    type_commons:ActionMode:
+      type: string
+      enum:
+      - foreground
+      - background
+      - toolbarBlocking
+      description: Foreground actions will prevent interacting with the resource until complete
+      title: ActionMode
+    type_commons:WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_commons:ActionSchedule:
+      type: string
+      enum:
+      - weekly
+      - daily
+      - hourly
+      title: ActionSchedule
+    type_commons:ActionMessageType:
+      type: string
+      enum:
+      - error
+      - info
+      title: ActionMessageType
+    type_commons:ActionId:
+      type: string
+      description: Action ID
+      title: ActionId
+    type_files:HeaderDetectionOptions:
+      type: object
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/type_files:HeaderDetectionAlgorithm'
+        rowsToSearch:
+          type: integer
+        skip:
+          type: integer
+        headers:
+          type: array
+          items:
+            type: string
+        rowNumbers:
+          type: array
+          items:
+            type: integer
+      required:
+      - algorithm
+      title: HeaderDetectionOptions
+    type_spaces:GetSpacesSortField:
+      type: string
+      enum:
+      - name
+      - workbooksCount
+      - filesCount
+      - environmentId
+      - createdByUserName
+      - createdAt
+      - lastActivityAt
+      title: GetSpacesSortField
+    type_spaces:GuidanceApiCreateData:
+      type: object
+      properties:
+        guideSlug:
+          type: string
+        options:
+          $ref: '#/components/schemas/type_spaces:GuidanceOptions'
+          description: Options for the guidance
+      required:
+      - guideSlug
+      - options
+      title: GuidanceApiCreateData
+    type_commons:InputConstraint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:InputConstraintType'
+      required:
+      - type
+      title: InputConstraint
+    type_commons:ActionMessage:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:ActionMessageType'
+        content:
+          type: string
+      required:
+      - type
+      - content
+      title: ActionMessage
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons:InputForm:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:InputFormType'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputField'
+      required:
+      - type
+      - fields
+      title: InputForm
+    type_environments:GuestAuthenticationEnum:
+      type: string
+      enum:
+      - shared_link
+      - magic_link
+      description: The type of authentication to use for guests
+      title: GuestAuthenticationEnum
+    type_files:HeaderDetectionAlgorithm:
+      type: string
+      enum:
+      - aiDetection
+      - default
+      - explicitHeaders
+      - specificRows
+      - dataRowAndSubHeaderDetection
+      title: HeaderDetectionAlgorithm
+    type_commons:InputField:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key for a Field.
+        label:
+          type: string
+          description: Visible name of a Field.
+        description:
+          type: string
+          description: Brief description below the name of the Field.
+        type:
+          type: string
+          description: Field Types inform the user interface how to sort and display data.
+        defaultValue:
+          description: Default value for a Field.
+        config:
+          $ref: '#/components/schemas/type_commons:InputConfig'
+          description: Additional configuration for enum Fields.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputConstraint'
+          description: Indicate additional validations that will be applied to the Field.
+      required:
+      - key
+      - label
+      - type
+      title: InputField
+    type_spaces:GuidanceApiUpdateData:
+      type: object
+      properties:
+        options:
+          $ref: '#/components/schemas/type_spaces:GuidanceOptions'
+          description: Options for the guidance
+      required:
+      - options
+      title: GuidanceApiUpdateData
+    type_spaces:GuidanceResource:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:GuidanceId'
+        guideSlug:
+          type: string
+        options:
+          $ref: '#/components/schemas/type_spaces:GuidanceOptions'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons:GuidanceId'
+          description: The guidance id of the template that was used to create this guidance
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time the guidance template configuration was propagated to this guidance
+      required:
+      - id
+      - guideSlug
+      - options
+      title: GuidanceResource
+    type_spaces:SpaceDraftResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_spaces:SpaceDraft'
+      required:
+      - data
+      title: SpaceDraftResponse
+    type_spaces:SpaceAccess:
+      type: string
+      enum:
+      - '*'
+      - upload
+      title: SpaceAccess
+    type_commons:ActionConstraint:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasAllValid
+            description: 'Discriminator value: hasAllValid'
+          ignoreSelection:
+            type: boolean
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasSelection
+            description: 'Discriminator value: hasSelection'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasData
+            description: 'Discriminator value: hasData'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasColumnEnabled
+            description: 'Discriminator value: hasColumnEnabled'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionConstraint
+    type_commons:ActionMount:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - sheet
+            description: 'Discriminator value: sheet'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - workbook
+            description: 'Discriminator value: workbook'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - field
+            description: 'Discriminator value: field'
+          keys:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - document
+            description: 'Discriminator value: document'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - file
+            description: 'Discriminator value: file'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionMount
+    type_spaces:SpaceSize:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+        numUsers:
+          type: integer
+        pdv:
+          type: integer
+        numFiles:
+          type: integer
+      required:
+      - name
+      - id
+      - numUsers
+      - pdv
+      - numFiles
+      description: The size of a space
+      title: SpaceSize
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons:InputFormType:
+      type: string
+      enum:
+      - simple
+      title: InputFormType
+    type_commons:InputConfig:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputEnumPropertyOption'
+      required:
+      - options
+      title: InputConfig
+    type_commons:InputEnumPropertyOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A visual label for this option, defaults to value if not provided
+        description:
+          type: string
+          description: A short description for this option
+        color:
+          type: string
+          description: An optional color to assign this option
+        icon:
+          type: string
+          description: A reference pointer to a previously registered icon
+        meta:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: An arbitrary JSON object to be associated with this option and made available to hooks
+        value:
+          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
+      required:
+      - value
+      title: InputEnumPropertyOption
+    type_commons:Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_spaces:SpaceSettings:
+      type: object
+      properties:
+        sidebarConfig:
+          $ref: '#/components/schemas/type_spaces:SpaceSidebarConfig'
+          description: The sidebar configuration for the space. (This will eventually replace metadata.sidebarconfig)
+        filesMappedAfterJob:
+          type: string
+          description: The name of the job that needs to complete before navigating to file mapping
+        extractionOptions:
+          $ref: '#/components/schemas/type_files:HeaderDetectionOptions'
+          description: The extraction options for CSV files.
+        omitActions:
+          type: array
+          items:
+            type: string
+          description: List of action names to omit from the space interface (e.g., 'file.import', 'records.delete', 'records.download')
+        omitRowSelectionToolbar:
+          type: boolean
+          description: Whether to hide the floating toolbar at the bottom that appears when rows are selected
+      description: Settings for a space
+      title: SpaceSettings
+    type_spaces:JSONPatchOperationType:
+      type: string
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      title: JSONPatchOperationType
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_commons:Action:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: '**This is deprecated. Use `operation` instead.**'
+        operation:
+          type: string
+          description: This will become the job operation that is triggered
+        mode:
+          $ref: '#/components/schemas/type_commons:ActionMode'
+          description: Foreground and toolbarBlocking action mode will prevent interacting with the resource until complete
+        tooltip:
+          type: string
+          description: A tooltip that appears when hovering the action button
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ActionMessage'
+        type:
+          type: string
+          description: '**This is deprecated.**'
+        description:
+          type: string
+          description: The text that appears in the dialog after the action is clicked.
+        schedule:
+          $ref: '#/components/schemas/type_commons:ActionSchedule'
+          description: Determines if the action should happen on a regular cadence.
+        primary:
+          type: boolean
+          description: A primary action will be more visibly present, whether in Sheet or Workbook.
+        confirm:
+          type: boolean
+          description: Whether to show a modal to confirm the action
+        icon:
+          type: string
+          description: Icon will work on primary actions. It will only accept an already existing Flatfile design system icon.
+        requireAllValid:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        requireSelection:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        inputForm:
+          $ref: '#/components/schemas/type_commons:InputForm'
+          description: Adds an input form for this action after it is clicked.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ActionConstraint'
+          description: A limitation or restriction on the action.
+        mount:
+          $ref: '#/components/schemas/type_commons:ActionMount'
+        guide:
+          $ref: '#/components/schemas/type_commons:Guide'
+        guardrail:
+          $ref: '#/components/schemas/type_commons:Guardrail'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons:ActionId'
+          description: The action that this action was cloned from
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time this action was propagated to a workbook
+        deletedAt:
+          type: string
+          format: date-time
+          description: The time this action was deleted
+        invalidConditionalMessaging:
+          type: boolean
+          description: When enabled, shows dynamic confirmation messages based on record validation status instead of the static description
+        validRecordsMessage:
+          type: string
+          description: Custom message to show when all records are valid (only used when invalidConditionalMessaging is true)
+        invalidRecordsMessage:
+          type: string
+          description: Custom message to show when there are invalid records (only used when invalidConditionalMessaging is true)
+        label:
+          type: string
+          description: The text on the Button itself
+      required:
+      - label
+      title: Action
+    type_commons:AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_spaces:SpaceDraftMergeOperationsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_spaces:SpaceDraftMergeOperations'
+      required:
+      - data
+      title: SpaceDraftMergeOperationsResponse
+    type_commons:SortDirection:
+      type: string
+      enum:
+      - asc
+      - desc
+      description: Sort direction - asc (ascending) or desc (descending)
+      title: SortDirection
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons:Guardrail:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guardrail for this action
+      required:
+      - content
+      title: Guardrail
+    type_commons:GuidanceId:
+      type: string
+      description: Guidance ID
+      title: GuidanceId
+    type_spaces:SpaceDraftMergeOperation:
+      type: object
+      properties:
+        action:
+          type: string
+        id:
+          type: string
+        mergeId:
+          type: string
+        jsonPatch:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:JSONPatchOperation'
+      required:
+      - action
+      title: SpaceDraftMergeOperation
+    type_spaces:RoleEnum:
+      type: string
+      enum:
+      - admin
+      - guest
+      title: RoleEnum
+    type_spaces:SpaceSidebarConfig:
+      type: object
+      properties:
+        workbookSidebarOrder:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:WorkbookId'
+          description: Used to set the order of workbooks in the sidebar. This will not affect workbooks that are pinned and workbooks that are not specified here will be sorted alphabetically.
+      title: SpaceSidebarConfig
+    type_commons:UserId:
+      type: string
+      description: User ID
+      title: UserId
+    type_spaces:GuidanceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces:GuidanceResource'
+      required:
+      - data
+      title: GuidanceListResponse
+    type_spaces:TriggerEnum:
+      type: string
+      enum:
+      - first
+      - hover
+      - event
+      - manual
+      title: TriggerEnum
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

@@ -1,0 +1,1024 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_files API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_files
+paths:
+  /files:
+    get:
+      operationId: list
+      summary: List files
+      tags:
+      - subpackage_files
+      parameters:
+      - name: spaceId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: Number of files to return in a page (default 20)
+        required: false
+        schema:
+          type: integer
+      - name: pageNumber
+        in: query
+        description: Based on pageSize, which page of files to return
+        required: false
+        schema:
+          type: integer
+      - name: mode
+        in: query
+        description: The storage mode of file to fetch, defaults to "import"
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_files:Mode'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_files:ListFilesResponse'
+    post:
+      operationId: upload
+      summary: Upload a file
+      tags:
+      - subpackage_files
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_files:FileResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                spaceId:
+                  $ref: '#/components/schemas/type_commons:SpaceId'
+                environmentId:
+                  $ref: '#/components/schemas/type_commons:EnvironmentId'
+                mode:
+                  $ref: '#/components/schemas/type_files:Mode'
+                  description: The storage mode of file to insert, defaults to "import"
+                file:
+                  type: string
+                  format: binary
+                  description: A binary payload containing the file contents
+                actions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/type_commons:Action'
+                  description: The actions attached to the file
+                origin:
+                  $ref: '#/components/schemas/type_files:FileOrigin'
+                  description: The origin of the file, ie filesystem
+              required:
+              - spaceId
+              - environmentId
+              - file
+  /files/{fileId}:
+    get:
+      operationId: get
+      summary: Get a file
+      tags:
+      - subpackage_files
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_files:FileResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    delete:
+      operationId: delete
+      summary: Delete a file
+      tags:
+      - subpackage_files
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update
+      summary: Update a file
+      description: Update a file, to change the workbook id for example
+      tags:
+      - subpackage_files
+      parameters:
+      - name: fileId
+        in: path
+        description: ID of file to update
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_files:FileResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workbookId:
+                  $ref: '#/components/schemas/type_commons:WorkbookId'
+                name:
+                  type: string
+                  description: The name of the file
+                mode:
+                  $ref: '#/components/schemas/type_files:Mode'
+                  description: The storage mode of file to update
+                status:
+                  $ref: '#/components/schemas/type_files:ModelFileStatusEnum'
+                actions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/type_commons:Action'
+                  description: The actions attached to the file
+  /files/{fileId}/download:
+    get:
+      operationId: download
+      summary: Download a file
+      tags:
+      - subpackage_files
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:FileId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /files/{fileId}/clone:
+    post:
+      operationId: clone
+      summary: Clone a file
+      tags:
+      - subpackage_files
+      parameters:
+      - name: fileId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:FileId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_files:FileResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prefix:
+                  type: string
+                  description: The prefix for the cloned file (defaults to original name with "Copy of " prefix)
+  /files/detect-header:
+    post:
+      operationId: detect-header
+      summary: Detect header
+      tags:
+      - subpackage_files
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_files:DetectHeaderResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                options:
+                  $ref: '#/components/schemas/type_files:HeaderDetectionOptions'
+                data:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: string
+              required:
+              - options
+              - data
+components:
+  schemas:
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_files:ModelFileStatusEnum:
+      type: string
+      enum:
+      - partial
+      - analyzing
+      - analyzed
+      - complete
+      - archived
+      - purged
+      - failed
+      description: 'Status of the file. Partial: File is uploaded but not yet processed. Analyzing: Smart Extract is running. Analyzed: Smart Extract has finished running. Complete: File has been extracted and is ready to be used. Archived: File has been archived. Purged: File has been purged. Failed: File has failed to be extracted.'
+      title: ModelFileStatusEnum
+    type_commons:Guide:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guidance for this action
+      required:
+      - content
+      title: Guide
+    type_commons:InputConstraintType:
+      type: string
+      enum:
+      - required
+      title: InputConstraintType
+    type_files:DetectHeaderResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_files:HeaderDetectionResult'
+      required:
+      - data
+      title: DetectHeaderResponse
+    type_commons:ActionMode:
+      type: string
+      enum:
+      - foreground
+      - background
+      - toolbarBlocking
+      description: Foreground actions will prevent interacting with the resource until complete
+      title: ActionMode
+    type_files:File:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:FileId'
+        name:
+          type: string
+          description: Original filename
+        description:
+          type: string
+          description: Description of the file
+        ext:
+          type: string
+          description: Extension of the file
+        mimetype:
+          type: string
+          description: MIME Type of the file
+        encoding:
+          type: string
+          description: Text encoding of the file
+        status:
+          $ref: '#/components/schemas/type_files:ModelFileStatusEnum'
+        mode:
+          $ref: '#/components/schemas/type_files:Mode'
+          description: The storage mode of file
+        size:
+          type: integer
+          description: Size of file in bytes
+        bytesReceived:
+          type: integer
+          description: Number of bytes that have been uploaded so far (useful for progress tracking)
+        createdAt:
+          type: string
+          format: date-time
+          description: Date the file was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date the file was last updated
+        expiredAt:
+          type: string
+          format: date-time
+          description: Date the file was expired
+        spaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        workbookId:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+        sheetId:
+          $ref: '#/components/schemas/type_commons:SheetId'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Action'
+        origin:
+          $ref: '#/components/schemas/type_files:FileOrigin'
+        treatments:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_files:FileTreatments'
+      required:
+      - id
+      - name
+      - ext
+      - mimetype
+      - encoding
+      - status
+      - size
+      - bytesReceived
+      - createdAt
+      - updatedAt
+      - spaceId
+      description: Any uploaded file of any type
+      title: File
+    type_commons:ActionSchedule:
+      type: string
+      enum:
+      - weekly
+      - daily
+      - hourly
+      title: ActionSchedule
+    type_commons:WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_commons:ActionMessageType:
+      type: string
+      enum:
+      - error
+      - info
+      title: ActionMessageType
+    type_commons:FileId:
+      type: string
+      description: File ID
+      title: FileId
+    type_commons:SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_commons:ActionId:
+      type: string
+      description: Action ID
+      title: ActionId
+    type_files:HeaderDetectionOptions:
+      type: object
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/type_files:HeaderDetectionAlgorithm'
+        rowsToSearch:
+          type: integer
+        skip:
+          type: integer
+        headers:
+          type: array
+          items:
+            type: string
+        rowNumbers:
+          type: array
+          items:
+            type: integer
+      required:
+      - algorithm
+      title: HeaderDetectionOptions
+    type_files:FileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_files:File'
+      required:
+      - data
+      title: FileResponse
+    type_commons:InputConstraint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:InputConstraintType'
+      required:
+      - type
+      title: InputConstraint
+    type_commons:ActionMessage:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:ActionMessageType'
+        content:
+          type: string
+      required:
+      - type
+      - content
+      title: ActionMessage
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:InputForm:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:InputFormType'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputField'
+      required:
+      - type
+      - fields
+      title: InputForm
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_files:HeaderDetectionAlgorithm:
+      type: string
+      enum:
+      - aiDetection
+      - default
+      - explicitHeaders
+      - specificRows
+      - dataRowAndSubHeaderDetection
+      title: HeaderDetectionAlgorithm
+    type_commons:InputField:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key for a Field.
+        label:
+          type: string
+          description: Visible name of a Field.
+        description:
+          type: string
+          description: Brief description below the name of the Field.
+        type:
+          type: string
+          description: Field Types inform the user interface how to sort and display data.
+        defaultValue:
+          description: Default value for a Field.
+        config:
+          $ref: '#/components/schemas/type_commons:InputConfig'
+          description: Additional configuration for enum Fields.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputConstraint'
+          description: Indicate additional validations that will be applied to the Field.
+      required:
+      - key
+      - label
+      - type
+      title: InputField
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons:ActionConstraint:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasAllValid
+            description: 'Discriminator value: hasAllValid'
+          ignoreSelection:
+            type: boolean
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasSelection
+            description: 'Discriminator value: hasSelection'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasData
+            description: 'Discriminator value: hasData'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasColumnEnabled
+            description: 'Discriminator value: hasColumnEnabled'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionConstraint
+    type_commons:ActionMount:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - sheet
+            description: 'Discriminator value: sheet'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - workbook
+            description: 'Discriminator value: workbook'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - field
+            description: 'Discriminator value: field'
+          keys:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - document
+            description: 'Discriminator value: document'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - file
+            description: 'Discriminator value: file'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionMount
+    type_commons:InputFormType:
+      type: string
+      enum:
+      - simple
+      title: InputFormType
+    type_commons:InputConfig:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputEnumPropertyOption'
+      required:
+      - options
+      title: InputConfig
+    type_commons:InputEnumPropertyOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A visual label for this option, defaults to value if not provided
+        description:
+          type: string
+          description: A short description for this option
+        color:
+          type: string
+          description: An optional color to assign this option
+        icon:
+          type: string
+          description: A reference pointer to a previously registered icon
+        meta:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: An arbitrary JSON object to be associated with this option and made available to hooks
+        value:
+          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
+      required:
+      - value
+      title: InputEnumPropertyOption
+    type_commons:Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_files:FileOrigin:
+      type: string
+      enum:
+      - filesystem
+      - googledrive
+      - box
+      - onedrive
+      title: FileOrigin
+    type_commons:Action:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: '**This is deprecated. Use `operation` instead.**'
+        operation:
+          type: string
+          description: This will become the job operation that is triggered
+        mode:
+          $ref: '#/components/schemas/type_commons:ActionMode'
+          description: Foreground and toolbarBlocking action mode will prevent interacting with the resource until complete
+        tooltip:
+          type: string
+          description: A tooltip that appears when hovering the action button
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ActionMessage'
+        type:
+          type: string
+          description: '**This is deprecated.**'
+        description:
+          type: string
+          description: The text that appears in the dialog after the action is clicked.
+        schedule:
+          $ref: '#/components/schemas/type_commons:ActionSchedule'
+          description: Determines if the action should happen on a regular cadence.
+        primary:
+          type: boolean
+          description: A primary action will be more visibly present, whether in Sheet or Workbook.
+        confirm:
+          type: boolean
+          description: Whether to show a modal to confirm the action
+        icon:
+          type: string
+          description: Icon will work on primary actions. It will only accept an already existing Flatfile design system icon.
+        requireAllValid:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        requireSelection:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        inputForm:
+          $ref: '#/components/schemas/type_commons:InputForm'
+          description: Adds an input form for this action after it is clicked.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ActionConstraint'
+          description: A limitation or restriction on the action.
+        mount:
+          $ref: '#/components/schemas/type_commons:ActionMount'
+        guide:
+          $ref: '#/components/schemas/type_commons:Guide'
+        guardrail:
+          $ref: '#/components/schemas/type_commons:Guardrail'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons:ActionId'
+          description: The action that this action was cloned from
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time this action was propagated to a workbook
+        deletedAt:
+          type: string
+          format: date-time
+          description: The time this action was deleted
+        invalidConditionalMessaging:
+          type: boolean
+          description: When enabled, shows dynamic confirmation messages based on record validation status instead of the static description
+        validRecordsMessage:
+          type: string
+          description: Custom message to show when all records are valid (only used when invalidConditionalMessaging is true)
+        invalidRecordsMessage:
+          type: string
+          description: Custom message to show when there are invalid records (only used when invalidConditionalMessaging is true)
+        label:
+          type: string
+          description: The text on the Button itself
+      required:
+      - label
+      title: Action
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons:Guardrail:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guardrail for this action
+      required:
+      - content
+      title: Guardrail
+    type_files:Mode:
+      type: string
+      enum:
+      - import
+      - export
+      title: Mode
+    type_files:FileTreatments:
+      type: string
+      enum:
+      - IS_BASIC_FILE_SHAPE
+      - IS_COMPLEX_FILE_SHAPE
+      title: FileTreatments
+    type_files:ListFilesResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_files:File'
+      required:
+      - data
+      title: ListFilesResponse
+    type_files:HeaderDetectionResult:
+      type: object
+      properties:
+        header:
+          type: array
+          items:
+            type: string
+        headerRow:
+          type: integer
+        letters:
+          type: array
+          items:
+            type: string
+      required:
+      - header
+      - headerRow
+      - letters
+      title: HeaderDetectionResult
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

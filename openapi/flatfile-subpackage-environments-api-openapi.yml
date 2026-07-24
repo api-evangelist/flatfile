@@ -1,0 +1,953 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_environments API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_environments
+paths:
+  /environments:
+    get:
+      operationId: list
+      summary: List environments
+      description: Get all environments
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: pageSize
+        in: query
+        description: Number of environments to return in a page (default 10)
+        required: false
+        schema:
+          type: integer
+      - name: pageNumber
+        in: query
+        description: Based on pageSize, which page of environments to return
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:ListEnvironmentsResponse'
+    post:
+      operationId: create
+      summary: Create an environment
+      description: Create a new environment
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:EnvironmentResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_environments:EnvironmentConfigCreate'
+  /environments/subscription-token:
+    get:
+      operationId: get-environment-event-token
+      summary: Get environment subscription credentials
+      description: Get a token which can be used to subscribe to events for this environment
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: query
+        description: ID of environment to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:EventTokenResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /environments/{environmentId}:
+    get:
+      operationId: get
+      summary: Get an environment
+      description: Returns a single environment
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: path
+        description: ID of the environment to return. To fetch the current environment, pass `current`
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:EnvironmentResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update
+      summary: Update an environment
+      description: Updates a single environment, to change the name for example
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: path
+        description: ID of the environment to update
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:Environment'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_environments:EnvironmentConfigUpdate'
+    delete:
+      operationId: delete
+      summary: Delete an environment
+      description: Deletes a single environment
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: path
+        description: ID of the environment to delete
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /environments/{environmentId}/guides:
+    get:
+      operationId: list-guides
+      summary: List guides
+      description: Returns guides in an account
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: path
+        description: ID of the environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:GuideListResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: create-guide
+      summary: Create a guide
+      description: Creates a guide
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: path
+        description: ID of the environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:GuideDetailResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_environments:GuideCreateRequest'
+  /environments/{environmentId}/guides/{guideId}:
+    get:
+      operationId: get-guide
+      summary: Get a guide
+      description: Returns a guide
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: path
+        description: ID of the environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: guideId
+        in: path
+        description: ID of guide
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuideId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:GuideDetailResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update-guide
+      summary: Update a guide
+      description: Updates a guide
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: path
+        description: ID of the environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: guideId
+        in: path
+        description: ID of guide
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuideId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:GuideDetailResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_environments:GuideUpdateRequest'
+    delete:
+      operationId: delete-guide
+      summary: Delete a guide
+      description: Deletes a guide
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: path
+        description: ID of the environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: guideId
+        in: path
+        description: ID of guide to delete
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuideId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:GuideDeleteResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /environments/{environmentId}/guides/{guideId}/versions/{version}:
+    get:
+      operationId: get-guide-version
+      summary: Get guide version
+      description: Returns a specified version of a specific guide
+      tags:
+      - subpackage_environments
+      parameters:
+      - name: environmentId
+        in: path
+        description: ID of the environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: guideId
+        in: path
+        description: ID of the guide
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:GuideId'
+      - name: version
+        in: path
+        description: Version of the guide
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_environments:GuideVersionResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_environments:GuideVersionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_environments:GuideVersionResource'
+      required:
+      - data
+      title: GuideVersionResponse
+    type_environments:EnvironmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_environments:Environment'
+      required:
+      - data
+      title: EnvironmentResponse
+    type_spaces:EventToken:
+      type: object
+      properties:
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+          description: The ID of the Account.
+        subscribeKey:
+          type: string
+          description: The id of the event bus to subscribe to
+        ttl:
+          type: integer
+          description: Time to live in minutes
+        token:
+          type: string
+          description: This should be your API key.
+      description: Properties used to allow users to connect to the event bus
+      title: EventToken
+    type_environments:GuideCreateRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        title:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        slug:
+          type: string
+        blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        environmentId:
+          type: string
+      required:
+      - description
+      - title
+      - slug
+      - blocks
+      - environmentId
+      description: Create a guide
+      title: GuideCreateRequest
+    type_environments:EnvironmentConfigUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the environment
+        isProd:
+          type: boolean
+          description: Whether or not the environment is a production environment
+        guestAuthentication:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments:GuestAuthenticationEnum'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        translationsPath:
+          type: string
+        namespaces:
+          type: array
+          items:
+            type: string
+        languageOverride:
+          type: string
+      description: Properties used to update an environment
+      title: EnvironmentConfigUpdate
+    type_spaces:EventTokenResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_spaces:EventToken'
+      required:
+      - data
+      title: EventTokenResponse
+    type_environments:GuideResource:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:GuideId'
+        description:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        slug:
+          type: string
+        title:
+          type: string
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments:GuideVersionResource'
+        blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - slug
+      - title
+      - versions
+      - blocks
+      - createdAt
+      - updatedAt
+      description: A guide
+      title: GuideResource
+    type_environments:GuideDeleteResponseData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: GuideDeleteResponseData
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_environments:GuestAuthenticationEnum:
+      type: string
+      enum:
+      - shared_link
+      - magic_link
+      description: The type of authentication to use for guests
+      title: GuestAuthenticationEnum
+    type_environments:GuideListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments:GuideResource'
+      required:
+      - data
+      title: GuideListResponse
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons:Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons:GuideId:
+      type: string
+      description: Guide ID
+      title: GuideId
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_environments:GuideVersionResource:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: integer
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - version
+      - content
+      - createdAt
+      - updatedAt
+      description: A version of a guide
+      title: GuideVersionResource
+    type_environments:Environment:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        name:
+          type: string
+          description: The name of the environment
+        isProd:
+          type: boolean
+          description: Whether or not the environment is a production environment
+        guestAuthentication:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments:GuestAuthenticationEnum'
+        features:
+          type: object
+          additionalProperties:
+            description: Any type
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        translationsPath:
+          type: string
+        namespaces:
+          type: array
+          items:
+            type: string
+        languageOverride:
+          type: string
+      required:
+      - id
+      - accountId
+      - name
+      - isProd
+      - guestAuthentication
+      - features
+      - metadata
+      title: Environment
+    type_environments:ListEnvironmentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments:Environment'
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+      required:
+      - data
+      title: ListEnvironmentsResponse
+    type_environments:GuideDeleteResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_environments:GuideDeleteResponseData'
+      required:
+      - data
+      title: GuideDeleteResponse
+    type_environments:GuideUpdateRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        title:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        slug:
+          type: string
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments:GuideVersionResource'
+        blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        environmentId:
+          type: string
+      description: Update a guide
+      title: GuideUpdateRequest
+    type_environments:EnvironmentConfigCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the environment
+        isProd:
+          type: boolean
+          description: Whether or not the environment is a production environment
+        guestAuthentication:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments:GuestAuthenticationEnum'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        translationsPath:
+          type: string
+        namespaces:
+          type: array
+          items:
+            type: string
+        languageOverride:
+          type: string
+      required:
+      - name
+      - isProd
+      description: Properties used to create a new environment
+      title: EnvironmentConfigCreate
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_environments:GuideDetailResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_environments:GuideResource'
+      required:
+      - data
+      title: GuideDetailResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

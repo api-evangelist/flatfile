@@ -1,0 +1,1111 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_data-clips API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_data-clips
+paths:
+  /data-clips:
+    post:
+      operationId: create
+      summary: Create
+      description: Creates a new DataClip.
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_data-clips:DataClip'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_data-clips:CreateDataClipRequest'
+    get:
+      operationId: list
+      summary: List
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: spaceId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: sheetId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SheetId'
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_data-clips:ListDataClipResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /data-clips/{dataClipId}:
+    patch:
+      operationId: update
+      summary: Update
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: dataClipId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_data-clips:DataClipResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_data-clips:UpdateDataClipRequest'
+    delete:
+      operationId: delete
+      summary: Delete
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: dataClipId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+    get:
+      operationId: get
+      summary: Get
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: dataClipId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_data-clips:DataClipResponse'
+  /data-clips/{dataClipId}/add-records:
+    post:
+      operationId: add-records-to-clip
+      summary: Add Records To Clip
+      description: Adds records to an existing DataClip.
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: dataClipId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_records:RecordsResponseData'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_data-clips:AddRecordsToClipRequest'
+  /data-clips/{dataClipId}/resolutions:
+    get:
+      operationId: get-resolutions
+      summary: Get Resolutions
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: dataClipId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+      - name: includeRecords
+        in: query
+        description: Include records in the response. Default is true
+        required: false
+        schema:
+          type: boolean
+      - name: includeSummary
+        in: query
+        description: Include summary in the response. Default is false
+        required: false
+        schema:
+          type: boolean
+      - name: filterColumn
+        in: query
+        description: The column to filter by.
+        required: false
+        schema:
+          type: string
+      - name: filterConflicts
+        in: query
+        description: Whether to filter only conflicts. Default is false
+        required: false
+        schema:
+          type: boolean
+      - name: pageSize
+        in: query
+        description: Number of resolutions to return in a page. Default is 1000
+        required: false
+        schema:
+          type: integer
+      - name: pageNumber
+        in: query
+        description: Page number of resolutions to return
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_records:DiffRecordsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update-resolution
+      summary: Update Resolution
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: dataClipId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_data-clips:UpdateResolutionRequest'
+  /data-clips/{dataClipId}/resolutions/index:
+    get:
+      operationId: get-resolution-index
+      summary: Get Resolution Index
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: dataClipId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+      - name: filterColumn
+        in: query
+        description: The column to filter by.
+        required: false
+        schema:
+          type: string
+      - name: filterConflicts
+        in: query
+        description: Whether to filter only conflicts. Default is false
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: The record ID to get the index of.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_data-clips:GetResolutionIndexResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+  /data-clips/{dataClipId}/refresh-resolutions:
+    patch:
+      operationId: refresh-resolutions
+      summary: Refresh Resolutions
+      tags:
+      - subpackage_data-clips
+      parameters:
+      - name: dataClipId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_records:CellConfig:
+      type: object
+      properties:
+        readonly:
+          type: boolean
+      description: CellConfig
+      title: CellConfig
+    type_commons:VersionId:
+      type: string
+      description: Version ID
+      title: VersionId
+    type_commons:CommitId:
+      type: string
+      description: Commit ID
+      title: CommitId
+    type_records:CellValueWithLinks:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_records:ValidationMessage'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Deprecated, use record level metadata instead.
+        value:
+          $ref: '#/components/schemas/type_records:CellValueUnion'
+        layer:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        links:
+          $ref: '#/components/schemas/type_records:Records'
+      title: CellValueWithLinks
+    type_records:ValidationSource:
+      type: string
+      enum:
+      - required-constraint
+      - unique-constraint
+      - custom-logic
+      - unlinked
+      - invalid-option
+      - is-artifact
+      title: ValidationSource
+    type_records:RecordData:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/type_records:CellValue'
+      description: A single row of data in a Sheet
+      title: RecordData
+    type_records:ValidationType:
+      type: string
+      enum:
+      - error
+      - warn
+      - info
+      title: ValidationType
+    type_data-clips:RemovedFromMainResolution:
+      type: string
+      enum:
+      - ignore
+      - restore
+      title: RemovedFromMainResolution
+    type_data-clips:DataClipResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_data-clips:DataClip'
+          description: The list of DataClips.
+      required:
+      - data
+      title: DataClipResponse
+    type_data-clips:Resolve:
+      type: object
+      properties:
+        field:
+          type: string
+        type:
+          $ref: '#/components/schemas/type_data-clips:ResolveType'
+        resolveTo:
+          $ref: '#/components/schemas/type_data-clips:ResolveTo'
+        clip_value_reference:
+          type: string
+        main_value_reference:
+          type: string
+        removedFromMainResolution:
+          $ref: '#/components/schemas/type_data-clips:RemovedFromMainResolution'
+      description: Conflict resolutions for a record
+      title: Resolve
+    type_data-clips:UpdateResolutionRequest:
+      type: object
+      properties:
+        resolvedRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_data-clips:ResolvedRecords'
+          description: Array of record-specific resolutions to update
+      required:
+      - resolvedRecords
+      title: UpdateResolutionRequest
+    type_data-clips:ResolvedRecords:
+      type: object
+      properties:
+        recordId:
+          $ref: '#/components/schemas/type_commons:RecordId'
+          description: The record ID to update
+        resolves:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_data-clips:Resolve'
+          description: The resolutions for the record
+      required:
+      - recordId
+      - resolves
+      title: ResolvedRecords
+    type_records:RecordCounts:
+      type: object
+      properties:
+        total:
+          type: integer
+        valid:
+          type: integer
+        error:
+          type: integer
+        errorsByField:
+          type: object
+          additionalProperties:
+            type: integer
+        byField:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/type_records:FieldRecordCounts'
+          description: Counts for valid, error, and total records grouped by field key
+      required:
+      - total
+      - valid
+      - error
+      title: RecordCounts
+    type_commons:RecordId:
+      type: string
+      description: Record ID
+      title: RecordId
+    type_data-clips:ListDataClipResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_data-clips:DataClipResponse'
+      required:
+      - data
+      title: ListDataClipResponse
+    type_commons:SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_data-clips:ResolveType:
+      type: string
+      enum:
+      - conflict
+      - resolve
+      title: ResolveType
+    type_records:DiffData:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/type_records:DiffValue'
+      title: DiffData
+    type_records:DiffValue:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_records:ValidationMessage'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Deprecated, use record level metadata instead.
+        value:
+          $ref: '#/components/schemas/type_records:CellValueUnion'
+        layer:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        snapshotValue:
+          $ref: '#/components/schemas/type_records:CellValueUnion'
+        clipValue:
+          $ref: '#/components/schemas/type_records:CellValueUnion'
+        warning:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+      title: DiffValue
+    type_records:CellValue:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_records:ValidationMessage'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Deprecated, use record level metadata instead.
+        value:
+          $ref: '#/components/schemas/type_records:CellValueUnion'
+        layer:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+      title: CellValue
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_records:RecordsWithLinks:
+      type: array
+      items:
+        $ref: '#/components/schemas/type_records:RecordWithLinks'
+      description: List of Record objects, including links to related rows
+      title: RecordsWithLinks
+    type_data-clips:SharedLinkAccess:
+      type: string
+      enum:
+      - public
+      - restricted
+      title: SharedLinkAccess
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_records:RecordsResponseData:
+      type: object
+      properties:
+        success:
+          type: boolean
+        records:
+          $ref: '#/components/schemas/type_records:RecordsWithLinks'
+        counts:
+          $ref: '#/components/schemas/type_records:RecordCounts'
+        versionId:
+          $ref: '#/components/schemas/type_commons:VersionId'
+          description: Deprecated, use `commitId` instead.
+        commitId:
+          $ref: '#/components/schemas/type_commons:CommitId'
+      required:
+      - success
+      title: RecordsResponseData
+    type_data-clips:AddRecordsToClipRequest:
+      type: object
+      properties:
+        recordIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:RecordId'
+      required:
+      - recordIds
+      title: AddRecordsToClipRequest
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_records:RecordWithLinks:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:RecordId'
+        values:
+          $ref: '#/components/schemas/type_records:RecordDataWithLinks'
+        valid:
+          type: boolean
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_records:ValidationMessage'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        config:
+          $ref: '#/components/schemas/type_records:RecordConfig'
+      required:
+      - id
+      - values
+      description: A single row of data in a Sheet, including links to related rows
+      title: RecordWithLinks
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_data-clips:GetResolutionIndexResponse:
+      type: object
+      properties:
+        index:
+          type: integer
+          description: Zero-based index of the record in the filtered list
+      required:
+      - index
+      title: GetResolutionIndexResponse
+    type_records:Record:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:RecordId'
+        versionId:
+          $ref: '#/components/schemas/type_commons:VersionId'
+          description: Deprecated, use `commitId` instead.
+        commitId:
+          $ref: '#/components/schemas/type_commons:CommitId'
+        valid:
+          type: boolean
+          description: Auto-generated value based on whether the record contains a field with an error message. Cannot be set via the API.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_records:ValidationMessage'
+          description: This record level `messages` property is deprecated and no longer stored or used. Use the `messages` property on the individual cell values instead. This property will be removed in a future release.
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        config:
+          $ref: '#/components/schemas/type_records:RecordConfig'
+        values:
+          $ref: '#/components/schemas/type_records:RecordData'
+      required:
+      - id
+      - values
+      description: A single row of data in a Sheet
+      title: Record
+    type_records:DiffRecords:
+      type: array
+      items:
+        $ref: '#/components/schemas/type_records:DiffRecord'
+      description: List of DiffRecord objects
+      title: DiffRecords
+    type_records:RecordDataWithLinks:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/type_records:CellValueWithLinks'
+      description: A single row of data in a Sheet, including links to related rows
+      title: RecordDataWithLinks
+    type_records:FieldRecordCounts:
+      type: object
+      properties:
+        total:
+          type: integer
+        valid:
+          type: integer
+        error:
+          type: integer
+        empty:
+          type: integer
+      required:
+      - total
+      - valid
+      - error
+      - empty
+      title: FieldRecordCounts
+    type_data-clips:CreateDataClipRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the DataClip.
+        description:
+          type: string
+          description: A description of the DataClip.
+        sourceSheetId:
+          $ref: '#/components/schemas/type_commons:SheetId'
+          description: The ID of the source sheet.
+        collaborators:
+          type: array
+          items:
+            type: string
+          description: The list of collaborators.
+        sharedLinkAccess:
+          $ref: '#/components/schemas/type_data-clips:SharedLinkAccess'
+          description: The type of shared link to generate for the DataClip.
+      required:
+      - name
+      - sourceSheetId
+      title: CreateDataClipRequest
+    type_data-clips:UpdateDataClipRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the DataClip.
+        description:
+          type: string
+          description: A description of the DataClip.
+        status:
+          type: string
+          description: The status of the DataClip.
+        collaborators:
+          type: array
+          items:
+            type: string
+          description: The list of collaborators.
+        sharedLinkAccess:
+          $ref: '#/components/schemas/type_data-clips:SharedLinkAccess'
+          description: The type of shared link to generate for the DataClip.
+      required:
+      - name
+      title: UpdateDataClipRequest
+    type_records:ValidationMessage:
+      type: object
+      properties:
+        field:
+          type: string
+        type:
+          $ref: '#/components/schemas/type_records:ValidationType'
+        source:
+          $ref: '#/components/schemas/type_records:ValidationSource'
+        message:
+          type: string
+        path:
+          $ref: '#/components/schemas/type_commons:JSONPathString'
+          description: This JSONPath is based on the root of mapped cell object.
+      description: Record data validation messages
+      title: ValidationMessage
+    type_records:DiffRecord:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:RecordId'
+        versionId:
+          $ref: '#/components/schemas/type_commons:VersionId'
+          description: Deprecated, use `commitId` instead.
+        commitId:
+          $ref: '#/components/schemas/type_commons:CommitId'
+        valid:
+          type: boolean
+          description: Auto-generated value based on whether the record contains a field with an error message. Cannot be set via the API.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_records:ValidationMessage'
+          description: This record level `messages` property is deprecated and no longer stored or used. Use the `messages` property on the individual cell values instead. This property will be removed in a future release.
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        config:
+          $ref: '#/components/schemas/type_records:RecordConfig'
+        values:
+          $ref: '#/components/schemas/type_records:DiffData'
+        resolves:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_data-clips:Resolve'
+      required:
+      - id
+      - values
+      title: DiffRecord
+    type_records:RecordConfig:
+      type: object
+      properties:
+        readonly:
+          type: boolean
+        fields:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/type_records:CellConfig'
+        markedForDeletion:
+          type: boolean
+      description: Configuration of a record or specific fields in the record
+      title: RecordConfig
+    type_commons:JSONPathString:
+      type: string
+      description: A JSONPath string - https://www.rfc-editor.org/rfc/rfc9535
+      title: JSONPathString
+    type_data-clips:DataClip:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+        name:
+          type: string
+          description: The name of the DataClip.
+        description:
+          type: string
+          description: A description of the DataClip.
+        sourceSheetId:
+          $ref: '#/components/schemas/type_commons:SheetId'
+          description: The ID of the source sheet.
+        clipSheetId:
+          $ref: '#/components/schemas/type_commons:SheetId'
+          description: The ID of the sheet that is clipped from source sheet.
+        workbookId:
+          type: string
+          description: The ID of the workbook.
+        status:
+          type: string
+          description: The status of the DataClip.
+        createdBy:
+          type: string
+          description: The user who created the DataClip.
+        mergedAt:
+          type: string
+          format: date-time
+          description: The date when the DataClip was merged.
+        deletedAt:
+          type: string
+          format: date-time
+          description: The date when the DataClip was deleted.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date when the DataClip was updated.
+        createdAt:
+          type: string
+          format: date-time
+          description: The date when the DataClip was created.
+        guestLinkUrl:
+          type: string
+          description: A URL for guests to access the DataClip.
+        accessToken:
+          type: string
+          description: A signed token associated with the guest link.
+        sharedLinkAccess:
+          type: string
+          description: Indicates the shared link access level, public or restricted
+      required:
+      - id
+      - name
+      - sourceSheetId
+      - clipSheetId
+      - workbookId
+      - status
+      - createdBy
+      - updatedAt
+      - createdAt
+      title: DataClip
+    type_records:CellValueUnion:
+      oneOf:
+      - type: string
+      - type: integer
+      - type: integer
+        format: int64
+      - type: number
+        format: double
+      - type: boolean
+      - type: string
+        format: date
+      - type: string
+        format: date-time
+      - type: array
+        items:
+          type: string
+      title: CellValueUnion
+    type_data-clips:ResolveTo:
+      type: string
+      enum:
+      - clip
+      - main
+      - snapshot
+      title: ResolveTo
+    type_commons:DataClipId:
+      type: string
+      description: Data Clip ID
+      title: DataClipId
+    type_records:Records:
+      type: array
+      items:
+        $ref: '#/components/schemas/type_records:Record'
+      description: List of Record objects
+      title: Records
+    type_records:DiffRecordsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_records:DiffRecords'
+      required:
+      - data
+      title: DiffRecordsResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

@@ -1,0 +1,381 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_routines API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_routines
+paths:
+  /routines:
+    get:
+      operationId: list
+      summary: List routines
+      description: Returns a list of routines
+      tags:
+      - subpackage_routines
+      parameters:
+      - name: runbookId
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:RunbookId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_routines:RoutinesResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: create
+      summary: Create a routine
+      description: Creates a new routine
+      tags:
+      - subpackage_routines
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_routines:RoutineResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_routines:CreateRoutineRequest'
+  /routines/{routineId}:
+    get:
+      operationId: get
+      summary: Get a routine
+      description: Returns a routine
+      tags:
+      - subpackage_routines
+      parameters:
+      - name: routineId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:RoutineId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_routines:RoutineResponse'
+    patch:
+      operationId: update
+      summary: Update a routine
+      description: Updates a routine
+      tags:
+      - subpackage_routines
+      parameters:
+      - name: routineId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:RoutineId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_routines:RoutineResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_routines:UpdateRoutineRequest'
+    delete:
+      operationId: delete
+      summary: Delete a routine
+      description: Deletes a routine
+      tags:
+      - subpackage_routines
+      parameters:
+      - name: routineId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:RoutineId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_routines:Routine:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:RoutineId'
+          description: The ID of the Routine.
+        runbookId:
+          $ref: '#/components/schemas/type_commons:RunbookId'
+        name:
+          type: string
+          description: The name of the Routine.
+        config:
+          description: Configuration for the Routine. Related to the type of Routine.
+        ordinal:
+          type: integer
+          description: The order of the Routine in the Runbook.
+        type:
+          $ref: '#/components/schemas/type_routines:RoutineType'
+          description: The type of Routine.
+        createdBy:
+          type: string
+          description: The entity which created the Runbook.
+        createdAt:
+          type: string
+          format: date-time
+          description: Date the sheet was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date the sheet was last updated
+      required:
+      - id
+      - runbookId
+      - name
+      - config
+      - ordinal
+      - type
+      - createdBy
+      - createdAt
+      - updatedAt
+      description: Routine is a set of instructions or procedures that are followed to complete a task.
+      title: Routine
+    type_routines:UpdateRoutineRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Routine.
+        config:
+          description: Configuration for the Routine. Related to the type of Routine.
+        ordinal:
+          type: integer
+          description: The order of the Routine in the Runbook.
+        type:
+          $ref: '#/components/schemas/type_routines:RoutineType'
+          description: The type of Routine.
+      required:
+      - name
+      - config
+      - ordinal
+      - type
+      title: UpdateRoutineRequest
+    type_routines:RoutineType:
+      type: string
+      enum:
+      - JOB
+      title: RoutineType
+    type_commons:RunbookId:
+      type: string
+      description: Runbook ID
+      title: RunbookId
+    type_routines:RoutineResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_routines:Routine'
+      required:
+      - data
+      title: RoutineResponse
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons:RoutineId:
+      type: string
+      description: Routine ID
+      title: RoutineId
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_routines:CreateRoutineRequest:
+      type: object
+      properties:
+        runbookId:
+          $ref: '#/components/schemas/type_commons:RunbookId'
+        name:
+          type: string
+          description: The name of the Routine.
+        config:
+          description: Configuration for the Routine. Related to the type of Routine.
+        ordinal:
+          type: integer
+          description: The order of the Routine in the Runbook.
+        type:
+          $ref: '#/components/schemas/type_routines:RoutineType'
+          description: The type of Routine.
+      required:
+      - runbookId
+      - name
+      - config
+      - ordinal
+      - type
+      title: CreateRoutineRequest
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_routines:RoutinesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_routines:Routine'
+      required:
+      - data
+      title: RoutinesResponse
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

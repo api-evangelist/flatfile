@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_agent-exports API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_agent-exports
+paths:
+  /agent-exports:
+    get:
+      operationId: list
+      summary: List agent exports
+      tags:
+      - subpackage_agent-exports
+      parameters:
+      - name: environmentId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: agentId
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentId'
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageSize'
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:PageNumber'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agent-exports:ListAgentExportsResponse'
+  /agent-exports/{agentExportId}:
+    get:
+      operationId: get
+      summary: Get an agent export
+      tags:
+      - subpackage_agent-exports
+      parameters:
+      - name: agentExportId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentExportId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agent-exports:GetAgentExportResponse'
+    delete:
+      operationId: delete
+      summary: Delete an agent export
+      tags:
+      - subpackage_agent-exports
+      parameters:
+      - name: agentExportId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentExportId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+  /agent-exports/{agentExportId}/download:
+    get:
+      operationId: download
+      summary: Download an agent export
+      tags:
+      - subpackage_agent-exports
+      parameters:
+      - name: agentExportId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:AgentExportId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    type_agent-exports:GetAgentExportResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agent-exports:AgentExport'
+      required:
+      - data
+      title: GetAgentExportResponse
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_agent-exports:AgentExport:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons:AgentExportId'
+        agentId:
+          $ref: '#/components/schemas/type_commons:AgentId'
+        exportType:
+          $ref: '#/components/schemas/type_agent-exports:AgentExportType'
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - agentId
+      - exportType
+      - accountId
+      - environmentId
+      - createdAt
+      - updatedAt
+      title: AgentExport
+    type_commons:PageSize:
+      type: integer
+      description: Number of logs to return in a page (default 20)
+      title: PageSize
+    type_commons:AgentExportId:
+      type: string
+      description: Agent Export ID
+      title: AgentExportId
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_commons:Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_agent-exports:ListAgentExportsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agent-exports:AgentExport'
+        pagination:
+          $ref: '#/components/schemas/type_commons:Pagination'
+      required:
+      - data
+      - pagination
+      title: ListAgentExportsResponse
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_agent-exports:AgentExportType:
+      type: string
+      enum:
+      - AUTOBUILD_INLINED
+      - SYSTEM_COMBINED
+      - SOURCE
+      description: The different export type formats available.
+      title: AgentExportType
+    type_commons:PageNumber:
+      type: integer
+      description: Based on pageSize, which page of records to return
+      title: PageNumber
+    type_commons:AgentId:
+      type: string
+      description: Agent ID
+      title: AgentId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

@@ -1,0 +1,4851 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_events API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_events
+paths:
+  /events:
+    get:
+      operationId: list
+      summary: List events
+      description: Event topics that the Flatfile Platform emits.
+      tags:
+      - subpackage_events
+      parameters:
+      - name: environmentId
+        in: query
+        description: Filter by environment
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+      - name: spaceId
+        in: query
+        description: Filter by space
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: domain
+        in: query
+        description: Filter by event domain
+        required: false
+        schema:
+          type: string
+      - name: topic
+        in: query
+        description: Filter by event topic
+        required: false
+        schema:
+          type: string
+      - name: since
+        in: query
+        description: Filter by event timestamp
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: pageSize
+        in: query
+        description: Number of results to return in a page (default 10)
+        required: false
+        schema:
+          type: integer
+      - name: pageNumber
+        in: query
+        description: Based on pageSize, which page of results to return
+        required: false
+        schema:
+          type: integer
+      - name: includeAcknowledged
+        in: query
+        description: Include acknowledged events
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_events:ListAllEventsResponse'
+    post:
+      operationId: create
+      summary: Create an event
+      tags:
+      - subpackage_events
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_events:EventResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_events:CreateEventConfig'
+  /events/{eventId}:
+    get:
+      operationId: get
+      summary: Get an event
+      tags:
+      - subpackage_events
+      parameters:
+      - name: eventId
+        in: path
+        description: The event id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EventId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_events:EventResponse'
+  /events/{eventId}/ack:
+    post:
+      operationId: ack
+      summary: Acknowledge an event
+      tags:
+      - subpackage_events
+      parameters:
+      - name: eventId
+        in: path
+        description: The event id
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:EventId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+  /subscription:
+    get:
+      operationId: get-event-token
+      summary: Get subscription credentials
+      description: Get a token which can be used to subscribe to events for this space
+      tags:
+      - subpackage_events
+      parameters:
+      - name: scope
+        in: query
+        description: The resource ID of the event stream (space or environment id)
+        required: false
+        schema:
+          type: string
+      - name: spaceId
+        in: query
+        description: The space ID of the event stream
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_spaces:EventTokenResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_commons:EventId:
+      type: string
+      description: Event ID
+      title: EventId
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_spaces:EventToken:
+      type: object
+      properties:
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+          description: The ID of the Account.
+        subscribeKey:
+          type: string
+          description: The id of the event bus to subscribe to
+        ttl:
+          type: integer
+          description: Time to live in minutes
+        token:
+          type: string
+          description: This should be your API key.
+      description: Properties used to allow users to connect to the event bus
+      title: EventToken
+    type_events:Event:
+      oneOf:
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - agent:created
+            description: 'Discriminator value: agent:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - agent:updated
+            description: 'Discriminator value: agent:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - agent:deleted
+            description: 'Discriminator value: agent:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - space:created
+            description: 'Discriminator value: space:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - space:updated
+            description: 'Discriminator value: space:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - space:deleted
+            description: 'Discriminator value: space:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - space:archived
+            description: 'Discriminator value: space:archived'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - space:expired
+            description: 'Discriminator value: space:expired'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - space:guestAdded
+            description: 'Discriminator value: space:guestAdded'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - space:guestRemoved
+            description: 'Discriminator value: space:guestRemoved'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - document:created
+            description: 'Discriminator value: document:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - document:updated
+            description: 'Discriminator value: document:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - document:deleted
+            description: 'Discriminator value: document:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - workbook:created
+            description: 'Discriminator value: workbook:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - workbook:updated
+            description: 'Discriminator value: workbook:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - workbook:deleted
+            description: 'Discriminator value: workbook:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - workbook:expired
+            description: 'Discriminator value: workbook:expired'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - workbook:thawed
+            description: 'Discriminator value: workbook:thawed'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - flag:created
+            description: 'Discriminator value: flag:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - flag:updated
+            description: 'Discriminator value: flag:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - flag:deleted
+            description: 'Discriminator value: flag:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - sheet:created
+            description: 'Discriminator value: sheet:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - sheet:updated
+            description: 'Discriminator value: sheet:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - sheet:deleted
+            description: 'Discriminator value: sheet:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - sheet:counts-updated
+            description: 'Discriminator value: sheet:counts-updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - sheet:calculation-updated
+            description: 'Discriminator value: sheet:calculation-updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - snapshot:created
+            description: 'Discriminator value: snapshot:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - records:created
+            description: 'Discriminator value: records:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - records:updated
+            description: 'Discriminator value: records:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - records:deleted
+            description: 'Discriminator value: records:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - file:created
+            description: 'Discriminator value: file:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - file:updated
+            description: 'Discriminator value: file:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - file:deleted
+            description: 'Discriminator value: file:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - file:expired
+            description: 'Discriminator value: file:expired'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - job:created
+            description: 'Discriminator value: job:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - job:updated
+            description: 'Discriminator value: job:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - job:deleted
+            description: 'Discriminator value: job:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - job:failed
+            description: 'Discriminator value: job:failed'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - job:completed
+            description: 'Discriminator value: job:completed'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - job:ready
+            description: 'Discriminator value: job:ready'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - job:scheduled
+            description: 'Discriminator value: job:scheduled'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - job:outcome-acknowledged
+            description: 'Discriminator value: job:outcome-acknowledged'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - job:parts-completed
+            description: 'Discriminator value: job:parts-completed'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - program:created
+            description: 'Discriminator value: program:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - program:updated
+            description: 'Discriminator value: program:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - commit:created
+            description: 'Discriminator value: commit:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - commit:updated
+            description: 'Discriminator value: commit:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - commit:completed
+            description: 'Discriminator value: commit:completed'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - secret:created
+            description: 'Discriminator value: secret:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - secret:updated
+            description: 'Discriminator value: secret:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - secret:deleted
+            description: 'Discriminator value: secret:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - layer:created
+            description: 'Discriminator value: layer:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - environment:created
+            description: 'Discriminator value: environment:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - environment:updated
+            description: 'Discriminator value: environment:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - environment:deleted
+            description: 'Discriminator value: environment:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - environment:autobuild-created
+            description: 'Discriminator value: environment:autobuild-created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - action:created
+            description: 'Discriminator value: action:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - action:updated
+            description: 'Discriminator value: action:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - action:deleted
+            description: 'Discriminator value: action:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - data-clip:created
+            description: 'Discriminator value: data-clip:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - data-clip:updated
+            description: 'Discriminator value: data-clip:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - data-clip:deleted
+            description: 'Discriminator value: data-clip:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - data-clip:collaborator-updated
+            description: 'Discriminator value: data-clip:collaborator-updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - data-clip:resolutions-created
+            description: 'Discriminator value: data-clip:resolutions-created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - data-clip:resolutions-updated
+            description: 'Discriminator value: data-clip:resolutions-updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - data-clip:resolutions-refreshed
+            description: 'Discriminator value: data-clip:resolutions-refreshed'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - canvas:created
+            description: 'Discriminator value: canvas:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - canvas:updated
+            description: 'Discriminator value: canvas:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - canvas:deleted
+            description: 'Discriminator value: canvas:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - canvas-area:created
+            description: 'Discriminator value: canvas-area:created'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - canvas-area:updated
+            description: 'Discriminator value: canvas-area:updated'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      - type: object
+        properties:
+          topic:
+            type: string
+            enum:
+            - canvas-area:deleted
+            description: 'Discriminator value: canvas-area:deleted'
+          domain:
+            $ref: '#/components/schemas/type_events:Domain'
+            description: The domain of the event
+          context:
+            $ref: '#/components/schemas/type_events:Context'
+            description: The context of the event
+          attributes:
+            $ref: '#/components/schemas/type_events:EventAttributes'
+            description: The attributes of the event
+          callbackUrl:
+            type: string
+            description: The callback url to acknowledge the event
+          dataUrl:
+            type: string
+            description: The url to retrieve the data associated with the event
+          target:
+            type: string
+          origin:
+            $ref: '#/components/schemas/type_events:Origin'
+          namespaces:
+            type: array
+            items:
+              type: string
+          id:
+            $ref: '#/components/schemas/type_commons:EventId'
+          createdAt:
+            type: string
+            format: date-time
+            description: Date the event was created
+          deletedAt:
+            type: string
+            format: date-time
+            description: Date the event was deleted
+          acknowledgedAt:
+            type: string
+            format: date-time
+            description: Date the event was acknowledged
+          acknowledgedBy:
+            type: string
+            description: The actor (user or system) who acknowledged the event
+          payload:
+            type: object
+            additionalProperties:
+              description: Any type
+        required:
+        - topic
+        - domain
+        - context
+        - id
+        - createdAt
+        - payload
+      discriminator:
+        propertyName: topic
+      description: An event that tracks an activity within an environment
+      title: Event
+    type_commons:CommitId:
+      type: string
+      description: Commit ID
+      title: CommitId
+    type_events:Progress:
+      type: object
+      properties:
+        current:
+          type: integer
+          description: The current progress of the event
+        total:
+          type: integer
+          description: The total number of events in this group
+        percent:
+          type: integer
+          description: The percent complete of the event group
+      description: The progress of the event within a collection of iterable events
+      title: Progress
+    type_events:Origin:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+      description: The origin resource of the event
+      title: Origin
+    type_events:Domain:
+      type: string
+      enum:
+      - file
+      - space
+      - workbook
+      - flag
+      - job
+      - document
+      - sheet
+      - program
+      - secret
+      - cron
+      - environment
+      - data-clip
+      - canvas
+      - canvas-area
+      - thread
+      description: The domain of the event
+      title: Domain
+    type_commons:WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_events:ActionName:
+      type: string
+      description: Name of an action
+      title: ActionName
+    type_commons:FileId:
+      type: string
+      description: File ID
+      title: FileId
+    type_spaces:EventTokenResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_spaces:EventToken'
+      required:
+      - data
+      title: EventTokenResponse
+    type_commons:SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_commons:ActionId:
+      type: string
+      description: Action ID
+      title: ActionId
+    type_events:EventTopic:
+      type: string
+      enum:
+      - agent:created
+      - agent:updated
+      - agent:deleted
+      - space:created
+      - space:updated
+      - space:deleted
+      - space:archived
+      - space:unarchived
+      - space:expired
+      - space:guestAdded
+      - space:guestRemoved
+      - document:created
+      - document:updated
+      - document:deleted
+      - workbook:created
+      - workbook:updated
+      - workbook:deleted
+      - workbook:expired
+      - workbook:thawed
+      - flag:created
+      - flag:updated
+      - flag:deleted
+      - sheet:created
+      - sheet:updated
+      - sheet:deleted
+      - sheet:counts-updated
+      - sheet:calculation-updated
+      - snapshot:created
+      - records:created
+      - records:updated
+      - records:deleted
+      - file:created
+      - file:updated
+      - file:deleted
+      - file:expired
+      - job:created
+      - job:updated
+      - job:deleted
+      - job:completed
+      - job:ready
+      - job:scheduled
+      - job:outcome-acknowledged
+      - job:parts-completed
+      - job:failed
+      - program:created
+      - program:updated
+      - program:recomputing
+      - program:recomputed
+      - commit:created
+      - commit:updated
+      - commit:completed
+      - layer:created
+      - secret:created
+      - secret:updated
+      - secret:deleted
+      - cron:5-minutes
+      - cron:hourly
+      - cron:daily
+      - cron:weekly
+      - environment:created
+      - environment:updated
+      - environment:deleted
+      - environment:autobuild-created
+      - action:created
+      - action:updated
+      - action:deleted
+      - data-clip:created
+      - data-clip:updated
+      - data-clip:deleted
+      - data-clip:collaborator-updated
+      - data-clip:resolutions-created
+      - data-clip:resolutions-updated
+      - data-clip:resolutions-refreshed
+      - canvas:created
+      - canvas:updated
+      - canvas:deleted
+      - canvas-area:created
+      - canvas-area:updated
+      - canvas-area:deleted
+      - thread:created
+      - thread:updated
+      - thread:deleted
+      description: The topic of the event
+      title: EventTopic
+    type_events:ListAllEventsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events:Event'
+      required:
+      - data
+      title: ListAllEventsResponse
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_events:EventAttributes:
+      type: object
+      properties:
+        targetUpdatedAt:
+          type: string
+          format: date-time
+          description: Date the related entity was last updated
+        progress:
+          $ref: '#/components/schemas/type_events:Progress'
+          description: The progress of the event within a collection of iterable events
+      description: The attributes of the event
+      title: EventAttributes
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_events:Context:
+      type: object
+      properties:
+        namespaces:
+          type: array
+          items:
+            type: string
+          description: The namespaces of the event
+        slugs:
+          $ref: '#/components/schemas/type_events:EventContextSlugs'
+          description: The slugs of related resources
+        actionName:
+          $ref: '#/components/schemas/type_events:ActionName'
+        accountId:
+          $ref: '#/components/schemas/type_commons:AccountId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        workbookId:
+          $ref: '#/components/schemas/type_commons:WorkbookId'
+        sheetId:
+          $ref: '#/components/schemas/type_commons:SheetId'
+        sheetSlug:
+          $ref: '#/components/schemas/type_events:SheetSlug'
+        snapshotId:
+          $ref: '#/components/schemas/type_commons:SnapshotId'
+        versionId:
+          $ref: '#/components/schemas/type_commons:VersionId'
+          description: Deprecated, use `commitId` instead.
+        commitId:
+          $ref: '#/components/schemas/type_commons:CommitId'
+        jobId:
+          $ref: '#/components/schemas/type_commons:JobId'
+        programId:
+          $ref: '#/components/schemas/type_commons:ProgramId'
+        fileId:
+          $ref: '#/components/schemas/type_commons:FileId'
+        documentId:
+          $ref: '#/components/schemas/type_commons:DocumentId'
+        precedingEventId:
+          $ref: '#/components/schemas/type_commons:EventId'
+        actorId:
+          type: string
+          description: Can be a UserId, GuestId, or AgentId
+        appId:
+          $ref: '#/components/schemas/type_commons:AppId'
+        actionId:
+          $ref: '#/components/schemas/type_commons:ActionId'
+        dataClipId:
+          $ref: '#/components/schemas/type_commons:DataClipId'
+        threadId:
+          $ref: '#/components/schemas/type_commons:ThreadId'
+        filters:
+          type: object
+          additionalProperties:
+            type: string
+        entityId:
+          type: string
+      required:
+      - accountId
+      - environmentId
+      description: The context of the event
+      title: Context
+    type_commons:JobId:
+      type: string
+      description: Pipeline Job ID
+      title: JobId
+    type_events:EventContextSlugs:
+      type: object
+      properties:
+        space:
+          type: string
+          description: The slug of the space
+        workbook:
+          type: string
+          description: The slug of the workbook
+        sheet:
+          type: string
+          description: The slug of the sheet
+      title: EventContextSlugs
+    type_events:EventResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_events:Event'
+      required:
+      - data
+      title: EventResponse
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_events:SheetSlug:
+      type: string
+      description: Sheet Slug
+      title: SheetSlug
+    type_commons:AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons:DocumentId:
+      type: string
+      description: Document ID
+      title: DocumentId
+    type_commons:AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_commons:ThreadId:
+      type: string
+      description: Thread ID
+      title: ThreadId
+    type_events:CreateEventConfig:
+      type: object
+      properties:
+        domain:
+          $ref: '#/components/schemas/type_events:Domain'
+          description: The domain of the event
+        context:
+          $ref: '#/components/schemas/type_events:Context'
+          description: The context of the event
+        attributes:
+          $ref: '#/components/schemas/type_events:EventAttributes'
+          description: The attributes of the event
+        callbackUrl:
+          type: string
+          description: The callback url to acknowledge the event
+        dataUrl:
+          type: string
+          description: The url to retrieve the data associated with the event
+        target:
+          type: string
+        origin:
+          $ref: '#/components/schemas/type_events:Origin'
+        namespaces:
+          type: array
+          items:
+            type: string
+        topic:
+          $ref: '#/components/schemas/type_events:EventTopic'
+        payload:
+          type: object
+          additionalProperties:
+            description: Any type
+        deletedAt:
+          type: string
+          format: date-time
+          description: Date the event was deleted
+      required:
+      - domain
+      - context
+      - topic
+      - payload
+      description: Properties used to create a new event
+      title: CreateEventConfig
+    type_commons:DataClipId:
+      type: string
+      description: Data Clip ID
+      title: DataClipId
+    type_commons:SnapshotId:
+      type: string
+      description: Snapshot ID
+      title: SnapshotId
+    type_commons:ProgramId:
+      type: string
+      description: Mapping Program ID
+      title: ProgramId
+    type_commons:VersionId:
+      type: string
+      description: Version ID
+      title: VersionId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

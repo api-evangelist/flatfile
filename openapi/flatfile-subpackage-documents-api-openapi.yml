@@ -1,0 +1,738 @@
+openapi: 3.1.0
+info:
+  title: API Reference subpackage_accounts subpackage_documents API
+  version: 1.0.0
+servers:
+- url: https://api.x.flatfile.com/v1
+tags:
+- name: subpackage_documents
+paths:
+  /spaces/{spaceId}/documents:
+    get:
+      operationId: list
+      summary: List documents
+      description: Returns all documents for a space
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_documents:ListDocumentsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    post:
+      operationId: create
+      summary: Create a document
+      description: Add a new document to the space
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_documents:DocumentResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_documents:DocumentConfig'
+  /spaces/{spaceId}/documents/{documentId}:
+    get:
+      operationId: get
+      summary: Get a document
+      description: Returns a single document
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: documentId
+        in: path
+        description: ID of document to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DocumentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_documents:DocumentResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+    patch:
+      operationId: update
+      summary: Update a document
+      description: updates a single document, for only the body and title
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: documentId
+        in: path
+        description: ID of document to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DocumentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_documents:DocumentResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_documents:DocumentConfig'
+    delete:
+      operationId: delete
+      summary: Delete a document
+      description: Deletes a single document
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: spaceId
+        in: path
+        description: ID of space to return
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+      - name: documentId
+        in: path
+        description: ID of document to delete
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:DocumentId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      - name: X-Disable-Hooks
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - 'true'
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Success'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:Errors'
+components:
+  schemas:
+    type_commons:Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_documents:DocumentConfig:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        treatments:
+          type: array
+          items:
+            type: string
+          description: Certain treatments will cause your Document to look or behave differently.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Action'
+      required:
+      - title
+      - body
+      title: DocumentConfig
+    type_commons:Guide:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guidance for this action
+      required:
+      - content
+      title: Guide
+    type_commons:InputConstraintType:
+      type: string
+      enum:
+      - required
+      title: InputConstraintType
+    type_commons:ActionMode:
+      type: string
+      enum:
+      - foreground
+      - background
+      - toolbarBlocking
+      description: Foreground actions will prevent interacting with the resource until complete
+      title: ActionMode
+    type_commons:ActionSchedule:
+      type: string
+      enum:
+      - weekly
+      - daily
+      - hourly
+      title: ActionSchedule
+    type_commons:ActionMessageType:
+      type: string
+      enum:
+      - error
+      - info
+      title: ActionMessageType
+    type_commons:ActionId:
+      type: string
+      description: Action ID
+      title: ActionId
+    type_documents:DocumentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_documents:Document'
+      required:
+      - data
+      title: DocumentResponse
+    type_commons:InputConstraint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:InputConstraintType'
+      required:
+      - type
+      title: InputConstraint
+    type_commons:ActionMessage:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:ActionMessageType'
+        content:
+          type: string
+      required:
+      - type
+      - content
+      title: ActionMessage
+    type_commons:EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons:InputForm:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:InputFormType'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputField'
+      required:
+      - type
+      - fields
+      title: InputForm
+    type_commons:Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons:InputField:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key for a Field.
+        label:
+          type: string
+          description: Visible name of a Field.
+        description:
+          type: string
+          description: Brief description below the name of the Field.
+        type:
+          type: string
+          description: Field Types inform the user interface how to sort and display data.
+        defaultValue:
+          description: Default value for a Field.
+        config:
+          $ref: '#/components/schemas/type_commons:InputConfig'
+          description: Additional configuration for enum Fields.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputConstraint'
+          description: Indicate additional validations that will be applied to the Field.
+      required:
+      - key
+      - label
+      - type
+      title: InputField
+    type_commons:SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons:ActionConstraint:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasAllValid
+            description: 'Discriminator value: hasAllValid'
+          ignoreSelection:
+            type: boolean
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasSelection
+            description: 'Discriminator value: hasSelection'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasData
+            description: 'Discriminator value: hasData'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasColumnEnabled
+            description: 'Discriminator value: hasColumnEnabled'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionConstraint
+    type_commons:ActionMount:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - sheet
+            description: 'Discriminator value: sheet'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - workbook
+            description: 'Discriminator value: workbook'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - field
+            description: 'Discriminator value: field'
+          keys:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - document
+            description: 'Discriminator value: document'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - file
+            description: 'Discriminator value: file'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionMount
+    type_commons:InputFormType:
+      type: string
+      enum:
+      - simple
+      title: InputFormType
+    type_commons:InputConfig:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:InputEnumPropertyOption'
+      required:
+      - options
+      title: InputConfig
+    type_documents:ListDocumentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_documents:Document'
+      required:
+      - data
+      title: ListDocumentsResponse
+    type_commons:InputEnumPropertyOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A visual label for this option, defaults to value if not provided
+        description:
+          type: string
+          description: A short description for this option
+        color:
+          type: string
+          description: An optional color to assign this option
+        icon:
+          type: string
+          description: A reference pointer to a previously registered icon
+        meta:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: An arbitrary JSON object to be associated with this option and made available to hooks
+        value:
+          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
+      required:
+      - value
+      title: InputEnumPropertyOption
+    type_commons:Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Error'
+      required:
+      - errors
+      title: Errors
+    type_commons:Action:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: '**This is deprecated. Use `operation` instead.**'
+        operation:
+          type: string
+          description: This will become the job operation that is triggered
+        mode:
+          $ref: '#/components/schemas/type_commons:ActionMode'
+          description: Foreground and toolbarBlocking action mode will prevent interacting with the resource until complete
+        tooltip:
+          type: string
+          description: A tooltip that appears when hovering the action button
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ActionMessage'
+        type:
+          type: string
+          description: '**This is deprecated.**'
+        description:
+          type: string
+          description: The text that appears in the dialog after the action is clicked.
+        schedule:
+          $ref: '#/components/schemas/type_commons:ActionSchedule'
+          description: Determines if the action should happen on a regular cadence.
+        primary:
+          type: boolean
+          description: A primary action will be more visibly present, whether in Sheet or Workbook.
+        confirm:
+          type: boolean
+          description: Whether to show a modal to confirm the action
+        icon:
+          type: string
+          description: Icon will work on primary actions. It will only accept an already existing Flatfile design system icon.
+        requireAllValid:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        requireSelection:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        inputForm:
+          $ref: '#/components/schemas/type_commons:InputForm'
+          description: Adds an input form for this action after it is clicked.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ActionConstraint'
+          description: A limitation or restriction on the action.
+        mount:
+          $ref: '#/components/schemas/type_commons:ActionMount'
+        guide:
+          $ref: '#/components/schemas/type_commons:Guide'
+        guardrail:
+          $ref: '#/components/schemas/type_commons:Guardrail'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons:ActionId'
+          description: The action that this action was cloned from
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time this action was propagated to a workbook
+        deletedAt:
+          type: string
+          format: date-time
+          description: The time this action was deleted
+        invalidConditionalMessaging:
+          type: boolean
+          description: When enabled, shows dynamic confirmation messages based on record validation status instead of the static description
+        validRecordsMessage:
+          type: string
+          description: Custom message to show when all records are valid (only used when invalidConditionalMessaging is true)
+        invalidRecordsMessage:
+          type: string
+          description: Custom message to show when there are invalid records (only used when invalidConditionalMessaging is true)
+        label:
+          type: string
+          description: The text on the Button itself
+      required:
+      - label
+      title: Action
+    type_commons:SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons:Guardrail:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guardrail for this action
+      required:
+      - content
+      title: Guardrail
+    type_documents:Document:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        treatments:
+          type: array
+          items:
+            type: string
+          description: Certain treatments will cause your Document to look or behave differently.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:Action'
+        id:
+          $ref: '#/components/schemas/type_commons:DocumentId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons:SpaceId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons:EnvironmentId'
+        createdAt:
+          type: string
+          format: date-time
+          description: Date the document was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date the document was last updated
+        createdFrom:
+          $ref: '#/components/schemas/type_commons:DocumentId'
+          description: The document id of the template that was used to create this document
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time the document template configuration was propagated to this document
+      required:
+      - title
+      - body
+      - id
+      - createdAt
+      - updatedAt
+      description: A document (markdown components) belong to a space
+      title: Document
+    type_commons:DocumentId:
+      type: string
+      description: Document ID
+      title: DocumentId
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer

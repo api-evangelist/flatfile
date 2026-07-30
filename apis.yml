@@ -6,7 +6,20 @@ description: >-
   agents, environments, users, guests, and related primitives for building automated data onboarding and ingestion
   workflows.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/flatfile.png
 access: 3rd-Party
 position: Consumer
 tags:
@@ -21,45 +34,523 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: flatfile:flatfile-api
-    name: Flatfile API
-    description: >-
-      The Flatfile API enables programmatic management of every primitive in the Flatfile platform: accounts,
-      environments, spaces, workbooks, sheets, records, snapshots, commits, versions, files, documents, jobs, events,
-      agents, agent exports, actions, mappings, runbooks, data clips, canvas areas, views, flags, secrets, roles, users,
-      guests, entitlements, apps, auth, data retention policies, and assistant operations.
-    humanURL: https://reference.flatfile.com/
-    baseURL: https://api.x.flatfile.com/v1
-    tags:
-      - Accounts
-      - Agents
-      - Apps
-      - Auth
-      - Documents
-      - Environments
-      - Events
-      - Files
-      - Guests
-      - Jobs
-      - Mapping
-      - Records
-      - Roles
-      - Secrets
-      - Sheets
-      - Snapshots
-      - Spaces
-      - Users
-      - Views
-      - Workbooks
-    properties:
-      - type: Documentation
-        url: https://flatfile.com/docs/
-      - type: APIReference
-        url: https://reference.flatfile.com/
-      - type: OpenAPI
-        url: openapi/flatfile-api-openapi.yml
-      - type: GettingStarted
-        url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-accounts-api
+  name: Flatfile subpackage_accounts API
+  description: The subpackage_accounts API from Flatfile — 1 operation(s) for subpackage_accounts.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-actions-api
+  name: Flatfile subpackage_actions API
+  description: The subpackage_actions API from Flatfile — 3 operation(s) for subpackage_actions.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_actions
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-actions-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-agent-exports-api
+  name: Flatfile subpackage_agent-exports API
+  description: >-
+    The subpackage_agent-exports API from Flatfile — 3 operation(s) for subpackage_agent-exports.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_agent-exports
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-agent-exports-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-agents-api
+  name: Flatfile subpackage_agents API
+  description: The subpackage_agents API from Flatfile — 10 operation(s) for subpackage_agents.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_agents
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-agents-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-apps-api
+  name: Flatfile subpackage_apps API
+  description: The subpackage_apps API from Flatfile — 6 operation(s) for subpackage_apps.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_apps
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-apps-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-assistant-api
+  name: Flatfile subpackage_assistant API
+  description: The subpackage_assistant API from Flatfile — 2 operation(s) for subpackage_assistant.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_assistant
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-assistant-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-auth-api
+  name: Flatfile subpackage_auth API
+  description: The subpackage_auth API from Flatfile — 2 operation(s) for subpackage_auth.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_auth
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-auth-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-canvas-areas-api
+  name: Flatfile subpackage_canvas-areas API
+  description: >-
+    The subpackage_canvas-areas API from Flatfile — 2 operation(s) for subpackage_canvas-areas.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_canvas-areas
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-canvas-areas-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-commits-api
+  name: Flatfile subpackage_commits API
+  description: The subpackage_commits API from Flatfile — 3 operation(s) for subpackage_commits.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_commits
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-commits-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-data-clips-api
+  name: Flatfile subpackage_data-clips API
+  description: The subpackage_data-clips API from Flatfile — 6 operation(s) for subpackage_data-clips.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_data-clips
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-data-clips-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-data-retention-policies-api
+  name: Flatfile subpackage_data-retention-policies API
+  description: >-
+    The subpackage_data-retention-policies API from Flatfile — 2 operation(s) for subpackage_data-retention-policies.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_data-retention-policies
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-data-retention-policies-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-documents-api
+  name: Flatfile subpackage_documents API
+  description: The subpackage_documents API from Flatfile — 2 operation(s) for subpackage_documents.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_documents
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-documents-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-entitlements-api
+  name: Flatfile subpackage_entitlements API
+  description: >-
+    The subpackage_entitlements API from Flatfile — 1 operation(s) for subpackage_entitlements.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_entitlements
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-entitlements-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-environments-api
+  name: Flatfile subpackage_environments API
+  description: >-
+    The subpackage_environments API from Flatfile — 6 operation(s) for subpackage_environments.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_environments
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-environments-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-events-api
+  name: Flatfile subpackage_events API
+  description: The subpackage_events API from Flatfile — 4 operation(s) for subpackage_events.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_events
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-events-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-files-api
+  name: Flatfile subpackage_files API
+  description: The subpackage_files API from Flatfile — 5 operation(s) for subpackage_files.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_files
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-files-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-flags-api
+  name: Flatfile subpackage_flags API
+  description: The subpackage_flags API from Flatfile — 3 operation(s) for subpackage_flags.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_flags
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-flags-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-guests-api
+  name: Flatfile subpackage_guests API
+  description: The subpackage_guests API from Flatfile — 6 operation(s) for subpackage_guests.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_guests
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-guests-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-jobs-api
+  name: Flatfile subpackage_jobs API
+  description: The subpackage_jobs API from Flatfile — 12 operation(s) for subpackage_jobs.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-mapping-api
+  name: Flatfile subpackage_mapping API
+  description: The subpackage_mapping API from Flatfile — 4 operation(s) for subpackage_mapping.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_mapping
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-mapping-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-records-api
+  name: Flatfile subpackage_records API
+  description: The subpackage_records API from Flatfile — 4 operation(s) for subpackage_records.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_records
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-records-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-roles-api
+  name: Flatfile subpackage_roles API
+  description: The subpackage_roles API from Flatfile — 1 operation(s) for subpackage_roles.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_roles
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-roles-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-routines-api
+  name: Flatfile subpackage_routines API
+  description: The subpackage_routines API from Flatfile — 2 operation(s) for subpackage_routines.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_routines
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-routines-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-runbooks-api
+  name: Flatfile subpackage_runbooks API
+  description: The subpackage_runbooks API from Flatfile — 2 operation(s) for subpackage_runbooks.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_runbooks
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-runbooks-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-secrets-api
+  name: Flatfile subpackage_secrets API
+  description: The subpackage_secrets API from Flatfile — 2 operation(s) for subpackage_secrets.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-secrets-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-sheets-api
+  name: Flatfile subpackage_sheets API
+  description: The subpackage_sheets API from Flatfile — 11 operation(s) for subpackage_sheets.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_sheets
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-sheets-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-snapshots-api
+  name: Flatfile subpackage_snapshots API
+  description: The subpackage_snapshots API from Flatfile — 4 operation(s) for subpackage_snapshots.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_snapshots
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-snapshots-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-spaces-api
+  name: Flatfile subpackage_spaces API
+  description: The subpackage_spaces API from Flatfile — 8 operation(s) for subpackage_spaces.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_spaces
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-spaces-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-users-api
+  name: Flatfile subpackage_users API
+  description: The subpackage_users API from Flatfile — 6 operation(s) for subpackage_users.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_users
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-users-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-versions-api
+  name: Flatfile subpackage_versions API
+  description: The subpackage_versions API from Flatfile — 1 operation(s) for subpackage_versions.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_versions
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-versions-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-views-api
+  name: Flatfile subpackage_views API
+  description: The subpackage_views API from Flatfile — 2 operation(s) for subpackage_views.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_views
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-views-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
+- aid: flatfile:flatfile-subpackage-workbooks-api
+  name: Flatfile subpackage_workbooks API
+  description: The subpackage_workbooks API from Flatfile — 3 operation(s) for subpackage_workbooks.
+  humanURL: https://reference.flatfile.com/
+  baseURL: https://api.x.flatfile.com/v1
+  tags:
+  - subpackage_workbooks
+  properties:
+  - type: OpenAPI
+    url: openapi/flatfile-subpackage-workbooks-api-openapi.yml
+  - type: Documentation
+    url: https://flatfile.com/docs/
+  - type: APIReference
+    url: https://reference.flatfile.com/
+  - type: GettingStarted
+    url: https://flatfile.com/docs/quickstart
 common:
   - type: AgenticAccess
     url: agentic-access/flatfile-agentic-access.yml

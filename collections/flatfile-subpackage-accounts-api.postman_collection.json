@@ -1,0 +1,233 @@
+{
+  "item": [
+    {
+      "id": "c6ed3994-5058-4206-bd04-09965adbb69a",
+      "name": "subpackage_accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc2fd83c-49e5-45b3-b813-153977cf9237",
+          "name": "Get the current account",
+          "request": {
+            "name": "Get the current account",
+            "description": {
+              "content": "Get the current account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11db8eb4-0519-41d9-b61e-68f9e4613325",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"metadata\": {\n      \"key_0\": {}\n    },\n    \"createdAt\": \"1952-01-03T19:59:32.349Z\",\n    \"updatedAt\": \"1984-03-27T01:32:01.905Z\",\n    \"primaryDomain\": \"string\",\n    \"subdomain\": \"string\",\n    \"vanityDomainDashboard\": \"string\",\n    \"vanityDomainSpaces\": \"string\",\n    \"embeddedDomainWhitelist\": [\n      \"string\",\n      \"string\"\n    ],\n    \"customFromEmail\": \"string\",\n    \"stripeCustomerId\": \"string\",\n    \"defaultAppId\": \"string\",\n    \"dashboard\": 9186\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cebcfc12-1188-4171-b658-0f1789dbd345",
+          "name": "Update the current account",
+          "request": {
+            "name": "Update the current account",
+            "description": {
+              "content": "Update the current account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"defaultAppId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c2da632-ee4f-4bdd-9e6f-06fcad79f9c4",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"defaultAppId\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"metadata\": {\n      \"key_0\": {}\n    },\n    \"createdAt\": \"1952-01-03T19:59:32.349Z\",\n    \"updatedAt\": \"1984-03-27T01:32:01.905Z\",\n    \"primaryDomain\": \"string\",\n    \"subdomain\": \"string\",\n    \"vanityDomainDashboard\": \"string\",\n    \"vanityDomainSpaces\": \"string\",\n    \"embeddedDomainWhitelist\": [\n      \"string\",\n      \"string\"\n    ],\n    \"customFromEmail\": \"string\",\n    \"stripeCustomerId\": \"string\",\n    \"defaultAppId\": \"string\",\n    \"dashboard\": 9186\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.x.flatfile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9c5f5e63-f46a-46f9-9b81-47c51ef21381",
+    "name": "API Reference subpackage_accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

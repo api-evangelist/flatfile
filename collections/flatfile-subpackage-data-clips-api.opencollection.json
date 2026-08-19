@@ -1,0 +1,371 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_data-clips API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_data-clips",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/data-clips",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/data-clips",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new DataClip."
+        },
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/data-clips/:dataClipId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataClipId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/data-clips/:dataClipId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataClipId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/data-clips/:dataClipId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataClipId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete"
+        },
+        {
+          "info": {
+            "name": "Add Records To Clip",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/data-clips/:dataClipId/add-records",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataClipId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds records to an existing DataClip."
+        },
+        {
+          "info": {
+            "name": "Get Resolutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/data-clips/:dataClipId/resolutions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataClipId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "includeRecords",
+                "value": "",
+                "type": "query",
+                "description": "Include records in the response. Default is true"
+              },
+              {
+                "name": "includeSummary",
+                "value": "",
+                "type": "query",
+                "description": "Include summary in the response. Default is false"
+              },
+              {
+                "name": "filterColumn",
+                "value": "",
+                "type": "query",
+                "description": "The column to filter by."
+              },
+              {
+                "name": "filterConflicts",
+                "value": "",
+                "type": "query",
+                "description": "Whether to filter only conflicts. Default is false"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of resolutions to return in a page. Default is 1000"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number of resolutions to return"
+              }
+            ]
+          },
+          "docs": "Get Resolutions"
+        },
+        {
+          "info": {
+            "name": "Update Resolution",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/data-clips/:dataClipId/resolutions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataClipId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Resolution"
+        },
+        {
+          "info": {
+            "name": "Get Resolution Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/data-clips/:dataClipId/resolutions/index",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataClipId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filterColumn",
+                "value": "",
+                "type": "query",
+                "description": "The column to filter by."
+              },
+              {
+                "name": "filterConflicts",
+                "value": "",
+                "type": "query",
+                "description": "Whether to filter only conflicts. Default is false"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The record ID to get the index of."
+              }
+            ]
+          },
+          "docs": "Get Resolution Index"
+        },
+        {
+          "info": {
+            "name": "Refresh Resolutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/data-clips/:dataClipId/refresh-resolutions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataClipId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Refresh Resolutions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

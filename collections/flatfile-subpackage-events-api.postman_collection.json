@@ -1,0 +1,848 @@
+{
+  "item": [
+    {
+      "id": "b2ab35a2-8fbb-44ac-9876-0fc6dff94984",
+      "name": "subpackage_events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e259da0e-faad-45ad-891a-2d831bbb1602",
+          "name": "List events",
+          "request": {
+            "name": "List events",
+            "description": {
+              "content": "Event topics that the Flatfile Platform emits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "environmentId",
+                  "value": "<string>",
+                  "description": "Filter by environment"
+                },
+                {
+                  "disabled": false,
+                  "key": "spaceId",
+                  "value": "<string>",
+                  "description": "Filter by space"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>",
+                  "description": "Filter by event domain"
+                },
+                {
+                  "disabled": false,
+                  "key": "topic",
+                  "value": "<string>",
+                  "description": "Filter by event topic"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "Filter by event timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of results to return in a page (default 10)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "<integer>",
+                  "description": "Based on pageSize, which page of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeAcknowledged",
+                  "value": "<boolean>",
+                  "description": "Include acknowledged events"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50e047e1-413a-4345-9c47-0d3582cf180b",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "environmentId",
+                      "value": "string"
+                    },
+                    {
+                      "key": "spaceId",
+                      "value": "string"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeAcknowledged",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"topic\": \"agent:created\",\n      \"domain\": \"document\",\n      \"context\": {\n        \"accountId\": \"string\",\n        \"environmentId\": \"string\",\n        \"namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"slugs\": {\n          \"space\": \"string\",\n          \"workbook\": \"string\",\n          \"sheet\": \"string\"\n        },\n        \"actionName\": \"string\",\n        \"spaceId\": \"string\",\n        \"workbookId\": \"string\",\n        \"sheetId\": \"string\",\n        \"sheetSlug\": \"string\",\n        \"snapshotId\": \"string\",\n        \"versionId\": \"string\",\n        \"commitId\": \"string\",\n        \"jobId\": \"string\",\n        \"programId\": \"string\",\n        \"fileId\": \"string\",\n        \"documentId\": \"string\",\n        \"precedingEventId\": \"string\",\n        \"actorId\": \"string\",\n        \"appId\": \"string\",\n        \"actionId\": \"string\",\n        \"dataClipId\": \"string\",\n        \"threadId\": \"string\",\n        \"filters\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"entityId\": \"string\"\n      },\n      \"id\": \"string\",\n      \"createdAt\": \"2018-05-09T03:31:17.501Z\",\n      \"payload\": {\n        \"key_0\": {}\n      },\n      \"attributes\": {\n        \"targetUpdatedAt\": \"2015-09-12T16:30:24.883Z\",\n        \"progress\": {\n          \"current\": 7879,\n          \"total\": 9205,\n          \"percent\": 7093\n        }\n      },\n      \"callbackUrl\": \"string\",\n      \"dataUrl\": \"string\",\n      \"target\": \"string\",\n      \"origin\": {\n        \"id\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"deletedAt\": \"1977-07-25T22:51:21.875Z\",\n      \"acknowledgedAt\": \"1997-10-21T09:00:47.548Z\",\n      \"acknowledgedBy\": \"string\"\n    },\n    {\n      \"topic\": \"agent:created\",\n      \"domain\": \"data-clip\",\n      \"context\": {\n        \"accountId\": \"string\",\n        \"environmentId\": \"string\",\n        \"namespaces\": [\n          \"string\",\n          \"string\"\n        ],\n        \"slugs\": {\n          \"space\": \"string\",\n          \"workbook\": \"string\",\n          \"sheet\": \"string\"\n        },\n        \"actionName\": \"string\",\n        \"spaceId\": \"string\",\n        \"workbookId\": \"string\",\n        \"sheetId\": \"string\",\n        \"sheetSlug\": \"string\",\n        \"snapshotId\": \"string\",\n        \"versionId\": \"string\",\n        \"commitId\": \"string\",\n        \"jobId\": \"string\",\n        \"programId\": \"string\",\n        \"fileId\": \"string\",\n        \"documentId\": \"string\",\n        \"precedingEventId\": \"string\",\n        \"actorId\": \"string\",\n        \"appId\": \"string\",\n        \"actionId\": \"string\",\n        \"dataClipId\": \"string\",\n        \"threadId\": \"string\",\n        \"filters\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"entityId\": \"string\"\n      },\n      \"id\": \"string\",\n      \"createdAt\": \"1987-06-25T08:14:28.263Z\",\n      \"payload\": {\n        \"key_0\": {}\n      },\n      \"attributes\": {\n        \"targetUpdatedAt\": \"2021-05-12T14:49:00.513Z\",\n        \"progress\": {\n          \"current\": 7304,\n          \"total\": 7350,\n          \"percent\": 6731\n        }\n      },\n      \"callbackUrl\": \"string\",\n      \"dataUrl\": \"string\",\n      \"target\": \"string\",\n      \"origin\": {\n        \"id\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"deletedAt\": \"1968-04-07T18:00:58.026Z\",\n      \"acknowledgedAt\": \"1995-11-02T12:57:19.358Z\",\n      \"acknowledgedBy\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a21146f-eff4-46bd-98bf-fad0a42fa849",
+          "name": "Create an event",
+          "request": {
+            "name": "Create an event",
+            "description": {},
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"domain\": \"<string>\",\n  \"context\": {\n    \"accountId\": \"<string>\",\n    \"environmentId\": \"<string>\",\n    \"namespaces\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"slugs\": {\n      \"space\": \"<string>\",\n      \"workbook\": \"<string>\",\n      \"sheet\": \"<string>\"\n    },\n    \"actionName\": \"<string>\",\n    \"spaceId\": \"<string>\",\n    \"workbookId\": \"<string>\",\n    \"sheetId\": \"<string>\",\n    \"sheetSlug\": \"<string>\",\n    \"snapshotId\": \"<string>\",\n    \"versionId\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"jobId\": \"<string>\",\n    \"programId\": \"<string>\",\n    \"fileId\": \"<string>\",\n    \"documentId\": \"<string>\",\n    \"precedingEventId\": \"<string>\",\n    \"actorId\": \"<string>\",\n    \"appId\": \"<string>\",\n    \"actionId\": \"<string>\",\n    \"dataClipId\": \"<string>\",\n    \"threadId\": \"<string>\",\n    \"filters\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"entityId\": \"<string>\"\n  },\n  \"topic\": \"<string>\",\n  \"payload\": {\n    \"key_0\": {}\n  },\n  \"attributes\": {\n    \"targetUpdatedAt\": \"<dateTime>\",\n    \"progress\": {\n      \"current\": \"<integer>\",\n      \"total\": \"<integer>\",\n      \"percent\": \"<integer>\"\n    }\n  },\n  \"callbackUrl\": \"<string>\",\n  \"dataUrl\": \"<string>\",\n  \"target\": \"<string>\",\n  \"origin\": {\n    \"id\": \"<string>\",\n    \"slug\": \"<string>\"\n  },\n  \"namespaces\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deletedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e8e4a4e-3642-4f3f-b8d6-8f83cb13ac55",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"canvas\",\n  \"context\": {\n    \"accountId\": \"string\",\n    \"environmentId\": \"string\",\n    \"namespaces\": [\n      \"string\",\n      \"string\"\n    ],\n    \"slugs\": {\n      \"space\": \"string\",\n      \"workbook\": \"string\",\n      \"sheet\": \"string\"\n    },\n    \"actionName\": \"string\",\n    \"spaceId\": \"string\",\n    \"workbookId\": \"string\",\n    \"sheetId\": \"string\",\n    \"sheetSlug\": \"string\",\n    \"snapshotId\": \"string\",\n    \"versionId\": \"string\",\n    \"commitId\": \"string\",\n    \"jobId\": \"string\",\n    \"programId\": \"string\",\n    \"fileId\": \"string\",\n    \"documentId\": \"string\",\n    \"precedingEventId\": \"string\",\n    \"actorId\": \"string\",\n    \"appId\": \"string\",\n    \"actionId\": \"string\",\n    \"dataClipId\": \"string\",\n    \"threadId\": \"string\",\n    \"filters\": {\n      \"key_0\": \"string\"\n    },\n    \"entityId\": \"string\"\n  },\n  \"topic\": \"job:created\",\n  \"payload\": {\n    \"key_0\": {}\n  },\n  \"attributes\": {\n    \"targetUpdatedAt\": \"2005-03-24T04:14:21.872Z\",\n    \"progress\": {\n      \"current\": 8268,\n      \"total\": 5118,\n      \"percent\": 3150\n    }\n  },\n  \"callbackUrl\": \"<string>\",\n  \"dataUrl\": \"<string>\",\n  \"target\": \"<string>\",\n  \"origin\": {\n    \"id\": \"string\",\n    \"slug\": \"string\"\n  },\n  \"namespaces\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deletedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"topic\": \"agent:created\",\n    \"domain\": \"program\",\n    \"context\": {\n      \"accountId\": \"string\",\n      \"environmentId\": \"string\",\n      \"namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"slugs\": {\n        \"space\": \"string\",\n        \"workbook\": \"string\",\n        \"sheet\": \"string\"\n      },\n      \"actionName\": \"string\",\n      \"spaceId\": \"string\",\n      \"workbookId\": \"string\",\n      \"sheetId\": \"string\",\n      \"sheetSlug\": \"string\",\n      \"snapshotId\": \"string\",\n      \"versionId\": \"string\",\n      \"commitId\": \"string\",\n      \"jobId\": \"string\",\n      \"programId\": \"string\",\n      \"fileId\": \"string\",\n      \"documentId\": \"string\",\n      \"precedingEventId\": \"string\",\n      \"actorId\": \"string\",\n      \"appId\": \"string\",\n      \"actionId\": \"string\",\n      \"dataClipId\": \"string\",\n      \"threadId\": \"string\",\n      \"filters\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"entityId\": \"string\"\n    },\n    \"id\": \"string\",\n    \"createdAt\": \"1997-08-01T11:16:04.266Z\",\n    \"payload\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    \"attributes\": {\n      \"targetUpdatedAt\": \"2009-11-09T11:39:14.542Z\",\n      \"progress\": {\n        \"current\": 3662,\n        \"total\": 9852,\n        \"percent\": 7039\n      }\n    },\n    \"callbackUrl\": \"string\",\n    \"dataUrl\": \"string\",\n    \"target\": \"string\",\n    \"origin\": {\n      \"id\": \"string\",\n      \"slug\": \"string\"\n    },\n    \"namespaces\": [\n      \"string\",\n      \"string\"\n    ],\n    \"deletedAt\": \"2001-10-03T10:57:52.019Z\",\n    \"acknowledgedAt\": \"1950-01-30T18:16:20.381Z\",\n    \"acknowledgedBy\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cde0c24-72f3-43be-b579-8272bb4276c2",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"canvas\",\n  \"context\": {\n    \"accountId\": \"string\",\n    \"environmentId\": \"string\",\n    \"namespaces\": [\n      \"string\",\n      \"string\"\n    ],\n    \"slugs\": {\n      \"space\": \"string\",\n      \"workbook\": \"string\",\n      \"sheet\": \"string\"\n    },\n    \"actionName\": \"string\",\n    \"spaceId\": \"string\",\n    \"workbookId\": \"string\",\n    \"sheetId\": \"string\",\n    \"sheetSlug\": \"string\",\n    \"snapshotId\": \"string\",\n    \"versionId\": \"string\",\n    \"commitId\": \"string\",\n    \"jobId\": \"string\",\n    \"programId\": \"string\",\n    \"fileId\": \"string\",\n    \"documentId\": \"string\",\n    \"precedingEventId\": \"string\",\n    \"actorId\": \"string\",\n    \"appId\": \"string\",\n    \"actionId\": \"string\",\n    \"dataClipId\": \"string\",\n    \"threadId\": \"string\",\n    \"filters\": {\n      \"key_0\": \"string\"\n    },\n    \"entityId\": \"string\"\n  },\n  \"topic\": \"job:created\",\n  \"payload\": {\n    \"key_0\": {}\n  },\n  \"attributes\": {\n    \"targetUpdatedAt\": \"2005-03-24T04:14:21.872Z\",\n    \"progress\": {\n      \"current\": 8268,\n      \"total\": 5118,\n      \"percent\": 3150\n    }\n  },\n  \"callbackUrl\": \"<string>\",\n  \"dataUrl\": \"<string>\",\n  \"target\": \"<string>\",\n  \"origin\": {\n    \"id\": \"string\",\n    \"slug\": \"string\"\n  },\n  \"namespaces\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deletedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4762166a-97c1-472c-b481-c0070d1cd08c",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"canvas\",\n  \"context\": {\n    \"accountId\": \"string\",\n    \"environmentId\": \"string\",\n    \"namespaces\": [\n      \"string\",\n      \"string\"\n    ],\n    \"slugs\": {\n      \"space\": \"string\",\n      \"workbook\": \"string\",\n      \"sheet\": \"string\"\n    },\n    \"actionName\": \"string\",\n    \"spaceId\": \"string\",\n    \"workbookId\": \"string\",\n    \"sheetId\": \"string\",\n    \"sheetSlug\": \"string\",\n    \"snapshotId\": \"string\",\n    \"versionId\": \"string\",\n    \"commitId\": \"string\",\n    \"jobId\": \"string\",\n    \"programId\": \"string\",\n    \"fileId\": \"string\",\n    \"documentId\": \"string\",\n    \"precedingEventId\": \"string\",\n    \"actorId\": \"string\",\n    \"appId\": \"string\",\n    \"actionId\": \"string\",\n    \"dataClipId\": \"string\",\n    \"threadId\": \"string\",\n    \"filters\": {\n      \"key_0\": \"string\"\n    },\n    \"entityId\": \"string\"\n  },\n  \"topic\": \"job:created\",\n  \"payload\": {\n    \"key_0\": {}\n  },\n  \"attributes\": {\n    \"targetUpdatedAt\": \"2005-03-24T04:14:21.872Z\",\n    \"progress\": {\n      \"current\": 8268,\n      \"total\": 5118,\n      \"percent\": 3150\n    }\n  },\n  \"callbackUrl\": \"<string>\",\n  \"dataUrl\": \"<string>\",\n  \"target\": \"<string>\",\n  \"origin\": {\n    \"id\": \"string\",\n    \"slug\": \"string\"\n  },\n  \"namespaces\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deletedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dfd51ffa-9f8f-41a9-848c-47cd744cf117",
+          "name": "Get an event",
+          "request": {
+            "name": "Get an event",
+            "description": {},
+            "url": {
+              "path": [
+                "events",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) The event id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd0b9d14-3a83-4156-8d8d-aaa47270beb7",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) The event id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"topic\": \"agent:created\",\n    \"domain\": \"program\",\n    \"context\": {\n      \"accountId\": \"string\",\n      \"environmentId\": \"string\",\n      \"namespaces\": [\n        \"string\",\n        \"string\"\n      ],\n      \"slugs\": {\n        \"space\": \"string\",\n        \"workbook\": \"string\",\n        \"sheet\": \"string\"\n      },\n      \"actionName\": \"string\",\n      \"spaceId\": \"string\",\n      \"workbookId\": \"string\",\n      \"sheetId\": \"string\",\n      \"sheetSlug\": \"string\",\n      \"snapshotId\": \"string\",\n      \"versionId\": \"string\",\n      \"commitId\": \"string\",\n      \"jobId\": \"string\",\n      \"programId\": \"string\",\n      \"fileId\": \"string\",\n      \"documentId\": \"string\",\n      \"precedingEventId\": \"string\",\n      \"actorId\": \"string\",\n      \"appId\": \"string\",\n      \"actionId\": \"string\",\n      \"dataClipId\": \"string\",\n      \"threadId\": \"string\",\n      \"filters\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"entityId\": \"string\"\n    },\n    \"id\": \"string\",\n    \"createdAt\": \"1997-08-01T11:16:04.266Z\",\n    \"payload\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    \"attributes\": {\n      \"targetUpdatedAt\": \"2009-11-09T11:39:14.542Z\",\n      \"progress\": {\n        \"current\": 3662,\n        \"total\": 9852,\n        \"percent\": 7039\n      }\n    },\n    \"callbackUrl\": \"string\",\n    \"dataUrl\": \"string\",\n    \"target\": \"string\",\n    \"origin\": {\n      \"id\": \"string\",\n      \"slug\": \"string\"\n    },\n    \"namespaces\": [\n      \"string\",\n      \"string\"\n    ],\n    \"deletedAt\": \"2001-10-03T10:57:52.019Z\",\n    \"acknowledgedAt\": \"1950-01-30T18:16:20.381Z\",\n    \"acknowledgedBy\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddcedba5-d61a-461b-85dd-c7a1728e68a2",
+          "name": "Acknowledge an event",
+          "request": {
+            "name": "Acknowledge an event",
+            "description": {},
+            "url": {
+              "path": [
+                "events",
+                ":eventId",
+                "ack"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) The event id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6b3b9f1-7bf9-4f1b-9af6-f1c107b5276b",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    ":eventId",
+                    "ack"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) The event id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"success\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2af7868-e4fd-4310-aa7e-db05fe206d08",
+          "name": "Get subscription credentials",
+          "request": {
+            "name": "Get subscription credentials",
+            "description": {
+              "content": "Get a token which can be used to subscribe to events for this space",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscription"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "The resource ID of the event stream (space or environment id)"
+                },
+                {
+                  "disabled": false,
+                  "key": "spaceId",
+                  "value": "<string>",
+                  "description": "The space ID of the event stream"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3c7efe6-1e62-47cf-9da1-2a7fceb3b26d",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spaceId",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"accountId\": \"string\",\n    \"subscribeKey\": \"string\",\n    \"ttl\": 7317,\n    \"token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a498d92-1208-4b87-8e7b-4c62143ff519",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spaceId",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6b8081c-3e25-437d-ba67-0d4a9f660e9b",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spaceId",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.x.flatfile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0aafba89-637b-4a53-b4fa-8e1f7692d94f",
+    "name": "API Reference subpackage_accounts subpackage_events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

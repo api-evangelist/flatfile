@@ -1,0 +1,589 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_jobs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/jobs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "When provided, only jobs for the given environment will be returned"
+              },
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "query",
+                "description": "When provided, only jobs for the given space will be returned"
+              },
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "query",
+                "description": "When provided, only jobs for the given workbook will be returned"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "query",
+                "description": "When provided, only jobs for the given file will be returned"
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "When provided, only jobs that are parts of the given job will be returned"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of jobs to return in a page (default 20)"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Based on pageSize, which page of jobs to return"
+              },
+              {
+                "name": "sortDirection",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction - asc (ascending) or desc (descending)"
+              },
+              {
+                "name": "excludeChildJobs",
+                "value": "",
+                "type": "query",
+                "description": "When true, only top-level jobs will be returned unless a parentId is specified"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "When provided, only jobs with the given source will be returned"
+              }
+            ]
+          },
+          "docs": "List jobs"
+        },
+        {
+          "info": {
+            "name": "Create a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a job"
+        },
+        {
+          "info": {
+            "name": "Get a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the job to return"
+              }
+            ]
+          },
+          "docs": "Get a job"
+        },
+        {
+          "info": {
+            "name": "Update a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the job to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a job"
+        },
+        {
+          "info": {
+            "name": "Delete a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the job to delete"
+              }
+            ]
+          },
+          "docs": "Delete a job"
+        },
+        {
+          "info": {
+            "name": "Execute a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/execute",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ]
+          },
+          "docs": "Execute a job and return the job"
+        },
+        {
+          "info": {
+            "name": "Get a job's execution plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/plan",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ]
+          },
+          "docs": "Returns a single job's execution plan"
+        },
+        {
+          "info": {
+            "name": "Replace a job's plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/plan",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a job's entire execution plan"
+        },
+        {
+          "info": {
+            "name": "Update a job's plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/plan",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update one or more individual fields on a job's execution plan"
+        },
+        {
+          "info": {
+            "name": "Acknowledge a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/ack",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledge a job and return the job"
+        },
+        {
+          "info": {
+            "name": "Acknowledge a job outcome",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/outcome/ack",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ]
+          },
+          "docs": "Acknowledge a job outcome and return the job"
+        },
+        {
+          "info": {
+            "name": "Complete a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/complete",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Complete a job and return the job"
+        },
+        {
+          "info": {
+            "name": "Fail a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/fail",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fail a job and return the job"
+        },
+        {
+          "info": {
+            "name": "Cancel a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/cancel",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a job and return the job"
+        },
+        {
+          "info": {
+            "name": "Retry a failed job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/retry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ]
+          },
+          "docs": "Retry a failt job and return the job"
+        },
+        {
+          "info": {
+            "name": "Preview a mutation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs/preview-mutation",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Preview the results of a mutation"
+        },
+        {
+          "info": {
+            "name": "Split a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/jobs/:jobId/split",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of job to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Split a job and return the job"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

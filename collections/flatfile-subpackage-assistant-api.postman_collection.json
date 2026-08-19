@@ -1,0 +1,610 @@
+{
+  "item": [
+    {
+      "id": "00adfc69-d937-42b2-aee7-b6449eb3509f",
+      "name": "subpackage_assistant",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "503c0f13-2e92-4870-b3f6-ff58f504f8c8",
+          "name": "List prompts",
+          "request": {
+            "name": "List prompts",
+            "description": {
+              "content": "Returns prompts created by user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "",
+                "prompts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "promptType",
+                  "value": "<string>",
+                  "description": "Type of prompt (default AI_ASSIST)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of prompts to return in a page (default 7)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "<integer>",
+                  "description": "Based on pageSize, which page of prompts to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b86292f-a207-44d4-a6fa-3b987bdc9386",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "",
+                    "prompts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "promptType",
+                      "value": "ALL"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"createdById\": \"string\",\n      \"accountId\": \"string\",\n      \"promptType\": \"CONSTRAINT_GENERATION\",\n      \"prompt\": \"string\",\n      \"createdAt\": \"2008-11-25T09:24:55.100Z\",\n      \"updatedAt\": \"1947-09-12T04:29:08.990Z\",\n      \"environmentId\": \"string\",\n      \"spaceId\": \"string\",\n      \"deletedAt\": \"2023-04-05T03:53:22.245Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"createdById\": \"string\",\n      \"accountId\": \"string\",\n      \"promptType\": \"CONSTRAINT_GENERATION\",\n      \"prompt\": \"string\",\n      \"createdAt\": \"1970-04-27T01:42:40.416Z\",\n      \"updatedAt\": \"1950-07-31T15:22:25.901Z\",\n      \"environmentId\": \"string\",\n      \"spaceId\": \"string\",\n      \"deletedAt\": \"1992-03-06T07:18:04.604Z\"\n    }\n  ],\n  \"pagination\": {\n    \"currentPage\": 4662,\n    \"pageCount\": 9708,\n    \"totalCount\": 9629\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fab28e9-ad47-4f7b-b31a-32e786d0e3af",
+          "name": "Create a prompt",
+          "request": {
+            "name": "Create a prompt",
+            "description": {
+              "content": "Creates a prompt",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "",
+                "prompts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"environmentId\": \"<string>\",\n  \"spaceId\": \"<string>\",\n  \"promptType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "34aef734-56b1-4c74-89d1-3911ef624920",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "",
+                    "prompts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"environmentId\": \"string\",\n  \"spaceId\": \"string\",\n  \"promptType\": \"CONSTRAINT_GENERATION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"createdById\": \"string\",\n    \"accountId\": \"string\",\n    \"promptType\": \"AI_ASSIST\",\n    \"prompt\": \"string\",\n    \"createdAt\": \"1995-08-20T16:31:21.706Z\",\n    \"updatedAt\": \"1948-12-02T16:15:06.010Z\",\n    \"environmentId\": \"string\",\n    \"spaceId\": \"string\",\n    \"deletedAt\": \"1971-01-29T20:08:35.491Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a0f29ea-22e7-418d-99bb-7dd47818d293",
+          "name": "Get a prompt",
+          "request": {
+            "name": "Get a prompt",
+            "description": {
+              "content": "Returns a prompt",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "",
+                "prompts",
+                ":promptId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promptId",
+                  "description": "(Required) ID of prompts"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b7cba99-6a51-43b0-bf64-d590b6595763",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "",
+                    "prompts",
+                    ":promptId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promptId",
+                      "description": "(Required) ID of prompts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"createdById\": \"string\",\n    \"accountId\": \"string\",\n    \"promptType\": \"AI_ASSIST\",\n    \"prompt\": \"string\",\n    \"createdAt\": \"1995-08-20T16:31:21.706Z\",\n    \"updatedAt\": \"1948-12-02T16:15:06.010Z\",\n    \"environmentId\": \"string\",\n    \"spaceId\": \"string\",\n    \"deletedAt\": \"1971-01-29T20:08:35.491Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7ea69ae-505f-447a-a3ec-b2403a1abbf5",
+          "name": "Update a prompt",
+          "request": {
+            "name": "Update a prompt",
+            "description": {
+              "content": "Updates a prompt",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "",
+                "prompts",
+                ":promptId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promptId",
+                  "description": "(Required) ID of prompts"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "223e53c3-a5b6-435b-9ed3-6c3e1437a585",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "",
+                    "prompts",
+                    ":promptId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promptId",
+                      "description": "(Required) ID of prompts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"createdById\": \"string\",\n    \"accountId\": \"string\",\n    \"promptType\": \"AI_ASSIST\",\n    \"prompt\": \"string\",\n    \"createdAt\": \"1995-08-20T16:31:21.706Z\",\n    \"updatedAt\": \"1948-12-02T16:15:06.010Z\",\n    \"environmentId\": \"string\",\n    \"spaceId\": \"string\",\n    \"deletedAt\": \"1971-01-29T20:08:35.491Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd08be88-a766-4ca3-9827-408826a2bdfa",
+          "name": "Delete a prompts",
+          "request": {
+            "name": "Delete a prompts",
+            "description": {
+              "content": "Deletes a prompts",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "",
+                "prompts",
+                ":promptId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promptId",
+                  "description": "(Required) ID of prompts"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b27cbf0-ed34-4874-b7e0-8873cbb48e95",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "",
+                    "prompts",
+                    ":promptId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promptId",
+                      "description": "(Required) ID of prompts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"success\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.x.flatfile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6135eaf1-4c3f-4481-9d52-00a1f9dc4f8f",
+    "name": "API Reference subpackage_accounts subpackage_assistant API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

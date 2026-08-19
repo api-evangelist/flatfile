@@ -1,0 +1,410 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_environments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_environments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/environments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of environments to return in a page (default 10)"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Based on pageSize, which page of environments to return"
+              }
+            ]
+          },
+          "docs": "Get all environments"
+        },
+        {
+          "info": {
+            "name": "Create an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/environments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new environment"
+        },
+        {
+          "info": {
+            "name": "Get environment subscription credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/environments/subscription-token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "ID of environment to return"
+              }
+            ]
+          },
+          "docs": "Get a token which can be used to subscribe to events for this environment"
+        },
+        {
+          "info": {
+            "name": "Get an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/environments/:environmentId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the environment to return. To fetch the current environment, pass `current`"
+              }
+            ]
+          },
+          "docs": "Returns a single environment"
+        },
+        {
+          "info": {
+            "name": "Update an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/environments/:environmentId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the environment to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a single environment, to change the name for example"
+        },
+        {
+          "info": {
+            "name": "Delete an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/environments/:environmentId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the environment to delete"
+              }
+            ]
+          },
+          "docs": "Deletes a single environment"
+        },
+        {
+          "info": {
+            "name": "List guides",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/environments/:environmentId/guides",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the environment"
+              }
+            ]
+          },
+          "docs": "Returns guides in an account"
+        },
+        {
+          "info": {
+            "name": "Create a guide",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/environments/:environmentId/guides",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a guide"
+        },
+        {
+          "info": {
+            "name": "Get a guide",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/environments/:environmentId/guides/:guideId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the environment"
+              },
+              {
+                "name": "guideId",
+                "value": "",
+                "type": "path",
+                "description": "ID of guide"
+              }
+            ]
+          },
+          "docs": "Returns a guide"
+        },
+        {
+          "info": {
+            "name": "Update a guide",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/environments/:environmentId/guides/:guideId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the environment"
+              },
+              {
+                "name": "guideId",
+                "value": "",
+                "type": "path",
+                "description": "ID of guide"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a guide"
+        },
+        {
+          "info": {
+            "name": "Delete a guide",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/environments/:environmentId/guides/:guideId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the environment"
+              },
+              {
+                "name": "guideId",
+                "value": "",
+                "type": "path",
+                "description": "ID of guide to delete"
+              }
+            ]
+          },
+          "docs": "Deletes a guide"
+        },
+        {
+          "info": {
+            "name": "Get guide version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/environments/:environmentId/guides/:guideId/versions/:version",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the environment"
+              },
+              {
+                "name": "guideId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the guide"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Version of the guide"
+              }
+            ]
+          },
+          "docs": "Returns a specified version of a specific guide"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

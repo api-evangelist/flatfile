@@ -1,0 +1,190 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_canvas-areas API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_canvas-areas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List canvas areas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/canvas-areas",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "canvasId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the canvas to filter areas by"
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the parent canvas area to filter by"
+              },
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the space to filter areas by"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the environment to filter areas by"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of areas to return in a page (default 20)"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Based on pageSize, which page of areas to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of canvas areas filtered by canvas, space, or environment"
+        },
+        {
+          "info": {
+            "name": "Create a canvas area",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/canvas-areas",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new canvas area"
+        },
+        {
+          "info": {
+            "name": "Get a canvas area",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/canvas-areas/:canvasAreaId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "canvasAreaId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a specific canvas area by ID"
+        },
+        {
+          "info": {
+            "name": "Update a canvas area",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/canvas-areas/:canvasAreaId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "canvasAreaId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing canvas area"
+        },
+        {
+          "info": {
+            "name": "Delete a canvas area",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/canvas-areas/:canvasAreaId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "canvasAreaId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a specific canvas area"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

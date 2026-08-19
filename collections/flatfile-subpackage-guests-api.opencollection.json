@@ -1,0 +1,332 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_guests API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_guests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List guests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/guests",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "query",
+                "description": "ID of space to return"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email of guest to return"
+              }
+            ]
+          },
+          "docs": "Returns all guests"
+        },
+        {
+          "info": {
+            "name": "Create a guest",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/guests",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Guests are only there to upload, edit, and download files and perform their tasks in a specific Space."
+        },
+        {
+          "info": {
+            "name": "Get a guest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/guests/:guestId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "guestId",
+                "value": "",
+                "type": "path",
+                "description": "ID of guest to return"
+              }
+            ]
+          },
+          "docs": "Returns a single guest"
+        },
+        {
+          "info": {
+            "name": "Update a guest",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/guests/:guestId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "guestId",
+                "value": "",
+                "type": "path",
+                "description": "ID of guest to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a single guest, for example to change name or email"
+        },
+        {
+          "info": {
+            "name": "Delete a guest",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/guests/:guestId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "guestId",
+                "value": "",
+                "type": "path",
+                "description": "ID of guest to return"
+              },
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "query",
+                "description": "ID of space to remove guest access from. If not provided, guest will be completely deleted."
+              }
+            ]
+          },
+          "docs": "Deletes a single guest or removes guest access from a specific space"
+        },
+        {
+          "info": {
+            "name": "Get guest token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/guests/:guestId/token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "guestId",
+                "value": "",
+                "type": "path",
+                "description": "ID of guest to return"
+              },
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "query",
+                "description": "ID of space to return"
+              }
+            ]
+          },
+          "docs": "Returns a single guest token"
+        },
+        {
+          "info": {
+            "name": "List Guest Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/guests/:guestId/roles",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "guestId",
+                "value": "",
+                "type": "path",
+                "description": "The guest id"
+              }
+            ]
+          },
+          "docs": "Lists roles assigned to a guest."
+        },
+        {
+          "info": {
+            "name": "Assign Role to Guest",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/guests/:guestId/roles",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "guestId",
+                "value": "",
+                "type": "path",
+                "description": "The guest id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a role to a guest."
+        },
+        {
+          "info": {
+            "name": "Remove Role from Guest",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/guests/:guestId/roles/:actorRoleId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "guestId",
+                "value": "",
+                "type": "path",
+                "description": "The guest id"
+              },
+              {
+                "name": "actorRoleId",
+                "value": "",
+                "type": "path",
+                "description": "The actor role id"
+              }
+            ]
+          },
+          "docs": "Removes a role from a guest."
+        },
+        {
+          "info": {
+            "name": "Invite guests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/invitations",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Guests can be created as a named guest on the Space or there’s a global link that will let anonymous guests into the space."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

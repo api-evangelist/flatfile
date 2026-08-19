@@ -1,0 +1,1070 @@
+{
+  "item": [
+    {
+      "id": "d0235d72-8c18-473d-8906-89b9e6168bd6",
+      "name": "subpackage_views",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c693baa4-9db9-4855-a893-c42eac245515",
+          "name": "List views by Sheet",
+          "request": {
+            "name": "List views by Sheet",
+            "description": {
+              "content": "Returns all views for the sheet",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "views"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sheetId",
+                  "value": "<string>",
+                  "description": "(Required) The associated sheet ID of the view."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of prompts to return in a page (default 10)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "<integer>",
+                  "description": "Based on pageSize, which page of prompts to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c98054c-045c-481d-bc81-20854b998a1e",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sheetId",
+                      "value": "string"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"sheetId\": \"string\",\n      \"name\": \"string\",\n      \"config\": {\n        \"versionId\": \"string\",\n        \"commitId\": \"string\",\n        \"sinceVersionId\": \"string\",\n        \"sinceCommitId\": \"string\",\n        \"sortField\": \"string\",\n        \"sortDirection\": \"asc\",\n        \"filter\": \"valid\",\n        \"filterField\": \"string\",\n        \"searchValue\": \"string\",\n        \"searchField\": \"string\",\n        \"ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"pageSize\": 2791,\n        \"pageNumber\": 70,\n        \"includeCounts\": true,\n        \"includeLength\": true,\n        \"includeLinks\": true,\n        \"includeMessages\": false,\n        \"for\": \"string\",\n        \"q\": \"string\"\n      },\n      \"createdBy\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sheetId\": \"string\",\n      \"name\": \"string\",\n      \"config\": {\n        \"versionId\": \"string\",\n        \"commitId\": \"string\",\n        \"sinceVersionId\": \"string\",\n        \"sinceCommitId\": \"string\",\n        \"sortField\": \"string\",\n        \"sortDirection\": \"desc\",\n        \"filter\": \"error\",\n        \"filterField\": \"string\",\n        \"searchValue\": \"string\",\n        \"searchField\": \"string\",\n        \"ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"pageSize\": 7055,\n        \"pageNumber\": 4741,\n        \"includeCounts\": true,\n        \"includeLength\": true,\n        \"includeLinks\": false,\n        \"includeMessages\": true,\n        \"for\": \"string\",\n        \"q\": \"string\"\n      },\n      \"createdBy\": \"string\"\n    }\n  ],\n  \"pagination\": {\n    \"currentPage\": 7378,\n    \"pageCount\": 2422,\n    \"totalCount\": 737\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fcefb29-c65e-4b83-b447-12ff9d434474",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sheetId",
+                      "value": "string"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edc1c82f-49ae-45c7-a05c-3e4f74e1e624",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sheetId",
+                      "value": "string"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "971b6119-8e9c-4489-9841-35e7dfba5930",
+          "name": "Create a view",
+          "request": {
+            "name": "Create a view",
+            "description": {
+              "content": "Add a new view to the space",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "views"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sheetId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"config\": {\n    \"versionId\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"sinceVersionId\": \"<string>\",\n    \"sinceCommitId\": \"<string>\",\n    \"sortField\": \"<string>\",\n    \"sortDirection\": \"<string>\",\n    \"filter\": \"<string>\",\n    \"filterField\": \"<string>\",\n    \"searchValue\": \"<string>\",\n    \"searchField\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"pageSize\": \"<integer>\",\n    \"pageNumber\": \"<integer>\",\n    \"includeCounts\": \"<boolean>\",\n    \"includeLength\": \"<boolean>\",\n    \"includeLinks\": \"<boolean>\",\n    \"includeMessages\": \"<boolean>\",\n    \"for\": \"<string>\",\n    \"q\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a0e12c4-c4a7-4d70-bb0d-96f30180aefe",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sheetId\": \"string\",\n  \"name\": \"<string>\",\n  \"config\": {\n    \"versionId\": \"string\",\n    \"commitId\": \"string\",\n    \"sinceVersionId\": \"string\",\n    \"sinceCommitId\": \"string\",\n    \"sortField\": \"string\",\n    \"sortDirection\": \"asc\",\n    \"filter\": \"all\",\n    \"filterField\": \"string\",\n    \"searchValue\": \"string\",\n    \"searchField\": \"string\",\n    \"ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageSize\": 4297,\n    \"pageNumber\": 4555,\n    \"includeCounts\": false,\n    \"includeLength\": false,\n    \"includeLinks\": false,\n    \"includeMessages\": true,\n    \"for\": \"string\",\n    \"q\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"sheetId\": \"string\",\n    \"name\": \"string\",\n    \"config\": {\n      \"versionId\": \"string\",\n      \"commitId\": \"string\",\n      \"sinceVersionId\": \"string\",\n      \"sinceCommitId\": \"string\",\n      \"sortField\": \"string\",\n      \"sortDirection\": \"desc\",\n      \"filter\": \"error\",\n      \"filterField\": \"string\",\n      \"searchValue\": \"string\",\n      \"searchField\": \"string\",\n      \"ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pageSize\": 2704,\n      \"pageNumber\": 218,\n      \"includeCounts\": true,\n      \"includeLength\": false,\n      \"includeLinks\": false,\n      \"includeMessages\": true,\n      \"for\": \"string\",\n      \"q\": \"string\"\n    },\n    \"createdBy\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d59e2001-b6fa-457f-8e1c-f09da2ea8eb0",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sheetId\": \"string\",\n  \"name\": \"<string>\",\n  \"config\": {\n    \"versionId\": \"string\",\n    \"commitId\": \"string\",\n    \"sinceVersionId\": \"string\",\n    \"sinceCommitId\": \"string\",\n    \"sortField\": \"string\",\n    \"sortDirection\": \"asc\",\n    \"filter\": \"all\",\n    \"filterField\": \"string\",\n    \"searchValue\": \"string\",\n    \"searchField\": \"string\",\n    \"ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageSize\": 4297,\n    \"pageNumber\": 4555,\n    \"includeCounts\": false,\n    \"includeLength\": false,\n    \"includeLinks\": false,\n    \"includeMessages\": true,\n    \"for\": \"string\",\n    \"q\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6670d50-dcd4-48ec-9b52-8deb0af740c6",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sheetId\": \"string\",\n  \"name\": \"<string>\",\n  \"config\": {\n    \"versionId\": \"string\",\n    \"commitId\": \"string\",\n    \"sinceVersionId\": \"string\",\n    \"sinceCommitId\": \"string\",\n    \"sortField\": \"string\",\n    \"sortDirection\": \"asc\",\n    \"filter\": \"all\",\n    \"filterField\": \"string\",\n    \"searchValue\": \"string\",\n    \"searchField\": \"string\",\n    \"ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageSize\": 4297,\n    \"pageNumber\": 4555,\n    \"includeCounts\": false,\n    \"includeLength\": false,\n    \"includeLinks\": false,\n    \"includeMessages\": true,\n    \"for\": \"string\",\n    \"q\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c79fec4-3054-493f-af87-2d6b480fd005",
+          "name": "Get a view",
+          "request": {
+            "name": "Get a view",
+            "description": {
+              "content": "Returns a single view",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "views",
+                ":viewId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "viewId",
+                  "description": "(Required) ID of view to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b265b927-5bbf-4aec-bd77-31bdac6fd80a",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views",
+                    ":viewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "viewId",
+                      "description": "(Required) ID of view to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"sheetId\": \"string\",\n    \"name\": \"string\",\n    \"config\": {\n      \"versionId\": \"string\",\n      \"commitId\": \"string\",\n      \"sinceVersionId\": \"string\",\n      \"sinceCommitId\": \"string\",\n      \"sortField\": \"string\",\n      \"sortDirection\": \"desc\",\n      \"filter\": \"error\",\n      \"filterField\": \"string\",\n      \"searchValue\": \"string\",\n      \"searchField\": \"string\",\n      \"ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pageSize\": 2704,\n      \"pageNumber\": 218,\n      \"includeCounts\": true,\n      \"includeLength\": false,\n      \"includeLinks\": false,\n      \"includeMessages\": true,\n      \"for\": \"string\",\n      \"q\": \"string\"\n    },\n    \"createdBy\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e20c7f02-6218-46d0-81e1-ffb07c47fc2d",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views",
+                    ":viewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "viewId",
+                      "description": "(Required) ID of view to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8e9ee1d-7fc3-42e8-8360-2d6884cf53b5",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views",
+                    ":viewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "viewId",
+                      "description": "(Required) ID of view to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48956483-b985-4cd2-93cd-b21bb67deec9",
+          "name": "Update a view",
+          "request": {
+            "name": "Update a view",
+            "description": {
+              "content": "Updates a single view",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "views",
+                ":viewId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "viewId",
+                  "description": "(Required) ID of view to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"versionId\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"sinceVersionId\": \"<string>\",\n    \"sinceCommitId\": \"<string>\",\n    \"sortField\": \"<string>\",\n    \"sortDirection\": \"<string>\",\n    \"filter\": \"<string>\",\n    \"filterField\": \"<string>\",\n    \"searchValue\": \"<string>\",\n    \"searchField\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"pageSize\": \"<integer>\",\n    \"pageNumber\": \"<integer>\",\n    \"includeCounts\": \"<boolean>\",\n    \"includeLength\": \"<boolean>\",\n    \"includeLinks\": \"<boolean>\",\n    \"includeMessages\": \"<boolean>\",\n    \"for\": \"<string>\",\n    \"q\": \"<string>\"\n  },\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "95b520f8-6b10-4e04-a282-c85b97c739fc",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views",
+                    ":viewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "viewId",
+                      "description": "(Required) ID of view to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"versionId\": \"string\",\n    \"commitId\": \"string\",\n    \"sinceVersionId\": \"string\",\n    \"sinceCommitId\": \"string\",\n    \"sortField\": \"string\",\n    \"sortDirection\": \"desc\",\n    \"filter\": \"none\",\n    \"filterField\": \"string\",\n    \"searchValue\": \"string\",\n    \"searchField\": \"string\",\n    \"ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageSize\": 2601,\n    \"pageNumber\": 4587,\n    \"includeCounts\": true,\n    \"includeLength\": false,\n    \"includeLinks\": true,\n    \"includeMessages\": true,\n    \"for\": \"string\",\n    \"q\": \"string\"\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"sheetId\": \"string\",\n    \"name\": \"string\",\n    \"config\": {\n      \"versionId\": \"string\",\n      \"commitId\": \"string\",\n      \"sinceVersionId\": \"string\",\n      \"sinceCommitId\": \"string\",\n      \"sortField\": \"string\",\n      \"sortDirection\": \"desc\",\n      \"filter\": \"error\",\n      \"filterField\": \"string\",\n      \"searchValue\": \"string\",\n      \"searchField\": \"string\",\n      \"ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pageSize\": 2704,\n      \"pageNumber\": 218,\n      \"includeCounts\": true,\n      \"includeLength\": false,\n      \"includeLinks\": false,\n      \"includeMessages\": true,\n      \"for\": \"string\",\n      \"q\": \"string\"\n    },\n    \"createdBy\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b38d675d-cb7e-4ca4-ae98-9ad09585a9a3",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views",
+                    ":viewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "viewId",
+                      "description": "(Required) ID of view to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"versionId\": \"string\",\n    \"commitId\": \"string\",\n    \"sinceVersionId\": \"string\",\n    \"sinceCommitId\": \"string\",\n    \"sortField\": \"string\",\n    \"sortDirection\": \"desc\",\n    \"filter\": \"none\",\n    \"filterField\": \"string\",\n    \"searchValue\": \"string\",\n    \"searchField\": \"string\",\n    \"ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageSize\": 2601,\n    \"pageNumber\": 4587,\n    \"includeCounts\": true,\n    \"includeLength\": false,\n    \"includeLinks\": true,\n    \"includeMessages\": true,\n    \"for\": \"string\",\n    \"q\": \"string\"\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4e11403-7c5a-4561-8cee-6c82f5a2bb81",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views",
+                    ":viewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "viewId",
+                      "description": "(Required) ID of view to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"versionId\": \"string\",\n    \"commitId\": \"string\",\n    \"sinceVersionId\": \"string\",\n    \"sinceCommitId\": \"string\",\n    \"sortField\": \"string\",\n    \"sortDirection\": \"desc\",\n    \"filter\": \"none\",\n    \"filterField\": \"string\",\n    \"searchValue\": \"string\",\n    \"searchField\": \"string\",\n    \"ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"pageSize\": 2601,\n    \"pageNumber\": 4587,\n    \"includeCounts\": true,\n    \"includeLength\": false,\n    \"includeLinks\": true,\n    \"includeMessages\": true,\n    \"for\": \"string\",\n    \"q\": \"string\"\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4aaa88ec-d5bb-4240-b816-213ac91b86ea",
+          "name": "Delete a view",
+          "request": {
+            "name": "Delete a view",
+            "description": {
+              "content": "Deletes a single view",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "views",
+                ":viewId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "viewId",
+                  "description": "(Required) ID of view to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "791f3587-8a46-40c9-8bf2-703f3d538569",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "views",
+                    ":viewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "viewId",
+                      "description": "(Required) ID of view to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"success\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.x.flatfile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2c15f0df-c194-4c44-9ba5-fbabe9b91175",
+    "name": "API Reference subpackage_accounts subpackage_views API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

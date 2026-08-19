@@ -1,0 +1,1312 @@
+{
+  "item": [
+    {
+      "id": "47a15517-2c48-415a-af15-1ff91b3a6b59",
+      "name": "subpackage_documents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3c0f86db-7d7a-4155-8bf7-32250da77284",
+          "name": "List documents",
+          "request": {
+            "name": "List documents",
+            "description": {
+              "content": "Returns all documents for a space",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spaces",
+                ":spaceId",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "spaceId",
+                  "description": "(Required) ID of space to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "472b818e-12f3-4d40-a5cd-f2403e6684ea",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"title\": \"string\",\n      \"body\": \"string\",\n      \"id\": \"string\",\n      \"createdAt\": \"1983-11-28T04:20:45.726Z\",\n      \"updatedAt\": \"1968-07-27T02:58:19.583Z\",\n      \"treatments\": [\n        \"string\",\n        \"string\"\n      ],\n      \"actions\": [\n        {\n          \"label\": \"string\",\n          \"slug\": \"string\",\n          \"operation\": \"string\",\n          \"mode\": \"foreground\",\n          \"tooltip\": \"string\",\n          \"messages\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"content\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"content\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"schedule\": \"daily\",\n          \"primary\": true,\n          \"confirm\": false,\n          \"icon\": \"string\",\n          \"requireAllValid\": true,\n          \"requireSelection\": true,\n          \"inputForm\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fields\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"constraints\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"mount\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"slugs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"guide\": {\n            \"content\": \"string\"\n          },\n          \"guardrail\": {\n            \"content\": \"string\"\n          },\n          \"createdFrom\": \"string\",\n          \"lastPropagatedAt\": \"1985-06-28T18:27:28.146Z\",\n          \"deletedAt\": \"2016-04-01T01:27:48.102Z\",\n          \"invalidConditionalMessaging\": false,\n          \"validRecordsMessage\": \"string\",\n          \"invalidRecordsMessage\": \"string\"\n        },\n        {\n          \"label\": \"string\",\n          \"slug\": \"string\",\n          \"operation\": \"string\",\n          \"mode\": \"background\",\n          \"tooltip\": \"string\",\n          \"messages\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"content\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"content\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"schedule\": \"hourly\",\n          \"primary\": true,\n          \"confirm\": false,\n          \"icon\": \"string\",\n          \"requireAllValid\": true,\n          \"requireSelection\": true,\n          \"inputForm\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fields\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"constraints\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"mount\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"slugs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"guide\": {\n            \"content\": \"string\"\n          },\n          \"guardrail\": {\n            \"content\": \"string\"\n          },\n          \"createdFrom\": \"string\",\n          \"lastPropagatedAt\": \"1976-02-02T04:09:35.779Z\",\n          \"deletedAt\": \"2010-10-09T19:22:10.217Z\",\n          \"invalidConditionalMessaging\": false,\n          \"validRecordsMessage\": \"string\",\n          \"invalidRecordsMessage\": \"string\"\n        }\n      ],\n      \"spaceId\": \"string\",\n      \"environmentId\": \"string\",\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"1958-08-27T18:27:35.626Z\"\n    },\n    {\n      \"title\": \"string\",\n      \"body\": \"string\",\n      \"id\": \"string\",\n      \"createdAt\": \"2002-03-29T14:54:05.560Z\",\n      \"updatedAt\": \"1946-10-28T14:09:07.849Z\",\n      \"treatments\": [\n        \"string\",\n        \"string\"\n      ],\n      \"actions\": [\n        {\n          \"label\": \"string\",\n          \"slug\": \"string\",\n          \"operation\": \"string\",\n          \"mode\": \"background\",\n          \"tooltip\": \"string\",\n          \"messages\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"content\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"content\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"schedule\": \"daily\",\n          \"primary\": true,\n          \"confirm\": false,\n          \"icon\": \"string\",\n          \"requireAllValid\": true,\n          \"requireSelection\": false,\n          \"inputForm\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fields\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"constraints\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"mount\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"slugs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"guide\": {\n            \"content\": \"string\"\n          },\n          \"guardrail\": {\n            \"content\": \"string\"\n          },\n          \"createdFrom\": \"string\",\n          \"lastPropagatedAt\": \"1965-04-30T15:25:00.435Z\",\n          \"deletedAt\": \"1960-12-26T01:42:43.101Z\",\n          \"invalidConditionalMessaging\": false,\n          \"validRecordsMessage\": \"string\",\n          \"invalidRecordsMessage\": \"string\"\n        },\n        {\n          \"label\": \"string\",\n          \"slug\": \"string\",\n          \"operation\": \"string\",\n          \"mode\": \"toolbarBlocking\",\n          \"tooltip\": \"string\",\n          \"messages\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"content\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"content\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"schedule\": \"hourly\",\n          \"primary\": true,\n          \"confirm\": false,\n          \"icon\": \"string\",\n          \"requireAllValid\": false,\n          \"requireSelection\": false,\n          \"inputForm\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fields\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"constraints\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"mount\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"slugs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"guide\": {\n            \"content\": \"string\"\n          },\n          \"guardrail\": {\n            \"content\": \"string\"\n          },\n          \"createdFrom\": \"string\",\n          \"lastPropagatedAt\": \"1964-09-25T05:57:23.628Z\",\n          \"deletedAt\": \"1986-04-14T00:57:16.802Z\",\n          \"invalidConditionalMessaging\": false,\n          \"validRecordsMessage\": \"string\",\n          \"invalidRecordsMessage\": \"string\"\n        }\n      ],\n      \"spaceId\": \"string\",\n      \"environmentId\": \"string\",\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"1977-03-31T19:46:28.704Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "381f3fc3-04a1-4d4e-8bfb-5e766add2f5e",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12ba7ef9-e258-4535-929d-ab5b98c4bcd3",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54bd6e70-8f6b-4d92-bf5a-632abea4b701",
+          "name": "Create a document",
+          "request": {
+            "name": "Create a document",
+            "description": {
+              "content": "Add a new document to the space",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spaces",
+                ":spaceId",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "spaceId",
+                  "description": "(Required) ID of space to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"treatments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actions\": [\n    {\n      \"label\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"tooltip\": \"<string>\",\n      \"messages\": [\n        {\n          \"type\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"schedule\": \"<string>\",\n      \"primary\": \"<boolean>\",\n      \"confirm\": \"<boolean>\",\n      \"icon\": \"<string>\",\n      \"requireAllValid\": \"<boolean>\",\n      \"requireSelection\": \"<boolean>\",\n      \"inputForm\": {\n        \"type\": \"<string>\",\n        \"fields\": [\n          {\n            \"key\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\",\n            \"description\": \"<string>\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\",\n            \"description\": \"<string>\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"<string>\",\n          \"ignoreSelection\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"ignoreSelection\": \"<boolean>\"\n        }\n      ],\n      \"mount\": {\n        \"type\": \"<string>\",\n        \"slugs\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"<string>\"\n      },\n      \"guardrail\": {\n        \"content\": \"<string>\"\n      },\n      \"createdFrom\": \"<string>\",\n      \"lastPropagatedAt\": \"<dateTime>\",\n      \"deletedAt\": \"<dateTime>\",\n      \"invalidConditionalMessaging\": \"<boolean>\",\n      \"validRecordsMessage\": \"<string>\",\n      \"invalidRecordsMessage\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"tooltip\": \"<string>\",\n      \"messages\": [\n        {\n          \"type\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"schedule\": \"<string>\",\n      \"primary\": \"<boolean>\",\n      \"confirm\": \"<boolean>\",\n      \"icon\": \"<string>\",\n      \"requireAllValid\": \"<boolean>\",\n      \"requireSelection\": \"<boolean>\",\n      \"inputForm\": {\n        \"type\": \"<string>\",\n        \"fields\": [\n          {\n            \"key\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\",\n            \"description\": \"<string>\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\",\n            \"description\": \"<string>\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"<string>\",\n          \"ignoreSelection\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"ignoreSelection\": \"<boolean>\"\n        }\n      ],\n      \"mount\": {\n        \"type\": \"<string>\",\n        \"slugs\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"<string>\"\n      },\n      \"guardrail\": {\n        \"content\": \"<string>\"\n      },\n      \"createdFrom\": \"<string>\",\n      \"lastPropagatedAt\": \"<dateTime>\",\n      \"deletedAt\": \"<dateTime>\",\n      \"invalidConditionalMessaging\": \"<boolean>\",\n      \"validRecordsMessage\": \"<string>\",\n      \"invalidRecordsMessage\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60ea93b8-a3b6-4d0c-b70a-e282cea0ee73",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"treatments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actions\": [\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"background\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"error\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": false,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": false,\n      \"requireSelection\": false,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": false\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"1994-06-02T10:12:45.687Z\",\n      \"deletedAt\": \"1998-10-25T13:20:34.677Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    },\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"toolbarBlocking\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": true,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": true,\n      \"requireSelection\": true,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"2000-08-29T00:09:25.540Z\",\n      \"deletedAt\": \"1971-10-07T23:11:56.558Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"title\": \"string\",\n    \"body\": \"string\",\n    \"id\": \"string\",\n    \"createdAt\": \"2023-06-11T14:43:46.538Z\",\n    \"updatedAt\": \"2006-01-03T02:31:29.729Z\",\n    \"treatments\": [\n      \"string\",\n      \"string\"\n    ],\n    \"actions\": [\n      {\n        \"label\": \"string\",\n        \"slug\": \"string\",\n        \"operation\": \"string\",\n        \"mode\": \"toolbarBlocking\",\n        \"tooltip\": \"string\",\n        \"messages\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          }\n        ],\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"schedule\": \"daily\",\n        \"primary\": true,\n        \"confirm\": true,\n        \"icon\": \"string\",\n        \"requireAllValid\": true,\n        \"requireSelection\": true,\n        \"inputForm\": {\n          \"type\": \"simple\",\n          \"fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"constraints\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"mount\": {\n          \"type\": \"sheet\",\n          \"slugs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"guide\": {\n          \"content\": \"string\"\n        },\n        \"guardrail\": {\n          \"content\": \"string\"\n        },\n        \"createdFrom\": \"string\",\n        \"lastPropagatedAt\": \"1996-05-07T05:52:44.775Z\",\n        \"deletedAt\": \"1953-12-18T09:28:06.850Z\",\n        \"invalidConditionalMessaging\": true,\n        \"validRecordsMessage\": \"string\",\n        \"invalidRecordsMessage\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"slug\": \"string\",\n        \"operation\": \"string\",\n        \"mode\": \"foreground\",\n        \"tooltip\": \"string\",\n        \"messages\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          }\n        ],\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"schedule\": \"hourly\",\n        \"primary\": false,\n        \"confirm\": false,\n        \"icon\": \"string\",\n        \"requireAllValid\": true,\n        \"requireSelection\": false,\n        \"inputForm\": {\n          \"type\": \"simple\",\n          \"fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"constraints\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"mount\": {\n          \"type\": \"sheet\",\n          \"slugs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"guide\": {\n          \"content\": \"string\"\n        },\n        \"guardrail\": {\n          \"content\": \"string\"\n        },\n        \"createdFrom\": \"string\",\n        \"lastPropagatedAt\": \"1984-06-17T06:18:29.169Z\",\n        \"deletedAt\": \"1952-11-16T17:33:28.613Z\",\n        \"invalidConditionalMessaging\": false,\n        \"validRecordsMessage\": \"string\",\n        \"invalidRecordsMessage\": \"string\"\n      }\n    ],\n    \"spaceId\": \"string\",\n    \"environmentId\": \"string\",\n    \"createdFrom\": \"string\",\n    \"lastPropagatedAt\": \"2005-09-18T13:20:32.651Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b466e876-d734-4a6b-9ef8-bc92e8452dac",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"treatments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actions\": [\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"background\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"error\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": false,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": false,\n      \"requireSelection\": false,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": false\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"1994-06-02T10:12:45.687Z\",\n      \"deletedAt\": \"1998-10-25T13:20:34.677Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    },\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"toolbarBlocking\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": true,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": true,\n      \"requireSelection\": true,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"2000-08-29T00:09:25.540Z\",\n      \"deletedAt\": \"1971-10-07T23:11:56.558Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fefc32f6-d729-4150-9fa0-c8da05fabd21",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"treatments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actions\": [\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"background\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"error\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": false,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": false,\n      \"requireSelection\": false,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": false\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"1994-06-02T10:12:45.687Z\",\n      \"deletedAt\": \"1998-10-25T13:20:34.677Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    },\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"toolbarBlocking\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": true,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": true,\n      \"requireSelection\": true,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"2000-08-29T00:09:25.540Z\",\n      \"deletedAt\": \"1971-10-07T23:11:56.558Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "889cf6eb-d89d-4eb6-96b7-3100e54e926d",
+          "name": "Get a document",
+          "request": {
+            "name": "Get a document",
+            "description": {
+              "content": "Returns a single document",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spaces",
+                ":spaceId",
+                "documents",
+                ":documentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "spaceId",
+                  "description": "(Required) ID of space to return"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentId",
+                  "description": "(Required) ID of document to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53d858fb-0965-440a-92ca-ca3333edca47",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) ID of document to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"title\": \"string\",\n    \"body\": \"string\",\n    \"id\": \"string\",\n    \"createdAt\": \"2023-06-11T14:43:46.538Z\",\n    \"updatedAt\": \"2006-01-03T02:31:29.729Z\",\n    \"treatments\": [\n      \"string\",\n      \"string\"\n    ],\n    \"actions\": [\n      {\n        \"label\": \"string\",\n        \"slug\": \"string\",\n        \"operation\": \"string\",\n        \"mode\": \"toolbarBlocking\",\n        \"tooltip\": \"string\",\n        \"messages\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          }\n        ],\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"schedule\": \"daily\",\n        \"primary\": true,\n        \"confirm\": true,\n        \"icon\": \"string\",\n        \"requireAllValid\": true,\n        \"requireSelection\": true,\n        \"inputForm\": {\n          \"type\": \"simple\",\n          \"fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"constraints\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"mount\": {\n          \"type\": \"sheet\",\n          \"slugs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"guide\": {\n          \"content\": \"string\"\n        },\n        \"guardrail\": {\n          \"content\": \"string\"\n        },\n        \"createdFrom\": \"string\",\n        \"lastPropagatedAt\": \"1996-05-07T05:52:44.775Z\",\n        \"deletedAt\": \"1953-12-18T09:28:06.850Z\",\n        \"invalidConditionalMessaging\": true,\n        \"validRecordsMessage\": \"string\",\n        \"invalidRecordsMessage\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"slug\": \"string\",\n        \"operation\": \"string\",\n        \"mode\": \"foreground\",\n        \"tooltip\": \"string\",\n        \"messages\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          }\n        ],\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"schedule\": \"hourly\",\n        \"primary\": false,\n        \"confirm\": false,\n        \"icon\": \"string\",\n        \"requireAllValid\": true,\n        \"requireSelection\": false,\n        \"inputForm\": {\n          \"type\": \"simple\",\n          \"fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"constraints\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"mount\": {\n          \"type\": \"sheet\",\n          \"slugs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"guide\": {\n          \"content\": \"string\"\n        },\n        \"guardrail\": {\n          \"content\": \"string\"\n        },\n        \"createdFrom\": \"string\",\n        \"lastPropagatedAt\": \"1984-06-17T06:18:29.169Z\",\n        \"deletedAt\": \"1952-11-16T17:33:28.613Z\",\n        \"invalidConditionalMessaging\": false,\n        \"validRecordsMessage\": \"string\",\n        \"invalidRecordsMessage\": \"string\"\n      }\n    ],\n    \"spaceId\": \"string\",\n    \"environmentId\": \"string\",\n    \"createdFrom\": \"string\",\n    \"lastPropagatedAt\": \"2005-09-18T13:20:32.651Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a421e23a-f95c-47fb-b393-e48289234938",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) ID of document to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2a57888-c70b-43c7-b48c-72c3891a36fd",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) ID of document to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d30cbb10-66e9-4594-b2ff-86b22d947768",
+          "name": "Update a document",
+          "request": {
+            "name": "Update a document",
+            "description": {
+              "content": "updates a single document, for only the body and title",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spaces",
+                ":spaceId",
+                "documents",
+                ":documentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "spaceId",
+                  "description": "(Required) ID of space to return"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentId",
+                  "description": "(Required) ID of document to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"treatments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actions\": [\n    {\n      \"label\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"tooltip\": \"<string>\",\n      \"messages\": [\n        {\n          \"type\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"schedule\": \"<string>\",\n      \"primary\": \"<boolean>\",\n      \"confirm\": \"<boolean>\",\n      \"icon\": \"<string>\",\n      \"requireAllValid\": \"<boolean>\",\n      \"requireSelection\": \"<boolean>\",\n      \"inputForm\": {\n        \"type\": \"<string>\",\n        \"fields\": [\n          {\n            \"key\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\",\n            \"description\": \"<string>\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\",\n            \"description\": \"<string>\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"<string>\",\n          \"ignoreSelection\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"ignoreSelection\": \"<boolean>\"\n        }\n      ],\n      \"mount\": {\n        \"type\": \"<string>\",\n        \"slugs\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"<string>\"\n      },\n      \"guardrail\": {\n        \"content\": \"<string>\"\n      },\n      \"createdFrom\": \"<string>\",\n      \"lastPropagatedAt\": \"<dateTime>\",\n      \"deletedAt\": \"<dateTime>\",\n      \"invalidConditionalMessaging\": \"<boolean>\",\n      \"validRecordsMessage\": \"<string>\",\n      \"invalidRecordsMessage\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"tooltip\": \"<string>\",\n      \"messages\": [\n        {\n          \"type\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"type\": \"<string>\",\n      \"description\": \"<string>\",\n      \"schedule\": \"<string>\",\n      \"primary\": \"<boolean>\",\n      \"confirm\": \"<boolean>\",\n      \"icon\": \"<string>\",\n      \"requireAllValid\": \"<boolean>\",\n      \"requireSelection\": \"<boolean>\",\n      \"inputForm\": {\n        \"type\": \"<string>\",\n        \"fields\": [\n          {\n            \"key\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\",\n            \"description\": \"<string>\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\",\n            \"description\": \"<string>\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"<string>\",\n          \"ignoreSelection\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"ignoreSelection\": \"<boolean>\"\n        }\n      ],\n      \"mount\": {\n        \"type\": \"<string>\",\n        \"slugs\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"<string>\"\n      },\n      \"guardrail\": {\n        \"content\": \"<string>\"\n      },\n      \"createdFrom\": \"<string>\",\n      \"lastPropagatedAt\": \"<dateTime>\",\n      \"deletedAt\": \"<dateTime>\",\n      \"invalidConditionalMessaging\": \"<boolean>\",\n      \"validRecordsMessage\": \"<string>\",\n      \"invalidRecordsMessage\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "698566ce-23ae-4a0d-892d-5fdc173ad4c0",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) ID of document to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"treatments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actions\": [\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"background\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"error\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": false,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": false,\n      \"requireSelection\": false,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": false\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"1994-06-02T10:12:45.687Z\",\n      \"deletedAt\": \"1998-10-25T13:20:34.677Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    },\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"toolbarBlocking\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": true,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": true,\n      \"requireSelection\": true,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"2000-08-29T00:09:25.540Z\",\n      \"deletedAt\": \"1971-10-07T23:11:56.558Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"title\": \"string\",\n    \"body\": \"string\",\n    \"id\": \"string\",\n    \"createdAt\": \"2023-06-11T14:43:46.538Z\",\n    \"updatedAt\": \"2006-01-03T02:31:29.729Z\",\n    \"treatments\": [\n      \"string\",\n      \"string\"\n    ],\n    \"actions\": [\n      {\n        \"label\": \"string\",\n        \"slug\": \"string\",\n        \"operation\": \"string\",\n        \"mode\": \"toolbarBlocking\",\n        \"tooltip\": \"string\",\n        \"messages\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          }\n        ],\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"schedule\": \"daily\",\n        \"primary\": true,\n        \"confirm\": true,\n        \"icon\": \"string\",\n        \"requireAllValid\": true,\n        \"requireSelection\": true,\n        \"inputForm\": {\n          \"type\": \"simple\",\n          \"fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"constraints\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"mount\": {\n          \"type\": \"sheet\",\n          \"slugs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"guide\": {\n          \"content\": \"string\"\n        },\n        \"guardrail\": {\n          \"content\": \"string\"\n        },\n        \"createdFrom\": \"string\",\n        \"lastPropagatedAt\": \"1996-05-07T05:52:44.775Z\",\n        \"deletedAt\": \"1953-12-18T09:28:06.850Z\",\n        \"invalidConditionalMessaging\": true,\n        \"validRecordsMessage\": \"string\",\n        \"invalidRecordsMessage\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"slug\": \"string\",\n        \"operation\": \"string\",\n        \"mode\": \"foreground\",\n        \"tooltip\": \"string\",\n        \"messages\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": \"string\"\n          }\n        ],\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"schedule\": \"hourly\",\n        \"primary\": false,\n        \"confirm\": false,\n        \"icon\": \"string\",\n        \"requireAllValid\": true,\n        \"requireSelection\": false,\n        \"inputForm\": {\n          \"type\": \"simple\",\n          \"fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"constraints\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ignoreSelection\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"mount\": {\n          \"type\": \"sheet\",\n          \"slugs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"guide\": {\n          \"content\": \"string\"\n        },\n        \"guardrail\": {\n          \"content\": \"string\"\n        },\n        \"createdFrom\": \"string\",\n        \"lastPropagatedAt\": \"1984-06-17T06:18:29.169Z\",\n        \"deletedAt\": \"1952-11-16T17:33:28.613Z\",\n        \"invalidConditionalMessaging\": false,\n        \"validRecordsMessage\": \"string\",\n        \"invalidRecordsMessage\": \"string\"\n      }\n    ],\n    \"spaceId\": \"string\",\n    \"environmentId\": \"string\",\n    \"createdFrom\": \"string\",\n    \"lastPropagatedAt\": \"2005-09-18T13:20:32.651Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d135593-cc1c-4f0c-b264-b6c62f615fdf",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) ID of document to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"treatments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actions\": [\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"background\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"error\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": false,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": false,\n      \"requireSelection\": false,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": false\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"1994-06-02T10:12:45.687Z\",\n      \"deletedAt\": \"1998-10-25T13:20:34.677Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    },\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"toolbarBlocking\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": true,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": true,\n      \"requireSelection\": true,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"2000-08-29T00:09:25.540Z\",\n      \"deletedAt\": \"1971-10-07T23:11:56.558Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51a976d7-fe3b-418b-8b83-6ea90e768c4f",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) ID of document to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"treatments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actions\": [\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"background\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"error\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": false,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": false,\n      \"requireSelection\": false,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": false\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"1994-06-02T10:12:45.687Z\",\n      \"deletedAt\": \"1998-10-25T13:20:34.677Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    },\n    {\n      \"label\": \"string\",\n      \"slug\": \"string\",\n      \"operation\": \"string\",\n      \"mode\": \"toolbarBlocking\",\n      \"tooltip\": \"string\",\n      \"messages\": [\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        },\n        {\n          \"type\": \"info\",\n          \"content\": \"string\"\n        }\n      ],\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"schedule\": \"daily\",\n      \"primary\": true,\n      \"confirm\": true,\n      \"icon\": \"string\",\n      \"requireAllValid\": true,\n      \"requireSelection\": true,\n      \"inputForm\": {\n        \"type\": \"simple\",\n        \"fields\": [\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"label\": \"string\",\n            \"type\": \"string\",\n            \"description\": \"string\",\n            \"defaultValue\": {},\n            \"config\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"constraints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"constraints\": [\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        },\n        {\n          \"type\": \"hasAllValid\",\n          \"ignoreSelection\": true\n        }\n      ],\n      \"mount\": {\n        \"type\": \"sheet\",\n        \"slugs\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"guide\": {\n        \"content\": \"string\"\n      },\n      \"guardrail\": {\n        \"content\": \"string\"\n      },\n      \"createdFrom\": \"string\",\n      \"lastPropagatedAt\": \"2000-08-29T00:09:25.540Z\",\n      \"deletedAt\": \"1971-10-07T23:11:56.558Z\",\n      \"invalidConditionalMessaging\": true,\n      \"validRecordsMessage\": \"string\",\n      \"invalidRecordsMessage\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc91e24a-392c-4fe6-8396-646e3f04dbda",
+          "name": "Delete a document",
+          "request": {
+            "name": "Delete a document",
+            "description": {
+              "content": "Deletes a single document",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spaces",
+                ":spaceId",
+                "documents",
+                ":documentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "spaceId",
+                  "description": "(Required) ID of space to return"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentId",
+                  "description": "(Required) ID of document to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Disable-Hooks",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adea8e9f-ee9b-46d1-9690-51819da13a7c",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) ID of document to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"success\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b60d137b-ba4f-4f5d-b64c-b3936e94ef91",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) ID of document to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2876be3-d594-4a0a-860f-2bb65cbc307a",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spaces",
+                    ":spaceId",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) ID of space to return"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) ID of document to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Disable-Hooks",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.x.flatfile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "810281fc-cefa-4441-9762-74e26c9d5cd9",
+    "name": "API Reference subpackage_accounts subpackage_documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

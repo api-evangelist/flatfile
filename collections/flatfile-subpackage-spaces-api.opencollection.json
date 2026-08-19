@@ -1,0 +1,627 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_spaces API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_spaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List spaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/spaces",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the environment."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of spaces to return in a page (default 10)"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Based on pageSize, which page of records to return"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Filter by appId"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search query for spaces"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Search by namespace"
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query",
+                "description": "Flag to include archived spaces"
+              },
+              {
+                "name": "sortField",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort spaces by; requires `sortDirection` if provided."
+              },
+              {
+                "name": "sortDirection",
+                "value": "",
+                "type": "query",
+                "description": "Direction of sorting; requires `sortField` if provided."
+              },
+              {
+                "name": "isCollaborative",
+                "value": "",
+                "type": "query",
+                "description": "Flag for collaborative (project) spaces"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "query",
+                "description": "(Deprecated!) Use `app` query parameter"
+              },
+              {
+                "name": "isAppTemplate",
+                "value": "",
+                "type": "query",
+                "description": "Flag for app templates"
+              }
+            ]
+          },
+          "docs": "Returns all spaces for an account or environment"
+        },
+        {
+          "info": {
+            "name": "Create a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/spaces",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new space based on an existing Space Config"
+        },
+        {
+          "info": {
+            "name": "Delete spaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/spaces",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceIds",
+                "value": "",
+                "type": "query",
+                "description": "List of ids for the spaces to be deleted"
+              }
+            ]
+          },
+          "docs": "Delete multiple spaces by id"
+        },
+        {
+          "info": {
+            "name": "Get a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of space to return"
+              }
+            ]
+          },
+          "docs": "Returns a single space"
+        },
+        {
+          "info": {
+            "name": "Update a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of space to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a space, to change the name for example"
+        },
+        {
+          "info": {
+            "name": "Delete a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of space to delete"
+              }
+            ]
+          },
+          "docs": "Delete a space"
+        },
+        {
+          "info": {
+            "name": "Archives a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/archive",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of space to archive"
+              }
+            ]
+          },
+          "docs": "Sets archivedAt timestamp on a space"
+        },
+        {
+          "info": {
+            "name": "Unarchives a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/unarchive",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of space to unarchive"
+              }
+            ]
+          },
+          "docs": "Sets archivedAt timestamp on a space to null"
+        },
+        {
+          "info": {
+            "name": "List guidances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/guidance",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the space"
+              },
+              {
+                "name": "includeGuide",
+                "value": "",
+                "type": "query",
+                "description": "Include the guide with the guidance, default is false"
+              }
+            ]
+          },
+          "docs": "Lists guidances"
+        },
+        {
+          "info": {
+            "name": "Create a new guidance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/guidance",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the space"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new guidance"
+        },
+        {
+          "info": {
+            "name": "Get a guidance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/guidance/:guidanceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the space"
+              },
+              {
+                "name": "guidanceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the guidance"
+              },
+              {
+                "name": "includeGuide",
+                "value": "",
+                "type": "query",
+                "description": "Include the guide with the guidance, default is false"
+              }
+            ]
+          },
+          "docs": "Retrieves a guidance by its id"
+        },
+        {
+          "info": {
+            "name": "Update a guidance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/guidance/:guidanceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the space"
+              },
+              {
+                "name": "guidanceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the guidance"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a guidance with the given id"
+        },
+        {
+          "info": {
+            "name": "Delete a guidance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/guidance/:guidanceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the space"
+              },
+              {
+                "name": "guidanceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the guidance"
+              }
+            ]
+          },
+          "docs": "Deletes a guidance by its id"
+        },
+        {
+          "info": {
+            "name": "List drafts for a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/drafts",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of space to list drafts for"
+              }
+            ]
+          },
+          "docs": "Lists drafts for a space"
+        },
+        {
+          "info": {
+            "name": "Create a draft of a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/drafts",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of space to create draft of"
+              }
+            ]
+          },
+          "docs": "Creates a draft of a space"
+        },
+        {
+          "info": {
+            "name": "Get a draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/drafts/:draftSpaceId/merge",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of space to get draft for"
+              },
+              {
+                "name": "draftSpaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of draft space to get"
+              }
+            ]
+          },
+          "docs": "Gets a draft by the space id and draft space id"
+        },
+        {
+          "info": {
+            "name": "Merge a draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/spaces/:spaceId/drafts/:draftSpaceId/merge",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of space to merge draft into"
+              },
+              {
+                "name": "draftSpaceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of draft space to merge"
+              }
+            ]
+          },
+          "docs": "Merges a draft into a space"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

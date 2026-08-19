@@ -1,0 +1,493 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_mapping API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_mapping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List mapping programs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/mapping",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of programs to return in a page (default 10)"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Based on pageSize, which page of records to return"
+              },
+              {
+                "name": "createdBy",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creator"
+              },
+              {
+                "name": "createdAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation time"
+              },
+              {
+                "name": "createdBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation time"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the environment"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "query",
+                "description": "A job ID to find mapping programs for"
+              },
+              {
+                "name": "familyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by family"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Filter by namespace"
+              },
+              {
+                "name": "sourceKeys",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source keys"
+              },
+              {
+                "name": "destinationKeys",
+                "value": "",
+                "type": "query",
+                "description": "Filter by destination keys"
+              }
+            ]
+          },
+          "docs": "List all mapping programs"
+        },
+        {
+          "info": {
+            "name": "Create a mapping between two schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/mapping",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a list of mapping rules based on two provided schemas"
+        },
+        {
+          "info": {
+            "name": "Delete all history for the authenticated user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/mapping",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes all history for the authenticated user"
+        },
+        {
+          "info": {
+            "name": "Get a mapping program",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              }
+            ]
+          },
+          "docs": "Get a mapping program"
+        },
+        {
+          "info": {
+            "name": "Update a mapping program",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a mapping program"
+        },
+        {
+          "info": {
+            "name": "Delete a mapping program",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              }
+            ]
+          },
+          "docs": "Deletes a mapping program"
+        },
+        {
+          "info": {
+            "name": "List mapping rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId/rules",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              }
+            ]
+          },
+          "docs": "List all mapping rules in a program"
+        },
+        {
+          "info": {
+            "name": "Add mapping rules to a program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId/rules",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add mapping rules to a program"
+        },
+        {
+          "info": {
+            "name": "Update a list of mapping rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId/rules",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a list of mapping rules in a program"
+        },
+        {
+          "info": {
+            "name": "Delete multiple mapping rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId/rules",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes multiple mapping rules from a program"
+        },
+        {
+          "info": {
+            "name": "Get a mapping rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId/rules/:mappingId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              },
+              {
+                "name": "mappingId",
+                "value": "",
+                "type": "path",
+                "description": "ID of mapping rule"
+              }
+            ]
+          },
+          "docs": "Get a mapping rule from a program"
+        },
+        {
+          "info": {
+            "name": "Update a mapping rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId/rules/:mappingId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              },
+              {
+                "name": "mappingId",
+                "value": "",
+                "type": "path",
+                "description": "ID of mapping rule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a mapping rule in a program"
+        },
+        {
+          "info": {
+            "name": "Delete a mapping rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/mapping/:programId/rules/:mappingId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the program"
+              },
+              {
+                "name": "mappingId",
+                "value": "",
+                "type": "path",
+                "description": "ID of mapping rule"
+              }
+            ]
+          },
+          "docs": "Deletes a mapping rule from a program"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

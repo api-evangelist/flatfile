@@ -1,0 +1,222 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_snapshots API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_snapshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/snapshots",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "query",
+                "description": "ID of sheet"
+              },
+              {
+                "name": "threadId",
+                "value": "",
+                "type": "query",
+                "description": "ID of thread to filter snapshots by"
+              }
+            ]
+          },
+          "docs": "List all snapshots of a sheet"
+        },
+        {
+          "info": {
+            "name": "Create a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/snapshots",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a snapshot of a sheet"
+        },
+        {
+          "info": {
+            "name": "Get a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/snapshots/:snapshotId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "snapshotId",
+                "value": "",
+                "type": "path",
+                "description": "ID of snapshot"
+              },
+              {
+                "name": "includeSummary",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include a summary in the snapshot response"
+              }
+            ]
+          },
+          "docs": "Gets a snapshot of a sheet"
+        },
+        {
+          "info": {
+            "name": "Delete a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/snapshots/:snapshotId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "snapshotId",
+                "value": "",
+                "type": "path",
+                "description": "ID of snapshot"
+              }
+            ]
+          },
+          "docs": "Deletes a snapshot of a sheet"
+        },
+        {
+          "info": {
+            "name": "Restore a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/snapshots/:snapshotId/restore",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "snapshotId",
+                "value": "",
+                "type": "path",
+                "description": "ID of snapshot"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restores a snapshot of a sheet"
+        },
+        {
+          "info": {
+            "name": "Get records from a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/snapshots/:snapshotId/records",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "snapshotId",
+                "value": "",
+                "type": "path",
+                "description": "ID of snapshot"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Based on pageSize, which page of records to return"
+              },
+              {
+                "name": "changeType",
+                "value": "",
+                "type": "query",
+                "description": "Filter records by change type"
+              }
+            ]
+          },
+          "docs": "Gets records from a snapshot of a sheet"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

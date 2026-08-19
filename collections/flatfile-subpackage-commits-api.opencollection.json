@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_commits API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_commits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a commit version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/commits/:commitId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "commitId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the commit version to return"
+              }
+            ]
+          },
+          "docs": "Returns the details of a commit version"
+        },
+        {
+          "info": {
+            "name": "Complete a commit version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/commits/:commitId/complete",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "commitId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the commit version to complete"
+              }
+            ]
+          },
+          "docs": "Completes a commit version. This marks the commit as complete and acknowledges that the changes have been applied to the sheet."
+        },
+        {
+          "info": {
+            "name": "Replay a commit version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/commits/:commitId/replay",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "commitId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the commit version to re-emit a commit:created event for"
+              }
+            ]
+          },
+          "docs": "Replays a commit:created event."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

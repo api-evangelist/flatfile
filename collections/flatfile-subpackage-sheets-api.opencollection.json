@@ -1,0 +1,656 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_sheets API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_sheets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List sheets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/sheets",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "query",
+                "description": "ID of workbook"
+              }
+            ]
+          },
+          "docs": "Returns sheets in a workbook"
+        },
+        {
+          "info": {
+            "name": "Get a sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              }
+            ]
+          },
+          "docs": "Returns a sheet in a workbook"
+        },
+        {
+          "info": {
+            "name": "Update a sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates Sheet"
+        },
+        {
+          "info": {
+            "name": "Delete a sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              }
+            ]
+          },
+          "docs": "Deletes a specific sheet from a workbook"
+        },
+        {
+          "info": {
+            "name": "Duplicate a sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId/duplicate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet to duplicate"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a copy of a sheet including all its data within the same workbook"
+        },
+        {
+          "info": {
+            "name": "Validate a sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId/validate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              }
+            ]
+          },
+          "docs": "Trigger data hooks and validation to run on a sheet"
+        },
+        {
+          "info": {
+            "name": "Download records as a CSV file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId/download",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated, use `sinceCommitId` instead."
+              },
+              {
+                "name": "commitId",
+                "value": "",
+                "type": "query",
+                "description": "Returns records that were changed in that version  in that version and only those records."
+              },
+              {
+                "name": "sinceVersionId",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated, use `sinceCommitId` instead."
+              },
+              {
+                "name": "sinceCommitId",
+                "value": "",
+                "type": "query",
+                "description": "Returns records that were changed in that version in addition to any records from versions after that version."
+              },
+              {
+                "name": "sortField",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort the data on."
+              },
+              {
+                "name": "sortDirection",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction - asc (ascending) or desc (descending)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Options to filter records"
+              },
+              {
+                "name": "filterField",
+                "value": "",
+                "type": "query",
+                "description": "The field to filter the data on."
+              },
+              {
+                "name": "searchValue",
+                "value": "",
+                "type": "query",
+                "description": "The value to search for data on."
+              },
+              {
+                "name": "searchField",
+                "value": "",
+                "type": "query",
+                "description": "The field to search for data on."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "The Record Ids param (ids) is a list of record ids that can be passed to several record endpoints allowing the user to identify specific records to INCLUDE in the query, or specific records to EXCLUDE, depending on whether or not filters are being applied. When passing a query param that filters the record dataset, such as 'searchValue', or a 'filter' of 'valid' | 'error' | 'all', the 'ids' param will EXCLUDE those records from the filtered results. For basic queries that do not filter the dataset, passing record ids in the 'ids' param will limit the dataset to INCLUDE just those specific records"
+              }
+            ]
+          },
+          "docs": "Returns records from a sheet in a workbook as a csv file"
+        },
+        {
+          "info": {
+            "name": "Get record counts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId/counts",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "Returns records that were changed in that version and only those records."
+              },
+              {
+                "name": "sinceVersionId",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated, use `sinceCommitId` instead."
+              },
+              {
+                "name": "commitId",
+                "value": "",
+                "type": "query",
+                "description": "Returns records that were changed in that version in addition to any records from versions after that version."
+              },
+              {
+                "name": "sinceCommitId",
+                "value": "",
+                "type": "query",
+                "description": "Listing a commit ID here will return all records since the specified commit."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Options to filter records"
+              },
+              {
+                "name": "filterField",
+                "value": "",
+                "type": "query",
+                "description": "The field to filter the data on."
+              },
+              {
+                "name": "searchValue",
+                "value": "",
+                "type": "query",
+                "description": "The value to search for data on."
+              },
+              {
+                "name": "searchField",
+                "value": "",
+                "type": "query",
+                "description": "The field to search for data on."
+              },
+              {
+                "name": "byField",
+                "value": "",
+                "type": "query",
+                "description": "If true, the counts for each field will also be returned"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "An FFQL query used to filter the result set to be counted"
+              }
+            ]
+          },
+          "docs": "Returns counts of records from a sheet"
+        },
+        {
+          "info": {
+            "name": "List calculations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId/calculations",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "Returns records that were changed in that version and only those records."
+              },
+              {
+                "name": "sinceVersionId",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated, use `sinceCommitId` instead."
+              },
+              {
+                "name": "commitId",
+                "value": "",
+                "type": "query",
+                "description": "Returns records that were changed in that version in addition to any records from versions after that version."
+              },
+              {
+                "name": "sinceCommitId",
+                "value": "",
+                "type": "query",
+                "description": "Listing a commit ID here will return all records since the specified commit."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Options to filter records"
+              },
+              {
+                "name": "filterField",
+                "value": "",
+                "type": "query",
+                "description": "The field to filter the data on."
+              },
+              {
+                "name": "searchValue",
+                "value": "",
+                "type": "query",
+                "description": "The value to search for data on."
+              },
+              {
+                "name": "searchField",
+                "value": "",
+                "type": "query",
+                "description": "The field to search for data on."
+              },
+              {
+                "name": "byField",
+                "value": "",
+                "type": "query",
+                "description": "If true, the counts for each field will also be returned"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "An FFQL query used to filter the result set to be counted"
+              }
+            ]
+          },
+          "docs": "Returns all calculations for a sheet"
+        },
+        {
+          "info": {
+            "name": "Get commit versions for a sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId/commits",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              },
+              {
+                "name": "completed",
+                "value": "",
+                "type": "query",
+                "description": "If true, only return commits that have been completed. If false, only return commits that have not been completed. If not provided, return all commits."
+              }
+            ]
+          },
+          "docs": "Returns the commit versions for a sheet"
+        },
+        {
+          "info": {
+            "name": "Lock a sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId/lock",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              }
+            ]
+          },
+          "docs": "Locks a sheet"
+        },
+        {
+          "info": {
+            "name": "Unlock a sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId/unlock",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              }
+            ]
+          },
+          "docs": "Removes a lock from a sheet"
+        },
+        {
+          "info": {
+            "name": "Get record cells by field",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/sheets/:sheetId/cells",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sheetId",
+                "value": "",
+                "type": "path",
+                "description": "ID of sheet"
+              },
+              {
+                "name": "fieldKey",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortField",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortDirection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterField",
+                "value": "",
+                "type": "query",
+                "description": "Name of field by which to filter records"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return in a page (default 1000 if pageNumber included)"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Based on pageSize, which page of records to return"
+              },
+              {
+                "name": "distinct",
+                "value": "",
+                "type": "query",
+                "description": "Must be set to true"
+              },
+              {
+                "name": "includeCounts",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "searchValue",
+                "value": "",
+                "type": "query",
+                "description": "A value to find for a given field in a sheet. Wrap the value in \"\" for exact match"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "An FFQL query used to filter the records to be queried"
+              }
+            ]
+          },
+          "docs": "Returns record cell values grouped by all fields in the sheet"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

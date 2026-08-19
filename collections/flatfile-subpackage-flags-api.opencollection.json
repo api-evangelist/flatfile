@@ -1,0 +1,222 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_flags API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/v1/workbooks/:workbookId/flags",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "The workbook ID to manage flags for"
+              }
+            ]
+          },
+          "docs": "Gets all flags for the workbook"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/v1/workbooks/:workbookId/flags",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "The workbook ID to manage flags for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new flag for the workbook"
+        },
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/v1/workbooks/:workbookId/flags/:slug",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "The workbook ID to manage flags for"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "The flag slug to retrieve"
+              }
+            ]
+          },
+          "docs": "Gets a specific flag by its slug"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/v1/workbooks/:workbookId/flags/:slug",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "The workbook ID to manage flags for"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "The flag slug to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing flag"
+        },
+        {
+          "info": {
+            "name": "Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/v1/workbooks/:workbookId/flags/:slug",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "The workbook ID to manage flags for"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "The flag slug to delete"
+              }
+            ]
+          },
+          "docs": "Deletes a flag"
+        },
+        {
+          "info": {
+            "name": "Bulk Mutate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/v1/workbooks/:workbookId/flags/bulk-mutate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "The workbook ID to manage flags for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Performs bulk flag operations on records"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

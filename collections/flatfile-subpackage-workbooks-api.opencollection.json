@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference subpackage_accounts subpackage_workbooks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_workbooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List workbooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/workbooks",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "query",
+                "description": "The associated Space ID of the Workbook."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name. Precede with - to negate the filter"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Filter by namespace. Precede with - to negate the filter"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label. Precede with - to negate the filter"
+              },
+              {
+                "name": "treatment",
+                "value": "",
+                "type": "query",
+                "description": "Filter by treatment."
+              },
+              {
+                "name": "includeSheets",
+                "value": "",
+                "type": "query",
+                "description": "Include sheets for the workbook (default true)"
+              },
+              {
+                "name": "includeCounts",
+                "value": "",
+                "type": "query",
+                "description": "Include counts for the workbook. **DEPRECATED** Counts will return 0s. Use GET /sheets/:sheetId/counts"
+              }
+            ]
+          },
+          "docs": "Returns all workbooks matching a filter for an account or space"
+        },
+        {
+          "info": {
+            "name": "Create a workbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.x.flatfile.com/v1/workbooks",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a workbook and adds it to a space"
+        },
+        {
+          "info": {
+            "name": "Get a workbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/workbooks/:workbookId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "ID of workbook to return"
+              }
+            ]
+          },
+          "docs": "Returns a single workbook"
+        },
+        {
+          "info": {
+            "name": "Update a workbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.x.flatfile.com/v1/workbooks/:workbookId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "ID of workbook to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a workbook\n<Note>\n  Adding a sheet to a workbook does not require the config object to be provided, however updating an existing sheet does.\n</Note>"
+        },
+        {
+          "info": {
+            "name": "Delete a workbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.x.flatfile.com/v1/workbooks/:workbookId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "ID of workbook to delete"
+              }
+            ]
+          },
+          "docs": "Deletes a workbook and all of its record data permanently"
+        },
+        {
+          "info": {
+            "name": "Get commits for a workbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.x.flatfile.com/v1/workbooks/:workbookId/commits",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Disable-Hooks",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workbookId",
+                "value": "",
+                "type": "path",
+                "description": "ID of workbook"
+              },
+              {
+                "name": "completed",
+                "value": "",
+                "type": "query",
+                "description": "If true, only return commits that have been completed. If false, only return commits that have not been completed. If not provided, return all commits."
+              }
+            ]
+          },
+          "docs": "Returns the commits for a workbook"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

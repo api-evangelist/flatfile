@@ -39,7 +39,8 @@ apis:
   description: The subpackage_accounts API from Flatfile — 1 operation(s) for subpackage_accounts.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_accounts
   properties:
   - type: OpenAPI
@@ -55,7 +56,8 @@ apis:
   description: The subpackage_actions API from Flatfile — 3 operation(s) for subpackage_actions.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_actions
   properties:
   - type: OpenAPI
@@ -88,7 +90,8 @@ apis:
   description: The subpackage_agents API from Flatfile — 10 operation(s) for subpackage_agents.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_agents
   properties:
   - type: OpenAPI
@@ -104,7 +107,8 @@ apis:
   description: The subpackage_apps API from Flatfile — 6 operation(s) for subpackage_apps.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_apps
   properties:
   - type: OpenAPI
@@ -120,7 +124,8 @@ apis:
   description: The subpackage_assistant API from Flatfile — 2 operation(s) for subpackage_assistant.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_assistant
   properties:
   - type: OpenAPI
@@ -136,7 +141,8 @@ apis:
   description: The subpackage_auth API from Flatfile — 2 operation(s) for subpackage_auth.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_auth
   properties:
   - type: OpenAPI
@@ -169,7 +175,8 @@ apis:
   description: The subpackage_commits API from Flatfile — 3 operation(s) for subpackage_commits.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_commits
   properties:
   - type: OpenAPI
@@ -218,7 +225,8 @@ apis:
   description: The subpackage_documents API from Flatfile — 2 operation(s) for subpackage_documents.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_documents
   properties:
   - type: OpenAPI
@@ -235,7 +243,8 @@ apis:
     The subpackage_entitlements API from Flatfile — 1 operation(s) for subpackage_entitlements.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_entitlements
   properties:
   - type: OpenAPI
@@ -252,7 +261,8 @@ apis:
     The subpackage_environments API from Flatfile — 6 operation(s) for subpackage_environments.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_environments
   properties:
   - type: OpenAPI
@@ -268,7 +278,8 @@ apis:
   description: The subpackage_events API from Flatfile — 4 operation(s) for subpackage_events.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_events
   properties:
   - type: OpenAPI
@@ -284,7 +295,8 @@ apis:
   description: The subpackage_files API from Flatfile — 5 operation(s) for subpackage_files.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_files
   properties:
   - type: OpenAPI
@@ -300,7 +312,8 @@ apis:
   description: The subpackage_flags API from Flatfile — 3 operation(s) for subpackage_flags.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_flags
   properties:
   - type: OpenAPI
@@ -316,7 +329,8 @@ apis:
   description: The subpackage_guests API from Flatfile — 6 operation(s) for subpackage_guests.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_guests
   properties:
   - type: OpenAPI
@@ -332,7 +346,8 @@ apis:
   description: The subpackage_jobs API from Flatfile — 12 operation(s) for subpackage_jobs.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_jobs
   properties:
   - type: OpenAPI
@@ -348,7 +363,8 @@ apis:
   description: The subpackage_mapping API from Flatfile — 4 operation(s) for subpackage_mapping.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_mapping
   properties:
   - type: OpenAPI
@@ -364,7 +380,8 @@ apis:
   description: The subpackage_records API from Flatfile — 4 operation(s) for subpackage_records.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_records
   properties:
   - type: OpenAPI
@@ -380,7 +397,8 @@ apis:
   description: The subpackage_roles API from Flatfile — 1 operation(s) for subpackage_roles.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_roles
   properties:
   - type: OpenAPI
@@ -396,7 +414,8 @@ apis:
   description: The subpackage_routines API from Flatfile — 2 operation(s) for subpackage_routines.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_routines
   properties:
   - type: OpenAPI
@@ -412,7 +431,8 @@ apis:
   description: The subpackage_runbooks API from Flatfile — 2 operation(s) for subpackage_runbooks.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_runbooks
   properties:
   - type: OpenAPI
@@ -428,7 +448,8 @@ apis:
   description: The subpackage_secrets API from Flatfile — 2 operation(s) for subpackage_secrets.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_secrets
   properties:
   - type: OpenAPI
@@ -444,7 +465,8 @@ apis:
   description: The subpackage_sheets API from Flatfile — 11 operation(s) for subpackage_sheets.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_sheets
   properties:
   - type: OpenAPI
@@ -460,7 +482,8 @@ apis:
   description: The subpackage_snapshots API from Flatfile — 4 operation(s) for subpackage_snapshots.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_snapshots
   properties:
   - type: OpenAPI
@@ -476,7 +499,8 @@ apis:
   description: The subpackage_spaces API from Flatfile — 8 operation(s) for subpackage_spaces.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_spaces
   properties:
   - type: OpenAPI
@@ -492,7 +516,8 @@ apis:
   description: The subpackage_users API from Flatfile — 6 operation(s) for subpackage_users.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_users
   properties:
   - type: OpenAPI
@@ -508,7 +533,8 @@ apis:
   description: The subpackage_versions API from Flatfile — 1 operation(s) for subpackage_versions.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_versions
   properties:
   - type: OpenAPI
@@ -524,7 +550,8 @@ apis:
   description: The subpackage_views API from Flatfile — 2 operation(s) for subpackage_views.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_views
   properties:
   - type: OpenAPI
@@ -540,7 +567,8 @@ apis:
   description: The subpackage_workbooks API from Flatfile — 3 operation(s) for subpackage_workbooks.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_workbooks
   properties:
   - type: OpenAPI

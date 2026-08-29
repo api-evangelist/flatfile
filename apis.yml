@@ -592,6 +592,9 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 common:
+  - type: CapabilityMap
+    url: capabilities/flatfile-capability-edges.yml
+    name: Flatfile Business Capability Map
   - type: AgenticAccess
     url: agentic-access/flatfile-agentic-access.yml
   - type: TrustCenter

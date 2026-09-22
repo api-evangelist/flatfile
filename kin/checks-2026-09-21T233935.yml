@@ -2,16 +2,16 @@
 kin_checks:
   slug: flatfile
   schema_version: 0.22.0
-  scored_at: '2026-09-19'
-  run_ts: 2026-09-19T193153
+  scored_at: '2026-09-21'
+  run_ts: 2026-09-21T233935
   note: Actionable checks (missed + partial) in `checks`, plus the ids that did not
     apply in `na`. Everything else in rubric/scoring-0.22.0.yml was earned; counts
     below let you verify that.
   counts:
     total: 136
-    earned: 37
-    partial: 13
-    missed: 60
+    earned: 38
+    partial: 11
+    missed: 61
     na: 26
   checks:
   - id: multiple_apis
@@ -93,6 +93,8 @@ kin_checks:
     status: missed
   - id: support_channel
     status: missed
+  - id: plans_multiple
+    status: missed
   - id: terms_of_service
     status: missed
   - id: privacy_policy
@@ -161,12 +163,6 @@ kin_checks:
     status: partial
     earned: 1.0
     detail: pointer liveness 0.5
-  - id: plans_present
-    status: partial
-    earned: 2.0
-  - id: plans_multiple
-    status: partial
-    earned: 1.0
   - id: agentic_access
     status: partial
     earned: 2.5

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_agent-exports API
+  title: Reference Subpackage Agent Exports API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -18,22 +18,22 @@ paths:
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: agentId
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: pageSize
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:PageSize'
+          $ref: '#/components/schemas/type_commons_PageSize'
       - name: pageNumber
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:PageNumber'
+          $ref: '#/components/schemas/type_commons_PageNumber'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agent-exports:ListAgentExportsResponse'
+                $ref: '#/components/schemas/type_agent-exports_ListAgentExportsResponse'
   /agent-exports/{agentExportId}:
     get:
       operationId: get
@@ -65,7 +65,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentExportId'
+          $ref: '#/components/schemas/type_commons_AgentExportId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -85,7 +85,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agent-exports:GetAgentExportResponse'
+                $ref: '#/components/schemas/type_agent-exports_GetAgentExportResponse'
     delete:
       operationId: delete
       summary: Delete an agent export
@@ -96,7 +96,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentExportId'
+          $ref: '#/components/schemas/type_commons_AgentExportId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -116,7 +116,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Success'
+                $ref: '#/components/schemas/type_commons_Success'
   /agent-exports/{agentExportId}/download:
     get:
       operationId: download
@@ -128,7 +128,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentExportId'
+          $ref: '#/components/schemas/type_commons_AgentExportId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -152,22 +152,28 @@ paths:
                 format: binary
 components:
   schemas:
-    type_agent-exports:GetAgentExportResponse:
+    type_agent-exports_ListAgentExportsResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_agent-exports:AgentExport'
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agent-exports_AgentExport'
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
       required:
       - data
-      title: GetAgentExportResponse
-    type_commons:Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons:SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons:SuccessData:
+      - pagination
+      title: ListAgentExportsResponse
+    type_commons_AgentExportId:
+      type: string
+      description: Agent Export ID
+      title: AgentExportId
+    type_commons_PageSize:
+      type: integer
+      description: Number of logs to return in a page (default 20)
+      title: PageSize
+    type_commons_SuccessData:
       type: object
       properties:
         success:
@@ -175,19 +181,57 @@ components:
       required:
       - success
       title: SuccessData
-    type_agent-exports:AgentExport:
+    type_commons_AgentId:
+      type: string
+      description: Agent ID
+      title: AgentId
+    type_agent-exports_AgentExportType:
+      type: string
+      enum:
+      - AUTOBUILD_INLINED
+      - SYSTEM_COMBINED
+      - SOURCE
+      description: The different export type formats available.
+      title: AgentExportType
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_agent-exports_GetAgentExportResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agent-exports_AgentExport'
+      required:
+      - data
+      title: GetAgentExportResponse
+    type_agent-exports_AgentExport:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:AgentExportId'
+          $ref: '#/components/schemas/type_commons_AgentExportId'
         agentId:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
         exportType:
-          $ref: '#/components/schemas/type_agent-exports:AgentExportType'
+          $ref: '#/components/schemas/type_agent-exports_AgentExportType'
         accountId:
-          $ref: '#/components/schemas/type_commons:AccountId'
+          $ref: '#/components/schemas/type_commons_AccountId'
         environmentId:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
         createdAt:
           type: string
           format: date-time
@@ -206,69 +250,25 @@ components:
       - createdAt
       - updatedAt
       title: AgentExport
-    type_commons:PageSize:
-      type: integer
-      description: Number of logs to return in a page (default 20)
-      title: PageSize
-    type_commons:AgentExportId:
-      type: string
-      description: Agent Export ID
-      title: AgentExportId
-    type_commons:AccountId:
+    type_commons_AccountId:
       type: string
       description: Account ID
       title: AccountId
-    type_commons:Pagination:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_agent-exports:ListAgentExportsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agent-exports:AgentExport'
-        pagination:
-          $ref: '#/components/schemas/type_commons:Pagination'
-      required:
-      - data
-      - pagination
-      title: ListAgentExportsResponse
-    type_commons:EnvironmentId:
+    type_commons_EnvironmentId:
       type: string
       description: Environment ID
       title: EnvironmentId
-    type_agent-exports:AgentExportType:
-      type: string
-      enum:
-      - AUTOBUILD_INLINED
-      - SYSTEM_COMBINED
-      - SOURCE
-      description: The different export type formats available.
-      title: AgentExportType
-    type_commons:PageNumber:
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_PageNumber:
       type: integer
       description: Based on pageSize, which page of records to return
       title: PageNumber
-    type_commons:AgentId:
-      type: string
-      description: Agent ID
-      title: AgentId
   securitySchemes:
     default:
       type: http

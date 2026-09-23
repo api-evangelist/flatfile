@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_flags API
+  title: Reference Subpackage Flags API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -20,7 +20,7 @@ paths:
         description: The workbook ID to manage flags for
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:WorkbookId'
+          $ref: '#/components/schemas/type_commons_WorkbookId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -40,12 +40,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_flags:FlagResponse'
+                $ref: '#/components/schemas/type_flags_FlagResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_flags:CreateFlagRequest'
+              $ref: '#/components/schemas/type_flags_CreateFlagRequest'
     get:
       operationId: list
       summary: List
@@ -58,7 +58,7 @@ paths:
         description: The workbook ID to manage flags for
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:WorkbookId'
+          $ref: '#/components/schemas/type_commons_WorkbookId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -80,7 +80,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/type_flags:FlagResponse'
+                  $ref: '#/components/schemas/type_flags_FlagResponse'
   /v1/workbooks/{workbookId}/flags/{slug}:
     get:
       operationId: get
@@ -94,7 +94,7 @@ paths:
         description: The workbook ID to manage flags for
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:WorkbookId'
+          $ref: '#/components/schemas/type_commons_WorkbookId'
       - name: slug
         in: path
         description: The flag slug to retrieve
@@ -120,7 +120,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_flags:FlagResponse'
+                $ref: '#/components/schemas/type_flags_FlagResponse'
     patch:
       operationId: update
       summary: Update
@@ -133,7 +133,7 @@ paths:
         description: The workbook ID to manage flags for
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:WorkbookId'
+          $ref: '#/components/schemas/type_commons_WorkbookId'
       - name: slug
         in: path
         description: The flag slug to update
@@ -159,12 +159,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_flags:FlagResponse'
+                $ref: '#/components/schemas/type_flags_FlagResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_flags:UpdateFlagRequest'
+              $ref: '#/components/schemas/type_flags_UpdateFlagRequest'
     delete:
       operationId: delete
       summary: Delete
@@ -177,7 +177,7 @@ paths:
         description: The workbook ID to manage flags for
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:WorkbookId'
+          $ref: '#/components/schemas/type_commons_WorkbookId'
       - name: slug
         in: path
         description: The flag slug to delete
@@ -203,7 +203,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Success'
+                $ref: '#/components/schemas/type_commons_Success'
   /v1/workbooks/{workbookId}/flags/bulk-mutate:
     post:
       operationId: bulk-mutate
@@ -217,7 +217,7 @@ paths:
         description: The workbook ID to manage flags for
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:WorkbookId'
+          $ref: '#/components/schemas/type_commons_WorkbookId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -237,15 +237,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_flags:BulkMutateFlagsResponse'
+                $ref: '#/components/schemas/type_flags_BulkMutateFlagsResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_flags:BulkMutateFlagsRequest'
+              $ref: '#/components/schemas/type_flags_BulkMutateFlagsRequest'
 components:
   schemas:
-    type_flags:FlagMutationData:
+    type_flags_FlagMutationData:
       type: object
       properties:
         label:
@@ -256,24 +256,79 @@ components:
           description: The flag color in hex format
       description: Flag data for mutation operations
       title: FlagMutationData
-    type_commons:Success:
+    type_flags_CreateFlagRequest:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_commons:SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_flags:BulkMutateFlagsRequest:
+        slug:
+          type: string
+          description: The unique identifier for the flag
+        label:
+          type: string
+          description: The human-readable name for the flag
+        colorHex:
+          type: string
+          description: The hex color code for the flag (e.g., "#0090FF")
+      required:
+      - slug
+      - label
+      - colorHex
+      description: Request to create a new flag
+      title: CreateFlagRequest
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_flags_FlagResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the flag
+        slug:
+          type: string
+          description: The flag slug
+        label:
+          type: string
+          description: The flag label
+        colorHex:
+          type: string
+          description: The hex color code for the flag
+        workbookId:
+          $ref: '#/components/schemas/type_commons_WorkbookId'
+          description: The workbook this flag belongs to
+        createdAt:
+          type: string
+          format: date-time
+          description: When the flag was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the flag was last updated
+      required:
+      - id
+      - slug
+      - label
+      - colorHex
+      - workbookId
+      - createdAt
+      - updatedAt
+      description: A flag object
+      title: FlagResponse
+    type_flags_BulkMutateFlagsRequest:
       type: object
       properties:
         operation:
-          $ref: '#/components/schemas/type_flags:FlagOperation'
+          $ref: '#/components/schemas/type_flags_FlagOperation'
           description: The operation to perform
         slug:
           type: string
           description: The flag slug to operate on
         flag:
-          $ref: '#/components/schemas/type_flags:FlagMutationData'
+          $ref: '#/components/schemas/type_flags_FlagMutationData'
           description: Flag data for apply/update operations
         exceptions:
           type: array
@@ -310,19 +365,7 @@ components:
       - slug
       description: Request to perform bulk flag operations
       title: BulkMutateFlagsRequest
-    type_commons:WorkbookId:
-      type: string
-      description: Workbook ID
-      title: WorkbookId
-    type_commons:SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_flags:FlagOperation:
+    type_flags_FlagOperation:
       type: string
       enum:
       - apply
@@ -331,75 +374,18 @@ components:
       - replace
       description: The type of flag operation to perform
       title: FlagOperation
-    type_flags:CreateFlagRequest:
+    type_commons_Success:
       type: object
       properties:
-        slug:
-          type: string
-          description: The unique identifier for the flag
-        label:
-          type: string
-          description: The human-readable name for the flag
-        colorHex:
-          type: string
-          description: The hex color code for the flag (e.g., "#0090FF")
-      required:
-      - slug
-      - label
-      - colorHex
-      description: Request to create a new flag
-      title: CreateFlagRequest
-    type_flags:UpdateFlagRequest:
-      type: object
-      properties:
-        label:
-          type: string
-          description: The new label for the flag
-        colorHex:
-          type: string
-          description: The new hex color code for the flag
-        newSlug:
-          type: string
-          description: The new slug for the flag
-      description: Request to update an existing flag
-      title: UpdateFlagRequest
-    type_flags:FlagResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the flag
-        slug:
-          type: string
-          description: The flag slug
-        label:
-          type: string
-          description: The flag label
-        colorHex:
-          type: string
-          description: The hex color code for the flag
-        workbookId:
-          $ref: '#/components/schemas/type_commons:WorkbookId'
-          description: The workbook this flag belongs to
-        createdAt:
-          type: string
-          format: date-time
-          description: When the flag was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the flag was last updated
-      required:
-      - id
-      - slug
-      - label
-      - colorHex
-      - workbookId
-      - createdAt
-      - updatedAt
-      description: A flag object
-      title: FlagResponse
-    type_flags:BulkMutateFlagsResponse:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_flags_BulkMutateFlagsResponse:
       type: object
       properties:
         success:
@@ -413,6 +399,20 @@ components:
       - jobId
       description: Response from bulk flag mutation
       title: BulkMutateFlagsResponse
+    type_flags_UpdateFlagRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The new label for the flag
+        colorHex:
+          type: string
+          description: The new hex color code for the flag
+        newSlug:
+          type: string
+          description: The new slug for the flag
+      description: Request to update an existing flag
+      title: UpdateFlagRequest
   securitySchemes:
     default:
       type: http

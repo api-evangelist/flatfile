@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_entitlements API
+  title: Reference Subpackage Entitlements API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -40,42 +40,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_entitlements:ListEntitlementsResponse'
+                $ref: '#/components/schemas/type_entitlements_ListEntitlementsResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons:Errors:
+    type_entitlements_ListEntitlementsResponse:
       type: object
       properties:
-        errors:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:Error'
+            $ref: '#/components/schemas/type_entitlements_Entitlement'
       required:
-      - errors
-      title: Errors
-    type_commons:Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_entitlements:Entitlement:
+      - data
+      title: ListEntitlementsResponse
+    type_entitlements_Entitlement:
       type: object
       properties:
         key:
@@ -88,16 +78,26 @@ components:
       - metadata
       description: An entitlement belonging to a resource
       title: Entitlement
-    type_entitlements:ListEntitlementsResponse:
+    type_commons_Errors:
       type: object
       properties:
-        data:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_entitlements:Entitlement'
+            $ref: '#/components/schemas/type_commons_Error'
       required:
-      - data
-      title: ListEntitlementsResponse
+      - errors
+      title: Errors
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
   securitySchemes:
     default:
       type: http

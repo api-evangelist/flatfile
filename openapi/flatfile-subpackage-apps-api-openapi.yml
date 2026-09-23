@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_apps API
+  title: Reference Subpackage Apps API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -34,7 +34,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:AppsResponse'
+                $ref: '#/components/schemas/type_apps_AppsResponse'
     post:
       operationId: create
       summary: Create an app
@@ -61,12 +61,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:AppResponse'
+                $ref: '#/components/schemas/type_apps_AppResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_apps:AppCreate'
+              $ref: '#/components/schemas/type_apps_AppCreate'
   /apps/{appId}:
     get:
       operationId: get
@@ -80,7 +80,7 @@ paths:
         description: ID of app
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -100,7 +100,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:AppResponse'
+                $ref: '#/components/schemas/type_apps_AppResponse'
     patch:
       operationId: update
       summary: Update an app
@@ -113,7 +113,7 @@ paths:
         description: ID of app
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -133,12 +133,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:AppResponse'
+                $ref: '#/components/schemas/type_apps_AppResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_apps:AppPatch'
+              $ref: '#/components/schemas/type_apps_AppPatch'
     delete:
       operationId: delete
       summary: Delete an app
@@ -151,7 +151,7 @@ paths:
         description: ID of app to delete
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -171,7 +171,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:SuccessResponse'
+                $ref: '#/components/schemas/type_apps_SuccessResponse'
   /apps/{appId}/constraints:
     get:
       operationId: get-constraints
@@ -185,7 +185,7 @@ paths:
         description: ID of the app
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: includeBuiltins
         in: query
         description: Whether to include built-in constraints
@@ -211,7 +211,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:ConstraintsResponse'
+                $ref: '#/components/schemas/type_apps_ConstraintsResponse'
     post:
       operationId: create-constraint
       summary: Create constraint
@@ -224,7 +224,7 @@ paths:
         description: ID of the app
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -244,12 +244,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:ConstraintResponse'
+                $ref: '#/components/schemas/type_apps_ConstraintResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_apps:ConstraintCreate'
+              $ref: '#/components/schemas/type_apps_ConstraintCreate'
   /apps/{appId}/constraints/{constraintId}:
     get:
       operationId: get-constraint-by-id
@@ -263,13 +263,13 @@ paths:
         description: ID of the app
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: constraintId
         in: path
         description: ID of the constraint
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:ConstraintId'
+          $ref: '#/components/schemas/type_commons_ConstraintId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -289,7 +289,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:ConstraintResponse'
+                $ref: '#/components/schemas/type_apps_ConstraintResponse'
     patch:
       operationId: update-constraint
       summary: Update constraint
@@ -302,13 +302,13 @@ paths:
         description: ID of the app
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: constraintId
         in: path
         description: ID of the constraint
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:ConstraintId'
+          $ref: '#/components/schemas/type_commons_ConstraintId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -328,12 +328,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:ConstraintResponse'
+                $ref: '#/components/schemas/type_apps_ConstraintResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_apps:ConstraintUpdate'
+              $ref: '#/components/schemas/type_apps_ConstraintUpdate'
     delete:
       operationId: delete-constraint
       summary: Delete constraint
@@ -346,13 +346,13 @@ paths:
         description: ID of the app
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: constraintId
         in: path
         description: ID of the constraint
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:ConstraintId'
+          $ref: '#/components/schemas/type_commons_ConstraintId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -372,7 +372,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:SuccessResponse'
+                $ref: '#/components/schemas/type_apps_SuccessResponse'
   /apps/{appId}/constraints/{constraintId}/versions:
     get:
       operationId: get-constraint-versions
@@ -386,13 +386,13 @@ paths:
         description: ID of the app
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: constraintId
         in: path
         description: ID of the constraint
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:ConstraintId'
+          $ref: '#/components/schemas/type_commons_ConstraintId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -412,7 +412,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:ConstraintVersionsResponse'
+                $ref: '#/components/schemas/type_apps_ConstraintVersionsResponse'
   /apps/{appId}/constraints/{constraintId}/versions/{version}:
     get:
       operationId: get-constraint-version
@@ -426,13 +426,13 @@ paths:
         description: ID of the app
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: constraintId
         in: path
         description: ID of the constraint
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:ConstraintId'
+          $ref: '#/components/schemas/type_commons_ConstraintId'
       - name: version
         in: path
         description: Version of the constraint
@@ -458,16 +458,130 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_apps:ConstraintVersionResponse'
+                $ref: '#/components/schemas/type_apps_ConstraintVersionResponse'
 components:
   schemas:
-    type_apps:ConstraintResource:
+    type_apps_AppCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        type:
+          $ref: '#/components/schemas/type_apps_AppType'
+        entity:
+          type: string
+        entityPlural:
+          type: string
+        icon:
+          type: string
+        metadata:
+          description: Any type
+        environmentFilters:
+          description: Any type
+        blueprint:
+          description: Any type
+      required:
+      - name
+      - namespace
+      - type
+      description: Create an app
+      title: AppCreate
+    type_commons_AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_apps_ConstraintCreate:
+      type: object
+      properties:
+        description:
+          type: string
+        function:
+          type: string
+        options:
+          description: Any type
+        label:
+          type: string
+        validator:
+          type: string
+        appId:
+          $ref: '#/components/schemas/type_commons_AppId'
+      title: ConstraintCreate
+    type_apps_ConstraintsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_apps_ConstraintResource'
+      required:
+      - data
+      title: ConstraintsResponse
+    type_apps_SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessResponse
+    type_apps_AppResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_apps_App'
+      required:
+      - data
+      title: AppResponse
+    type_commons_ConstraintId:
+      type: string
+      description: Constraint ID
+      title: ConstraintId
+    type_apps_AppType:
+      type: string
+      enum:
+      - PORTAL
+      - PROJECTS
+      - MAPPING
+      - WORKBOOKS
+      - CUSTOM
+      title: AppType
+    type_apps_ConstraintVersionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_apps_ConstraintVersionResource'
+      required:
+      - data
+      title: ConstraintVersionResponse
+    type_apps_ConstraintUpdate:
+      type: object
+      properties:
+        description:
+          type: string
+        function:
+          type: string
+        options:
+          description: Any type
+        label:
+          type: string
+      title: ConstraintUpdate
+    type_apps_ConstraintResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_apps_ConstraintResource'
+      required:
+      - data
+      title: ConstraintResponse
+    type_apps_ConstraintResource:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:ConstraintId'
+          $ref: '#/components/schemas/type_commons_ConstraintId'
         appId:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
         validator:
           type: string
         description:
@@ -491,51 +605,13 @@ components:
       - createdAt
       - updatedAt
       title: ConstraintResource
-    type_apps:ConstraintCreate:
-      type: object
-      properties:
-        description:
-          type: string
-        function:
-          type: string
-        options:
-          description: Any type
-        label:
-          type: string
-        validator:
-          type: string
-        appId:
-          $ref: '#/components/schemas/type_commons:AppId'
-      title: ConstraintCreate
-    type_apps:AppResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_apps:App'
-      required:
-      - data
-      title: AppResponse
-    type_apps:ConstraintUpdate:
-      type: object
-      properties:
-        description:
-          type: string
-        function:
-          type: string
-        options:
-          description: Any type
-        label:
-          type: string
-      title: ConstraintUpdate
-    type_apps:AppCreate:
+    type_apps_AppPatch:
       type: object
       properties:
         name:
           type: string
         namespace:
           type: string
-        type:
-          $ref: '#/components/schemas/type_apps:AppType'
         entity:
           type: string
         entityPlural:
@@ -548,31 +624,22 @@ components:
           description: Any type
         blueprint:
           description: Any type
-      required:
-      - name
-      - namespace
-      - type
-      description: Create an app
-      title: AppCreate
-    type_apps:ConstraintVersionResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_apps:ConstraintVersionResource'
-      required:
-      - data
-      title: ConstraintVersionResponse
-    type_apps:App:
+        activatedAt:
+          type: string
+          format: date-time
+      description: Update an app
+      title: AppPatch
+    type_apps_App:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
         name:
           type: string
         namespace:
           type: string
         type:
-          $ref: '#/components/schemas/type_apps:AppType'
+          $ref: '#/components/schemas/type_apps_AppType'
         entity:
           type: string
         entityPlural:
@@ -610,100 +677,33 @@ components:
       - updatedAt
       description: An app
       title: App
-    type_apps:ConstraintVersionsResponse:
+    type_apps_ConstraintVersionsResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_apps:ConstraintVersionResource'
+            $ref: '#/components/schemas/type_apps_ConstraintVersionResource'
       required:
       - data
       title: ConstraintVersionsResponse
-    type_apps:ConstraintResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_apps:ConstraintResource'
-      required:
-      - data
-      title: ConstraintResponse
-    type_commons:ConstraintId:
-      type: string
-      description: Constraint ID
-      title: ConstraintId
-    type_apps:SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessResponse
-    type_apps:AppType:
-      type: string
-      enum:
-      - PORTAL
-      - PROJECTS
-      - MAPPING
-      - WORKBOOKS
-      - CUSTOM
-      title: AppType
-    type_apps:AppPatch:
-      type: object
-      properties:
-        name:
-          type: string
-        namespace:
-          type: string
-        entity:
-          type: string
-        entityPlural:
-          type: string
-        icon:
-          type: string
-        metadata:
-          description: Any type
-        environmentFilters:
-          description: Any type
-        blueprint:
-          description: Any type
-        activatedAt:
-          type: string
-          format: date-time
-      description: Update an app
-      title: AppPatch
-    type_commons:AppId:
-      type: string
-      description: App ID
-      title: AppId
-    type_apps:ConstraintsResponse:
+    type_apps_AppsResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_apps:ConstraintResource'
-      required:
-      - data
-      title: ConstraintsResponse
-    type_apps:AppsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_apps:App'
+            $ref: '#/components/schemas/type_apps_App'
       required:
       - data
       title: AppsResponse
-    type_apps:ConstraintVersionResource:
+    type_apps_ConstraintVersionResource:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:ConstraintId'
+          $ref: '#/components/schemas/type_commons_ConstraintId'
         appId:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
         validator:
           type: string
         description:

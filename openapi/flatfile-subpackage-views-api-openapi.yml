@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_views API
+  title: Reference Subpackage Views API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -20,7 +20,7 @@ paths:
         description: The associated sheet ID of the view.
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:SheetId'
+          $ref: '#/components/schemas/type_commons_SheetId'
       - name: pageSize
         in: query
         description: Number of prompts to return in a page (default 10)
@@ -52,19 +52,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_views:ListViewsResponse'
+                $ref: '#/components/schemas/type_views_ListViewsResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     post:
       operationId: create
       summary: Create a view
@@ -91,24 +91,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_views:ViewResponse'
+                $ref: '#/components/schemas/type_views_ViewResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_views:ViewCreate'
+              $ref: '#/components/schemas/type_views_ViewCreate'
   /views/{viewId}:
     get:
       operationId: get
@@ -122,7 +122,7 @@ paths:
         description: ID of view to return
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:ViewId'
+          $ref: '#/components/schemas/type_commons_ViewId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -142,19 +142,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_views:ViewResponse'
+                $ref: '#/components/schemas/type_views_ViewResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     patch:
       operationId: update
       summary: Update a view
@@ -167,7 +167,7 @@ paths:
         description: ID of view to update
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:ViewId'
+          $ref: '#/components/schemas/type_commons_ViewId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -187,24 +187,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_views:ViewResponse'
+                $ref: '#/components/schemas/type_views_ViewResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_views:ViewUpdate'
+              $ref: '#/components/schemas/type_views_ViewUpdate'
     delete:
       operationId: delete
       summary: Delete a view
@@ -217,7 +217,7 @@ paths:
         description: ID of view to delete
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:ViewId'
+          $ref: '#/components/schemas/type_commons_ViewId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -237,62 +237,40 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Success'
+                $ref: '#/components/schemas/type_commons_Success'
 components:
   schemas:
-    type_commons:EventId:
-      type: string
-      description: Event ID
-      title: EventId
-    type_commons:Success:
+    type_views_ViewUpdate:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_commons:SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons:FilterField:
-      type: string
-      description: Use this to narrow the valid/error filter results to a specific field
-      title: FilterField
-    type_commons:VersionId:
-      type: string
-      description: Version ID
-      title: VersionId
-    type_commons:CommitId:
-      type: string
-      description: Commit ID
-      title: CommitId
-    type_views:ViewResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_views:View'
+        name:
+          type: string
+        config:
+          $ref: '#/components/schemas/type_views_ViewConfig'
       required:
-      - data
-      title: ViewResponse
-    type_commons:RecordId:
+      - config
+      title: ViewUpdate
+    type_commons_SortDirection:
       type: string
-      description: Record ID
-      title: RecordId
-    type_commons:SearchValue:
-      type: string
-      description: Search for the given value, returning matching rows. For exact matches, wrap the value in double quotes ("Bob"). To search for null values, send empty double quotes ("")
-      title: SearchValue
-    type_views:View:
+      enum:
+      - asc
+      - desc
+      description: Sort direction - asc (ascending) or desc (descending)
+      title: SortDirection
+    type_views_View:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:ViewId'
+          $ref: '#/components/schemas/type_commons_ViewId'
           description: The ID of the view
         sheetId:
-          $ref: '#/components/schemas/type_commons:SheetId'
+          $ref: '#/components/schemas/type_commons_SheetId'
           description: The associated sheet ID of the view
         name:
           type: string
           description: The name of the view
         config:
-          $ref: '#/components/schemas/type_views:ViewConfig'
+          $ref: '#/components/schemas/type_views_ViewConfig'
           description: The view filters of the view
         createdBy:
           type: string
@@ -305,11 +283,11 @@ components:
       - createdBy
       description: A view
       title: View
-    type_commons:SheetId:
+    type_commons_SortField:
       type: string
-      description: Sheet ID
-      title: SheetId
-    type_commons:Filter:
+      description: Name of field by which to sort records
+      title: SortField
+    type_commons_Filter:
       type: string
       enum:
       - valid
@@ -318,76 +296,56 @@ components:
       - none
       description: Options to filter records
       title: Filter
-    type_views:ListViewsResponse:
+    type_commons_CommitId:
+      type: string
+      description: Commit ID
+      title: CommitId
+    type_commons_SearchValue:
+      type: string
+      description: Search for the given value, returning matching rows. For exact matches, wrap the value in double quotes ("Bob"). To search for null values, send empty double quotes ("")
+      title: SearchValue
+    type_commons_ViewId:
+      type: string
+      description: View ID
+      title: ViewId
+    type_views_ViewResponse:
       type: object
       properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons:Pagination'
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_views:View'
+          $ref: '#/components/schemas/type_views_View'
       required:
       - data
-      title: ListViewsResponse
-    type_views:ViewUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-        config:
-          $ref: '#/components/schemas/type_views:ViewConfig'
-      required:
-      - config
-      title: ViewUpdate
-    type_commons:Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_commons:SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_views:ViewConfig:
+      title: ViewResponse
+    type_views_ViewConfig:
       type: object
       properties:
         versionId:
-          $ref: '#/components/schemas/type_commons:VersionId'
+          $ref: '#/components/schemas/type_commons_VersionId'
           description: Deprecated, use `commitId` instead.
         commitId:
-          $ref: '#/components/schemas/type_commons:CommitId'
+          $ref: '#/components/schemas/type_commons_CommitId'
         sinceVersionId:
-          $ref: '#/components/schemas/type_commons:VersionId'
+          $ref: '#/components/schemas/type_commons_VersionId'
           description: Deprecated, use `sinceCommitId` instead.
         sinceCommitId:
-          $ref: '#/components/schemas/type_commons:CommitId'
+          $ref: '#/components/schemas/type_commons_CommitId'
         sortField:
-          $ref: '#/components/schemas/type_commons:SortField'
+          $ref: '#/components/schemas/type_commons_SortField'
         sortDirection:
-          $ref: '#/components/schemas/type_commons:SortDirection'
+          $ref: '#/components/schemas/type_commons_SortDirection'
         filter:
-          $ref: '#/components/schemas/type_commons:Filter'
+          $ref: '#/components/schemas/type_commons_Filter'
         filterField:
-          $ref: '#/components/schemas/type_commons:FilterField'
+          $ref: '#/components/schemas/type_commons_FilterField'
           description: Name of field by which to filter records
         searchValue:
-          $ref: '#/components/schemas/type_commons:SearchValue'
+          $ref: '#/components/schemas/type_commons_SearchValue'
         searchField:
-          $ref: '#/components/schemas/type_commons:SearchField'
+          $ref: '#/components/schemas/type_commons_SearchField'
         ids:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:RecordId'
+            $ref: '#/components/schemas/type_commons_RecordId'
           description: The Record Ids param (ids) is a list of record ids that can be passed to several record endpoints allowing the user to identify specific records to INCLUDE in the query, or specific records to EXCLUDE, depending on whether or not filters are being applied. When passing a query param that filters the record dataset, such as 'searchValue', or a 'filter' of 'valid' | 'error' | 'all', the 'ids' param will EXCLUDE those records from the filtered results. For basic queries that do not filter the dataset, passing record ids in the 'ids' param will limit the dataset to INCLUDE just those specific records. Maximum of 100 allowed.
         pageSize:
           type: integer
@@ -408,18 +366,87 @@ components:
           type: boolean
           description: Include error messages, defaults to false.
         for:
-          $ref: '#/components/schemas/type_commons:EventId'
+          $ref: '#/components/schemas/type_commons_EventId'
           description: if "for" is provided, the query parameters will be pulled from the event payload
         q:
           type: string
           description: An FFQL query used to filter the result set
       description: The configuration of a view. Filters, sorting, and search query.
       title: ViewConfig
-    type_commons:SearchField:
+    type_views_ListViewsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_views_View'
+      required:
+      - data
+      title: ListViewsResponse
+    type_commons_SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_commons_RecordId:
+      type: string
+      description: Record ID
+      title: RecordId
+    type_views_ViewCreate:
+      type: object
+      properties:
+        sheetId:
+          $ref: '#/components/schemas/type_commons_SheetId'
+        name:
+          type: string
+        config:
+          $ref: '#/components/schemas/type_views_ViewConfig'
+      required:
+      - sheetId
+      - name
+      - config
+      title: ViewCreate
+    type_commons_SearchField:
       type: string
       description: Use this to narrow the searchValue results to a specific field
       title: SearchField
-    type_commons:Pagination:
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_Pagination:
       type: object
       properties:
         currentPage:
@@ -437,45 +464,18 @@ components:
       - totalCount
       description: pagination info
       title: Pagination
-    type_commons:Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons:Error'
-      required:
-      - errors
-      title: Errors
-    type_commons:SortDirection:
+    type_commons_VersionId:
       type: string
-      enum:
-      - asc
-      - desc
-      description: Sort direction - asc (ascending) or desc (descending)
-      title: SortDirection
-    type_commons:SortField:
+      description: Version ID
+      title: VersionId
+    type_commons_EventId:
       type: string
-      description: Name of field by which to sort records
-      title: SortField
-    type_commons:ViewId:
+      description: Event ID
+      title: EventId
+    type_commons_FilterField:
       type: string
-      description: View ID
-      title: ViewId
-    type_views:ViewCreate:
-      type: object
-      properties:
-        sheetId:
-          $ref: '#/components/schemas/type_commons:SheetId'
-        name:
-          type: string
-        config:
-          $ref: '#/components/schemas/type_views:ViewConfig'
-      required:
-      - sheetId
-      - name
-      - config
-      title: ViewCreate
+      description: Use this to narrow the valid/error filter results to a specific field
+      title: FilterField
   securitySchemes:
     default:
       type: http

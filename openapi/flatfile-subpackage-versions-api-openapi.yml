@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_versions API
+  title: Reference Subpackage Versions API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -33,7 +33,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_versions:VersionResponse'
+                $ref: '#/components/schemas/type_versions_VersionResponse'
       requestBody:
         content:
           application/json:
@@ -41,37 +41,37 @@ paths:
               type: object
               properties:
                 sheetId:
-                  $ref: '#/components/schemas/type_commons:SheetId'
+                  $ref: '#/components/schemas/type_commons_SheetId'
                   description: The ID of the Sheet.
                 parentVersionId:
-                  $ref: '#/components/schemas/type_commons:VersionId'
+                  $ref: '#/components/schemas/type_commons_VersionId'
                   description: Deprecated, creating or updating a group of records together will automatically generate a commitId to group those record changes together.
 components:
   schemas:
-    type_commons:SheetId:
-      type: string
-      description: Sheet ID
-      title: SheetId
-    type_versions:Version:
+    type_versions_Version:
       type: object
       properties:
         versionId:
-          $ref: '#/components/schemas/type_commons:VersionId'
+          $ref: '#/components/schemas/type_commons_VersionId'
       required:
       - versionId
       title: Version
-    type_versions:VersionResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_versions:Version'
-      required:
-      - data
-      title: VersionResponse
-    type_commons:VersionId:
+    type_commons_VersionId:
       type: string
       description: Version ID
       title: VersionId
+    type_commons_SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_versions_VersionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_versions_Version'
+      required:
+      - data
+      title: VersionResponse
   securitySchemes:
     default:
       type: http

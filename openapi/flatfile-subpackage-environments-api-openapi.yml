@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_environments API
+  title: Reference Subpackage Environments API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -46,7 +46,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:ListEnvironmentsResponse'
+                $ref: '#/components/schemas/type_environments_ListEnvironmentsResponse'
     post:
       operationId: create
       summary: Create an environment
@@ -73,12 +73,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:EnvironmentResponse'
+                $ref: '#/components/schemas/type_environments_EnvironmentResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_environments:EnvironmentConfigCreate'
+              $ref: '#/components/schemas/type_environments_EnvironmentConfigCreate'
   /environments/subscription-token:
     get:
       operationId: get-environment-event-token
@@ -92,7 +92,7 @@ paths:
         description: ID of environment to return
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -112,19 +112,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_spaces:EventTokenResponse'
+                $ref: '#/components/schemas/type_spaces_EventTokenResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /environments/{environmentId}:
     get:
       operationId: get
@@ -158,19 +158,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:EnvironmentResponse'
+                $ref: '#/components/schemas/type_environments_EnvironmentResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     patch:
       operationId: update
       summary: Update an environment
@@ -203,12 +203,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:Environment'
+                $ref: '#/components/schemas/type_environments_Environment'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_environments:EnvironmentConfigUpdate'
+              $ref: '#/components/schemas/type_environments_EnvironmentConfigUpdate'
     delete:
       operationId: delete
       summary: Delete an environment
@@ -241,19 +241,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Success'
+                $ref: '#/components/schemas/type_commons_Success'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /environments/{environmentId}/guides:
     get:
       operationId: list-guides
@@ -267,7 +267,7 @@ paths:
         description: ID of the environment
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -287,19 +287,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:GuideListResponse'
+                $ref: '#/components/schemas/type_environments_GuideListResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     post:
       operationId: create-guide
       summary: Create a guide
@@ -312,7 +312,7 @@ paths:
         description: ID of the environment
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -332,24 +332,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:GuideDetailResponse'
+                $ref: '#/components/schemas/type_environments_GuideDetailResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_environments:GuideCreateRequest'
+              $ref: '#/components/schemas/type_environments_GuideCreateRequest'
   /environments/{environmentId}/guides/{guideId}:
     get:
       operationId: get-guide
@@ -363,13 +363,13 @@ paths:
         description: ID of the environment
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: guideId
         in: path
         description: ID of guide
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:GuideId'
+          $ref: '#/components/schemas/type_commons_GuideId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -389,19 +389,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:GuideDetailResponse'
+                $ref: '#/components/schemas/type_environments_GuideDetailResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     patch:
       operationId: update-guide
       summary: Update a guide
@@ -414,13 +414,13 @@ paths:
         description: ID of the environment
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: guideId
         in: path
         description: ID of guide
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:GuideId'
+          $ref: '#/components/schemas/type_commons_GuideId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -440,24 +440,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:GuideDetailResponse'
+                $ref: '#/components/schemas/type_environments_GuideDetailResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_environments:GuideUpdateRequest'
+              $ref: '#/components/schemas/type_environments_GuideUpdateRequest'
     delete:
       operationId: delete-guide
       summary: Delete a guide
@@ -470,13 +470,13 @@ paths:
         description: ID of the environment
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: guideId
         in: path
         description: ID of guide to delete
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:GuideId'
+          $ref: '#/components/schemas/type_commons_GuideId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -496,19 +496,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:GuideDeleteResponse'
+                $ref: '#/components/schemas/type_environments_GuideDeleteResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /environments/{environmentId}/guides/{guideId}/versions/{version}:
     get:
       operationId: get-guide-version
@@ -522,13 +522,13 @@ paths:
         description: ID of the environment
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: guideId
         in: path
         description: ID of the guide
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:GuideId'
+          $ref: '#/components/schemas/type_commons_GuideId'
       - name: version
         in: path
         description: Version of the guide
@@ -554,62 +554,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_environments:GuideVersionResponse'
+                $ref: '#/components/schemas/type_environments_GuideVersionResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons:Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons:SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_environments:GuideVersionResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_environments:GuideVersionResource'
-      required:
-      - data
-      title: GuideVersionResponse
-    type_environments:EnvironmentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_environments:Environment'
-      required:
-      - data
-      title: EnvironmentResponse
-    type_spaces:EventToken:
-      type: object
-      properties:
-        accountId:
-          $ref: '#/components/schemas/type_commons:AccountId'
-          description: The ID of the Account.
-        subscribeKey:
-          type: string
-          description: The id of the event bus to subscribe to
-        ttl:
-          type: integer
-          description: Time to live in minutes
-        token:
-          type: string
-          description: This should be your API key.
-      description: Properties used to allow users to connect to the event bus
-      title: EventToken
-    type_environments:GuideCreateRequest:
+    type_environments_GuideCreateRequest:
       type: object
       properties:
         description:
@@ -638,162 +598,7 @@ components:
       - environmentId
       description: Create a guide
       title: GuideCreateRequest
-    type_environments:EnvironmentConfigUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the environment
-        isProd:
-          type: boolean
-          description: Whether or not the environment is a production environment
-        guestAuthentication:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_environments:GuestAuthenticationEnum'
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-        translationsPath:
-          type: string
-        namespaces:
-          type: array
-          items:
-            type: string
-        languageOverride:
-          type: string
-      description: Properties used to update an environment
-      title: EnvironmentConfigUpdate
-    type_spaces:EventTokenResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_spaces:EventToken'
-      required:
-      - data
-      title: EventTokenResponse
-    type_environments:GuideResource:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons:GuideId'
-        description:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-        slug:
-          type: string
-        title:
-          type: string
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_environments:GuideVersionResource'
-        blocks:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - slug
-      - title
-      - versions
-      - blocks
-      - createdAt
-      - updatedAt
-      description: A guide
-      title: GuideResource
-    type_environments:GuideDeleteResponseData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: GuideDeleteResponseData
-    type_commons:EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons:Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_environments:GuestAuthenticationEnum:
-      type: string
-      enum:
-      - shared_link
-      - magic_link
-      description: The type of authentication to use for guests
-      title: GuestAuthenticationEnum
-    type_environments:GuideListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_environments:GuideResource'
-      required:
-      - data
-      title: GuideListResponse
-    type_commons:SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_commons:Pagination:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_commons:GuideId:
-      type: string
-      description: Guide ID
-      title: GuideId
-    type_commons:Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons:Error'
-      required:
-      - errors
-      title: Errors
-    type_environments:GuideVersionResource:
+    type_environments_GuideVersionResource:
       type: object
       properties:
         id:
@@ -816,13 +621,25 @@ components:
       - updatedAt
       description: A version of a guide
       title: GuideVersionResource
-    type_environments:Environment:
+    type_environments_GuideVersionResponse:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
-        accountId:
-          $ref: '#/components/schemas/type_commons:AccountId'
+        data:
+          $ref: '#/components/schemas/type_environments_GuideVersionResource'
+      required:
+      - data
+      title: GuideVersionResponse
+    type_environments_GuideDeleteResponseData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: GuideDeleteResponseData
+    type_environments_EnvironmentConfigCreate:
+      type: object
+      properties:
         name:
           type: string
           description: The name of the environment
@@ -832,7 +649,222 @@ components:
         guestAuthentication:
           type: array
           items:
-            $ref: '#/components/schemas/type_environments:GuestAuthenticationEnum'
+            $ref: '#/components/schemas/type_environments_GuestAuthenticationEnum'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        translationsPath:
+          type: string
+        namespaces:
+          type: array
+          items:
+            type: string
+        languageOverride:
+          type: string
+      required:
+      - name
+      - isProd
+      description: Properties used to create a new environment
+      title: EnvironmentConfigCreate
+    type_commons_GuideId:
+      type: string
+      description: Guide ID
+      title: GuideId
+    type_environments_GuideResource:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_GuideId'
+        description:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        slug:
+          type: string
+        title:
+          type: string
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments_GuideVersionResource'
+        blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - slug
+      - title
+      - versions
+      - blocks
+      - createdAt
+      - updatedAt
+      description: A guide
+      title: GuideResource
+    type_spaces_EventToken:
+      type: object
+      properties:
+        accountId:
+          $ref: '#/components/schemas/type_commons_AccountId'
+          description: The ID of the Account.
+        subscribeKey:
+          type: string
+          description: The id of the event bus to subscribe to
+        ttl:
+          type: integer
+          description: Time to live in minutes
+        token:
+          type: string
+          description: This should be your API key.
+      description: Properties used to allow users to connect to the event bus
+      title: EventToken
+    type_environments_GuideUpdateRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        title:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        slug:
+          type: string
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments_GuideVersionResource'
+        blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        environmentId:
+          type: string
+      description: Update a guide
+      title: GuideUpdateRequest
+    type_environments_GuideListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments_GuideResource'
+      required:
+      - data
+      title: GuideListResponse
+    type_environments_GuideDetailResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_environments_GuideResource'
+      required:
+      - data
+      title: GuideDetailResponse
+    type_environments_EnvironmentConfigUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the environment
+        isProd:
+          type: boolean
+          description: Whether or not the environment is a production environment
+        guestAuthentication:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments_GuestAuthenticationEnum'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        translationsPath:
+          type: string
+        namespaces:
+          type: array
+          items:
+            type: string
+        languageOverride:
+          type: string
+      description: Properties used to update an environment
+      title: EnvironmentConfigUpdate
+    type_environments_ListEnvironmentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments_Environment'
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+      required:
+      - data
+      title: ListEnvironmentsResponse
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_environments_GuideDeleteResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_environments_GuideDeleteResponseData'
+      required:
+      - data
+      title: GuideDeleteResponse
+    type_environments_Environment:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
+        accountId:
+          $ref: '#/components/schemas/type_commons_AccountId'
+        name:
+          type: string
+          description: The name of the environment
+        isProd:
+          type: boolean
+          description: Whether or not the environment is a production environment
+        guestAuthentication:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments_GuestAuthenticationEnum'
         features:
           type: object
           additionalProperties:
@@ -858,95 +890,63 @@ components:
       - features
       - metadata
       title: Environment
-    type_environments:ListEnvironmentsResponse:
+    type_environments_GuestAuthenticationEnum:
+      type: string
+      enum:
+      - shared_link
+      - magic_link
+      description: The type of authentication to use for guests
+      title: GuestAuthenticationEnum
+    type_commons_SuccessData:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_environments:Environment'
-        pagination:
-          $ref: '#/components/schemas/type_commons:Pagination'
-      required:
-      - data
-      title: ListEnvironmentsResponse
-    type_environments:GuideDeleteResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_environments:GuideDeleteResponseData'
-      required:
-      - data
-      title: GuideDeleteResponse
-    type_environments:GuideUpdateRequest:
-      type: object
-      properties:
-        description:
-          type: string
-        title:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-        slug:
-          type: string
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_environments:GuideVersionResource'
-        blocks:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-        environmentId:
-          type: string
-      description: Update a guide
-      title: GuideUpdateRequest
-    type_environments:EnvironmentConfigCreate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the environment
-        isProd:
+        success:
           type: boolean
-          description: Whether or not the environment is a production environment
-        guestAuthentication:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_environments:GuestAuthenticationEnum'
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-        translationsPath:
-          type: string
-        namespaces:
-          type: array
-          items:
-            type: string
-        languageOverride:
-          type: string
       required:
-      - name
-      - isProd
-      description: Properties used to create a new environment
-      title: EnvironmentConfigCreate
-    type_commons:AccountId:
+      - success
+      title: SuccessData
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_environments_EnvironmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_environments_Environment'
+      required:
+      - data
+      title: EnvironmentResponse
+    type_commons_AccountId:
       type: string
       description: Account ID
       title: AccountId
-    type_environments:GuideDetailResponse:
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_spaces_EventTokenResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_environments:GuideResource'
+          $ref: '#/components/schemas/type_spaces_EventToken'
       required:
       - data
-      title: GuideDetailResponse
+      title: EventTokenResponse
   securitySchemes:
     default:
       type: http

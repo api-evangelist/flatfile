@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_canvas-areas API
+  title: Reference Subpackage Canvas Areas API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -20,25 +20,25 @@ paths:
         description: ID of the canvas to filter areas by
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:CanvasId'
+          $ref: '#/components/schemas/type_commons_CanvasId'
       - name: parentId
         in: query
         description: ID of the parent canvas area to filter by
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+          $ref: '#/components/schemas/type_commons_CanvasAreaId'
       - name: spaceId
         in: query
         description: ID of the space to filter areas by
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:SpaceId'
+          $ref: '#/components/schemas/type_commons_SpaceId'
       - name: environmentId
         in: query
         description: ID of the environment to filter areas by
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: pageSize
         in: query
         description: Number of areas to return in a page (default 20)
@@ -70,13 +70,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_canvas-areas:ListCanvasAreasResponse'
+                $ref: '#/components/schemas/type_canvas-areas_ListCanvasAreasResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     post:
       operationId: create
       summary: Create a canvas area
@@ -103,13 +103,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_canvas-areas:CanvasAreaResponse'
+                $ref: '#/components/schemas/type_canvas-areas_CanvasAreaResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
@@ -117,15 +117,15 @@ paths:
               type: object
               properties:
                 canvasId:
-                  $ref: '#/components/schemas/type_commons:CanvasId'
+                  $ref: '#/components/schemas/type_commons_CanvasId'
                 type:
-                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaType'
+                  $ref: '#/components/schemas/type_canvas-areas_CanvasAreaType'
                 position:
-                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaPosition'
+                  $ref: '#/components/schemas/type_canvas-areas_CanvasAreaPosition'
                 visibility:
-                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaVisibility'
+                  $ref: '#/components/schemas/type_canvas-areas_CanvasAreaVisibility'
                 layout:
-                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaLayout'
+                  $ref: '#/components/schemas/type_canvas-areas_CanvasAreaLayout'
                 overlay:
                   description: Any type
                 config:
@@ -133,7 +133,7 @@ paths:
                 metadata:
                   description: Any type
                 parentId:
-                  $ref: '#/components/schemas/type_commons:CanvasAreaId'
+                  $ref: '#/components/schemas/type_commons_CanvasAreaId'
               required:
               - canvasId
               - type
@@ -150,7 +150,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+          $ref: '#/components/schemas/type_commons_CanvasAreaId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -170,19 +170,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_canvas-areas:CanvasAreaResponse'
+                $ref: '#/components/schemas/type_canvas-areas_CanvasAreaResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     patch:
       operationId: update
       summary: Update a canvas area
@@ -194,7 +194,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+          $ref: '#/components/schemas/type_commons_CanvasAreaId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -214,19 +214,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_canvas-areas:CanvasAreaResponse'
+                $ref: '#/components/schemas/type_canvas-areas_CanvasAreaResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
@@ -234,13 +234,13 @@ paths:
               type: object
               properties:
                 type:
-                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaType'
+                  $ref: '#/components/schemas/type_canvas-areas_CanvasAreaType'
                 position:
-                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaPosition'
+                  $ref: '#/components/schemas/type_canvas-areas_CanvasAreaPosition'
                 visibility:
-                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaVisibility'
+                  $ref: '#/components/schemas/type_canvas-areas_CanvasAreaVisibility'
                 layout:
-                  $ref: '#/components/schemas/type_canvas-areas:CanvasAreaLayout'
+                  $ref: '#/components/schemas/type_canvas-areas_CanvasAreaLayout'
                 overlay:
                   description: Any type
                 config:
@@ -248,9 +248,9 @@ paths:
                 metadata:
                   description: Any type
                 parentId:
-                  $ref: '#/components/schemas/type_commons:CanvasAreaId'
+                  $ref: '#/components/schemas/type_commons_CanvasAreaId'
                 canvasId:
-                  $ref: '#/components/schemas/type_commons:CanvasId'
+                  $ref: '#/components/schemas/type_commons_CanvasId'
     delete:
       operationId: delete
       summary: Delete a canvas area
@@ -262,7 +262,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+          $ref: '#/components/schemas/type_commons_CanvasAreaId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -282,36 +282,29 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Success'
+                $ref: '#/components/schemas/type_commons_Success'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_canvas-areas:CanvasAreaLayout:
+    type_canvas-areas_CanvasAreaLayout:
       type: string
       enum:
       - split
       - drawer
       - modal
       title: CanvasAreaLayout
-    type_commons:Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons:SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons:SuccessData:
+    type_commons_SuccessData:
       type: object
       properties:
         success:
@@ -319,34 +312,95 @@ components:
       required:
       - success
       title: SuccessData
-    type_canvas-areas:CanvasArea:
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons_CanvasAreaId:
+      type: string
+      description: Canvas Area ID
+      title: CanvasAreaId
+    type_canvas-areas_CanvasAreaType:
+      type: string
+      enum:
+      - mapping
+      - header
+      - agent
+      - form
+      - sheet
+      - sheets
+      - workbook
+      - document
+      - file
+      - iframe
+      title: CanvasAreaType
+    type_canvas-areas_CanvasAreaPosition:
+      type: string
+      enum:
+      - top
+      - left
+      - right
+      - middle
+      - bottom
+      title: CanvasAreaPosition
+    type_canvas-areas_ListCanvasAreasResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_canvas-areas_CanvasArea'
+      required:
+      - data
+      title: ListCanvasAreasResponse
+    type_canvas-areas_CanvasArea:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+          $ref: '#/components/schemas/type_commons_CanvasAreaId'
         canvasId:
-          $ref: '#/components/schemas/type_commons:CanvasId'
+          $ref: '#/components/schemas/type_commons_CanvasId'
           description: ID of the canvas this area belongs to
         parentId:
-          $ref: '#/components/schemas/type_commons:CanvasAreaId'
+          $ref: '#/components/schemas/type_commons_CanvasAreaId'
           description: ID of the parent canvas area, if this is a nested area
         config:
           description: Additional configuration data for the canvas area
         metadata:
           description: Metadata associated with the canvas area
         layout:
-          $ref: '#/components/schemas/type_canvas-areas:CanvasAreaLayout'
+          $ref: '#/components/schemas/type_canvas-areas_CanvasAreaLayout'
           description: Layout configuration for the canvas area
         overlay:
           description: Overlay configuration for the canvas area
         type:
-          $ref: '#/components/schemas/type_canvas-areas:CanvasAreaType'
+          $ref: '#/components/schemas/type_canvas-areas_CanvasAreaType'
           description: Type of the canvas area
         position:
-          $ref: '#/components/schemas/type_canvas-areas:CanvasAreaPosition'
+          $ref: '#/components/schemas/type_canvas-areas_CanvasAreaPosition'
           description: Position of the canvas area within the canvas
         visibility:
-          $ref: '#/components/schemas/type_canvas-areas:CanvasAreaVisibility'
+          $ref: '#/components/schemas/type_canvas-areas_CanvasAreaVisibility'
           description: Visibility of the canvas area
         createdAt:
           type: string
@@ -374,78 +428,44 @@ components:
       - updatedAt
       description: A canvas area represents a section within a canvas for organizing content
       title: CanvasArea
-    type_canvas-areas:ListCanvasAreasResponse:
+    type_canvas-areas_CanvasAreaResponse:
       type: object
       properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons:Pagination'
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_canvas-areas:CanvasArea'
+          $ref: '#/components/schemas/type_canvas-areas_CanvasArea'
       required:
       - data
-      title: ListCanvasAreasResponse
-    type_commons:CanvasId:
+      title: CanvasAreaResponse
+    type_canvas-areas_CanvasAreaVisibility:
+      type: string
+      enum:
+      - visible
+      - hidden
+      - optional
+      - skeleton
+      title: CanvasAreaVisibility
+    type_commons_CanvasId:
       type: string
       description: Canvas ID
       title: CanvasId
-    type_canvas-areas:CanvasAreaPosition:
-      type: string
-      enum:
-      - top
-      - left
-      - right
-      - middle
-      - bottom
-      title: CanvasAreaPosition
-    type_canvas-areas:CanvasAreaType:
-      type: string
-      enum:
-      - mapping
-      - header
-      - agent
-      - form
-      - sheet
-      - sheets
-      - workbook
-      - document
-      - file
-      - iframe
-      title: CanvasAreaType
-    type_commons:Pagination:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_commons:Errors:
+    type_commons_Errors:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:Error'
+            $ref: '#/components/schemas/type_commons_Error'
       required:
       - errors
       title: Errors
-    type_commons:EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons:Error:
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_Error:
       type: object
       properties:
         key:
@@ -455,30 +475,10 @@ components:
       required:
       - message
       title: Error
-    type_canvas-areas:CanvasAreaResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_canvas-areas:CanvasArea'
-      required:
-      - data
-      title: CanvasAreaResponse
-    type_canvas-areas:CanvasAreaVisibility:
+    type_commons_EnvironmentId:
       type: string
-      enum:
-      - visible
-      - hidden
-      - optional
-      - skeleton
-      title: CanvasAreaVisibility
-    type_commons:SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_commons:CanvasAreaId:
-      type: string
-      description: Canvas Area ID
-      title: CanvasAreaId
+      description: Environment ID
+      title: EnvironmentId
   securitySchemes:
     default:
       type: http

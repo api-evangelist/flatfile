@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_auth API
+  title: Reference Subpackage Auth API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -19,7 +19,7 @@ paths:
         description: ID of environment to search
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -39,19 +39,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_auth:PublishableKeyResponse'
+                $ref: '#/components/schemas/type_auth_PublishableKeyResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /auth/sftp-credentials:
     get:
       operationId: get-sftp-credentials
@@ -64,7 +64,7 @@ paths:
         description: ID of space to get credentials for
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:SpaceId'
+          $ref: '#/components/schemas/type_commons_SpaceId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -84,33 +84,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_auth:SftpCredentials'
+                $ref: '#/components/schemas/type_auth_SftpCredentials'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_auth:ApiKeyOperation:
-      type: object
-      properties:
-        path:
-          type: string
-        method:
-          type: string
-      required:
-      - path
-      - method
-      title: ApiKeyOperation
-    type_auth:SftpCredentials:
+    type_auth_RawKey:
+      type: string
+      description: Raw Api Key
+      title: RawKey
+    type_auth_SftpCredentials:
       type: object
       properties:
         username:
@@ -128,73 +121,27 @@ components:
       - port
       description: Credentials being used to login to SFTP with host and port
       title: SftpCredentials
-    type_auth:PublishableKeyResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_auth:ApiKey'
-      required:
-      - data
-      title: PublishableKeyResponse
-    type_auth:RawKey:
+    type_commons_SpaceId:
       type: string
-      description: Raw Api Key
-      title: RawKey
-    type_auth:ApiKeyId:
-      type: string
-      description: Api Key ID
-      title: ApiKeyId
-    type_commons:AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_commons:Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons:Error'
-      required:
-      - errors
-      title: Errors
-    type_auth:ApiKeyType:
-      type: string
-      enum:
-      - PUBLISHABLE
-      - SECRET
-      title: ApiKeyType
-    type_commons:EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons:Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_auth:ApiKey:
+      description: Space ID
+      title: SpaceId
+    type_auth_ApiKey:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_auth:ApiKeyId'
+          $ref: '#/components/schemas/type_auth_ApiKeyId'
         rawKey:
-          $ref: '#/components/schemas/type_auth:RawKey'
+          $ref: '#/components/schemas/type_auth_RawKey'
         type:
-          $ref: '#/components/schemas/type_auth:ApiKeyType'
+          $ref: '#/components/schemas/type_auth_ApiKeyType'
         environmentId:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
         accountId:
-          $ref: '#/components/schemas/type_commons:AccountId'
+          $ref: '#/components/schemas/type_commons_AccountId'
         operations:
           type: array
           items:
-            $ref: '#/components/schemas/type_auth:ApiKeyOperation'
+            $ref: '#/components/schemas/type_auth_ApiKeyOperation'
         createdAt:
           type: string
           format: date-time
@@ -213,10 +160,63 @@ components:
       - createdAt
       description: API Key used for authenticating against our APIs
       title: ApiKey
-    type_commons:SpaceId:
+    type_auth_PublishableKeyResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_auth_ApiKey'
+      required:
+      - data
+      title: PublishableKeyResponse
+    type_commons_AccountId:
       type: string
-      description: Space ID
-      title: SpaceId
+      description: Account ID
+      title: AccountId
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_auth_ApiKeyOperation:
+      type: object
+      properties:
+        path:
+          type: string
+        method:
+          type: string
+      required:
+      - path
+      - method
+      title: ApiKeyOperation
+    type_auth_ApiKeyType:
+      type: string
+      enum:
+      - PUBLISHABLE
+      - SECRET
+      title: ApiKeyType
+    type_auth_ApiKeyId:
+      type: string
+      description: Api Key ID
+      title: ApiKeyId
   securitySchemes:
     default:
       type: http

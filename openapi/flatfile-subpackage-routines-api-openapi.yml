@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_routines API
+  title: Reference Subpackage Routines API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -19,7 +19,7 @@ paths:
         in: query
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:RunbookId'
+          $ref: '#/components/schemas/type_commons_RunbookId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -39,19 +39,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_routines:RoutinesResponse'
+                $ref: '#/components/schemas/type_routines_RoutinesResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     post:
       operationId: create
       summary: Create a routine
@@ -78,24 +78,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_routines:RoutineResponse'
+                $ref: '#/components/schemas/type_routines_RoutineResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_routines:CreateRoutineRequest'
+              $ref: '#/components/schemas/type_routines_CreateRoutineRequest'
   /routines/{routineId}:
     get:
       operationId: get
@@ -108,7 +108,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:RoutineId'
+          $ref: '#/components/schemas/type_commons_RoutineId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -128,7 +128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_routines:RoutineResponse'
+                $ref: '#/components/schemas/type_routines_RoutineResponse'
     patch:
       operationId: update
       summary: Update a routine
@@ -140,7 +140,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:RoutineId'
+          $ref: '#/components/schemas/type_commons_RoutineId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -160,24 +160,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_routines:RoutineResponse'
+                $ref: '#/components/schemas/type_routines_RoutineResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_routines:UpdateRoutineRequest'
+              $ref: '#/components/schemas/type_routines_UpdateRoutineRequest'
     delete:
       operationId: delete
       summary: Delete a routine
@@ -189,7 +189,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:RoutineId'
+          $ref: '#/components/schemas/type_commons_RoutineId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -209,29 +209,29 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Success'
+                $ref: '#/components/schemas/type_commons_Success'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_routines:Routine:
+    type_routines_Routine:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:RoutineId'
+          $ref: '#/components/schemas/type_commons_RoutineId'
           description: The ID of the Routine.
         runbookId:
-          $ref: '#/components/schemas/type_commons:RunbookId'
+          $ref: '#/components/schemas/type_commons_RunbookId'
         name:
           type: string
           description: The name of the Routine.
@@ -241,7 +241,7 @@ components:
           type: integer
           description: The order of the Routine in the Runbook.
         type:
-          $ref: '#/components/schemas/type_routines:RoutineType'
+          $ref: '#/components/schemas/type_routines_RoutineType'
           description: The type of Routine.
         createdBy:
           type: string
@@ -266,51 +266,7 @@ components:
       - updatedAt
       description: Routine is a set of instructions or procedures that are followed to complete a task.
       title: Routine
-    type_routines:UpdateRoutineRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the Routine.
-        config:
-          description: Configuration for the Routine. Related to the type of Routine.
-        ordinal:
-          type: integer
-          description: The order of the Routine in the Runbook.
-        type:
-          $ref: '#/components/schemas/type_routines:RoutineType'
-          description: The type of Routine.
-      required:
-      - name
-      - config
-      - ordinal
-      - type
-      title: UpdateRoutineRequest
-    type_routines:RoutineType:
-      type: string
-      enum:
-      - JOB
-      title: RoutineType
-    type_commons:RunbookId:
-      type: string
-      description: Runbook ID
-      title: RunbookId
-    type_routines:RoutineResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_routines:Routine'
-      required:
-      - data
-      title: RoutineResponse
-    type_commons:Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons:SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons:SuccessData:
+    type_commons_SuccessData:
       type: object
       properties:
         success:
@@ -318,25 +274,21 @@ components:
       required:
       - success
       title: SuccessData
-    type_commons:RoutineId:
-      type: string
-      description: Routine ID
-      title: RoutineId
-    type_commons:Errors:
+    type_routines_RoutineResponse:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons:Error'
+        data:
+          $ref: '#/components/schemas/type_routines_Routine'
       required:
-      - errors
-      title: Errors
-    type_routines:CreateRoutineRequest:
+      - data
+      title: RoutineResponse
+    type_commons_RunbookId:
+      type: string
+      description: Runbook ID
+      title: RunbookId
+    type_routines_UpdateRoutineRequest:
       type: object
       properties:
-        runbookId:
-          $ref: '#/components/schemas/type_commons:RunbookId'
         name:
           type: string
           description: The name of the Routine.
@@ -346,16 +298,34 @@ components:
           type: integer
           description: The order of the Routine in the Runbook.
         type:
-          $ref: '#/components/schemas/type_routines:RoutineType'
+          $ref: '#/components/schemas/type_routines_RoutineType'
           description: The type of Routine.
       required:
-      - runbookId
       - name
       - config
       - ordinal
       - type
-      title: CreateRoutineRequest
-    type_commons:Error:
+      title: UpdateRoutineRequest
+    type_routines_RoutineType:
+      type: string
+      enum:
+      - JOB
+      title: RoutineType
+    type_commons_RoutineId:
+      type: string
+      description: Routine ID
+      title: RoutineId
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_commons_Error:
       type: object
       properties:
         key:
@@ -365,16 +335,46 @@ components:
       required:
       - message
       title: Error
-    type_routines:RoutinesResponse:
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_routines_RoutinesResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_routines:Routine'
+            $ref: '#/components/schemas/type_routines_Routine'
       required:
       - data
       title: RoutinesResponse
+    type_routines_CreateRoutineRequest:
+      type: object
+      properties:
+        runbookId:
+          $ref: '#/components/schemas/type_commons_RunbookId'
+        name:
+          type: string
+          description: The name of the Routine.
+        config:
+          description: Configuration for the Routine. Related to the type of Routine.
+        ordinal:
+          type: integer
+          description: The order of the Routine in the Runbook.
+        type:
+          $ref: '#/components/schemas/type_routines_RoutineType'
+          description: The type of Routine.
+      required:
+      - runbookId
+      - name
+      - config
+      - ordinal
+      - type
+      title: CreateRoutineRequest
   securitySchemes:
     default:
       type: http

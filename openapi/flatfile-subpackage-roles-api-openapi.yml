@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_roles API
+  title: Reference Subpackage Roles API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -34,18 +34,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_roles:ListRolesResponse'
+                $ref: '#/components/schemas/type_roles_ListRolesResponse'
 components:
   schemas:
-    type_roles:RoleResponse:
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_commons_RoleId:
+      type: string
+      description: Role ID
+      title: RoleId
+    type_roles_RoleResponse:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:RoleId'
+          $ref: '#/components/schemas/type_commons_RoleId'
         name:
           type: string
         accountId:
-          $ref: '#/components/schemas/type_commons:AccountId'
+          $ref: '#/components/schemas/type_commons_AccountId'
         createdAt:
           type: string
           format: date-time
@@ -59,24 +67,16 @@ components:
       - createdAt
       - updatedAt
       title: RoleResponse
-    type_roles:ListRolesResponse:
+    type_roles_ListRolesResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_roles:RoleResponse'
+            $ref: '#/components/schemas/type_roles_RoleResponse'
       required:
       - data
       title: ListRolesResponse
-    type_commons:RoleId:
-      type: string
-      description: Role ID
-      title: RoleId
-    type_commons:AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
   securitySchemes:
     default:
       type: http

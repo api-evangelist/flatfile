@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_agents API
+  title: Reference Subpackage Agents API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -18,7 +18,7 @@ paths:
         in: query
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: isSystem
         in: query
         required: false
@@ -33,12 +33,12 @@ paths:
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:PageSize'
+          $ref: '#/components/schemas/type_commons_PageSize'
       - name: pageNumber
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:PageNumber'
+          $ref: '#/components/schemas/type_commons_PageNumber'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -58,7 +58,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agents:ListAgentsResponse'
+                $ref: '#/components/schemas/type_agents_ListAgentsResponse'
     post:
       operationId: create
       summary: Create an agent
@@ -69,7 +69,7 @@ paths:
         in: query
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -89,18 +89,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agents:AgentResponse'
+                $ref: '#/components/schemas/type_agents_AgentResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_agents:AgentConfig'
+              $ref: '#/components/schemas/type_agents_AgentConfig'
   /agents/{agentId}:
     get:
       operationId: get
@@ -112,12 +112,12 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: environmentId
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -137,19 +137,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agents:AgentResponse'
+                $ref: '#/components/schemas/type_agents_AgentResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     delete:
       operationId: delete
       summary: Delete an agent
@@ -161,13 +161,13 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: environmentId
         in: query
         description: This environment variable is no longer needed or used
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -187,19 +187,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Success'
+                $ref: '#/components/schemas/type_commons_Success'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /agents/{agentId}/versions:
     get:
       operationId: list-versions
@@ -211,7 +211,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -231,19 +231,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agents:ListAgentVersionsResponse'
+                $ref: '#/components/schemas/type_agents_ListAgentVersionsResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /agents/{agentId}/versions/{agentVersionId}/revert:
     get:
       operationId: revert
@@ -255,12 +255,12 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: agentVersionId
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentVersionId'
+          $ref: '#/components/schemas/type_commons_AgentVersionId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -280,19 +280,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agents:AgentVersionResponse'
+                $ref: '#/components/schemas/type_agents_AgentVersionResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /agents/{agentId}/roles:
     get:
       operationId: list-agent-roles
@@ -306,7 +306,7 @@ paths:
         description: The agent id
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -326,25 +326,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_roles:ListActorRolesResponse'
+                $ref: '#/components/schemas/type_roles_ListActorRolesResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     post:
       operationId: assign-agent-role
       summary: Assign Role to Agent
@@ -357,7 +357,7 @@ paths:
         description: The agent id
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -377,30 +377,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_roles:AssignRoleResponse'
+                $ref: '#/components/schemas/type_roles_AssignRoleResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_roles:AssignActorRoleRequest'
+              $ref: '#/components/schemas/type_roles_AssignActorRoleRequest'
   /agents/{agentId}/roles/{actorRoleId}:
     delete:
       operationId: delete-agent-role
@@ -414,13 +414,13 @@ paths:
         description: The agent id
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: actorRoleId
         in: path
         description: The actor role id
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:ActorRoleId'
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -440,25 +440,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Success'
+                $ref: '#/components/schemas/type_commons_Success'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /agents/{agentId}/logs:
     get:
       operationId: get-agent-logs
@@ -470,12 +470,12 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: environmentId
         in: query
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -495,19 +495,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agents:GetAgentLogsResponse'
+                $ref: '#/components/schemas/type_agents_GetAgentLogsResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /agents/log/{eventId}:
     get:
       operationId: get-agent-log
@@ -519,12 +519,12 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EventId'
+          $ref: '#/components/schemas/type_commons_EventId'
       - name: environmentId
         in: query
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -544,19 +544,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agents:GetDetailedAgentLogResponse'
+                $ref: '#/components/schemas/type_agents_GetDetailedAgentLogResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /agents/logs:
     get:
       operationId: get-environment-agent-logs
@@ -568,27 +568,27 @@ paths:
         in: query
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: spaceId
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:SpaceId'
+          $ref: '#/components/schemas/type_commons_SpaceId'
       - name: success
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:SuccessQueryParameter'
+          $ref: '#/components/schemas/type_commons_SuccessQueryParameter'
       - name: pageSize
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:PageSize'
+          $ref: '#/components/schemas/type_commons_PageSize'
       - name: pageNumber
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:PageNumber'
+          $ref: '#/components/schemas/type_commons_PageNumber'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -608,19 +608,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agents:GetDetailedAgentLogsResponse'
+                $ref: '#/components/schemas/type_agents_GetDetailedAgentLogsResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
   /agents/executions:
     get:
       operationId: get-environment-agent-executions
@@ -632,32 +632,32 @@ paths:
         in: query
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: agentId
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
       - name: spaceId
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:SpaceId'
+          $ref: '#/components/schemas/type_commons_SpaceId'
       - name: success
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:SuccessQueryParameter'
+          $ref: '#/components/schemas/type_commons_SuccessQueryParameter'
       - name: pageSize
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:PageSize'
+          $ref: '#/components/schemas/type_commons_PageSize'
       - name: pageNumber
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:PageNumber'
+          $ref: '#/components/schemas/type_commons_PageNumber'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -677,58 +677,134 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_agents:GetExecutionsResponse'
+                $ref: '#/components/schemas/type_agents_GetExecutionsResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons:EventId:
-      type: string
-      description: Event ID
-      title: EventId
-    type_commons:Success:
+    type_agents_AgentResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_commons:SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_agents:Compiler:
-      type: string
-      enum:
-      - js
-      description: The compiler of the agent
-      title: Compiler
-    type_commons:PageSize:
-      type: integer
-      description: Number of logs to return in a page (default 20)
-      title: PageSize
-    type_agents:AgentVersionResponse:
+          $ref: '#/components/schemas/type_agents_Agent'
+      title: AgentResponse
+    type_roles_AssignRoleResponseData:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_agents:AgentVersion'
-      title: AgentVersionResponse
-    type_agents:Execution:
+        id:
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons_ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: AssignRoleResponseData
+    type_agents_DetailedAgentLog:
       type: object
       properties:
         eventId:
-          $ref: '#/components/schemas/type_commons:EventId'
+          $ref: '#/components/schemas/type_commons_EventId'
+        success:
+          type: boolean
+          description: Whether the agent execution was successful
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          description: The duration of the agent execution
+        topic:
+          type: string
+          description: The topics of the agent execution
+        context:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The context of the agent execution
+        log:
+          type: string
+          description: The log of the agent execution
+      required:
+      - eventId
+      - success
+      - createdAt
+      - completedAt
+      - duration
+      - topic
+      - context
+      description: A log of an agent execution
+      title: DetailedAgentLog
+    type_commons_PageSize:
+      type: integer
+      description: Number of logs to return in a page (default 20)
+      title: PageSize
+    type_agents_GetDetailedAgentLogResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agents_DetailedAgentLog'
+      required:
+      - data
+      title: GetDetailedAgentLogResponse
+    type_commons_AgentId:
+      type: string
+      description: Agent ID
+      title: AgentId
+    type_roles_ListActorRolesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles_ActorRoleResponse'
+      required:
+      - data
+      title: ListActorRolesResponse
+    type_agents_ListAgentVersionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_AgentVersion'
+      title: ListAgentVersionsResponse
+    type_agents_Execution:
+      type: object
+      properties:
+        eventId:
+          $ref: '#/components/schemas/type_commons_EventId'
         success:
           type: boolean
           description: Whether the agent execution was successful
         spaceId:
-          $ref: '#/components/schemas/type_commons:SpaceId'
+          $ref: '#/components/schemas/type_commons_SpaceId'
           description: The space ID associated with this execution
         createdAt:
           type: string
@@ -760,17 +836,17 @@ components:
       - topic
       description: An execution of an agent
       title: Execution
-    type_roles:ActorRoleResponse:
+    type_roles_ActorRoleResponse:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:ActorRoleId'
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
         roleId:
-          $ref: '#/components/schemas/type_commons:RoleId'
+          $ref: '#/components/schemas/type_commons_RoleId'
         actorId:
-          $ref: '#/components/schemas/type_commons:ActorIdUnion'
+          $ref: '#/components/schemas/type_commons_ActorIdUnion'
         resourceId:
-          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
         createdAt:
           type: string
           format: date-time
@@ -785,11 +861,140 @@ components:
       - createdAt
       - updatedAt
       title: ActorRoleResponse
-    type_commons:SuccessQueryParameter:
-      type: boolean
-      description: Boolean
-      title: SuccessQueryParameter
-    type_events:EventTopic:
+    type_agents_GetDetailedAgentLogsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_DetailedAgentLog'
+      required:
+      - data
+      title: GetDetailedAgentLogsResponse
+    type_agents_Agent:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events_EventTopic'
+          description: The topics the agent should listen for
+        compiler:
+          $ref: '#/components/schemas/type_agents_Compiler'
+          description: The compiler of the agent
+        source:
+          type: string
+          description: The source of the agent
+        sourceMap:
+          type: string
+          description: The source map of the agent
+        slug:
+          type: string
+          description: The slug of the agent
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
+        template:
+          $ref: '#/components/schemas/type_agents_AgentTemplateEnum'
+          description: The template of the agent; Template options are required for templated agents.
+        templateOptions:
+          $ref: '#/components/schemas/type_agents_TemplateOptions'
+          description: The options for a templated agent. Must be provided if `template` is provided.
+        isSystem:
+          type: boolean
+          description: Whether the agent is a system agent. This should be false for all agents created by users.
+        namespace:
+          type: string
+          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
+        packageVersions:
+          type: object
+          additionalProperties:
+            type: string
+          description: Package versions information for the agent
+        commitInfo:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Commit information for the agent
+        id:
+          $ref: '#/components/schemas/type_commons_AgentId'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        accountId:
+          $ref: '#/components/schemas/type_commons_AccountId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons_AgentId'
+          description: The agent id of the template that was used to create this agent
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time the agent template configuration was propagated to this agent
+      required:
+      - id
+      - createdAt
+      - updatedAt
+      - accountId
+      - environmentId
+      title: Agent
+    type_commons_AgentVersionId:
+      type: string
+      description: Agent version ID
+      title: AgentVersionId
+    type_agents_GetExecutionsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_Execution'
+      required:
+      - data
+      title: GetExecutionsResponse
+    type_agents_AutomapOptions:
+      type: object
+      properties:
+        accuracy:
+          type: string
+        defaultTargetSheet:
+          type: string
+        matchFilename:
+          type: string
+      required:
+      - accuracy
+      - defaultTargetSheet
+      - matchFilename
+      title: AutomapOptions
+    type_roles_ResourceIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_AccountId'
+      - $ref: '#/components/schemas/type_commons_EnvironmentId'
+      - $ref: '#/components/schemas/type_commons_SpaceId'
+      title: ResourceIdUnion
+    type_roles_AssignRoleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_roles_AssignRoleResponseData'
+      required:
+      - data
+      title: AssignRoleResponse
+    type_commons_GuestId:
+      type: string
+      description: Guest ID
+      title: GuestId
+    type_events_EventTopic:
       type: string
       enum:
       - agent:created
@@ -876,7 +1081,221 @@ components:
       - thread:deleted
       description: The topic of the event
       title: EventTopic
-    type_agents:TemplateOptions:
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_agents_GetAgentLogsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_AgentLog'
+      title: GetAgentLogsResponse
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_commons_SuccessQueryParameter:
+      type: boolean
+      description: Boolean
+      title: SuccessQueryParameter
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_agents_Compiler:
+      type: string
+      enum:
+      - js
+      description: The compiler of the agent
+      title: Compiler
+    type_agents_AgentConfig:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events_EventTopic'
+          description: The topics the agent should listen for
+        compiler:
+          $ref: '#/components/schemas/type_agents_Compiler'
+          description: The compiler of the agent
+        source:
+          type: string
+          description: The source of the agent
+        sourceMap:
+          type: string
+          description: The source map of the agent
+        slug:
+          type: string
+          description: The slug of the agent
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
+        template:
+          $ref: '#/components/schemas/type_agents_AgentTemplateEnum'
+          description: The template of the agent; Template options are required for templated agents.
+        templateOptions:
+          $ref: '#/components/schemas/type_agents_TemplateOptions'
+          description: The options for a templated agent. Must be provided if `template` is provided.
+        isSystem:
+          type: boolean
+          description: Whether the agent is a system agent. This should be false for all agents created by users.
+        namespace:
+          type: string
+          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
+        packageVersions:
+          type: object
+          additionalProperties:
+            type: string
+          description: Package versions information for the agent
+        commitInfo:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Commit information for the agent
+      description: Properties used to create a new agent
+      title: AgentConfig
+    type_commons_PageNumber:
+      type: integer
+      description: Based on pageSize, which page of records to return
+      title: PageNumber
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_AgentLogId:
+      type: string
+      description: Agent Log ID
+      title: AgentLogId
+    type_agents_AgentTemplateEnum:
+      type: string
+      enum:
+      - constraints
+      - autobuild
+      - autocast
+      - webhook-egress
+      - action-listener
+      - automap
+      description: The template of the agent
+      title: AgentTemplateEnum
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_agents_AgentVersion:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events_EventTopic'
+          description: The topics the agent should listen for
+        compiler:
+          $ref: '#/components/schemas/type_agents_Compiler'
+          description: The compiler of the agent
+        source:
+          type: string
+          description: The source of the agent
+        sourceMap:
+          type: string
+          description: The source map of the agent
+        slug:
+          type: string
+          description: The slug of the agent
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
+        template:
+          $ref: '#/components/schemas/type_agents_AgentTemplateEnum'
+          description: The template of the agent; Template options are required for templated agents.
+        templateOptions:
+          $ref: '#/components/schemas/type_agents_TemplateOptions'
+          description: The options for a templated agent. Must be provided if `template` is provided.
+        isSystem:
+          type: boolean
+          description: Whether the agent is a system agent. This should be false for all agents created by users.
+        namespace:
+          type: string
+          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
+        packageVersions:
+          type: object
+          additionalProperties:
+            type: string
+          description: Package versions information for the agent
+        commitInfo:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Commit information for the agent
+        id:
+          $ref: '#/components/schemas/type_commons_AgentVersionId'
+        version:
+          type: integer
+        origin:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        agent_id:
+          $ref: '#/components/schemas/type_commons_AgentId'
+      required:
+      - id
+      - version
+      - origin
+      - createdAt
+      - updatedAt
+      - agent_id
+      title: AgentVersion
+    type_agents_TemplateOptions:
       oneOf:
       - type: object
         properties:
@@ -969,7 +1388,7 @@ components:
           namespace:
             type: string
           options:
-            $ref: '#/components/schemas/type_agents:AutomapOptions'
+            $ref: '#/components/schemas/type_agents_AutomapOptions'
         required:
         - template
         - options
@@ -977,134 +1396,48 @@ components:
         propertyName: template
       description: The options for a templated agent.
       title: TemplateOptions
-    type_commons:EnvironmentId:
+    type_commons_EventId:
       type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons:ActorRoleId:
-      type: string
-      description: Actor Role ID
-      title: ActorRoleId
-    type_commons:Error:
+      description: Event ID
+      title: EventId
+    type_agents_ListAgentsResponse:
       type: object
       properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_agents:AgentVersion:
-      type: object
-      properties:
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_events:EventTopic'
-          description: The topics the agent should listen for
-        compiler:
-          $ref: '#/components/schemas/type_agents:Compiler'
-          description: The compiler of the agent
-        source:
-          type: string
-          description: The source of the agent
-        sourceMap:
-          type: string
-          description: The source map of the agent
-        slug:
-          type: string
-          description: The slug of the agent
-        options:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
-        template:
-          $ref: '#/components/schemas/type_agents:AgentTemplateEnum'
-          description: The template of the agent; Template options are required for templated agents.
-        templateOptions:
-          $ref: '#/components/schemas/type_agents:TemplateOptions'
-          description: The options for a templated agent. Must be provided if `template` is provided.
-        isSystem:
-          type: boolean
-          description: Whether the agent is a system agent. This should be false for all agents created by users.
-        namespace:
-          type: string
-          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
-        packageVersions:
-          type: object
-          additionalProperties:
-            type: string
-          description: Package versions information for the agent
-        commitInfo:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Commit information for the agent
-        id:
-          $ref: '#/components/schemas/type_commons:AgentVersionId'
-        version:
-          type: integer
-        origin:
-          type: integer
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        agent_id:
-          $ref: '#/components/schemas/type_commons:AgentId'
-      required:
-      - id
-      - version
-      - origin
-      - createdAt
-      - updatedAt
-      - agent_id
-      title: AgentVersion
-    type_commons:RoleId:
-      type: string
-      description: Role ID
-      title: RoleId
-    type_commons:AgentLogId:
-      type: string
-      description: Agent Log ID
-      title: AgentLogId
-    type_commons:PageNumber:
-      type: integer
-      description: Based on pageSize, which page of records to return
-      title: PageNumber
-    type_agents:GetExecutionsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons:Pagination'
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_agents:Execution'
-      required:
-      - data
-      title: GetExecutionsResponse
-    type_commons:SuccessData:
+            $ref: '#/components/schemas/type_agents_Agent'
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+      title: ListAgentsResponse
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_roles_AssignActorRoleRequest:
       type: object
       properties:
-        success:
-          type: boolean
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
       required:
-      - success
-      title: SuccessData
-    type_agents:AgentLog:
+      - roleId
+      - resourceId
+      title: AssignActorRoleRequest
+    type_commons_RoleId:
+      type: string
+      description: Role ID
+      title: RoleId
+    type_agents_AgentLog:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:AgentLogId'
+          $ref: '#/components/schemas/type_commons_AgentLogId'
         agentId:
-          $ref: '#/components/schemas/type_commons:AgentId'
+          $ref: '#/components/schemas/type_commons_AgentId'
         eventId:
-          $ref: '#/components/schemas/type_commons:EventId'
+          $ref: '#/components/schemas/type_commons_EventId'
         success:
           type: boolean
           description: Whether the agent execution was successful
@@ -1158,363 +1491,30 @@ components:
       - completedAt
       description: A log of an agent execution
       title: AgentLog
-    type_agents:GetAgentLogsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons:Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents:AgentLog'
-      title: GetAgentLogsResponse
-    type_agents:AutomapOptions:
-      type: object
-      properties:
-        accuracy:
-          type: string
-        defaultTargetSheet:
-          type: string
-        matchFilename:
-          type: string
-      required:
-      - accuracy
-      - defaultTargetSheet
-      - matchFilename
-      title: AutomapOptions
-    type_agents:DetailedAgentLog:
-      type: object
-      properties:
-        eventId:
-          $ref: '#/components/schemas/type_commons:EventId'
-        success:
-          type: boolean
-          description: Whether the agent execution was successful
-        createdAt:
-          type: string
-          format: date-time
-        completedAt:
-          type: string
-          format: date-time
-        duration:
-          type: integer
-          description: The duration of the agent execution
-        topic:
-          type: string
-          description: The topics of the agent execution
-        context:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: The context of the agent execution
-        log:
-          type: string
-          description: The log of the agent execution
-      required:
-      - eventId
-      - success
-      - createdAt
-      - completedAt
-      - duration
-      - topic
-      - context
-      description: A log of an agent execution
-      title: DetailedAgentLog
-    type_agents:AgentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_agents:Agent'
-      title: AgentResponse
-    type_agents:GetDetailedAgentLogsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons:Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents:DetailedAgentLog'
-      required:
-      - data
-      title: GetDetailedAgentLogsResponse
-    type_agents:ListAgentVersionsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents:AgentVersion'
-      title: ListAgentVersionsResponse
-    type_commons:Pagination:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_commons:GuestId:
+    type_commons_EnvironmentId:
       type: string
-      description: Guest ID
-      title: GuestId
-    type_roles:AssignActorRoleRequest:
-      type: object
-      properties:
-        roleId:
-          $ref: '#/components/schemas/type_commons:RoleId'
-        resourceId:
-          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
-      required:
-      - roleId
-      - resourceId
-      title: AssignActorRoleRequest
-    type_commons:Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons:Error'
-      required:
-      - errors
-      title: Errors
-    type_agents:AgentConfig:
-      type: object
-      properties:
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_events:EventTopic'
-          description: The topics the agent should listen for
-        compiler:
-          $ref: '#/components/schemas/type_agents:Compiler'
-          description: The compiler of the agent
-        source:
-          type: string
-          description: The source of the agent
-        sourceMap:
-          type: string
-          description: The source map of the agent
-        slug:
-          type: string
-          description: The slug of the agent
-        options:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
-        template:
-          $ref: '#/components/schemas/type_agents:AgentTemplateEnum'
-          description: The template of the agent; Template options are required for templated agents.
-        templateOptions:
-          $ref: '#/components/schemas/type_agents:TemplateOptions'
-          description: The options for a templated agent. Must be provided if `template` is provided.
-        isSystem:
-          type: boolean
-          description: Whether the agent is a system agent. This should be false for all agents created by users.
-        namespace:
-          type: string
-          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
-        packageVersions:
-          type: object
-          additionalProperties:
-            type: string
-          description: Package versions information for the agent
-        commitInfo:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Commit information for the agent
-      description: Properties used to create a new agent
-      title: AgentConfig
-    type_commons:SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_commons:AgentId:
-      type: string
-      description: Agent ID
-      title: AgentId
-    type_agents:Agent:
-      type: object
-      properties:
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_events:EventTopic'
-          description: The topics the agent should listen for
-        compiler:
-          $ref: '#/components/schemas/type_agents:Compiler'
-          description: The compiler of the agent
-        source:
-          type: string
-          description: The source of the agent
-        sourceMap:
-          type: string
-          description: The source map of the agent
-        slug:
-          type: string
-          description: The slug of the agent
-        options:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
-        template:
-          $ref: '#/components/schemas/type_agents:AgentTemplateEnum'
-          description: The template of the agent; Template options are required for templated agents.
-        templateOptions:
-          $ref: '#/components/schemas/type_agents:TemplateOptions'
-          description: The options for a templated agent. Must be provided if `template` is provided.
-        isSystem:
-          type: boolean
-          description: Whether the agent is a system agent. This should be false for all agents created by users.
-        namespace:
-          type: string
-          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
-        packageVersions:
-          type: object
-          additionalProperties:
-            type: string
-          description: Package versions information for the agent
-        commitInfo:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Commit information for the agent
-        id:
-          $ref: '#/components/schemas/type_commons:AgentId'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        accountId:
-          $ref: '#/components/schemas/type_commons:AccountId'
-        environmentId:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
-        createdFrom:
-          $ref: '#/components/schemas/type_commons:AgentId'
-          description: The agent id of the template that was used to create this agent
-        lastPropagatedAt:
-          type: string
-          format: date-time
-          description: The last time the agent template configuration was propagated to this agent
-      required:
-      - id
-      - createdAt
-      - updatedAt
-      - accountId
-      - environmentId
-      title: Agent
-    type_roles:AssignRoleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_roles:AssignRoleResponseData'
-      required:
-      - data
-      title: AssignRoleResponse
-    type_commons:AgentVersionId:
-      type: string
-      description: Agent version ID
-      title: AgentVersionId
-    type_roles:AssignRoleResponseData:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons:ActorRoleId'
-        roleId:
-          $ref: '#/components/schemas/type_commons:RoleId'
-        actorId:
-          $ref: '#/components/schemas/type_commons:ActorIdUnion'
-        resourceId:
-          $ref: '#/components/schemas/type_roles:ResourceIdUnion'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - roleId
-      - actorId
-      - resourceId
-      - createdAt
-      - updatedAt
-      title: AssignRoleResponseData
-    type_agents:GetDetailedAgentLogResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_agents:DetailedAgentLog'
-      required:
-      - data
-      title: GetDetailedAgentLogResponse
-    type_commons:UserId:
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_UserId:
       type: string
       description: User ID
       title: UserId
-    type_agents:AgentTemplateEnum:
-      type: string
-      enum:
-      - constraints
-      - autobuild
-      - autocast
-      - webhook-egress
-      - action-listener
-      - automap
-      description: The template of the agent
-      title: AgentTemplateEnum
-    type_commons:AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_roles:ListActorRolesResponse:
+    type_agents_AgentVersionResponse:
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_roles:ActorRoleResponse'
-      required:
-      - data
-      title: ListActorRolesResponse
-    type_roles:ResourceIdUnion:
+          $ref: '#/components/schemas/type_agents_AgentVersion'
+      title: AgentVersionResponse
+    type_commons_ActorIdUnion:
       oneOf:
-      - $ref: '#/components/schemas/type_commons:AccountId'
-      - $ref: '#/components/schemas/type_commons:EnvironmentId'
-      - $ref: '#/components/schemas/type_commons:SpaceId'
-      title: ResourceIdUnion
-    type_commons:ActorIdUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons:UserId'
-      - $ref: '#/components/schemas/type_commons:AgentId'
-      - $ref: '#/components/schemas/type_commons:GuestId'
+      - $ref: '#/components/schemas/type_commons_UserId'
+      - $ref: '#/components/schemas/type_commons_AgentId'
+      - $ref: '#/components/schemas/type_commons_GuestId'
       title: ActorIdUnion
-    type_agents:ListAgentsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents:Agent'
-        pagination:
-          $ref: '#/components/schemas/type_commons:Pagination'
-      title: ListAgentsResponse
+    type_commons_ActorRoleId:
+      type: string
+      description: Actor Role ID
+      title: ActorRoleId
   securitySchemes:
     default:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts subpackage_runbooks API
+  title: Reference Subpackage Runbooks API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -19,17 +19,17 @@ paths:
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
       - name: environmentId
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
       - name: spaceId
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:SpaceId'
+          $ref: '#/components/schemas/type_commons_SpaceId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -49,19 +49,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_runbooks:RunbooksResponse'
+                $ref: '#/components/schemas/type_runbooks_RunbooksResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
     post:
       operationId: create
       summary: Create a runbook
@@ -88,24 +88,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_runbooks:RunbookResponse'
+                $ref: '#/components/schemas/type_runbooks_RunbookResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_runbooks:CreateRunbookRequest'
+              $ref: '#/components/schemas/type_runbooks_CreateRunbookRequest'
   /runbooks/{runbookId}:
     get:
       operationId: get
@@ -118,7 +118,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:RunbookId'
+          $ref: '#/components/schemas/type_commons_RunbookId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -138,7 +138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_runbooks:RunbookResponse'
+                $ref: '#/components/schemas/type_runbooks_RunbookResponse'
     patch:
       operationId: update
       summary: Update a runbook
@@ -150,7 +150,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:RunbookId'
+          $ref: '#/components/schemas/type_commons_RunbookId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -170,24 +170,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_runbooks:RunbookResponse'
+                $ref: '#/components/schemas/type_runbooks_RunbookResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_runbooks:UpdateRunbookRequest'
+              $ref: '#/components/schemas/type_runbooks_UpdateRunbookRequest'
     delete:
       operationId: delete
       summary: Delete a runbook
@@ -199,7 +199,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:RunbookId'
+          $ref: '#/components/schemas/type_commons_RunbookId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -219,46 +219,50 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Success'
+                $ref: '#/components/schemas/type_commons_Success'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:Errors'
+                $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_runbooks:Runbook:
+    type_commons_AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_runbooks_Runbook:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:RunbookId'
+          $ref: '#/components/schemas/type_commons_RunbookId'
           description: The ID of the Runbook.
         accountId:
-          $ref: '#/components/schemas/type_commons:AccountId'
+          $ref: '#/components/schemas/type_commons_AccountId'
         appId:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
         environmentId:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
         spaceId:
-          $ref: '#/components/schemas/type_commons:SpaceId'
+          $ref: '#/components/schemas/type_commons_SpaceId'
         name:
           type: string
           description: The name of the Runbook.
         config:
-          $ref: '#/components/schemas/type_runbooks:RunbookConfig'
+          $ref: '#/components/schemas/type_runbooks_RunbookConfig'
           description: The configuration of the Runbook.
         status:
-          $ref: '#/components/schemas/type_runbooks:RunbookStatus'
+          $ref: '#/components/schemas/type_runbooks_RunbookStatus'
           description: The status of the Runbook.
         type:
-          $ref: '#/components/schemas/type_runbooks:RunbookType'
+          $ref: '#/components/schemas/type_runbooks_RunbookType'
           description: The type of the Runbook.
         createdBy:
           type: string
@@ -286,7 +290,143 @@ components:
       - updatedAt
       description: Runbook
       title: Runbook
-    type_runbooks:SheetTransformConfig:
+    type_runbooks_CreateRunbookRequest:
+      type: object
+      properties:
+        accountId:
+          $ref: '#/components/schemas/type_commons_AccountId'
+        appId:
+          $ref: '#/components/schemas/type_commons_AppId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons_SpaceId'
+        name:
+          type: string
+          description: The name of the Runbook.
+        config:
+          $ref: '#/components/schemas/type_runbooks_RunbookConfig'
+          description: The configuration of the Runbook.
+        status:
+          $ref: '#/components/schemas/type_runbooks_RunbookStatus'
+          description: The status of the Runbook.
+        type:
+          $ref: '#/components/schemas/type_runbooks_RunbookType'
+          description: The type of the Runbook.
+      required:
+      - accountId
+      - appId
+      - environmentId
+      - spaceId
+      - name
+      - config
+      - status
+      - type
+      title: CreateRunbookRequest
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_runbooks_RunbookConfig:
+      oneOf:
+      - $ref: '#/components/schemas/type_runbooks_SheetTransformConfig'
+      title: RunbookConfig
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons_RunbookId:
+      type: string
+      description: Runbook ID
+      title: RunbookId
+    type_runbooks_RunbookType:
+      type: string
+      enum:
+      - SHEET_TOOL
+      - PREPROCESSING
+      title: RunbookType
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_runbooks_RunbookStatus:
+      type: string
+      enum:
+      - CREATED
+      - RECORDING
+      - EXECUTING
+      - WAITING
+      - COMPLETED
+      - FAILED
+      - CANCELED
+      title: RunbookStatus
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_runbooks_UpdateRunbookRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Runbook.
+        status:
+          $ref: '#/components/schemas/type_runbooks_RunbookStatus'
+          description: The status of the Runbook.
+        config:
+          $ref: '#/components/schemas/type_runbooks_RunbookConfig'
+          description: The configuration of the Runbook.
+      title: UpdateRunbookRequest
+    type_runbooks_RunbookResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_runbooks_Runbook'
+      required:
+      - data
+      title: RunbookResponse
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_runbooks_RunbooksResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_runbooks_Runbook'
+      required:
+      - data
+      title: RunbooksResponse
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_runbooks_SheetTransformConfig:
       type: object
       properties:
         sourceSheetIds:
@@ -303,146 +443,6 @@ components:
       - sourceSheetIds
       - destinationSheetIds
       title: SheetTransformConfig
-    type_runbooks:RunbookStatus:
-      type: string
-      enum:
-      - CREATED
-      - RECORDING
-      - EXECUTING
-      - WAITING
-      - COMPLETED
-      - FAILED
-      - CANCELED
-      title: RunbookStatus
-    type_commons:Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_commons:Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons:SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons:RunbookId:
-      type: string
-      description: Runbook ID
-      title: RunbookId
-    type_commons:SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_runbooks:RunbookConfig:
-      oneOf:
-      - $ref: '#/components/schemas/type_runbooks:SheetTransformConfig'
-      title: RunbookConfig
-    type_runbooks:RunbookType:
-      type: string
-      enum:
-      - SHEET_TOOL
-      - PREPROCESSING
-      title: RunbookType
-    type_commons:AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_runbooks:UpdateRunbookRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the Runbook.
-        status:
-          $ref: '#/components/schemas/type_runbooks:RunbookStatus'
-          description: The status of the Runbook.
-        config:
-          $ref: '#/components/schemas/type_runbooks:RunbookConfig'
-          description: The configuration of the Runbook.
-      title: UpdateRunbookRequest
-    type_runbooks:RunbookResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_runbooks:Runbook'
-      required:
-      - data
-      title: RunbookResponse
-    type_commons:Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons:Error'
-      required:
-      - errors
-      title: Errors
-    type_runbooks:CreateRunbookRequest:
-      type: object
-      properties:
-        accountId:
-          $ref: '#/components/schemas/type_commons:AccountId'
-        appId:
-          $ref: '#/components/schemas/type_commons:AppId'
-        environmentId:
-          $ref: '#/components/schemas/type_commons:EnvironmentId'
-        spaceId:
-          $ref: '#/components/schemas/type_commons:SpaceId'
-        name:
-          type: string
-          description: The name of the Runbook.
-        config:
-          $ref: '#/components/schemas/type_runbooks:RunbookConfig'
-          description: The configuration of the Runbook.
-        status:
-          $ref: '#/components/schemas/type_runbooks:RunbookStatus'
-          description: The status of the Runbook.
-        type:
-          $ref: '#/components/schemas/type_runbooks:RunbookType'
-          description: The type of the Runbook.
-      required:
-      - accountId
-      - appId
-      - environmentId
-      - spaceId
-      - name
-      - config
-      - status
-      - type
-      title: CreateRunbookRequest
-    type_commons:EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons:AppId:
-      type: string
-      description: App ID
-      title: AppId
-    type_runbooks:RunbooksResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_runbooks:Runbook'
-      required:
-      - data
-      title: RunbooksResponse
-    type_commons:SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
   securitySchemes:
     default:
       type: http

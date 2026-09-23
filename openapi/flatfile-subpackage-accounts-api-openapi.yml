@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference subpackage_accounts API
+  title: Reference Subpackage Accounts API
   version: 1.0.0
 servers:
 - url: https://api.x.flatfile.com/v1
@@ -11,7 +11,6 @@ paths:
     get:
       operationId: get-current
       summary: Get the current account
-      description: Get the current account
       tags:
       - subpackage_accounts
       parameters:
@@ -34,11 +33,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_accounts:AccountResponse'
+                $ref: '#/components/schemas/type_accounts_AccountResponse'
     patch:
       operationId: update-current
       summary: Update the current account
-      description: Update the current account
       tags:
       - subpackage_accounts
       parameters:
@@ -61,27 +59,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_accounts:AccountResponse'
+                $ref: '#/components/schemas/type_accounts_AccountResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_accounts:AccountPatch'
+              $ref: '#/components/schemas/type_accounts_AccountPatch'
 components:
   schemas:
-    type_accounts:AccountResponse:
+    type_commons_AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_accounts_AccountPatch:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_accounts:Account'
-      required:
-      - data
-      title: AccountResponse
-    type_accounts:Account:
+        name:
+          type: string
+        defaultAppId:
+          $ref: '#/components/schemas/type_commons_AppId'
+      description: Properties used to update an account
+      title: AccountPatch
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_accounts_Account:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/type_commons:AccountId'
+          $ref: '#/components/schemas/type_commons_AccountId'
         name:
           type: string
         primaryDomain:
@@ -111,7 +118,7 @@ components:
           type: string
           format: date-time
         defaultAppId:
-          $ref: '#/components/schemas/type_commons:AppId'
+          $ref: '#/components/schemas/type_commons_AppId'
         dashboard:
           type: integer
       required:
@@ -122,23 +129,14 @@ components:
       - updatedAt
       description: An account
       title: Account
-    type_commons:AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_commons:AppId:
-      type: string
-      description: App ID
-      title: AppId
-    type_accounts:AccountPatch:
+    type_accounts_AccountResponse:
       type: object
       properties:
-        name:
-          type: string
-        defaultAppId:
-          $ref: '#/components/schemas/type_commons:AppId'
-      description: Properties used to update an account
-      title: AccountPatch
+        data:
+          $ref: '#/components/schemas/type_accounts_Account'
+      required:
+      - data
+      title: AccountResponse
   securitySchemes:
     default:
       type: http

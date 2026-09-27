@@ -245,43 +245,6 @@ paths:
               $ref: '#/components/schemas/type_flags_BulkMutateFlagsRequest'
 components:
   schemas:
-    type_flags_FlagMutationData:
-      type: object
-      properties:
-        label:
-          type: string
-          description: The flag label
-        colorHex:
-          type: string
-          description: The flag color in hex format
-      description: Flag data for mutation operations
-      title: FlagMutationData
-    type_flags_CreateFlagRequest:
-      type: object
-      properties:
-        slug:
-          type: string
-          description: The unique identifier for the flag
-        label:
-          type: string
-          description: The human-readable name for the flag
-        colorHex:
-          type: string
-          description: The hex color code for the flag (e.g., "#0090FF")
-      required:
-      - slug
-      - label
-      - colorHex
-      description: Request to create a new flag
-      title: CreateFlagRequest
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
     type_flags_FlagResponse:
       type: object
       properties:
@@ -318,6 +281,61 @@ components:
       - updatedAt
       description: A flag object
       title: FlagResponse
+    type_flags_FlagMutationData:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The flag label
+        colorHex:
+          type: string
+          description: The flag color in hex format
+      description: Flag data for mutation operations
+      title: FlagMutationData
+    type_commons_WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_flags_UpdateFlagRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The new label for the flag
+        colorHex:
+          type: string
+          description: The new hex color code for the flag
+        newSlug:
+          type: string
+          description: The new slug for the flag
+      description: Request to update an existing flag
+      title: UpdateFlagRequest
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_flags_CreateFlagRequest:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: The unique identifier for the flag
+        label:
+          type: string
+          description: The human-readable name for the flag
+        colorHex:
+          type: string
+          description: The hex color code for the flag (e.g., "#0090FF")
+      required:
+      - slug
+      - label
+      - colorHex
+      description: Request to create a new flag
+      title: CreateFlagRequest
     type_flags_BulkMutateFlagsRequest:
       type: object
       properties:
@@ -381,10 +399,6 @@ components:
           $ref: '#/components/schemas/type_commons_SuccessData'
       description: Informs whether or not a request was successful
       title: Success
-    type_commons_WorkbookId:
-      type: string
-      description: Workbook ID
-      title: WorkbookId
     type_flags_BulkMutateFlagsResponse:
       type: object
       properties:
@@ -399,20 +413,6 @@ components:
       - jobId
       description: Response from bulk flag mutation
       title: BulkMutateFlagsResponse
-    type_flags_UpdateFlagRequest:
-      type: object
-      properties:
-        label:
-          type: string
-          description: The new label for the flag
-        colorHex:
-          type: string
-          description: The new hex color code for the flag
-        newSlug:
-          type: string
-          description: The new slug for the flag
-      description: Request to update an existing flag
-      title: UpdateFlagRequest
   securitySchemes:
     default:
       type: http

@@ -569,74 +569,26 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_environments_GuideCreateRequest:
-      type: object
-      properties:
-        description:
-          type: string
-        title:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-        slug:
-          type: string
-        blocks:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-        environmentId:
-          type: string
-      required:
-      - description
-      - title
-      - slug
-      - blocks
-      - environmentId
-      description: Create a guide
-      title: GuideCreateRequest
-    type_environments_GuideVersionResource:
-      type: object
-      properties:
-        id:
-          type: string
-        version:
-          type: integer
-        content:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - version
-      - content
-      - createdAt
-      - updatedAt
-      description: A version of a guide
-      title: GuideVersionResource
-    type_environments_GuideVersionResponse:
+    type_environments_GuideDetailResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_environments_GuideVersionResource'
+          $ref: '#/components/schemas/type_environments_GuideResource'
       required:
       - data
-      title: GuideVersionResponse
-    type_environments_GuideDeleteResponseData:
+      title: GuideDetailResponse
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_SuccessData:
       type: object
       properties:
         success:
           type: boolean
       required:
       - success
-      title: GuideDeleteResponseData
+      title: SuccessData
     type_environments_EnvironmentConfigCreate:
       type: object
       properties:
@@ -667,95 +619,6 @@ components:
       - isProd
       description: Properties used to create a new environment
       title: EnvironmentConfigCreate
-    type_commons_GuideId:
-      type: string
-      description: Guide ID
-      title: GuideId
-    type_environments_GuideResource:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_GuideId'
-        description:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-        slug:
-          type: string
-        title:
-          type: string
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_environments_GuideVersionResource'
-        blocks:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - slug
-      - title
-      - versions
-      - blocks
-      - createdAt
-      - updatedAt
-      description: A guide
-      title: GuideResource
-    type_spaces_EventToken:
-      type: object
-      properties:
-        accountId:
-          $ref: '#/components/schemas/type_commons_AccountId'
-          description: The ID of the Account.
-        subscribeKey:
-          type: string
-          description: The id of the event bus to subscribe to
-        ttl:
-          type: integer
-          description: Time to live in minutes
-        token:
-          type: string
-          description: This should be your API key.
-      description: Properties used to allow users to connect to the event bus
-      title: EventToken
-    type_environments_GuideUpdateRequest:
-      type: object
-      properties:
-        description:
-          type: string
-        title:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-        slug:
-          type: string
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_environments_GuideVersionResource'
-        blocks:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-        environmentId:
-          type: string
-      description: Update a guide
-      title: GuideUpdateRequest
     type_environments_GuideListResponse:
       type: object
       properties:
@@ -766,14 +629,32 @@ components:
       required:
       - data
       title: GuideListResponse
-    type_environments_GuideDetailResponse:
+    type_environments_GuestAuthenticationEnum:
+      type: string
+      enum:
+      - shared_link
+      - magic_link
+      description: The type of authentication to use for guests
+      title: GuestAuthenticationEnum
+    type_commons_Success:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_environments_GuideResource'
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_spaces_EventTokenResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_spaces_EventToken'
       required:
       - data
-      title: GuideDetailResponse
+      title: EventTokenResponse
     type_environments_EnvironmentConfigUpdate:
       type: object
       properties:
@@ -801,6 +682,33 @@ components:
           type: string
       description: Properties used to update an environment
       title: EnvironmentConfigUpdate
+    type_environments_GuideUpdateRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        title:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        slug:
+          type: string
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments_GuideVersionResource'
+        blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        environmentId:
+          type: string
+      description: Update a guide
+      title: GuideUpdateRequest
     type_environments_ListEnvironmentsResponse:
       type: object
       properties:
@@ -813,33 +721,6 @@ components:
       required:
       - data
       title: ListEnvironmentsResponse
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
     type_environments_GuideDeleteResponse:
       type: object
       properties:
@@ -848,6 +729,14 @@ components:
       required:
       - data
       title: GuideDeleteResponse
+    type_environments_EnvironmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_environments_Environment'
+      required:
+      - data
+      title: EnvironmentResponse
     type_environments_Environment:
       type: object
       properties:
@@ -890,21 +779,52 @@ components:
       - features
       - metadata
       title: Environment
-    type_environments_GuestAuthenticationEnum:
-      type: string
-      enum:
-      - shared_link
-      - magic_link
-      description: The type of authentication to use for guests
-      title: GuestAuthenticationEnum
-    type_commons_SuccessData:
+    type_environments_GuideCreateRequest:
       type: object
       properties:
-        success:
-          type: boolean
+        description:
+          type: string
+        title:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        slug:
+          type: string
+        blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        environmentId:
+          type: string
       required:
-      - success
-      title: SuccessData
+      - description
+      - title
+      - slug
+      - blocks
+      - environmentId
+      description: Create a guide
+      title: GuideCreateRequest
+    type_spaces_EventToken:
+      type: object
+      properties:
+        accountId:
+          $ref: '#/components/schemas/type_commons_AccountId'
+          description: The ID of the Account.
+        subscribeKey:
+          type: string
+          description: The id of the event bus to subscribe to
+        ttl:
+          type: integer
+          description: Time to live in minutes
+        token:
+          type: string
+          description: This should be your API key.
+      description: Properties used to allow users to connect to the event bus
+      title: EventToken
     type_commons_Pagination:
       type: object
       properties:
@@ -923,30 +843,110 @@ components:
       - totalCount
       description: pagination info
       title: Pagination
-    type_environments_EnvironmentResponse:
+    type_commons_GuideId:
+      type: string
+      description: Guide ID
+      title: GuideId
+    type_environments_GuideDeleteResponseData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: GuideDeleteResponseData
+    type_environments_GuideVersionResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_environments_Environment'
+          $ref: '#/components/schemas/type_environments_GuideVersionResource'
       required:
       - data
-      title: EnvironmentResponse
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_spaces_EventTokenResponse:
+      title: GuideVersionResponse
+    type_environments_GuideResource:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_spaces_EventToken'
+        id:
+          $ref: '#/components/schemas/type_commons_GuideId'
+        description:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        slug:
+          type: string
+        title:
+          type: string
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments_GuideVersionResource'
+        blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
       required:
-      - data
-      title: EventTokenResponse
+      - id
+      - slug
+      - title
+      - versions
+      - blocks
+      - createdAt
+      - updatedAt
+      description: A guide
+      title: GuideResource
+    type_environments_GuideVersionResource:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: integer
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - version
+      - content
+      - createdAt
+      - updatedAt
+      description: A version of a guide
+      title: GuideVersionResource
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
   securitySchemes:
     default:
       type: http

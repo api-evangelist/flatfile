@@ -427,67 +427,21 @@ paths:
               - data
 components:
   schemas:
-    type_files_FileResponse:
+    type_commons_ActionMessage:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_files_File'
+        type:
+          $ref: '#/components/schemas/type_commons_ActionMessageType'
+        content:
+          type: string
       required:
-      - data
-      title: FileResponse
-    type_commons_ActionMessageType:
+      - type
+      - content
+      title: ActionMessage
+    type_commons_FileId:
       type: string
-      enum:
-      - error
-      - info
-      title: ActionMessageType
-    type_files_HeaderDetectionResult:
-      type: object
-      properties:
-        header:
-          type: array
-          items:
-            type: string
-        headerRow:
-          type: integer
-        letters:
-          type: array
-          items:
-            type: string
-      required:
-      - header
-      - headerRow
-      - letters
-      title: HeaderDetectionResult
-    type_files_Mode:
-      type: string
-      enum:
-      - import
-      - export
-      title: Mode
-    type_commons_InputConfig:
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputEnumPropertyOption'
-      required:
-      - options
-      title: InputConfig
-    type_files_DetectHeaderResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_files_HeaderDetectionResult'
-      required:
-      - data
-      title: DetectHeaderResponse
-    type_commons_InputConstraintType:
-      type: string
-      enum:
-      - required
-      title: InputConstraintType
+      description: File ID
+      title: FileId
     type_files_File:
       type: object
       properties:
@@ -561,10 +515,196 @@ components:
       - spaceId
       description: Any uploaded file of any type
       title: File
-    type_commons_WorkbookId:
+    type_commons_ActionId:
       type: string
-      description: Workbook ID
-      title: WorkbookId
+      description: Action ID
+      title: ActionId
+    type_files_HeaderDetectionResult:
+      type: object
+      properties:
+        header:
+          type: array
+          items:
+            type: string
+        headerRow:
+          type: integer
+        letters:
+          type: array
+          items:
+            type: string
+      required:
+      - header
+      - headerRow
+      - letters
+      title: HeaderDetectionResult
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_InputField:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key for a Field.
+        label:
+          type: string
+          description: Visible name of a Field.
+        description:
+          type: string
+          description: Brief description below the name of the Field.
+        type:
+          type: string
+          description: Field Types inform the user interface how to sort and display data.
+        defaultValue:
+          description: Default value for a Field.
+        config:
+          $ref: '#/components/schemas/type_commons_InputConfig'
+          description: Additional configuration for enum Fields.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputConstraint'
+          description: Indicate additional validations that will be applied to the Field.
+      required:
+      - key
+      - label
+      - type
+      title: InputField
+    type_commons_InputEnumPropertyOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A visual label for this option, defaults to value if not provided
+        description:
+          type: string
+          description: A short description for this option
+        color:
+          type: string
+          description: An optional color to assign this option
+        icon:
+          type: string
+          description: A reference pointer to a previously registered icon
+        meta:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: An arbitrary JSON object to be associated with this option and made available to hooks
+        value:
+          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
+      required:
+      - value
+      title: InputEnumPropertyOption
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_files_HeaderDetectionOptions:
+      type: object
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/type_files_HeaderDetectionAlgorithm'
+        rowsToSearch:
+          type: integer
+        skip:
+          type: integer
+        headers:
+          type: array
+          items:
+            type: string
+        rowNumbers:
+          type: array
+          items:
+            type: integer
+      required:
+      - algorithm
+      title: HeaderDetectionOptions
+    type_files_HeaderDetectionAlgorithm:
+      type: string
+      enum:
+      - aiDetection
+      - default
+      - explicitHeaders
+      - specificRows
+      - dataRowAndSubHeaderDetection
+      title: HeaderDetectionAlgorithm
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_files_FileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_files_File'
+      required:
+      - data
+      title: FileResponse
+    type_commons_ActionMode:
+      type: string
+      enum:
+      - foreground
+      - background
+      - toolbarBlocking
+      description: Foreground actions will prevent interacting with the resource until complete
+      title: ActionMode
+    type_commons_InputForm:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_InputFormType'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputField'
+      required:
+      - type
+      - fields
+      title: InputForm
+    type_commons_Guardrail:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guardrail for this action
+      required:
+      - content
+      title: Guardrail
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons_InputConfig:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputEnumPropertyOption'
+      required:
+      - options
+      title: InputConfig
+    type_commons_InputFormType:
+      type: string
+      enum:
+      - simple
+      title: InputFormType
+    type_commons_InputConstraint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_InputConstraintType'
+      required:
+      - type
+      title: InputConstraint
     type_commons_Guide:
       type: object
       properties:
@@ -574,18 +714,168 @@ components:
       required:
       - content
       title: Guide
-    type_commons_ActionId:
-      type: string
-      description: Action ID
-      title: ActionId
-    type_commons_ActionMode:
+    type_commons_ActionSchedule:
       type: string
       enum:
-      - foreground
-      - background
-      - toolbarBlocking
-      description: Foreground actions will prevent interacting with the resource until complete
-      title: ActionMode
+      - weekly
+      - daily
+      - hourly
+      title: ActionSchedule
+    type_files_DetectHeaderResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_files_HeaderDetectionResult'
+      required:
+      - data
+      title: DetectHeaderResponse
+    type_commons_InputConstraintType:
+      type: string
+      enum:
+      - required
+      title: InputConstraintType
+    type_commons_ActionMount:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - sheet
+            description: 'Discriminator value: sheet'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - workbook
+            description: 'Discriminator value: workbook'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - field
+            description: 'Discriminator value: field'
+          keys:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - document
+            description: 'Discriminator value: document'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - file
+            description: 'Discriminator value: file'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionMount
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons_SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_files_ModelFileStatusEnum:
+      type: string
+      enum:
+      - partial
+      - analyzing
+      - analyzed
+      - complete
+      - archived
+      - purged
+      - failed
+      description: 'Status of the file. Partial: File is uploaded but not yet processed. Analyzing: Smart Extract is running. Analyzed: Smart Extract has finished running. Complete: File has been extracted and is ready to be used. Archived: File has been archived. Purged: File has been purged. Failed: File has failed to be extracted.'
+      title: ModelFileStatusEnum
+    type_files_ListFilesResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_files_File'
+      required:
+      - data
+      title: ListFilesResponse
+    type_commons_ActionMessageType:
+      type: string
+      enum:
+      - error
+      - info
+      title: ActionMessageType
+    type_commons_WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_files_FileOrigin:
+      type: string
+      enum:
+      - filesystem
+      - googledrive
+      - box
+      - onedrive
+      title: FileOrigin
+    type_files_Mode:
+      type: string
+      enum:
+      - import
+      - export
+      title: Mode
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
     type_commons_ActionConstraint:
       oneOf:
       - type: object
@@ -629,212 +919,6 @@ components:
       discriminator:
         propertyName: type
       title: ActionConstraint
-    type_commons_InputField:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Unique key for a Field.
-        label:
-          type: string
-          description: Visible name of a Field.
-        description:
-          type: string
-          description: Brief description below the name of the Field.
-        type:
-          type: string
-          description: Field Types inform the user interface how to sort and display data.
-        defaultValue:
-          description: Default value for a Field.
-        config:
-          $ref: '#/components/schemas/type_commons_InputConfig'
-          description: Additional configuration for enum Fields.
-        constraints:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputConstraint'
-          description: Indicate additional validations that will be applied to the Field.
-      required:
-      - key
-      - label
-      - type
-      title: InputField
-    type_commons_Guardrail:
-      type: object
-      properties:
-        content:
-          type: string
-          description: Markdown guardrail for this action
-      required:
-      - content
-      title: Guardrail
-    type_commons_SheetId:
-      type: string
-      description: Sheet ID
-      title: SheetId
-    type_commons_ActionMessage:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_ActionMessageType'
-        content:
-          type: string
-      required:
-      - type
-      - content
-      title: ActionMessage
-    type_commons_InputConstraint:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_InputConstraintType'
-      required:
-      - type
-      title: InputConstraint
-    type_commons_ActionSchedule:
-      type: string
-      enum:
-      - weekly
-      - daily
-      - hourly
-      title: ActionSchedule
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_files_ListFilesResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_files_File'
-      required:
-      - data
-      title: ListFilesResponse
-    type_files_FileTreatments:
-      type: string
-      enum:
-      - IS_BASIC_FILE_SHAPE
-      - IS_COMPLEX_FILE_SHAPE
-      title: FileTreatments
-    type_files_HeaderDetectionOptions:
-      type: object
-      properties:
-        algorithm:
-          $ref: '#/components/schemas/type_files_HeaderDetectionAlgorithm'
-        rowsToSearch:
-          type: integer
-        skip:
-          type: integer
-        headers:
-          type: array
-          items:
-            type: string
-        rowNumbers:
-          type: array
-          items:
-            type: integer
-      required:
-      - algorithm
-      title: HeaderDetectionOptions
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_InputEnumPropertyOption:
-      type: object
-      properties:
-        label:
-          type: string
-          description: A visual label for this option, defaults to value if not provided
-        description:
-          type: string
-          description: A short description for this option
-        color:
-          type: string
-          description: An optional color to assign this option
-        icon:
-          type: string
-          description: A reference pointer to a previously registered icon
-        meta:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: An arbitrary JSON object to be associated with this option and made available to hooks
-        value:
-          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
-      required:
-      - value
-      title: InputEnumPropertyOption
-    type_files_FileOrigin:
-      type: string
-      enum:
-      - filesystem
-      - googledrive
-      - box
-      - onedrive
-      title: FileOrigin
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_commons_Pagination:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_files_HeaderDetectionAlgorithm:
-      type: string
-      enum:
-      - aiDetection
-      - default
-      - explicitHeaders
-      - specificRows
-      - dataRowAndSubHeaderDetection
-      title: HeaderDetectionAlgorithm
     type_commons_Action:
       type: object
       properties:
@@ -918,106 +1002,22 @@ components:
       required:
       - label
       title: Action
-    type_commons_InputFormType:
+    type_files_FileTreatments:
       type: string
       enum:
-      - simple
-      title: InputFormType
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_ActionMount:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - sheet
-            description: 'Discriminator value: sheet'
-          slugs:
-            type: array
-            items:
-              type: string
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - workbook
-            description: 'Discriminator value: workbook'
-          slugs:
-            type: array
-            items:
-              type: string
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - field
-            description: 'Discriminator value: field'
-          keys:
-            type: array
-            items:
-              type: string
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - document
-            description: 'Discriminator value: document'
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - file
-            description: 'Discriminator value: file'
-        required:
-        - type
-      discriminator:
-        propertyName: type
-      title: ActionMount
-    type_commons_FileId:
-      type: string
-      description: File ID
-      title: FileId
-    type_files_ModelFileStatusEnum:
-      type: string
-      enum:
-      - partial
-      - analyzing
-      - analyzed
-      - complete
-      - archived
-      - purged
-      - failed
-      description: 'Status of the file. Partial: File is uploaded but not yet processed. Analyzing: Smart Extract is running. Analyzed: Smart Extract has finished running. Complete: File has been extracted and is ready to be used. Archived: File has been archived. Purged: File has been purged. Failed: File has failed to be extracted.'
-      title: ModelFileStatusEnum
-    type_commons_InputForm:
+      - IS_BASIC_FILE_SHAPE
+      - IS_COMPLEX_FILE_SHAPE
+      title: FileTreatments
+    type_commons_Error:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/type_commons_InputFormType'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputField'
+        key:
+          type: string
+        message:
+          type: string
       required:
-      - type
-      - fields
-      title: InputForm
+      - message
+      title: Error
   securitySchemes:
     default:
       type: http

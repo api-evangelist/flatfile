@@ -234,10 +234,113 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
+    type_commons_RunbookId:
+      type: string
+      description: Runbook ID
+      title: RunbookId
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_runbooks_RunbookType:
+      type: string
+      enum:
+      - SHEET_TOOL
+      - PREPROCESSING
+      title: RunbookType
+    type_runbooks_RunbooksResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_runbooks_Runbook'
+      required:
+      - data
+      title: RunbooksResponse
+    type_runbooks_SheetTransformConfig:
+      type: object
+      properties:
+        sourceSheetIds:
+          type: array
+          items:
+            type: string
+          description: The ids of the sourceSheets to transform
+        destinationSheetIds:
+          type: array
+          items:
+            type: string
+          description: The id of the destinationSheet to transform
+      required:
+      - sourceSheetIds
+      - destinationSheetIds
+      title: SheetTransformConfig
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
     type_commons_AppId:
       type: string
       description: App ID
       title: AppId
+    type_runbooks_RunbookResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_runbooks_Runbook'
+      required:
+      - data
+      title: RunbookResponse
+    type_runbooks_RunbookConfig:
+      oneOf:
+      - $ref: '#/components/schemas/type_runbooks_SheetTransformConfig'
+      title: RunbookConfig
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_runbooks_RunbookStatus:
+      type: string
+      enum:
+      - CREATED
+      - RECORDING
+      - EXECUTING
+      - WAITING
+      - COMPLETED
+      - FAILED
+      - CANCELED
+      title: RunbookStatus
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_runbooks_UpdateRunbookRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Runbook.
+        status:
+          $ref: '#/components/schemas/type_runbooks_RunbookStatus'
+          description: The status of the Runbook.
+        config:
+          $ref: '#/components/schemas/type_runbooks_RunbookConfig'
+          description: The configuration of the Runbook.
+      title: UpdateRunbookRequest
     type_runbooks_Runbook:
       type: object
       properties:
@@ -290,6 +393,13 @@ components:
       - updatedAt
       description: Runbook
       title: Runbook
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
     type_runbooks_CreateRunbookRequest:
       type: object
       properties:
@@ -323,99 +433,6 @@ components:
       - status
       - type
       title: CreateRunbookRequest
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_runbooks_RunbookConfig:
-      oneOf:
-      - $ref: '#/components/schemas/type_runbooks_SheetTransformConfig'
-      title: RunbookConfig
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_commons_RunbookId:
-      type: string
-      description: Runbook ID
-      title: RunbookId
-    type_runbooks_RunbookType:
-      type: string
-      enum:
-      - SHEET_TOOL
-      - PREPROCESSING
-      title: RunbookType
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_runbooks_RunbookStatus:
-      type: string
-      enum:
-      - CREATED
-      - RECORDING
-      - EXECUTING
-      - WAITING
-      - COMPLETED
-      - FAILED
-      - CANCELED
-      title: RunbookStatus
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_runbooks_UpdateRunbookRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the Runbook.
-        status:
-          $ref: '#/components/schemas/type_runbooks_RunbookStatus'
-          description: The status of the Runbook.
-        config:
-          $ref: '#/components/schemas/type_runbooks_RunbookConfig'
-          description: The configuration of the Runbook.
-      title: UpdateRunbookRequest
-    type_runbooks_RunbookResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_runbooks_Runbook'
-      required:
-      - data
-      title: RunbookResponse
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_runbooks_RunbooksResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_runbooks_Runbook'
-      required:
-      - data
-      title: RunbooksResponse
     type_commons_Error:
       type: object
       properties:
@@ -426,23 +443,6 @@ components:
       required:
       - message
       title: Error
-    type_runbooks_SheetTransformConfig:
-      type: object
-      properties:
-        sourceSheetIds:
-          type: array
-          items:
-            type: string
-          description: The ids of the sourceSheets to transform
-        destinationSheetIds:
-          type: array
-          items:
-            type: string
-          description: The id of the destinationSheet to transform
-      required:
-      - sourceSheetIds
-      - destinationSheetIds
-      title: SheetTransformConfig
   securitySchemes:
     default:
       type: http

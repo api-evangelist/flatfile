@@ -692,37 +692,52 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_agents_AgentResponse:
+    type_commons_AgentId:
+      type: string
+      description: Agent ID
+      title: AgentId
+    type_agents_AutomapOptions:
+      type: object
+      properties:
+        accuracy:
+          type: string
+        defaultTargetSheet:
+          type: string
+        matchFilename:
+          type: string
+      required:
+      - accuracy
+      - defaultTargetSheet
+      - matchFilename
+      title: AutomapOptions
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_roles_ResourceIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_AccountId'
+      - $ref: '#/components/schemas/type_commons_EnvironmentId'
+      - $ref: '#/components/schemas/type_commons_SpaceId'
+      title: ResourceIdUnion
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_agents_ListAgentsResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_agents_Agent'
-      title: AgentResponse
-    type_roles_AssignRoleResponseData:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_ActorRoleId'
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        actorId:
-          $ref: '#/components/schemas/type_commons_ActorIdUnion'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - roleId
-      - actorId
-      - resourceId
-      - createdAt
-      - updatedAt
-      title: AssignRoleResponseData
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_Agent'
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+      title: ListAgentsResponse
     type_agents_DetailedAgentLog:
       type: object
       properties:
@@ -761,107 +776,7 @@ components:
       - context
       description: A log of an agent execution
       title: DetailedAgentLog
-    type_commons_PageSize:
-      type: integer
-      description: Number of logs to return in a page (default 20)
-      title: PageSize
-    type_agents_GetDetailedAgentLogResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_agents_DetailedAgentLog'
-      required:
-      - data
-      title: GetDetailedAgentLogResponse
-    type_commons_AgentId:
-      type: string
-      description: Agent ID
-      title: AgentId
-    type_roles_ListActorRolesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_roles_ActorRoleResponse'
-      required:
-      - data
-      title: ListActorRolesResponse
-    type_agents_ListAgentVersionsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents_AgentVersion'
-      title: ListAgentVersionsResponse
-    type_agents_Execution:
-      type: object
-      properties:
-        eventId:
-          $ref: '#/components/schemas/type_commons_EventId'
-        success:
-          type: boolean
-          description: Whether the agent execution was successful
-        spaceId:
-          $ref: '#/components/schemas/type_commons_SpaceId'
-          description: The space ID associated with this execution
-        createdAt:
-          type: string
-          format: date-time
-        completedAt:
-          type: string
-          format: date-time
-        duration:
-          type: integer
-          description: The duration of the agent execution
-        requestTime:
-          type: integer
-          description: The amount of time the agent spent making http requests
-        requestCount:
-          type: integer
-          description: The number of requests made by the agent
-        memoryUsage:
-          type: integer
-          description: The memory usage of the agent
-        topic:
-          type: string
-          description: The topics of the agent execution
-      required:
-      - eventId
-      - success
-      - createdAt
-      - completedAt
-      - duration
-      - topic
-      description: An execution of an agent
-      title: Execution
-    type_roles_ActorRoleResponse:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_ActorRoleId'
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        actorId:
-          $ref: '#/components/schemas/type_commons_ActorIdUnion'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - roleId
-      - actorId
-      - resourceId
-      - createdAt
-      - updatedAt
-      title: ActorRoleResponse
-    type_agents_GetDetailedAgentLogsResponse:
+    type_agents_GetAgentLogsResponse:
       type: object
       properties:
         pagination:
@@ -869,10 +784,19 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_agents_DetailedAgentLog'
-      required:
-      - data
-      title: GetDetailedAgentLogsResponse
+            $ref: '#/components/schemas/type_agents_AgentLog'
+      title: GetAgentLogsResponse
+    type_commons_AgentVersionId:
+      type: string
+      description: Agent version ID
+      title: AgentVersionId
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
     type_agents_Agent:
       type: object
       properties:
@@ -946,54 +870,121 @@ components:
       - accountId
       - environmentId
       title: Agent
-    type_commons_AgentVersionId:
+    type_commons_SuccessQueryParameter:
+      type: boolean
+      description: Boolean
+      title: SuccessQueryParameter
+    type_commons_PageNumber:
+      type: integer
+      description: Based on pageSize, which page of records to return
+      title: PageNumber
+    type_commons_AccountId:
       type: string
-      description: Agent version ID
-      title: AgentVersionId
-    type_agents_GetExecutionsResponse:
+      description: Account ID
+      title: AccountId
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons_AgentLogId:
+      type: string
+      description: Agent Log ID
+      title: AgentLogId
+    type_roles_ListActorRolesResponse:
       type: object
       properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_agents_Execution'
+            $ref: '#/components/schemas/type_roles_ActorRoleResponse'
       required:
       - data
-      title: GetExecutionsResponse
-    type_agents_AutomapOptions:
+      title: ListActorRolesResponse
+    type_roles_ActorRoleResponse:
       type: object
       properties:
-        accuracy:
+        id:
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons_ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+        createdAt:
           type: string
-        defaultTargetSheet:
+          format: date-time
+        updatedAt:
           type: string
-        matchFilename:
-          type: string
+          format: date-time
       required:
-      - accuracy
-      - defaultTargetSheet
-      - matchFilename
-      title: AutomapOptions
-    type_roles_ResourceIdUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_AccountId'
-      - $ref: '#/components/schemas/type_commons_EnvironmentId'
-      - $ref: '#/components/schemas/type_commons_SpaceId'
-      title: ResourceIdUnion
-    type_roles_AssignRoleResponse:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: ActorRoleResponse
+    type_agents_AgentConfig:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_roles_AssignRoleResponseData'
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events_EventTopic'
+          description: The topics the agent should listen for
+        compiler:
+          $ref: '#/components/schemas/type_agents_Compiler'
+          description: The compiler of the agent
+        source:
+          type: string
+          description: The source of the agent
+        sourceMap:
+          type: string
+          description: The source map of the agent
+        slug:
+          type: string
+          description: The slug of the agent
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
+        template:
+          $ref: '#/components/schemas/type_agents_AgentTemplateEnum'
+          description: The template of the agent; Template options are required for templated agents.
+        templateOptions:
+          $ref: '#/components/schemas/type_agents_TemplateOptions'
+          description: The options for a templated agent. Must be provided if `template` is provided.
+        isSystem:
+          type: boolean
+          description: Whether the agent is a system agent. This should be false for all agents created by users.
+        namespace:
+          type: string
+          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
+        packageVersions:
+          type: object
+          additionalProperties:
+            type: string
+          description: Package versions information for the agent
+        commitInfo:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Commit information for the agent
+      description: Properties used to create a new agent
+      title: AgentConfig
+    type_roles_AssignActorRoleRequest:
+      type: object
+      properties:
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
       required:
-      - data
-      title: AssignRoleResponse
-    type_commons_GuestId:
-      type: string
-      description: Guest ID
-      title: GuestId
+      - roleId
+      - resourceId
+      title: AssignActorRoleRequest
     type_events_EventTopic:
       type: string
       enum:
@@ -1081,122 +1072,6 @@ components:
       - thread:deleted
       description: The topic of the event
       title: EventTopic
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_agents_GetAgentLogsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents_AgentLog'
-      title: GetAgentLogsResponse
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_commons_SuccessQueryParameter:
-      type: boolean
-      description: Boolean
-      title: SuccessQueryParameter
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_agents_Compiler:
-      type: string
-      enum:
-      - js
-      description: The compiler of the agent
-      title: Compiler
-    type_agents_AgentConfig:
-      type: object
-      properties:
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_events_EventTopic'
-          description: The topics the agent should listen for
-        compiler:
-          $ref: '#/components/schemas/type_agents_Compiler'
-          description: The compiler of the agent
-        source:
-          type: string
-          description: The source of the agent
-        sourceMap:
-          type: string
-          description: The source map of the agent
-        slug:
-          type: string
-          description: The slug of the agent
-        options:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
-        template:
-          $ref: '#/components/schemas/type_agents_AgentTemplateEnum'
-          description: The template of the agent; Template options are required for templated agents.
-        templateOptions:
-          $ref: '#/components/schemas/type_agents_TemplateOptions'
-          description: The options for a templated agent. Must be provided if `template` is provided.
-        isSystem:
-          type: boolean
-          description: Whether the agent is a system agent. This should be false for all agents created by users.
-        namespace:
-          type: string
-          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
-        packageVersions:
-          type: object
-          additionalProperties:
-            type: string
-          description: Package versions information for the agent
-        commitInfo:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Commit information for the agent
-      description: Properties used to create a new agent
-      title: AgentConfig
-    type_commons_PageNumber:
-      type: integer
-      description: Based on pageSize, which page of records to return
-      title: PageNumber
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_commons_AgentLogId:
-      type: string
-      description: Agent Log ID
-      title: AgentLogId
     type_agents_AgentTemplateEnum:
       type: string
       enum:
@@ -1208,6 +1083,40 @@ components:
       - automap
       description: The template of the agent
       title: AgentTemplateEnum
+    type_agents_GetDetailedAgentLogsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_DetailedAgentLog'
+      required:
+      - data
+      title: GetDetailedAgentLogsResponse
+    type_agents_Compiler:
+      type: string
+      enum:
+      - js
+      description: The compiler of the agent
+      title: Compiler
+    type_commons_ActorIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_UserId'
+      - $ref: '#/components/schemas/type_commons_AgentId'
+      - $ref: '#/components/schemas/type_commons_GuestId'
+      title: ActorIdUnion
+    type_agents_AgentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agents_Agent'
+      title: AgentResponse
+    type_commons_PageSize:
+      type: integer
+      description: Number of logs to return in a page (default 20)
+      title: PageSize
     type_commons_Pagination:
       type: object
       properties:
@@ -1226,75 +1135,14 @@ components:
       - totalCount
       description: pagination info
       title: Pagination
-    type_agents_AgentVersion:
+    type_agents_GetDetailedAgentLogResponse:
       type: object
       properties:
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_events_EventTopic'
-          description: The topics the agent should listen for
-        compiler:
-          $ref: '#/components/schemas/type_agents_Compiler'
-          description: The compiler of the agent
-        source:
-          type: string
-          description: The source of the agent
-        sourceMap:
-          type: string
-          description: The source map of the agent
-        slug:
-          type: string
-          description: The slug of the agent
-        options:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
-        template:
-          $ref: '#/components/schemas/type_agents_AgentTemplateEnum'
-          description: The template of the agent; Template options are required for templated agents.
-        templateOptions:
-          $ref: '#/components/schemas/type_agents_TemplateOptions'
-          description: The options for a templated agent. Must be provided if `template` is provided.
-        isSystem:
-          type: boolean
-          description: Whether the agent is a system agent. This should be false for all agents created by users.
-        namespace:
-          type: string
-          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
-        packageVersions:
-          type: object
-          additionalProperties:
-            type: string
-          description: Package versions information for the agent
-        commitInfo:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Commit information for the agent
-        id:
-          $ref: '#/components/schemas/type_commons_AgentVersionId'
-        version:
-          type: integer
-        origin:
-          type: integer
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        agent_id:
-          $ref: '#/components/schemas/type_commons_AgentId'
+        data:
+          $ref: '#/components/schemas/type_agents_DetailedAgentLog'
       required:
-      - id
-      - version
-      - origin
-      - createdAt
-      - updatedAt
-      - agent_id
-      title: AgentVersion
+      - data
+      title: GetDetailedAgentLogResponse
     type_agents_TemplateOptions:
       oneOf:
       - type: object
@@ -1396,39 +1244,101 @@ components:
         propertyName: template
       description: The options for a templated agent.
       title: TemplateOptions
-    type_commons_EventId:
+    type_agents_AgentVersionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agents_AgentVersion'
+      title: AgentVersionResponse
+    type_commons_RoleId:
       type: string
-      description: Event ID
-      title: EventId
-    type_agents_ListAgentsResponse:
+      description: Role ID
+      title: RoleId
+    type_roles_AssignRoleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_roles_AssignRoleResponseData'
+      required:
+      - data
+      title: AssignRoleResponse
+    type_agents_AgentVersion:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events_EventTopic'
+          description: The topics the agent should listen for
+        compiler:
+          $ref: '#/components/schemas/type_agents_Compiler'
+          description: The compiler of the agent
+        source:
+          type: string
+          description: The source of the agent
+        sourceMap:
+          type: string
+          description: The source map of the agent
+        slug:
+          type: string
+          description: The slug of the agent
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: This field is deprecated and will be removed in the future. Use the `template` and `templateOptions` fields instead.
+        template:
+          $ref: '#/components/schemas/type_agents_AgentTemplateEnum'
+          description: The template of the agent; Template options are required for templated agents.
+        templateOptions:
+          $ref: '#/components/schemas/type_agents_TemplateOptions'
+          description: The options for a templated agent. Must be provided if `template` is provided.
+        isSystem:
+          type: boolean
+          description: Whether the agent is a system agent. This should be false for all agents created by users.
+        namespace:
+          type: string
+          description: The namespace this agent should be limited to. Right now, this is information only and not used to actually filter agents that run, so you must still specify the namespace filter in the agent code.
+        packageVersions:
+          type: object
+          additionalProperties:
+            type: string
+          description: Package versions information for the agent
+        commitInfo:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Commit information for the agent
+        id:
+          $ref: '#/components/schemas/type_commons_AgentVersionId'
+        version:
+          type: integer
+        origin:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        agent_id:
+          $ref: '#/components/schemas/type_commons_AgentId'
+      required:
+      - id
+      - version
+      - origin
+      - createdAt
+      - updatedAt
+      - agent_id
+      title: AgentVersion
+    type_agents_ListAgentVersionsResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_agents_Agent'
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-      title: ListAgentsResponse
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_roles_AssignActorRoleRequest:
-      type: object
-      properties:
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-      required:
-      - roleId
-      - resourceId
-      title: AssignActorRoleRequest
-    type_commons_RoleId:
-      type: string
-      description: Role ID
-      title: RoleId
+            $ref: '#/components/schemas/type_agents_AgentVersion'
+      title: ListAgentVersionsResponse
     type_agents_AgentLog:
       type: object
       properties:
@@ -1491,30 +1401,120 @@ components:
       - completedAt
       description: A log of an agent execution
       title: AgentLog
-    type_commons_EnvironmentId:
+    type_commons_EventId:
       type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_UserId:
-      type: string
-      description: User ID
-      title: UserId
-    type_agents_AgentVersionResponse:
+      description: Event ID
+      title: EventId
+    type_agents_Execution:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_agents_AgentVersion'
-      title: AgentVersionResponse
-    type_commons_ActorIdUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_UserId'
-      - $ref: '#/components/schemas/type_commons_AgentId'
-      - $ref: '#/components/schemas/type_commons_GuestId'
-      title: ActorIdUnion
+        eventId:
+          $ref: '#/components/schemas/type_commons_EventId'
+        success:
+          type: boolean
+          description: Whether the agent execution was successful
+        spaceId:
+          $ref: '#/components/schemas/type_commons_SpaceId'
+          description: The space ID associated with this execution
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          description: The duration of the agent execution
+        requestTime:
+          type: integer
+          description: The amount of time the agent spent making http requests
+        requestCount:
+          type: integer
+          description: The number of requests made by the agent
+        memoryUsage:
+          type: integer
+          description: The memory usage of the agent
+        topic:
+          type: string
+          description: The topics of the agent execution
+      required:
+      - eventId
+      - success
+      - createdAt
+      - completedAt
+      - duration
+      - topic
+      description: An execution of an agent
+      title: Execution
+    type_commons_GuestId:
+      type: string
+      description: Guest ID
+      title: GuestId
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
     type_commons_ActorRoleId:
       type: string
       description: Actor Role ID
       title: ActorRoleId
+    type_agents_GetExecutionsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_Execution'
+      required:
+      - data
+      title: GetExecutionsResponse
+    type_commons_UserId:
+      type: string
+      description: User ID
+      title: UserId
+    type_roles_AssignRoleResponseData:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons_ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: AssignRoleResponseData
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
   securitySchemes:
     default:
       type: http

@@ -264,16 +264,73 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons_DocumentId:
+    type_commons_ActionMessage:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_ActionMessageType'
+        content:
+          type: string
+      required:
+      - type
+      - content
+      title: ActionMessage
+    type_documents_DocumentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_documents_Document'
+      required:
+      - data
+      title: DocumentResponse
+    type_documents_ListDocumentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_documents_Document'
+      required:
+      - data
+      title: ListDocumentsResponse
+    type_commons_ActionId:
       type: string
-      description: Document ID
-      title: DocumentId
-    type_commons_ActionMessageType:
+      description: Action ID
+      title: ActionId
+    type_commons_EnvironmentId:
       type: string
-      enum:
-      - error
-      - info
-      title: ActionMessageType
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_InputField:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key for a Field.
+        label:
+          type: string
+          description: Visible name of a Field.
+        description:
+          type: string
+          description: Brief description below the name of the Field.
+        type:
+          type: string
+          description: Field Types inform the user interface how to sort and display data.
+        defaultValue:
+          description: Default value for a Field.
+        config:
+          $ref: '#/components/schemas/type_commons_InputConfig'
+          description: Additional configuration for enum Fields.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputConstraint'
+          description: Indicate additional validations that will be applied to the Field.
+      required:
+      - key
+      - label
+      - type
+      title: InputField
     type_documents_Document:
       type: object
       properties:
@@ -319,6 +376,84 @@ components:
       - updatedAt
       description: A document (markdown components) belong to a space
       title: Document
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_InputEnumPropertyOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A visual label for this option, defaults to value if not provided
+        description:
+          type: string
+          description: A short description for this option
+        color:
+          type: string
+          description: An optional color to assign this option
+        icon:
+          type: string
+          description: A reference pointer to a previously registered icon
+        meta:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: An arbitrary JSON object to be associated with this option and made available to hooks
+        value:
+          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
+      required:
+      - value
+      title: InputEnumPropertyOption
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_DocumentId:
+      type: string
+      description: Document ID
+      title: DocumentId
+    type_commons_ActionMode:
+      type: string
+      enum:
+      - foreground
+      - background
+      - toolbarBlocking
+      description: Foreground actions will prevent interacting with the resource until complete
+      title: ActionMode
+    type_commons_InputForm:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_InputFormType'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputField'
+      required:
+      - type
+      - fields
+      title: InputForm
+    type_commons_Guardrail:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guardrail for this action
+      required:
+      - content
+      title: Guardrail
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
     type_commons_InputConfig:
       type: object
       properties:
@@ -329,21 +464,108 @@ components:
       required:
       - options
       title: InputConfig
-    type_documents_ListDocumentsResponse:
+    type_commons_InputFormType:
+      type: string
+      enum:
+      - simple
+      title: InputFormType
+    type_commons_InputConstraint:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_documents_Document'
+        type:
+          $ref: '#/components/schemas/type_commons_InputConstraintType'
       required:
-      - data
-      title: ListDocumentsResponse
+      - type
+      title: InputConstraint
+    type_commons_Guide:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guidance for this action
+      required:
+      - content
+      title: Guide
+    type_commons_ActionSchedule:
+      type: string
+      enum:
+      - weekly
+      - daily
+      - hourly
+      title: ActionSchedule
     type_commons_InputConstraintType:
       type: string
       enum:
       - required
       title: InputConstraintType
+    type_commons_ActionMount:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - sheet
+            description: 'Discriminator value: sheet'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - workbook
+            description: 'Discriminator value: workbook'
+          slugs:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - field
+            description: 'Discriminator value: field'
+          keys:
+            type: array
+            items:
+              type: string
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - document
+            description: 'Discriminator value: document'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - file
+            description: 'Discriminator value: file'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionMount
+    type_commons_ActionMessageType:
+      type: string
+      enum:
+      - error
+      - info
+      title: ActionMessageType
     type_documents_DocumentConfig:
       type: object
       properties:
@@ -364,35 +586,16 @@ components:
       - title
       - body
       title: DocumentConfig
-    type_commons_Guide:
+    type_commons_Errors:
       type: object
       properties:
-        content:
-          type: string
-          description: Markdown guidance for this action
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
       required:
-      - content
-      title: Guide
-    type_commons_ActionId:
-      type: string
-      description: Action ID
-      title: ActionId
-    type_commons_ActionMode:
-      type: string
-      enum:
-      - foreground
-      - background
-      - toolbarBlocking
-      description: Foreground actions will prevent interacting with the resource until complete
-      title: ActionMode
-    type_documents_DocumentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_documents_Document'
-      required:
-      - data
-      title: DocumentResponse
+      - errors
+      title: Errors
     type_commons_ActionConstraint:
       oneOf:
       - type: object
@@ -436,135 +639,6 @@ components:
       discriminator:
         propertyName: type
       title: ActionConstraint
-    type_commons_InputField:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Unique key for a Field.
-        label:
-          type: string
-          description: Visible name of a Field.
-        description:
-          type: string
-          description: Brief description below the name of the Field.
-        type:
-          type: string
-          description: Field Types inform the user interface how to sort and display data.
-        defaultValue:
-          description: Default value for a Field.
-        config:
-          $ref: '#/components/schemas/type_commons_InputConfig'
-          description: Additional configuration for enum Fields.
-        constraints:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputConstraint'
-          description: Indicate additional validations that will be applied to the Field.
-      required:
-      - key
-      - label
-      - type
-      title: InputField
-    type_commons_Guardrail:
-      type: object
-      properties:
-        content:
-          type: string
-          description: Markdown guardrail for this action
-      required:
-      - content
-      title: Guardrail
-    type_commons_InputConstraint:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_InputConstraintType'
-      required:
-      - type
-      title: InputConstraint
-    type_commons_ActionMessage:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_ActionMessageType'
-        content:
-          type: string
-      required:
-      - type
-      - content
-      title: ActionMessage
-    type_commons_ActionSchedule:
-      type: string
-      enum:
-      - weekly
-      - daily
-      - hourly
-      title: ActionSchedule
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_InputEnumPropertyOption:
-      type: object
-      properties:
-        label:
-          type: string
-          description: A visual label for this option, defaults to value if not provided
-        description:
-          type: string
-          description: A short description for this option
-        color:
-          type: string
-          description: An optional color to assign this option
-        icon:
-          type: string
-          description: A reference pointer to a previously registered icon
-        meta:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: An arbitrary JSON object to be associated with this option and made available to hooks
-        value:
-          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
-      required:
-      - value
-      title: InputEnumPropertyOption
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
     type_commons_Action:
       type: object
       properties:
@@ -648,90 +722,16 @@ components:
       required:
       - label
       title: Action
-    type_commons_InputFormType:
-      type: string
-      enum:
-      - simple
-      title: InputFormType
-    type_commons_ActionMount:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - sheet
-            description: 'Discriminator value: sheet'
-          slugs:
-            type: array
-            items:
-              type: string
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - workbook
-            description: 'Discriminator value: workbook'
-          slugs:
-            type: array
-            items:
-              type: string
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - field
-            description: 'Discriminator value: field'
-          keys:
-            type: array
-            items:
-              type: string
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - document
-            description: 'Discriminator value: document'
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - file
-            description: 'Discriminator value: file'
-        required:
-        - type
-      discriminator:
-        propertyName: type
-      title: ActionMount
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_InputForm:
+    type_commons_Error:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/type_commons_InputFormType'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputField'
+        key:
+          type: string
+        message:
+          type: string
       required:
-      - type
-      - fields
-      title: InputForm
+      - message
+      title: Error
   securitySchemes:
     default:
       type: http

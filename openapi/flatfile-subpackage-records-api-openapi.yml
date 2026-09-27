@@ -600,19 +600,125 @@ paths:
               - fieldUpdates
 components:
   schemas:
+    type_commons_SortField:
+      type: string
+      description: Name of field by which to sort records
+      title: SortField
+    type_records_RecordsWithLinks:
+      type: array
+      items:
+        $ref: '#/components/schemas/type_records_RecordWithLinks'
+      description: List of Record objects, including links to related rows
+      title: RecordsWithLinks
+    type_records_CellConfig:
+      type: object
+      properties:
+        readonly:
+          type: boolean
+      description: CellConfig
+      title: CellConfig
+    type_records_ValidationType:
+      type: string
+      enum:
+      - error
+      - warn
+      - info
+      title: ValidationType
+    type_versions_VersionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_versions_Version'
+      required:
+      - data
+      title: VersionResponse
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_records_ValidationSource:
+      type: string
+      enum:
+      - required-constraint
+      - unique-constraint
+      - custom-logic
+      - unlinked
+      - invalid-option
+      - is-artifact
+      title: ValidationSource
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_FilterField:
+      type: string
+      description: Use this to narrow the valid/error filter results to a specific field
+      title: FilterField
+    type_records_Records:
+      type: array
+      items:
+        $ref: '#/components/schemas/type_records_Record'
+      description: List of Record objects
+      title: Records
+    type_records_RecordWithLinks:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_RecordId'
+        values:
+          $ref: '#/components/schemas/type_records_RecordDataWithLinks'
+        valid:
+          type: boolean
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_records_ValidationMessage'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        config:
+          $ref: '#/components/schemas/type_records_RecordConfig'
+      required:
+      - id
+      - values
+      description: A single row of data in a Sheet, including links to related rows
+      title: RecordWithLinks
+    type_records_RecordDataWithLinks:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/type_records_CellValueWithLinks'
+      description: A single row of data in a Sheet, including links to related rows
+      title: RecordDataWithLinks
+    type_records_RecordsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_records_RecordsResponseData'
+      required:
+      - data
+      title: RecordsResponse
+    type_versions_Version:
+      type: object
+      properties:
+        versionId:
+          $ref: '#/components/schemas/type_commons_VersionId'
+      required:
+      - versionId
+      title: Version
     type_records_RecordData:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/type_records_CellValue'
       description: A single row of data in a Sheet
       title: RecordData
-    type_commons_SortDirection:
-      type: string
-      enum:
-      - asc
-      - desc
-      description: Sort direction - asc (ascending) or desc (descending)
-      title: SortDirection
     type_records_RecordCounts:
       type: object
       properties:
@@ -636,10 +742,83 @@ components:
       - valid
       - error
       title: RecordCounts
-    type_commons_SortField:
+    type_commons_SortDirection:
       type: string
-      description: Name of field by which to sort records
-      title: SortField
+      enum:
+      - asc
+      - desc
+      description: Sort direction - asc (ascending) or desc (descending)
+      title: SortDirection
+    type_records_RecordsResponseData:
+      type: object
+      properties:
+        success:
+          type: boolean
+        records:
+          $ref: '#/components/schemas/type_records_RecordsWithLinks'
+        counts:
+          $ref: '#/components/schemas/type_records_RecordCounts'
+        versionId:
+          $ref: '#/components/schemas/type_commons_VersionId'
+          description: Deprecated, use `commitId` instead.
+        commitId:
+          $ref: '#/components/schemas/type_commons_CommitId'
+      required:
+      - success
+      title: RecordsResponseData
+    type_commons_SearchField:
+      type: string
+      description: Use this to narrow the searchValue results to a specific field
+      title: SearchField
+    type_commons_RecordId:
+      type: string
+      description: Record ID
+      title: RecordId
+    type_commons_JSONPathString:
+      type: string
+      description: A JSONPath string - https://www.rfc-editor.org/rfc/rfc9535
+      title: JSONPathString
+    type_records_GetRecordIndicesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/type_records_RecordIndices'
+      title: GetRecordIndicesResponse
+    type_records_CellValueWithLinks:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_records_ValidationMessage'
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Deprecated, use record level metadata instead.
+        value:
+          $ref: '#/components/schemas/type_records_CellValueUnion'
+        layer:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        links:
+          $ref: '#/components/schemas/type_records_Records'
+      title: CellValueWithLinks
+    type_records_RecordIndices:
+      type: object
+      properties:
+        id:
+          type: string
+        index:
+          type: integer
+      required:
+      - id
+      - index
+      description: A record index object
+      title: RecordIndices
     type_commons_Filter:
       type: string
       enum:
@@ -649,24 +828,67 @@ components:
       - none
       description: Options to filter records
       title: Filter
-    type_commons_CommitId:
-      type: string
-      description: Commit ID
-      title: CommitId
-    type_records_RecordsWithLinks:
-      type: array
-      items:
-        $ref: '#/components/schemas/type_records_RecordWithLinks'
-      description: List of Record objects, including links to related rows
-      title: RecordsWithLinks
-    type_versions_VersionResponse:
+    type_records_FieldRecordCounts:
+      type: object
+      properties:
+        total:
+          type: integer
+        valid:
+          type: integer
+        error:
+          type: integer
+        empty:
+          type: integer
+      required:
+      - total
+      - valid
+      - error
+      - empty
+      title: FieldRecordCounts
+    type_records_RecordConfig:
+      type: object
+      properties:
+        readonly:
+          type: boolean
+        fields:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/type_records_CellConfig'
+        markedForDeletion:
+          type: boolean
+      description: Configuration of a record or specific fields in the record
+      title: RecordConfig
+    type_records_GetRecordsResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_versions_Version'
+          $ref: '#/components/schemas/type_records_GetRecordsResponseData'
       required:
       - data
-      title: VersionResponse
+      title: GetRecordsResponse
+    type_records_GetRecordsResponseData:
+      type: object
+      properties:
+        success:
+          type: boolean
+        records:
+          $ref: '#/components/schemas/type_records_RecordsWithLinks'
+        counts:
+          $ref: '#/components/schemas/type_records_RecordCounts'
+        versionId:
+          $ref: '#/components/schemas/type_commons_VersionId'
+          description: Deprecated, use `commitId` instead.
+        commitId:
+          $ref: '#/components/schemas/type_commons_CommitId'
+      required:
+      - success
+      - records
+      description: A list of records with optional record counts
+      title: GetRecordsResponseData
+    type_commons_SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
     type_records_Record:
       type: object
       properties:
@@ -698,70 +920,14 @@ components:
       - values
       description: A single row of data in a Sheet
       title: Record
-    type_records_GetRecordIndicesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/type_records_RecordIndices'
-      title: GetRecordIndicesResponse
-    type_records_GetRecordsResponseData:
-      type: object
-      properties:
-        success:
-          type: boolean
-        records:
-          $ref: '#/components/schemas/type_records_RecordsWithLinks'
-        counts:
-          $ref: '#/components/schemas/type_records_RecordCounts'
-        versionId:
-          $ref: '#/components/schemas/type_commons_VersionId'
-          description: Deprecated, use `commitId` instead.
-        commitId:
-          $ref: '#/components/schemas/type_commons_CommitId'
-      required:
-      - success
-      - records
-      description: A list of records with optional record counts
-      title: GetRecordsResponseData
+    type_commons_CommitId:
+      type: string
+      description: Commit ID
+      title: CommitId
     type_commons_SearchValue:
       type: string
       description: Search for the given value, returning matching rows. For exact matches, wrap the value in double quotes ("Bob"). To search for null values, send empty double quotes ("")
       title: SearchValue
-    type_records_RecordIndices:
-      type: object
-      properties:
-        id:
-          type: string
-        index:
-          type: integer
-      required:
-      - id
-      - index
-      description: A record index object
-      title: RecordIndices
-    type_records_CellValueWithLinks:
-      type: object
-      properties:
-        valid:
-          type: boolean
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_records_ValidationMessage'
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Deprecated, use record level metadata instead.
-        value:
-          $ref: '#/components/schemas/type_records_CellValueUnion'
-        layer:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-        links:
-          $ref: '#/components/schemas/type_records_Records'
-      title: CellValueWithLinks
     type_records_ValidationMessage:
       type: object
       properties:
@@ -778,91 +944,41 @@ components:
           description: This JSONPath is based on the root of mapped cell object.
       description: Record data validation messages
       title: ValidationMessage
-    type_records_ValidationType:
+    type_commons_EventId:
       type: string
-      enum:
-      - error
-      - warn
-      - info
-      title: ValidationType
-    type_records_RecordWithLinks:
+      description: Event ID
+      title: EventId
+    type_commons_Errors:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/type_commons_RecordId'
-        values:
-          $ref: '#/components/schemas/type_records_RecordDataWithLinks'
-        valid:
-          type: boolean
-        messages:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_records_ValidationMessage'
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-        config:
-          $ref: '#/components/schemas/type_records_RecordConfig'
+            $ref: '#/components/schemas/type_commons_Error'
       required:
-      - id
-      - values
-      description: A single row of data in a Sheet, including links to related rows
-      title: RecordWithLinks
-    type_records_FieldRecordCounts:
-      type: object
-      properties:
-        total:
-          type: integer
-        valid:
-          type: integer
-        error:
-          type: integer
-        empty:
-          type: integer
-      required:
-      - total
-      - valid
-      - error
-      - empty
-      title: FieldRecordCounts
-    type_commons_SheetId:
+      - errors
+      title: Errors
+    type_commons_VersionId:
       type: string
-      description: Sheet ID
-      title: SheetId
-    type_commons_RecordId:
-      type: string
-      description: Record ID
-      title: RecordId
-    type_records_RecordsResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_records_RecordsResponseData'
-      required:
-      - data
-      title: RecordsResponse
-    type_commons_FilterField:
-      type: string
-      description: Use this to narrow the valid/error filter results to a specific field
-      title: FilterField
-    type_commons_SearchField:
-      type: string
-      description: Use this to narrow the searchValue results to a specific field
-      title: SearchField
-    type_records_RecordConfig:
-      type: object
-      properties:
-        readonly:
-          type: boolean
-        fields:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/type_records_CellConfig'
-        markedForDeletion:
-          type: boolean
-      description: Configuration of a record or specific fields in the record
-      title: RecordConfig
+      description: Version ID
+      title: VersionId
+    type_records_CellValueUnion:
+      oneOf:
+      - type: string
+      - type: integer
+      - type: integer
+        format: int64
+      - type: number
+        format: double
+      - type: boolean
+      - type: string
+        format: date
+      - type: string
+        format: date-time
+      - type: array
+        items:
+          type: string
+      title: CellValueUnion
     type_records_CellValue:
       type: object
       properties:
@@ -885,56 +1001,6 @@ components:
           type: string
           format: date-time
       title: CellValue
-    type_records_Records:
-      type: array
-      items:
-        $ref: '#/components/schemas/type_records_Record'
-      description: List of Record objects
-      title: Records
-    type_records_RecordsResponseData:
-      type: object
-      properties:
-        success:
-          type: boolean
-        records:
-          $ref: '#/components/schemas/type_records_RecordsWithLinks'
-        counts:
-          $ref: '#/components/schemas/type_records_RecordCounts'
-        versionId:
-          $ref: '#/components/schemas/type_commons_VersionId'
-          description: Deprecated, use `commitId` instead.
-        commitId:
-          $ref: '#/components/schemas/type_commons_CommitId'
-      required:
-      - success
-      title: RecordsResponseData
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_records_CellValueUnion:
-      oneOf:
-      - type: string
-      - type: integer
-      - type: integer
-        format: int64
-      - type: number
-        format: double
-      - type: boolean
-      - type: string
-        format: date
-      - type: string
-        format: date-time
-      - type: array
-        items:
-          type: string
-      title: CellValueUnion
     type_commons_Error:
       type: object
       properties:
@@ -945,72 +1011,6 @@ components:
       required:
       - message
       title: Error
-    type_records_RecordDataWithLinks:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/type_records_CellValueWithLinks'
-      description: A single row of data in a Sheet, including links to related rows
-      title: RecordDataWithLinks
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_JSONPathString:
-      type: string
-      description: A JSONPath string - https://www.rfc-editor.org/rfc/rfc9535
-      title: JSONPathString
-    type_versions_Version:
-      type: object
-      properties:
-        versionId:
-          $ref: '#/components/schemas/type_commons_VersionId'
-      required:
-      - versionId
-      title: Version
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_records_ValidationSource:
-      type: string
-      enum:
-      - required-constraint
-      - unique-constraint
-      - custom-logic
-      - unlinked
-      - invalid-option
-      - is-artifact
-      title: ValidationSource
-    type_records_GetRecordsResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_records_GetRecordsResponseData'
-      required:
-      - data
-      title: GetRecordsResponse
-    type_commons_VersionId:
-      type: string
-      description: Version ID
-      title: VersionId
-    type_commons_EventId:
-      type: string
-      description: Event ID
-      title: EventId
-    type_records_CellConfig:
-      type: object
-      properties:
-        readonly:
-          type: boolean
-      description: CellConfig
-      title: CellConfig
   securitySchemes:
     default:
       type: http

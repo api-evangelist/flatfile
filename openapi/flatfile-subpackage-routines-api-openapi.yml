@@ -224,6 +224,55 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
+    type_commons_RunbookId:
+      type: string
+      description: Runbook ID
+      title: RunbookId
+    type_commons_RoutineId:
+      type: string
+      description: Routine ID
+      title: RoutineId
+    type_routines_RoutinesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_routines_Routine'
+      required:
+      - data
+      title: RoutinesResponse
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_routines_RoutineType:
+      type: string
+      enum:
+      - JOB
+      title: RoutineType
+    type_routines_RoutineResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_routines_Routine'
+      required:
+      - data
+      title: RoutineResponse
     type_routines_Routine:
       type: object
       properties:
@@ -266,26 +315,6 @@ components:
       - updatedAt
       description: Routine is a set of instructions or procedures that are followed to complete a task.
       title: Routine
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_routines_RoutineResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_routines_Routine'
-      required:
-      - data
-      title: RoutineResponse
-    type_commons_RunbookId:
-      type: string
-      description: Runbook ID
-      title: RunbookId
     type_routines_UpdateRoutineRequest:
       type: object
       properties:
@@ -306,25 +335,13 @@ components:
       - ordinal
       - type
       title: UpdateRoutineRequest
-    type_routines_RoutineType:
-      type: string
-      enum:
-      - JOB
-      title: RoutineType
-    type_commons_RoutineId:
-      type: string
-      description: Routine ID
-      title: RoutineId
-    type_commons_Errors:
+    type_commons_Success:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
     type_commons_Error:
       type: object
       properties:
@@ -335,23 +352,6 @@ components:
       required:
       - message
       title: Error
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_routines_RoutinesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_routines_Routine'
-      required:
-      - data
-      title: RoutinesResponse
     type_routines_CreateRoutineRequest:
       type: object
       properties:

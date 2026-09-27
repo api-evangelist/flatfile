@@ -48,7 +48,7 @@ modified: '2026-05-19'
 specificationVersion: '0.23'
 apis:
 - aid: flatfile:flatfile-subpackage-accounts-api
-  name: Flatfile subpackage_accounts API
+  name: Flatfile Subpackage Accounts API
   description: The subpackage_accounts API from Flatfile — 1 operation(s) for subpackage_accounts.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -65,7 +65,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-actions-api
-  name: Flatfile subpackage_actions API
+  name: Flatfile Subpackage Actions API
   description: The subpackage_actions API from Flatfile — 3 operation(s) for subpackage_actions.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -82,7 +82,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-agent-exports-api
-  name: Flatfile subpackage_agent-exports API
+  name: Flatfile Subpackage Agent Exports API
   description: >-
     The subpackage_agent-exports API from Flatfile — 3 operation(s) for subpackage_agent-exports.
   humanURL: https://reference.flatfile.com/
@@ -99,7 +99,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-agents-api
-  name: Flatfile subpackage_agents API
+  name: Flatfile Subpackage Agents API
   description: The subpackage_agents API from Flatfile — 10 operation(s) for subpackage_agents.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -116,7 +116,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-apps-api
-  name: Flatfile subpackage_apps API
+  name: Flatfile Subpackage Apps API
   description: The subpackage_apps API from Flatfile — 6 operation(s) for subpackage_apps.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -133,7 +133,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-assistant-api
-  name: Flatfile subpackage_assistant API
+  name: Flatfile Subpackage Assistant API
   description: The subpackage_assistant API from Flatfile — 2 operation(s) for subpackage_assistant.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -150,7 +150,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-auth-api
-  name: Flatfile subpackage_auth API
+  name: Flatfile Subpackage Auth API
   description: The subpackage_auth API from Flatfile — 2 operation(s) for subpackage_auth.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -167,7 +167,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-canvas-areas-api
-  name: Flatfile subpackage_canvas-areas API
+  name: Flatfile Subpackage Canvas Areas API
   description: >-
     The subpackage_canvas-areas API from Flatfile — 2 operation(s) for subpackage_canvas-areas.
   humanURL: https://reference.flatfile.com/
@@ -184,7 +184,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-commits-api
-  name: Flatfile subpackage_commits API
+  name: Flatfile Subpackage Commits API
   description: The subpackage_commits API from Flatfile — 3 operation(s) for subpackage_commits.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -201,7 +201,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-data-clips-api
-  name: Flatfile subpackage_data-clips API
+  name: Flatfile Subpackage Data Clips API
   description: The subpackage_data-clips API from Flatfile — 6 operation(s) for subpackage_data-clips.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -217,7 +217,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-data-retention-policies-api
-  name: Flatfile subpackage_data-retention-policies API
+  name: Flatfile Subpackage Data Retention Policies API
   description: >-
     The subpackage_data-retention-policies API from Flatfile — 2 operation(s) for subpackage_data-retention-policies.
   humanURL: https://reference.flatfile.com/
@@ -234,7 +234,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-documents-api
-  name: Flatfile subpackage_documents API
+  name: Flatfile Subpackage Documents API
   description: The subpackage_documents API from Flatfile — 2 operation(s) for subpackage_documents.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -251,7 +251,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-entitlements-api
-  name: Flatfile subpackage_entitlements API
+  name: Flatfile Subpackage Entitlements API
   description: >-
     The subpackage_entitlements API from Flatfile — 1 operation(s) for subpackage_entitlements.
   humanURL: https://reference.flatfile.com/
@@ -269,7 +269,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-environments-api
-  name: Flatfile subpackage_environments API
+  name: Flatfile Subpackage Environments API
   description: >-
     The subpackage_environments API from Flatfile — 6 operation(s) for subpackage_environments.
   humanURL: https://reference.flatfile.com/
@@ -287,7 +287,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-events-api
-  name: Flatfile subpackage_events API
+  name: Flatfile Subpackage Events API
   description: The subpackage_events API from Flatfile — 4 operation(s) for subpackage_events.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -304,7 +304,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-files-api
-  name: Flatfile subpackage_files API
+  name: Flatfile Subpackage Files API
   description: The subpackage_files API from Flatfile — 5 operation(s) for subpackage_files.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -321,7 +321,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-flags-api
-  name: Flatfile subpackage_flags API
+  name: Flatfile Subpackage Flags API
   description: The subpackage_flags API from Flatfile — 3 operation(s) for subpackage_flags.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -338,7 +338,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-guests-api
-  name: Flatfile subpackage_guests API
+  name: Flatfile Subpackage Guests API
   description: The subpackage_guests API from Flatfile — 6 operation(s) for subpackage_guests.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -355,7 +355,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-jobs-api
-  name: Flatfile subpackage_jobs API
+  name: Flatfile Subpackage Jobs API
   description: The subpackage_jobs API from Flatfile — 12 operation(s) for subpackage_jobs.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -372,7 +372,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-mapping-api
-  name: Flatfile subpackage_mapping API
+  name: Flatfile Subpackage Mapping API
   description: The subpackage_mapping API from Flatfile — 4 operation(s) for subpackage_mapping.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -389,7 +389,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-records-api
-  name: Flatfile subpackage_records API
+  name: Flatfile Subpackage Records API
   description: The subpackage_records API from Flatfile — 4 operation(s) for subpackage_records.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -406,7 +406,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-roles-api
-  name: Flatfile subpackage_roles API
+  name: Flatfile Subpackage Roles API
   description: The subpackage_roles API from Flatfile — 1 operation(s) for subpackage_roles.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -423,7 +423,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-routines-api
-  name: Flatfile subpackage_routines API
+  name: Flatfile Subpackage Routines API
   description: The subpackage_routines API from Flatfile — 2 operation(s) for subpackage_routines.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -440,7 +440,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-runbooks-api
-  name: Flatfile subpackage_runbooks API
+  name: Flatfile Subpackage Runbooks API
   description: The subpackage_runbooks API from Flatfile — 2 operation(s) for subpackage_runbooks.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -457,7 +457,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-secrets-api
-  name: Flatfile subpackage_secrets API
+  name: Flatfile Subpackage Secrets API
   description: The subpackage_secrets API from Flatfile — 2 operation(s) for subpackage_secrets.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -474,7 +474,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-sheets-api
-  name: Flatfile subpackage_sheets API
+  name: Flatfile Subpackage Sheets API
   description: The subpackage_sheets API from Flatfile — 11 operation(s) for subpackage_sheets.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -491,7 +491,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-snapshots-api
-  name: Flatfile subpackage_snapshots API
+  name: Flatfile Subpackage Snapshots API
   description: The subpackage_snapshots API from Flatfile — 4 operation(s) for subpackage_snapshots.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -508,7 +508,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-spaces-api
-  name: Flatfile subpackage_spaces API
+  name: Flatfile Subpackage Spaces API
   description: The subpackage_spaces API from Flatfile — 8 operation(s) for subpackage_spaces.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -525,7 +525,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-users-api
-  name: Flatfile subpackage_users API
+  name: Flatfile Subpackage Users API
   description: The subpackage_users API from Flatfile — 6 operation(s) for subpackage_users.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -542,7 +542,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-versions-api
-  name: Flatfile subpackage_versions API
+  name: Flatfile Subpackage Versions API
   description: The subpackage_versions API from Flatfile — 1 operation(s) for subpackage_versions.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -559,7 +559,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-views-api
-  name: Flatfile subpackage_views API
+  name: Flatfile Subpackage Views API
   description: The subpackage_views API from Flatfile — 2 operation(s) for subpackage_views.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1
@@ -576,7 +576,7 @@ apis:
   - type: GettingStarted
     url: https://flatfile.com/docs/quickstart
 - aid: flatfile:flatfile-subpackage-workbooks-api
-  name: Flatfile subpackage_workbooks API
+  name: Flatfile Subpackage Workbooks API
   description: The subpackage_workbooks API from Flatfile — 3 operation(s) for subpackage_workbooks.
   humanURL: https://reference.flatfile.com/
   baseURL: https://api.x.flatfile.com/v1

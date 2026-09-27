@@ -37,10 +37,6 @@ paths:
                 $ref: '#/components/schemas/type_roles_ListRolesResponse'
 components:
   schemas:
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
     type_commons_RoleId:
       type: string
       description: Role ID
@@ -67,6 +63,10 @@ components:
       - createdAt
       - updatedAt
       title: RoleResponse
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
     type_roles_ListRolesResponse:
       type: object
       properties:

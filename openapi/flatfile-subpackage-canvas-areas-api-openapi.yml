@@ -297,29 +297,14 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons_CanvasAreaId:
-      type: string
-      description: Canvas Area ID
-      title: CanvasAreaId
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_canvas-areas_CanvasAreaLayout:
+    type_canvas-areas_CanvasAreaVisibility:
       type: string
       enum:
-      - split
-      - drawer
-      - modal
-      title: CanvasAreaLayout
-    type_canvas-areas_CanvasAreaResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_canvas-areas_CanvasArea'
-      required:
-      - data
-      title: CanvasAreaResponse
+      - visible
+      - hidden
+      - optional
+      - skeleton
+      title: CanvasAreaVisibility
     type_canvas-areas_CanvasArea:
       type: object
       properties:
@@ -375,40 +360,6 @@ components:
       - updatedAt
       description: A canvas area represents a section within a canvas for organizing content
       title: CanvasArea
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_CanvasId:
-      type: string
-      description: Canvas ID
-      title: CanvasId
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_canvas-areas_CanvasAreaVisibility:
-      type: string
-      enum:
-      - visible
-      - hidden
-      - optional
-      - skeleton
-      title: CanvasAreaVisibility
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
     type_canvas-areas_CanvasAreaType:
       type: string
       enum:
@@ -435,6 +386,16 @@ components:
       required:
       - data
       title: ListCanvasAreasResponse
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
     type_commons_Pagination:
       type: object
       properties:
@@ -453,6 +414,18 @@ components:
       - totalCount
       description: pagination info
       title: Pagination
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_canvas-areas_CanvasAreaResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_canvas-areas_CanvasArea'
+      required:
+      - data
+      title: CanvasAreaResponse
     type_commons_Success:
       type: object
       properties:
@@ -460,6 +433,18 @@ components:
           $ref: '#/components/schemas/type_commons_SuccessData'
       description: Informs whether or not a request was successful
       title: Success
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_CanvasAreaId:
+      type: string
+      description: Canvas Area ID
+      title: CanvasAreaId
     type_canvas-areas_CanvasAreaPosition:
       type: string
       enum:
@@ -469,16 +454,31 @@ components:
       - middle
       - bottom
       title: CanvasAreaPosition
-    type_commons_Error:
+    type_canvas-areas_CanvasAreaLayout:
+      type: string
+      enum:
+      - split
+      - drawer
+      - modal
+      title: CanvasAreaLayout
+    type_commons_Errors:
       type: object
       properties:
-        key:
-          type: string
-        message:
-          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
       required:
-      - message
-      title: Error
+      - errors
+      title: Errors
+    type_commons_CanvasId:
+      type: string
+      description: Canvas ID
+      title: CanvasId
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
   securitySchemes:
     default:
       type: http

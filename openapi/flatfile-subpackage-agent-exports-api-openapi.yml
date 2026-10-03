@@ -152,42 +152,10 @@ paths:
                 format: binary
 components:
   schemas:
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_commons_AgentId:
-      type: string
-      description: Agent ID
-      title: AgentId
-    type_commons_PageNumber:
-      type: integer
-      description: Based on pageSize, which page of records to return
-      title: PageNumber
-    type_agent-exports_GetAgentExportResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_agent-exports_AgentExport'
-      required:
-      - data
-      title: GetAgentExportResponse
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
     type_commons_AgentExportId:
       type: string
       description: Agent Export ID
       title: AgentExportId
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
     type_agent-exports_AgentExportType:
       type: string
       enum:
@@ -196,28 +164,10 @@ components:
       - SOURCE
       description: The different export type formats available.
       title: AgentExportType
-    type_commons_PageSize:
+    type_commons_PageNumber:
       type: integer
-      description: Number of logs to return in a page (default 20)
-      title: PageSize
-    type_commons_Pagination:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
+      description: Based on pageSize, which page of records to return
+      title: PageNumber
     type_agent-exports_AgentExport:
       type: object
       properties:
@@ -249,6 +199,32 @@ components:
       - createdAt
       - updatedAt
       title: AgentExport
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons_PageSize:
+      type: integer
+      description: Number of logs to return in a page (default 20)
+      title: PageSize
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
     type_commons_Success:
       type: object
       properties:
@@ -256,6 +232,22 @@ components:
           $ref: '#/components/schemas/type_commons_SuccessData'
       description: Informs whether or not a request was successful
       title: Success
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_AgentId:
+      type: string
+      description: Agent ID
+      title: AgentId
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
     type_agent-exports_ListAgentExportsResponse:
       type: object
       properties:
@@ -269,6 +261,14 @@ components:
       - data
       - pagination
       title: ListAgentExportsResponse
+    type_agent-exports_GetAgentExportResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agent-exports_AgentExport'
+      required:
+      - data
+      title: GetAgentExportResponse
   securitySchemes:
     default:
       type: http

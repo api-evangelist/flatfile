@@ -416,45 +416,45 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
+    type_commons_ActorIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_UserId'
+      - $ref: '#/components/schemas/type_commons_AgentId'
+      - $ref: '#/components/schemas/type_commons_GuestId'
+      title: ActorIdUnion
     type_commons_AgentId:
       type: string
       description: Agent ID
       title: AgentId
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_users_UserCreateAndInviteRequest:
+    type_users_ListUsersResponse:
       type: object
       properties:
-        email:
-          type: string
-        name:
-          type: string
-        actorRoles:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/type_roles_AssignActorRoleRequest'
+            $ref: '#/components/schemas/type_users_User'
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
       required:
-      - email
-      - name
-      - actorRoles
-      description: Properties used to create a new user
-      title: UserCreateAndInviteRequest
+      - data
+      title: ListUsersResponse
+    type_roles_AssignActorRoleRequest:
+      type: object
+      properties:
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+      required:
+      - roleId
+      - resourceId
+      title: AssignActorRoleRequest
     type_roles_ResourceIdUnion:
       oneOf:
       - $ref: '#/components/schemas/type_commons_AccountId'
       - $ref: '#/components/schemas/type_commons_EnvironmentId'
       - $ref: '#/components/schemas/type_commons_SpaceId'
       title: ResourceIdUnion
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
     type_users_UserWithRoles:
       type: object
       properties:
@@ -500,6 +500,152 @@ components:
       - updatedAt
       - actorRoles
       title: UserWithRoles
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_roles_AssignRoleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_roles_AssignRoleResponseData'
+      required:
+      - data
+      title: AssignRoleResponse
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_roles_ListActorRolesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles_ActorRoleResponse'
+      required:
+      - data
+      title: ListActorRolesResponse
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_roles_AssignRoleResponseData:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons_ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: AssignRoleResponseData
+    type_users_UserResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_User'
+      required:
+      - data
+      title: UserResponse
+    type_roles_ActorRoleResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons_ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: ActorRoleResponse
+    type_commons_UserId:
+      type: string
+      description: User ID
+      title: UserId
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons_SortDirection:
+      type: string
+      enum:
+      - asc
+      - desc
+      description: Sort direction - asc (ascending) or desc (descending)
+      title: SortDirection
+    type_commons_ActorRoleId:
+      type: string
+      description: Actor Role ID
+      title: ActorRoleId
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
     type_users_User:
       type: object
       properties:
@@ -541,31 +687,20 @@ components:
       - updatedAt
       description: Configurations for the user
       title: User
-    type_commons_Success:
+    type_commons_RoleId:
+      type: string
+      description: Role ID
+      title: RoleId
+    type_commons_Error:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_roles_ListActorRolesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_roles_ActorRoleResponse'
+        key:
+          type: string
+        message:
+          type: string
       required:
-      - data
-      title: ListActorRolesResponse
+      - message
+      title: Error
     type_users_ListUsersSortField:
       type: string
       enum:
@@ -579,105 +714,6 @@ components:
       - last_seen_at
       - dashboard
       title: ListUsersSortField
-    type_roles_ActorRoleResponse:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_ActorRoleId'
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        actorId:
-          $ref: '#/components/schemas/type_commons_ActorIdUnion'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - roleId
-      - actorId
-      - resourceId
-      - createdAt
-      - updatedAt
-      title: ActorRoleResponse
-    type_users_ListUsersResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_User'
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-      required:
-      - data
-      title: ListUsersResponse
-    type_commons_SortDirection:
-      type: string
-      enum:
-      - asc
-      - desc
-      description: Sort direction - asc (ascending) or desc (descending)
-      title: SortDirection
-    type_roles_AssignActorRoleRequest:
-      type: object
-      properties:
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-      required:
-      - roleId
-      - resourceId
-      title: AssignActorRoleRequest
-    type_commons_ActorIdUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_UserId'
-      - $ref: '#/components/schemas/type_commons_AgentId'
-      - $ref: '#/components/schemas/type_commons_GuestId'
-      title: ActorIdUnion
-    type_commons_Pagination:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_commons_RoleId:
-      type: string
-      description: Role ID
-      title: RoleId
-    type_roles_AssignRoleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_roles_AssignRoleResponseData'
-      required:
-      - data
-      title: AssignRoleResponse
-    type_users_UserResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_users_User'
-      required:
-      - data
-      title: UserResponse
     type_users_UserWithRolesResponse:
       type: object
       properties:
@@ -690,59 +726,23 @@ components:
       type: string
       description: Guest ID
       title: GuestId
-    type_commons_Errors:
+    type_users_UserCreateAndInviteRequest:
       type: object
       properties:
-        errors:
+        email:
+          type: string
+        name:
+          type: string
+        actorRoles:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons_Error'
+            $ref: '#/components/schemas/type_roles_AssignActorRoleRequest'
       required:
-      - errors
-      title: Errors
-    type_commons_ActorRoleId:
-      type: string
-      description: Actor Role ID
-      title: ActorRoleId
-    type_commons_UserId:
-      type: string
-      description: User ID
-      title: UserId
-    type_roles_AssignRoleResponseData:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_ActorRoleId'
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        actorId:
-          $ref: '#/components/schemas/type_commons_ActorIdUnion'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - roleId
-      - actorId
-      - resourceId
-      - createdAt
-      - updatedAt
-      title: AssignRoleResponseData
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
+      - email
+      - name
+      - actorRoles
+      description: Properties used to create a new user
+      title: UserCreateAndInviteRequest
   securitySchemes:
     default:
       type: http

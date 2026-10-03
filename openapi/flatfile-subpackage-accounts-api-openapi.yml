@@ -67,10 +67,6 @@ paths:
               $ref: '#/components/schemas/type_accounts_AccountPatch'
 components:
   schemas:
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
     type_accounts_AccountPatch:
       type: object
       properties:
@@ -80,6 +76,10 @@ components:
           $ref: '#/components/schemas/type_commons_AppId'
       description: Properties used to update an account
       title: AccountPatch
+    type_commons_AppId:
+      type: string
+      description: App ID
+      title: AppId
     type_accounts_Account:
       type: object
       properties:
@@ -125,6 +125,10 @@ components:
       - updatedAt
       description: An account
       title: Account
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
     type_accounts_AccountResponse:
       type: object
       properties:
@@ -133,10 +137,6 @@ components:
       required:
       - data
       title: AccountResponse
-    type_commons_AppId:
-      type: string
-      description: App ID
-      title: AppId
   securitySchemes:
     default:
       type: http

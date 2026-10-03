@@ -245,6 +245,17 @@ paths:
               $ref: '#/components/schemas/type_flags_BulkMutateFlagsRequest'
 components:
   schemas:
+    type_flags_FlagMutationData:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The flag label
+        colorHex:
+          type: string
+          description: The flag color in hex format
+      description: Flag data for mutation operations
+      title: FlagMutationData
     type_flags_FlagResponse:
       type: object
       properties:
@@ -281,43 +292,36 @@ components:
       - updatedAt
       description: A flag object
       title: FlagResponse
-    type_flags_FlagMutationData:
-      type: object
-      properties:
-        label:
-          type: string
-          description: The flag label
-        colorHex:
-          type: string
-          description: The flag color in hex format
-      description: Flag data for mutation operations
-      title: FlagMutationData
-    type_commons_WorkbookId:
+    type_flags_FlagOperation:
       type: string
-      description: Workbook ID
-      title: WorkbookId
-    type_flags_UpdateFlagRequest:
-      type: object
-      properties:
-        label:
-          type: string
-          description: The new label for the flag
-        colorHex:
-          type: string
-          description: The new hex color code for the flag
-        newSlug:
-          type: string
-          description: The new slug for the flag
-      description: Request to update an existing flag
-      title: UpdateFlagRequest
-    type_commons_SuccessData:
+      enum:
+      - apply
+      - update
+      - delete
+      - replace
+      description: The type of flag operation to perform
+      title: FlagOperation
+    type_flags_BulkMutateFlagsResponse:
       type: object
       properties:
         success:
           type: boolean
+          description: Whether the operation was successfully queued
+        jobId:
+          type: string
+          description: The ID of the job handling the bulk mutation
       required:
       - success
-      title: SuccessData
+      - jobId
+      description: Response from bulk flag mutation
+      title: BulkMutateFlagsResponse
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
     type_flags_CreateFlagRequest:
       type: object
       properties:
@@ -336,6 +340,32 @@ components:
       - colorHex
       description: Request to create a new flag
       title: CreateFlagRequest
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_flags_UpdateFlagRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The new label for the flag
+        colorHex:
+          type: string
+          description: The new hex color code for the flag
+        newSlug:
+          type: string
+          description: The new slug for the flag
+      description: Request to update an existing flag
+      title: UpdateFlagRequest
+    type_commons_WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
     type_flags_BulkMutateFlagsRequest:
       type: object
       properties:
@@ -383,36 +413,6 @@ components:
       - slug
       description: Request to perform bulk flag operations
       title: BulkMutateFlagsRequest
-    type_flags_FlagOperation:
-      type: string
-      enum:
-      - apply
-      - update
-      - delete
-      - replace
-      description: The type of flag operation to perform
-      title: FlagOperation
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_flags_BulkMutateFlagsResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successfully queued
-        jobId:
-          type: string
-          description: The ID of the job handling the bulk mutation
-      required:
-      - success
-      - jobId
-      description: Response from bulk flag mutation
-      title: BulkMutateFlagsResponse
   securitySchemes:
     default:
       type: http

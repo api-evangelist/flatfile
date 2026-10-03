@@ -927,194 +927,68 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons_ActionMessage:
+    type_commons_InputConstraintType:
+      type: string
+      enum:
+      - required
+      title: InputConstraintType
+    type_commons_Guardrail:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/type_commons_ActionMessageType'
         content:
           type: string
+          description: Markdown guardrail for this action
       required:
-      - type
       - content
-      title: ActionMessage
-    type_spaces_JSONPatchOperationType:
-      type: string
-      enum:
-      - add
-      - remove
-      - replace
-      - move
-      - copy
-      - test
-      title: JSONPatchOperationType
-    type_commons_ActionId:
-      type: string
-      description: Action ID
-      title: ActionId
-    type_spaces_TriggerEnum:
-      type: string
-      enum:
-      - first
-      - hover
-      - event
-      - manual
-      title: TriggerEnum
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_spaces_SpaceDraftListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_SpaceDraft'
-      required:
-      - data
-      title: SpaceDraftListResponse
-    type_commons_InputField:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Unique key for a Field.
-        label:
-          type: string
-          description: Visible name of a Field.
-        description:
-          type: string
-          description: Brief description below the name of the Field.
-        type:
-          type: string
-          description: Field Types inform the user interface how to sort and display data.
-        defaultValue:
-          description: Default value for a Field.
-        config:
-          $ref: '#/components/schemas/type_commons_InputConfig'
-          description: Additional configuration for enum Fields.
-        constraints:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputConstraint'
-          description: Indicate additional validations that will be applied to the Field.
-      required:
-      - key
-      - label
-      - type
-      title: InputField
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_commons_InputEnumPropertyOption:
-      type: object
-      properties:
-        label:
-          type: string
-          description: A visual label for this option, defaults to value if not provided
-        description:
-          type: string
-          description: A short description for this option
-        color:
-          type: string
-          description: An optional color to assign this option
-        icon:
-          type: string
-          description: A reference pointer to a previously registered icon
-        meta:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: An arbitrary JSON object to be associated with this option and made available to hooks
-        value:
-          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
-      required:
-      - value
-      title: InputEnumPropertyOption
-    type_spaces_SpaceDraftResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_spaces_SpaceDraft'
-      required:
-      - data
-      title: SpaceDraftResponse
-    type_spaces_GuidanceResource:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_GuidanceId'
-        guideSlug:
-          type: string
-        options:
-          $ref: '#/components/schemas/type_spaces_GuidanceOptions'
-        createdFrom:
-          $ref: '#/components/schemas/type_commons_GuidanceId'
-          description: The guidance id of the template that was used to create this guidance
-        lastPropagatedAt:
-          type: string
-          format: date-time
-          description: The last time the guidance template configuration was propagated to this guidance
-      required:
-      - id
-      - guideSlug
-      - options
-      title: GuidanceResource
-    type_commons_SpaceConfigId:
-      type: string
-      description: Space Config ID
-      title: SpaceConfigId
-    type_files_HeaderDetectionOptions:
-      type: object
-      properties:
-        algorithm:
-          $ref: '#/components/schemas/type_files_HeaderDetectionAlgorithm'
-        rowsToSearch:
-          type: integer
-        skip:
-          type: integer
-        headers:
-          type: array
-          items:
+      title: Guardrail
+    type_commons_ActionConstraint:
+      oneOf:
+      - type: object
+        properties:
+          type:
             type: string
-        rowNumbers:
-          type: array
-          items:
-            type: integer
-      required:
-      - algorithm
-      title: HeaderDetectionOptions
-    type_files_HeaderDetectionAlgorithm:
+            enum:
+            - hasAllValid
+            description: 'Discriminator value: hasAllValid'
+          ignoreSelection:
+            type: boolean
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasSelection
+            description: 'Discriminator value: hasSelection'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasData
+            description: 'Discriminator value: hasData'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasColumnEnabled
+            description: 'Discriminator value: hasColumnEnabled'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionConstraint
+    type_commons_InputFormType:
       type: string
       enum:
-      - aiDetection
-      - default
-      - explicitHeaders
-      - specificRows
-      - dataRowAndSubHeaderDetection
-      title: HeaderDetectionAlgorithm
-    type_spaces_SpaceSidebarConfig:
-      type: object
-      properties:
-        workbookSidebarOrder:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_WorkbookId'
-          description: Used to set the order of workbooks in the sidebar. This will not affect workbooks that are pinned and workbooks that are not specified here will be sorted alphabetically.
-      title: SpaceSidebarConfig
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
+      - simple
+      title: InputFormType
     type_spaces_SpaceSettings:
       type: object
       properties:
@@ -1137,59 +1011,6 @@ components:
           description: Whether to hide the floating toolbar at the bottom that appears when rows are selected
       description: Settings for a space
       title: SpaceSettings
-    type_environments_GuestAuthenticationEnum:
-      type: string
-      enum:
-      - shared_link
-      - magic_link
-      description: The type of authentication to use for guests
-      title: GuestAuthenticationEnum
-    type_spaces_SpaceDraft:
-      type: object
-      properties:
-        sourceSpaceId:
-          $ref: '#/components/schemas/type_commons_SpaceId'
-        draftSpaceId:
-          $ref: '#/components/schemas/type_commons_SpaceId'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        mergedAt:
-          type: string
-          format: date-time
-        deletedAt:
-          type: string
-          format: date-time
-      required:
-      - sourceSpaceId
-      - draftSpaceId
-      - createdAt
-      - updatedAt
-      title: SpaceDraft
-    type_commons_ActionMode:
-      type: string
-      enum:
-      - foreground
-      - background
-      - toolbarBlocking
-      description: Foreground actions will prevent interacting with the resource until complete
-      title: ActionMode
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_commons_Guardrail:
-      type: object
-      properties:
-        content:
-          type: string
-          description: Markdown guardrail for this action
-      required:
-      - content
-      title: Guardrail
     type_commons_InputForm:
       type: object
       properties:
@@ -1213,101 +1034,30 @@ components:
       required:
       - options
       title: InputConfig
-    type_spaces_SpaceAccess:
+    type_commons_GuidanceId:
       type: string
-      enum:
-      - '*'
-      - upload
-      title: SpaceAccess
-    type_commons_InputFormType:
-      type: string
-      enum:
-      - simple
-      title: InputFormType
-    type_spaces_TypeEnum:
-      type: string
-      enum:
-      - sidebar
-      - popout
-      - tooltip
-      title: TypeEnum
-    type_commons_SortDirection:
-      type: string
-      enum:
-      - asc
-      - desc
-      description: Sort direction - asc (ascending) or desc (descending)
-      title: SortDirection
-    type_commons_InputConstraint:
+      description: Guidance ID
+      title: GuidanceId
+    type_commons_ActionMessage:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/type_commons_InputConstraintType'
-      required:
-      - type
-      title: InputConstraint
-    type_commons_Guide:
-      type: object
-      properties:
+          $ref: '#/components/schemas/type_commons_ActionMessageType'
         content:
           type: string
-          description: Markdown guidance for this action
       required:
+      - type
       - content
-      title: Guide
-    type_commons_ActionSchedule:
+      title: ActionMessage
+    type_files_HeaderDetectionAlgorithm:
       type: string
       enum:
-      - weekly
-      - daily
-      - hourly
-      title: ActionSchedule
-    type_commons_InputConstraintType:
-      type: string
-      enum:
-      - required
-      title: InputConstraintType
-    type_spaces_ListSpacesResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_Space'
-      required:
-      - data
-      description: List of Space objects
-      title: ListSpacesResponse
-    type_spaces_GuidanceApiCreateData:
-      type: object
-      properties:
-        guideSlug:
-          type: string
-        options:
-          $ref: '#/components/schemas/type_spaces_GuidanceOptions'
-          description: Options for the guidance
-      required:
-      - guideSlug
-      - options
-      title: GuidanceApiCreateData
-    type_spaces_SpaceDraftMergeOperation:
-      type: object
-      properties:
-        action:
-          type: string
-        id:
-          type: string
-        mergeId:
-          type: string
-        jsonPatch:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_JSONPatchOperation'
-      required:
-      - action
-      title: SpaceDraftMergeOperation
+      - aiDetection
+      - default
+      - explicitHeaders
+      - specificRows
+      - dataRowAndSubHeaderDetection
+      title: HeaderDetectionAlgorithm
     type_commons_ActionMount:
       oneOf:
       - type: object
@@ -1370,10 +1120,76 @@ components:
       discriminator:
         propertyName: type
       title: ActionMount
-    type_commons_GuidanceId:
+    type_spaces_GuidanceApiUpdateData:
+      type: object
+      properties:
+        options:
+          $ref: '#/components/schemas/type_spaces_GuidanceOptions'
+          description: Options for the guidance
+      required:
+      - options
+      title: GuidanceApiUpdateData
+    type_commons_SpaceId:
       type: string
-      description: Guidance ID
-      title: GuidanceId
+      description: Space ID
+      title: SpaceId
+    type_spaces_ListSpacesResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_Space'
+      required:
+      - data
+      description: List of Space objects
+      title: ListSpacesResponse
+    type_spaces_RoleEnum:
+      type: string
+      enum:
+      - admin
+      - guest
+      title: RoleEnum
+    type_spaces_SpaceDraftMergeOperationsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperations'
+      required:
+      - data
+      title: SpaceDraftMergeOperationsResponse
+    type_commons_InputField:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key for a Field.
+        label:
+          type: string
+          description: Visible name of a Field.
+        description:
+          type: string
+          description: Brief description below the name of the Field.
+        type:
+          type: string
+          description: Field Types inform the user interface how to sort and display data.
+        defaultValue:
+          description: Default value for a Field.
+        config:
+          $ref: '#/components/schemas/type_commons_InputConfig'
+          description: Additional configuration for enum Fields.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputConstraint'
+          description: Indicate additional validations that will be applied to the Field.
+      required:
+      - key
+      - label
+      - type
+      title: InputField
     type_spaces_GetSpacesSortField:
       type: string
       enum:
@@ -1385,6 +1201,184 @@ components:
       - createdAt
       - lastActivityAt
       title: GetSpacesSortField
+    type_commons_InputEnumPropertyOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A visual label for this option, defaults to value if not provided
+        description:
+          type: string
+          description: A short description for this option
+        color:
+          type: string
+          description: An optional color to assign this option
+        icon:
+          type: string
+          description: A reference pointer to a previously registered icon
+        meta:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: An arbitrary JSON object to be associated with this option and made available to hooks
+        value:
+          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
+      required:
+      - value
+      title: InputEnumPropertyOption
+    type_commons_AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_spaces_GuidanceOptions:
+      type: object
+      properties:
+        target:
+          type: string
+        trigger:
+          $ref: '#/components/schemas/type_spaces_TriggerEnum'
+        type:
+          $ref: '#/components/schemas/type_spaces_TypeEnum'
+        role:
+          $ref: '#/components/schemas/type_spaces_RoleEnum'
+          description: The role for which this guidance should be displayed. If not specified, guidance will be shown to both admin and guest users.
+      required:
+      - target
+      - trigger
+      - type
+      title: GuidanceOptions
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_spaces_SpaceDraftListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_SpaceDraft'
+      required:
+      - data
+      title: SpaceDraftListResponse
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_spaces_SpaceSidebarConfig:
+      type: object
+      properties:
+        workbookSidebarOrder:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_WorkbookId'
+          description: Used to set the order of workbooks in the sidebar. This will not affect workbooks that are pinned and workbooks that are not specified here will be sorted alphabetically.
+      title: SpaceSidebarConfig
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_commons_WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_commons_ActionSchedule:
+      type: string
+      enum:
+      - weekly
+      - daily
+      - hourly
+      title: ActionSchedule
+    type_spaces_SpaceSize:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+        numUsers:
+          type: integer
+        pdv:
+          type: integer
+        numFiles:
+          type: integer
+      required:
+      - name
+      - id
+      - numUsers
+      - pdv
+      - numFiles
+      description: The size of a space
+      title: SpaceSize
+    type_commons_UserId:
+      type: string
+      description: User ID
+      title: UserId
+    type_commons_ActionMode:
+      type: string
+      enum:
+      - foreground
+      - background
+      - toolbarBlocking
+      description: Foreground actions will prevent interacting with the resource until complete
+      title: ActionMode
+    type_spaces_SpaceDraftMergeOperations:
+      type: object
+      properties:
+        space:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
+        workbook:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
+        sheet:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
+        guidance:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
+        document:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
+        action:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
+        agent:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
+      required:
+      - space
+      - workbook
+      - sheet
+      - guidance
+      - document
+      - action
+      - agent
+      title: SpaceDraftMergeOperations
     type_commons_Pagination:
       type: object
       properties:
@@ -1403,23 +1397,103 @@ components:
       - totalCount
       description: pagination info
       title: Pagination
-    type_spaces_GuidanceOptions:
+    type_commons_SpaceConfigId:
+      type: string
+      description: Space Config ID
+      title: SpaceConfigId
+    type_commons_SortDirection:
+      type: string
+      enum:
+      - asc
+      - desc
+      description: Sort direction - asc (ascending) or desc (descending)
+      title: SortDirection
+    type_commons_ActionMessageType:
+      type: string
+      enum:
+      - error
+      - info
+      title: ActionMessageType
+    type_spaces_SpaceAccess:
+      type: string
+      enum:
+      - '*'
+      - upload
+      title: SpaceAccess
+    type_commons_InputConstraint:
       type: object
       properties:
-        target:
-          type: string
-        trigger:
-          $ref: '#/components/schemas/type_spaces_TriggerEnum'
         type:
-          $ref: '#/components/schemas/type_spaces_TypeEnum'
-        role:
-          $ref: '#/components/schemas/type_spaces_RoleEnum'
-          description: The role for which this guidance should be displayed. If not specified, guidance will be shown to both admin and guest users.
+          $ref: '#/components/schemas/type_commons_InputConstraintType'
       required:
-      - target
-      - trigger
       - type
-      title: GuidanceOptions
+      title: InputConstraint
+    type_spaces_TriggerEnum:
+      type: string
+      enum:
+      - first
+      - hover
+      - event
+      - manual
+      title: TriggerEnum
+    type_spaces_SpaceConfig:
+      type: object
+      properties:
+        spaceConfigId:
+          $ref: '#/components/schemas/type_commons_SpaceConfigId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
+        primaryWorkbookId:
+          $ref: '#/components/schemas/type_commons_WorkbookId'
+          description: The ID of the primary workbook for the space. This should not be included in create space requests.
+        metadata:
+          description: Metadata for the space
+        settings:
+          $ref: '#/components/schemas/type_spaces_SpaceSettings'
+          description: The Space settings.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Action'
+        access:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_SpaceAccess'
+        autoConfigure:
+          type: boolean
+          description: Only used during creation - will be ignored on update
+        namespace:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        translationsPath:
+          type: string
+        languageOverride:
+          type: string
+        archivedAt:
+          type: string
+          format: date-time
+          description: Date when space was archived
+        appId:
+          $ref: '#/components/schemas/type_commons_AppId'
+          description: The ID of the App that space is associated with
+        isAppTemplate:
+          type: boolean
+          description: Whether the space is an app template. Only one space per app can be an app template.
+        name:
+          type: string
+          description: The name of the space
+        displayOrder:
+          type: integer
+          description: The display order
+        guestAuthentication:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_environments_GuestAuthenticationEnum'
+      description: Properties used to create a new Space
+      title: SpaceConfig
     type_spaces_Space:
       type: object
       properties:
@@ -1537,91 +1611,55 @@ components:
       - guestAuthentication
       description: A place to store your workbooks
       title: Space
-    type_commons_ActionMessageType:
+    type_spaces_TypeEnum:
       type: string
       enum:
-      - error
-      - info
-      title: ActionMessageType
-    type_spaces_SpaceSize:
+      - sidebar
+      - popout
+      - tooltip
+      title: TypeEnum
+    type_commons_Error:
       type: object
       properties:
-        name:
+        key:
           type: string
-        id:
+        message:
           type: string
-        numUsers:
-          type: integer
-        pdv:
-          type: integer
-        numFiles:
-          type: integer
       required:
-      - name
-      - id
-      - numUsers
-      - pdv
-      - numFiles
-      description: The size of a space
-      title: SpaceSize
-    type_spaces_SpaceDraftMergeOperations:
+      - message
+      title: Error
+    type_spaces_GuidanceApiCreateData:
       type: object
       properties:
-        space:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
-        workbook:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
-        sheet:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
-        guidance:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
-        document:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
-        action:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
-        agent:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperation'
+        guideSlug:
+          type: string
+        options:
+          $ref: '#/components/schemas/type_spaces_GuidanceOptions'
+          description: Options for the guidance
       required:
-      - space
-      - workbook
-      - sheet
-      - guidance
-      - document
-      - action
-      - agent
-      title: SpaceDraftMergeOperations
-    type_spaces_SpaceResponse:
+      - guideSlug
+      - options
+      title: GuidanceApiCreateData
+    type_files_HeaderDetectionOptions:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_spaces_Space'
+        algorithm:
+          $ref: '#/components/schemas/type_files_HeaderDetectionAlgorithm'
+        rowsToSearch:
+          type: integer
+        skip:
+          type: integer
+        headers:
+          type: array
+          items:
+            type: string
+        rowNumbers:
+          type: array
+          items:
+            type: integer
       required:
-      - data
-      title: SpaceResponse
-    type_spaces_RoleEnum:
-      type: string
-      enum:
-      - admin
-      - guest
-      title: RoleEnum
-    type_commons_WorkbookId:
-      type: string
-      description: Workbook ID
-      title: WorkbookId
+      - algorithm
+      title: HeaderDetectionOptions
     type_spaces_GuidanceListResponse:
       type: object
       properties:
@@ -1632,6 +1670,73 @@ components:
       required:
       - data
       title: GuidanceListResponse
+    type_spaces_SpaceDraftMergeOperation:
+      type: object
+      properties:
+        action:
+          type: string
+        id:
+          type: string
+        mergeId:
+          type: string
+        jsonPatch:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_spaces_JSONPatchOperation'
+      required:
+      - action
+      title: SpaceDraftMergeOperation
+    type_commons_ActionId:
+      type: string
+      description: Action ID
+      title: ActionId
+    type_commons_Guide:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guidance for this action
+      required:
+      - content
+      title: Guide
+    type_environments_GuestAuthenticationEnum:
+      type: string
+      enum:
+      - shared_link
+      - magic_link
+      description: The type of authentication to use for guests
+      title: GuestAuthenticationEnum
+    type_spaces_JSONPatchOperationType:
+      type: string
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      title: JSONPatchOperationType
+    type_spaces_GuidanceResource:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_GuidanceId'
+        guideSlug:
+          type: string
+        options:
+          $ref: '#/components/schemas/type_spaces_GuidanceOptions'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons_GuidanceId'
+          description: The guidance id of the template that was used to create this guidance
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time the guidance template configuration was propagated to this guidance
+      required:
+      - id
+      - guideSlug
+      - options
+      title: GuidanceResource
     type_spaces_JSONPatchOperation:
       type: object
       properties:
@@ -1646,129 +1751,14 @@ components:
       required:
       - op
       title: JSONPatchOperation
-    type_commons_AppId:
-      type: string
-      description: App ID
-      title: AppId
-    type_spaces_SpaceConfig:
-      type: object
-      properties:
-        spaceConfigId:
-          $ref: '#/components/schemas/type_commons_SpaceConfigId'
-        environmentId:
-          $ref: '#/components/schemas/type_commons_EnvironmentId'
-        primaryWorkbookId:
-          $ref: '#/components/schemas/type_commons_WorkbookId'
-          description: The ID of the primary workbook for the space. This should not be included in create space requests.
-        metadata:
-          description: Metadata for the space
-        settings:
-          $ref: '#/components/schemas/type_spaces_SpaceSettings'
-          description: The Space settings.
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Action'
-        access:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_spaces_SpaceAccess'
-        autoConfigure:
-          type: boolean
-          description: Only used during creation - will be ignored on update
-        namespace:
-          type: string
-        labels:
-          type: array
-          items:
-            type: string
-        translationsPath:
-          type: string
-        languageOverride:
-          type: string
-        archivedAt:
-          type: string
-          format: date-time
-          description: Date when space was archived
-        appId:
-          $ref: '#/components/schemas/type_commons_AppId'
-          description: The ID of the App that space is associated with
-        isAppTemplate:
-          type: boolean
-          description: Whether the space is an app template. Only one space per app can be an app template.
-        name:
-          type: string
-          description: The name of the space
-        displayOrder:
-          type: integer
-          description: The display order
-        guestAuthentication:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_environments_GuestAuthenticationEnum'
-      description: Properties used to create a new Space
-      title: SpaceConfig
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_commons_ActionConstraint:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasAllValid
-            description: 'Discriminator value: hasAllValid'
-          ignoreSelection:
-            type: boolean
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasSelection
-            description: 'Discriminator value: hasSelection'
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasData
-            description: 'Discriminator value: hasData'
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasColumnEnabled
-            description: 'Discriminator value: hasColumnEnabled'
-        required:
-        - type
-      discriminator:
-        propertyName: type
-      title: ActionConstraint
-    type_spaces_SpaceDraftMergeOperationsResponse:
+    type_spaces_SpaceDraftResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_spaces_SpaceDraftMergeOperations'
+          $ref: '#/components/schemas/type_spaces_SpaceDraft'
       required:
       - data
-      title: SpaceDraftMergeOperationsResponse
+      title: SpaceDraftResponse
     type_commons_Action:
       type: object
       properties:
@@ -1852,29 +1842,39 @@ components:
       required:
       - label
       title: Action
-    type_commons_UserId:
-      type: string
-      description: User ID
-      title: UserId
-    type_commons_Error:
+    type_spaces_SpaceDraft:
       type: object
       properties:
-        key:
+        sourceSpaceId:
+          $ref: '#/components/schemas/type_commons_SpaceId'
+        draftSpaceId:
+          $ref: '#/components/schemas/type_commons_SpaceId'
+        createdAt:
           type: string
-        message:
+          format: date-time
+        updatedAt:
           type: string
+          format: date-time
+        mergedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
       required:
-      - message
-      title: Error
-    type_spaces_GuidanceApiUpdateData:
+      - sourceSpaceId
+      - draftSpaceId
+      - createdAt
+      - updatedAt
+      title: SpaceDraft
+    type_spaces_SpaceResponse:
       type: object
       properties:
-        options:
-          $ref: '#/components/schemas/type_spaces_GuidanceOptions'
-          description: Options for the guidance
+        data:
+          $ref: '#/components/schemas/type_spaces_Space'
       required:
-      - options
-      title: GuidanceApiUpdateData
+      - data
+      title: SpaceResponse
   securitySchemes:
     default:
       type: http

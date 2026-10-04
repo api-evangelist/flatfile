@@ -692,166 +692,35 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons_ActorIdUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_UserId'
-      - $ref: '#/components/schemas/type_commons_AgentId'
-      - $ref: '#/components/schemas/type_commons_GuestId'
-      title: ActorIdUnion
-    type_commons_PageSize:
-      type: integer
-      description: Number of logs to return in a page (default 20)
-      title: PageSize
-    type_agents_GetDetailedAgentLogResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_agents_DetailedAgentLog'
-      required:
-      - data
-      title: GetDetailedAgentLogResponse
-    type_agents_GetExecutionsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents_Execution'
-      required:
-      - data
-      title: GetExecutionsResponse
-    type_commons_AgentId:
+    type_commons_ActorRoleId:
       type: string
-      description: Agent ID
-      title: AgentId
-    type_roles_AssignActorRoleRequest:
+      description: Actor Role ID
+      title: ActorRoleId
+    type_roles_AssignRoleResponseData:
       type: object
       properties:
+        id:
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
         roleId:
           $ref: '#/components/schemas/type_commons_RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons_ActorIdUnion'
         resourceId:
           $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
       required:
+      - id
       - roleId
+      - actorId
       - resourceId
-      title: AssignActorRoleRequest
-    type_agents_ListAgentsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents_Agent'
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-      title: ListAgentsResponse
-    type_roles_ResourceIdUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_AccountId'
-      - $ref: '#/components/schemas/type_commons_EnvironmentId'
-      - $ref: '#/components/schemas/type_commons_SpaceId'
-      title: ResourceIdUnion
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_roles_AssignRoleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_roles_AssignRoleResponseData'
-      required:
-      - data
-      title: AssignRoleResponse
-    type_events_EventTopic:
-      type: string
-      enum:
-      - agent:created
-      - agent:updated
-      - agent:deleted
-      - space:created
-      - space:updated
-      - space:deleted
-      - space:archived
-      - space:unarchived
-      - space:expired
-      - space:guestAdded
-      - space:guestRemoved
-      - document:created
-      - document:updated
-      - document:deleted
-      - workbook:created
-      - workbook:updated
-      - workbook:deleted
-      - workbook:expired
-      - workbook:thawed
-      - flag:created
-      - flag:updated
-      - flag:deleted
-      - sheet:created
-      - sheet:updated
-      - sheet:deleted
-      - sheet:counts-updated
-      - sheet:calculation-updated
-      - snapshot:created
-      - records:created
-      - records:updated
-      - records:deleted
-      - file:created
-      - file:updated
-      - file:deleted
-      - file:expired
-      - job:created
-      - job:updated
-      - job:deleted
-      - job:completed
-      - job:ready
-      - job:scheduled
-      - job:outcome-acknowledged
-      - job:parts-completed
-      - job:failed
-      - program:created
-      - program:updated
-      - program:recomputing
-      - program:recomputed
-      - commit:created
-      - commit:updated
-      - commit:completed
-      - layer:created
-      - secret:created
-      - secret:updated
-      - secret:deleted
-      - cron:5-minutes
-      - cron:hourly
-      - cron:daily
-      - cron:weekly
-      - environment:created
-      - environment:updated
-      - environment:deleted
-      - environment:autobuild-created
-      - action:created
-      - action:updated
-      - action:deleted
-      - data-clip:created
-      - data-clip:updated
-      - data-clip:deleted
-      - data-clip:collaborator-updated
-      - data-clip:resolutions-created
-      - data-clip:resolutions-updated
-      - data-clip:resolutions-refreshed
-      - canvas:created
-      - canvas:updated
-      - canvas:deleted
-      - canvas-area:created
-      - canvas-area:updated
-      - canvas-area:deleted
-      - thread:created
-      - thread:updated
-      - thread:deleted
-      description: The topic of the event
-      title: EventTopic
+      - createdAt
+      - updatedAt
+      title: AssignRoleResponseData
     type_agents_Execution:
       type: object
       properties:
@@ -893,97 +762,6 @@ components:
       - topic
       description: An execution of an agent
       title: Execution
-    type_agents_GetDetailedAgentLogsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents_DetailedAgentLog'
-      required:
-      - data
-      title: GetDetailedAgentLogsResponse
-    type_commons_SuccessQueryParameter:
-      type: boolean
-      description: Boolean
-      title: SuccessQueryParameter
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_agents_DetailedAgentLog:
-      type: object
-      properties:
-        eventId:
-          $ref: '#/components/schemas/type_commons_EventId'
-        success:
-          type: boolean
-          description: Whether the agent execution was successful
-        createdAt:
-          type: string
-          format: date-time
-        completedAt:
-          type: string
-          format: date-time
-        duration:
-          type: integer
-          description: The duration of the agent execution
-        topic:
-          type: string
-          description: The topics of the agent execution
-        context:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: The context of the agent execution
-        log:
-          type: string
-          description: The log of the agent execution
-      required:
-      - eventId
-      - success
-      - createdAt
-      - completedAt
-      - duration
-      - topic
-      - context
-      description: A log of an agent execution
-      title: DetailedAgentLog
-    type_agents_ListAgentVersionsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents_AgentVersion'
-      title: ListAgentVersionsResponse
-    type_agents_GetAgentLogsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_agents_AgentLog'
-      title: GetAgentLogsResponse
     type_agents_AutomapOptions:
       type: object
       properties:
@@ -998,17 +776,7 @@ components:
       - defaultTargetSheet
       - matchFilename
       title: AutomapOptions
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_roles_AssignRoleResponseData:
+    type_roles_ActorRoleResponse:
       type: object
       properties:
         id:
@@ -1032,21 +800,15 @@ components:
       - resourceId
       - createdAt
       - updatedAt
-      title: AssignRoleResponseData
-    type_commons_AgentVersionId:
-      type: string
-      description: Agent version ID
-      title: AgentVersionId
-    type_roles_ListActorRolesResponse:
+      title: ActorRoleResponse
+    type_commons_SuccessData:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_roles_ActorRoleResponse'
+        success:
+          type: boolean
       required:
-      - data
-      title: ListActorRolesResponse
+      - success
+      title: SuccessData
     type_agents_AgentVersion:
       type: object
       properties:
@@ -1116,35 +878,171 @@ components:
       - updatedAt
       - agent_id
       title: AgentVersion
+    type_agents_AgentVersionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agents_AgentVersion'
+      title: AgentVersionResponse
+    type_agents_AgentLog:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_AgentLogId'
+        agentId:
+          $ref: '#/components/schemas/type_commons_AgentId'
+        eventId:
+          $ref: '#/components/schemas/type_commons_EventId'
+        success:
+          type: boolean
+          description: Whether the agent execution was successful
+        createdAt:
+          type: string
+        completedAt:
+          type: string
+        log:
+          type: string
+          description: The log of the agent execution
+        queueLag:
+          type: integer
+          description: The time difference between when the event was created and when the agent started processing it
+        namespaces:
+          type: array
+          items:
+            type: string
+          description: The namespaces associated with the event
+        context:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The context of the agent execution
+        topic:
+          type: string
+          description: The topic of the agent execution
+        duration:
+          type: integer
+          description: The duration of the agent execution in milliseconds
+        memoryUsage:
+          type: integer
+          description: The memory usage of the agent execution in bytes
+        requestTime:
+          type: integer
+          description: The amount of time the agent spent making HTTP requests in milliseconds
+        requestCount:
+          type: integer
+          description: The number of HTTP requests made by the agent
+        bytesReceived:
+          type: integer
+          description: The total amount of data received by the agent during execution in bytes
+        bytesSent:
+          type: integer
+          description: The total amount of data sent by the agent during execution in bytes
+      required:
+      - id
+      - agentId
+      - eventId
+      - success
+      - createdAt
+      - completedAt
+      description: A log of an agent execution
+      title: AgentLog
+    type_commons_GuestId:
+      type: string
+      description: Guest ID
+      title: GuestId
+    type_roles_AssignRoleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_roles_AssignRoleResponseData'
+      required:
+      - data
+      title: AssignRoleResponse
+    type_agents_GetAgentLogsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_AgentLog'
+      title: GetAgentLogsResponse
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_agents_ListAgentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_Agent'
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+      title: ListAgentsResponse
+    type_agents_DetailedAgentLog:
+      type: object
+      properties:
+        eventId:
+          $ref: '#/components/schemas/type_commons_EventId'
+        success:
+          type: boolean
+          description: Whether the agent execution was successful
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          description: The duration of the agent execution
+        topic:
+          type: string
+          description: The topics of the agent execution
+        context:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The context of the agent execution
+        log:
+          type: string
+          description: The log of the agent execution
+      required:
+      - eventId
+      - success
+      - createdAt
+      - completedAt
+      - duration
+      - topic
+      - context
+      description: A log of an agent execution
+      title: DetailedAgentLog
     type_commons_UserId:
       type: string
       description: User ID
       title: UserId
-    type_roles_ActorRoleResponse:
+    type_commons_SuccessQueryParameter:
+      type: boolean
+      description: Boolean
+      title: SuccessQueryParameter
+    type_agents_GetExecutionsResponse:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/type_commons_ActorRoleId'
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        actorId:
-          $ref: '#/components/schemas/type_commons_ActorIdUnion'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_Execution'
       required:
-      - id
-      - roleId
-      - actorId
-      - resourceId
-      - createdAt
-      - updatedAt
-      title: ActorRoleResponse
+      - data
+      title: GetExecutionsResponse
     type_agents_Agent:
       type: object
       properties:
@@ -1218,45 +1116,79 @@ components:
       - accountId
       - environmentId
       title: Agent
-    type_agents_AgentTemplateEnum:
+    type_commons_RoleId:
       type: string
-      enum:
-      - constraints
-      - autobuild
-      - autocast
-      - webhook-egress
-      - action-listener
-      - automap
-      description: The template of the agent
-      title: AgentTemplateEnum
+      description: Role ID
+      title: RoleId
     type_commons_PageNumber:
       type: integer
       description: Based on pageSize, which page of records to return
       title: PageNumber
-    type_commons_Pagination:
+    type_commons_AgentId:
+      type: string
+      description: Agent ID
+      title: AgentId
+    type_commons_PageSize:
+      type: integer
+      description: Number of logs to return in a page (default 20)
+      title: PageSize
+    type_commons_EventId:
+      type: string
+      description: Event ID
+      title: EventId
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_roles_ResourceIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_AccountId'
+      - $ref: '#/components/schemas/type_commons_EnvironmentId'
+      - $ref: '#/components/schemas/type_commons_SpaceId'
+      title: ResourceIdUnion
+    type_commons_AgentVersionId:
+      type: string
+      description: Agent version ID
+      title: AgentVersionId
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_roles_AssignActorRoleRequest:
       type: object
       properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
       required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_agents_AgentResponse:
+      - roleId
+      - resourceId
+      title: AssignActorRoleRequest
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_roles_ListActorRolesResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_agents_Agent'
-      title: AgentResponse
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles_ActorRoleResponse'
+      required:
+      - data
+      title: ListActorRolesResponse
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
     type_agents_AgentConfig:
       type: object
       properties:
@@ -1306,108 +1238,43 @@ components:
           description: Commit information for the agent
       description: Properties used to create a new agent
       title: AgentConfig
-    type_commons_ActorRoleId:
-      type: string
-      description: Actor Role ID
-      title: ActorRoleId
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_commons_RoleId:
-      type: string
-      description: Role ID
-      title: RoleId
-    type_agents_AgentLog:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_AgentLogId'
-        agentId:
-          $ref: '#/components/schemas/type_commons_AgentId'
-        eventId:
-          $ref: '#/components/schemas/type_commons_EventId'
-        success:
-          type: boolean
-          description: Whether the agent execution was successful
-        createdAt:
-          type: string
-        completedAt:
-          type: string
-        log:
-          type: string
-          description: The log of the agent execution
-        queueLag:
-          type: integer
-          description: The time difference between when the event was created and when the agent started processing it
-        namespaces:
-          type: array
-          items:
-            type: string
-          description: The namespaces associated with the event
-        context:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: The context of the agent execution
-        topic:
-          type: string
-          description: The topic of the agent execution
-        duration:
-          type: integer
-          description: The duration of the agent execution in milliseconds
-        memoryUsage:
-          type: integer
-          description: The memory usage of the agent execution in bytes
-        requestTime:
-          type: integer
-          description: The amount of time the agent spent making HTTP requests in milliseconds
-        requestCount:
-          type: integer
-          description: The number of HTTP requests made by the agent
-        bytesReceived:
-          type: integer
-          description: The total amount of data received by the agent during execution in bytes
-        bytesSent:
-          type: integer
-          description: The total amount of data sent by the agent during execution in bytes
-      required:
-      - id
-      - agentId
-      - eventId
-      - success
-      - createdAt
-      - completedAt
-      description: A log of an agent execution
-      title: AgentLog
-    type_commons_AgentLogId:
-      type: string
-      description: Agent Log ID
-      title: AgentLogId
-    type_agents_AgentVersionResponse:
+    type_agents_ListAgentVersionsResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_agents_AgentVersion'
-      title: AgentVersionResponse
-    type_commons_Error:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_AgentVersion'
+      title: ListAgentVersionsResponse
+    type_agents_GetDetailedAgentLogsResponse:
       type: object
       properties:
-        key:
-          type: string
-        message:
-          type: string
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_agents_DetailedAgentLog'
       required:
-      - message
-      title: Error
-    type_commons_EventId:
+      - data
+      title: GetDetailedAgentLogsResponse
+    type_agents_Compiler:
       type: string
-      description: Event ID
-      title: EventId
-    type_commons_GuestId:
+      enum:
+      - js
+      description: The compiler of the agent
+      title: Compiler
+    type_agents_AgentTemplateEnum:
       type: string
-      description: Guest ID
-      title: GuestId
+      enum:
+      - constraints
+      - autobuild
+      - autocast
+      - webhook-egress
+      - action-listener
+      - automap
+      description: The template of the agent
+      title: AgentTemplateEnum
     type_agents_TemplateOptions:
       oneOf:
       - type: object
@@ -1509,12 +1376,145 @@ components:
         propertyName: template
       description: The options for a templated agent.
       title: TemplateOptions
-    type_agents_Compiler:
+    type_commons_AgentLogId:
+      type: string
+      description: Agent Log ID
+      title: AgentLogId
+    type_agents_GetDetailedAgentLogResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agents_DetailedAgentLog'
+      required:
+      - data
+      title: GetDetailedAgentLogResponse
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons_ActorIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_UserId'
+      - $ref: '#/components/schemas/type_commons_AgentId'
+      - $ref: '#/components/schemas/type_commons_GuestId'
+      title: ActorIdUnion
+    type_agents_AgentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_agents_Agent'
+      title: AgentResponse
+    type_events_EventTopic:
       type: string
       enum:
-      - js
-      description: The compiler of the agent
-      title: Compiler
+      - agent:created
+      - agent:updated
+      - agent:deleted
+      - space:created
+      - space:updated
+      - space:deleted
+      - space:archived
+      - space:unarchived
+      - space:expired
+      - space:guestAdded
+      - space:guestRemoved
+      - document:created
+      - document:updated
+      - document:deleted
+      - workbook:created
+      - workbook:updated
+      - workbook:deleted
+      - workbook:expired
+      - workbook:thawed
+      - flag:created
+      - flag:updated
+      - flag:deleted
+      - sheet:created
+      - sheet:updated
+      - sheet:deleted
+      - sheet:counts-updated
+      - sheet:calculation-updated
+      - snapshot:created
+      - records:created
+      - records:updated
+      - records:deleted
+      - file:created
+      - file:updated
+      - file:deleted
+      - file:expired
+      - job:created
+      - job:updated
+      - job:deleted
+      - job:completed
+      - job:ready
+      - job:scheduled
+      - job:outcome-acknowledged
+      - job:parts-completed
+      - job:failed
+      - program:created
+      - program:updated
+      - program:recomputing
+      - program:recomputed
+      - commit:created
+      - commit:updated
+      - commit:completed
+      - layer:created
+      - secret:created
+      - secret:updated
+      - secret:deleted
+      - cron:5-minutes
+      - cron:hourly
+      - cron:daily
+      - cron:weekly
+      - environment:created
+      - environment:updated
+      - environment:deleted
+      - environment:autobuild-created
+      - action:created
+      - action:updated
+      - action:deleted
+      - data-clip:created
+      - data-clip:updated
+      - data-clip:deleted
+      - data-clip:collaborator-updated
+      - data-clip:resolutions-created
+      - data-clip:resolutions-updated
+      - data-clip:resolutions-refreshed
+      - canvas:created
+      - canvas:updated
+      - canvas:deleted
+      - canvas-area:created
+      - canvas-area:updated
+      - canvas-area:deleted
+      - thread:created
+      - thread:updated
+      - thread:deleted
+      description: The topic of the event
+      title: EventTopic
   securitySchemes:
     default:
       type: http

@@ -240,6 +240,10 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
+    type_commons_DataRetentionPolicyId:
+      type: string
+      description: Data Retention Policy ID
+      title: DataRetentionPolicyId
     type_data-retention-policies_DataRetentionPolicy:
       type: object
       properties:
@@ -268,74 +272,6 @@ components:
       - updatedAt
       description: A data retention policy belonging to an environment
       title: DataRetentionPolicy
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_data-retention-policies_DataRetentionPolicyResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_data-retention-policies_DataRetentionPolicy'
-      required:
-      - data
-      title: DataRetentionPolicyResponse
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_data-retention-policies_ListDataRetentionPoliciesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_data-retention-policies_DataRetentionPolicy'
-      required:
-      - data
-      title: ListDataRetentionPoliciesResponse
-    type_data-retention-policies_DataRetentionPolicyEnum:
-      type: string
-      enum:
-      - lastActivity
-      - sinceCreated
-      description: The type of data retention policy on an environment
-      title: DataRetentionPolicyEnum
-    type_commons_DataRetentionPolicyId:
-      type: string
-      description: Data Retention Policy ID
-      title: DataRetentionPolicyId
     type_data-retention-policies_DataRetentionPolicyConfig:
       type: object
       properties:
@@ -350,6 +286,70 @@ components:
       - period
       - environmentId
       title: DataRetentionPolicyConfig
+    type_data-retention-policies_ListDataRetentionPoliciesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_data-retention-policies_DataRetentionPolicy'
+      required:
+      - data
+      title: ListDataRetentionPoliciesResponse
+    type_data-retention-policies_DataRetentionPolicyResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_data-retention-policies_DataRetentionPolicy'
+      required:
+      - data
+      title: DataRetentionPolicyResponse
+    type_data-retention-policies_DataRetentionPolicyEnum:
+      type: string
+      enum:
+      - lastActivity
+      - sinceCreated
+      description: The type of data retention policy on an environment
+      title: DataRetentionPolicyEnum
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
   securitySchemes:
     default:
       type: http

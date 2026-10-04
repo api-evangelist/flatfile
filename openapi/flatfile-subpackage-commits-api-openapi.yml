@@ -147,20 +147,10 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons_SheetId:
+    type_commons_CommitId:
       type: string
-      description: Sheet ID
-      title: SheetId
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
+      description: Commit ID
+      title: CommitId
     type_commits_CommitResponse:
       type: object
       properties:
@@ -169,35 +159,6 @@ components:
       required:
       - data
       title: CommitResponse
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_commons_CommitId:
-      type: string
-      description: Commit ID
-      title: CommitId
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
     type_commits_Commit:
       type: object
       properties:
@@ -226,6 +187,45 @@ components:
       - createdAt
       description: A commit version
       title: Commit
+    type_commons_SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
   securitySchemes:
     default:
       type: http

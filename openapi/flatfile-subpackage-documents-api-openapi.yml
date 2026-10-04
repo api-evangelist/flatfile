@@ -264,147 +264,6 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons_InputConstraintType:
-      type: string
-      enum:
-      - required
-      title: InputConstraintType
-    type_commons_Guardrail:
-      type: object
-      properties:
-        content:
-          type: string
-          description: Markdown guardrail for this action
-      required:
-      - content
-      title: Guardrail
-    type_commons_ActionConstraint:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasAllValid
-            description: 'Discriminator value: hasAllValid'
-          ignoreSelection:
-            type: boolean
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasSelection
-            description: 'Discriminator value: hasSelection'
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasData
-            description: 'Discriminator value: hasData'
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasColumnEnabled
-            description: 'Discriminator value: hasColumnEnabled'
-        required:
-        - type
-      discriminator:
-        propertyName: type
-      title: ActionConstraint
-    type_commons_InputFormType:
-      type: string
-      enum:
-      - simple
-      title: InputFormType
-    type_documents_Document:
-      type: object
-      properties:
-        title:
-          type: string
-        body:
-          type: string
-        treatments:
-          type: array
-          items:
-            type: string
-          description: Certain treatments will cause your Document to look or behave differently.
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Action'
-        id:
-          $ref: '#/components/schemas/type_commons_DocumentId'
-        spaceId:
-          $ref: '#/components/schemas/type_commons_SpaceId'
-        environmentId:
-          $ref: '#/components/schemas/type_commons_EnvironmentId'
-        createdAt:
-          type: string
-          format: date-time
-          description: Date the document was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: Date the document was last updated
-        createdFrom:
-          $ref: '#/components/schemas/type_commons_DocumentId'
-          description: The document id of the template that was used to create this document
-        lastPropagatedAt:
-          type: string
-          format: date-time
-          description: The last time the document template configuration was propagated to this document
-      required:
-      - title
-      - body
-      - id
-      - createdAt
-      - updatedAt
-      description: A document (markdown components) belong to a space
-      title: Document
-    type_commons_InputForm:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_InputFormType'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputField'
-      required:
-      - type
-      - fields
-      title: InputForm
-    type_commons_InputConfig:
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputEnumPropertyOption'
-      required:
-      - options
-      title: InputConfig
-    type_commons_ActionMessage:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_ActionMessageType'
-        content:
-          type: string
-      required:
-      - type
-      - content
-      title: ActionMessage
     type_commons_ActionMount:
       oneOf:
       - type: object
@@ -467,50 +326,76 @@ components:
       discriminator:
         propertyName: type
       title: ActionMount
-    type_commons_SpaceId:
+    type_commons_DocumentId:
       type: string
-      description: Space ID
-      title: SpaceId
-    type_commons_InputField:
+      description: Document ID
+      title: DocumentId
+    type_commons_InputFormType:
+      type: string
+      enum:
+      - simple
+      title: InputFormType
+    type_commons_ActionId:
+      type: string
+      description: Action ID
+      title: ActionId
+    type_commons_ActionSchedule:
+      type: string
+      enum:
+      - weekly
+      - daily
+      - hourly
+      title: ActionSchedule
+    type_commons_InputForm:
       type: object
       properties:
-        key:
-          type: string
-          description: Unique key for a Field.
-        label:
-          type: string
-          description: Visible name of a Field.
-        description:
-          type: string
-          description: Brief description below the name of the Field.
         type:
-          type: string
-          description: Field Types inform the user interface how to sort and display data.
-        defaultValue:
-          description: Default value for a Field.
-        config:
-          $ref: '#/components/schemas/type_commons_InputConfig'
-          description: Additional configuration for enum Fields.
-        constraints:
+          $ref: '#/components/schemas/type_commons_InputFormType'
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons_InputConstraint'
-          description: Indicate additional validations that will be applied to the Field.
+            $ref: '#/components/schemas/type_commons_InputField'
       required:
-      - key
-      - label
       - type
-      title: InputField
-    type_documents_ListDocumentsResponse:
+      - fields
+      title: InputForm
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_documents_DocumentResponse:
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_documents_Document'
+          $ref: '#/components/schemas/type_documents_Document'
       required:
       - data
-      title: ListDocumentsResponse
+      title: DocumentResponse
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_InputConstraintType:
+      type: string
+      enum:
+      - required
+      title: InputConstraintType
+    type_commons_Guardrail:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guardrail for this action
+      required:
+      - content
+      title: Guardrail
     type_commons_InputEnumPropertyOption:
       type: object
       properties:
@@ -536,110 +421,27 @@ components:
       required:
       - value
       title: InputEnumPropertyOption
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_documents_DocumentConfig:
-      type: object
-      properties:
-        title:
-          type: string
-        body:
-          type: string
-        treatments:
-          type: array
-          items:
-            type: string
-          description: Certain treatments will cause your Document to look or behave differently.
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Action'
-      required:
-      - title
-      - body
-      title: DocumentConfig
-    type_documents_DocumentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_documents_Document'
-      required:
-      - data
-      title: DocumentResponse
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_commons_ActionSchedule:
-      type: string
-      enum:
-      - weekly
-      - daily
-      - hourly
-      title: ActionSchedule
-    type_commons_ActionMode:
-      type: string
-      enum:
-      - foreground
-      - background
-      - toolbarBlocking
-      description: Foreground actions will prevent interacting with the resource until complete
-      title: ActionMode
-    type_commons_DocumentId:
-      type: string
-      description: Document ID
-      title: DocumentId
-    type_commons_ActionMessageType:
-      type: string
-      enum:
-      - error
-      - info
-      title: ActionMessageType
-    type_commons_InputConstraint:
+    type_commons_ActionMessage:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/type_commons_InputConstraintType'
+          $ref: '#/components/schemas/type_commons_ActionMessageType'
+        content:
+          type: string
       required:
       - type
-      title: InputConstraint
-    type_commons_Error:
+      - content
+      title: ActionMessage
+    type_commons_InputConfig:
       type: object
       properties:
-        key:
-          type: string
-        message:
-          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputEnumPropertyOption'
       required:
-      - message
-      title: Error
-    type_commons_ActionId:
-      type: string
-      description: Action ID
-      title: ActionId
+      - options
+      title: InputConfig
     type_commons_Guide:
       type: object
       properties:
@@ -649,6 +451,12 @@ components:
       required:
       - content
       title: Guide
+    type_commons_ActionMessageType:
+      type: string
+      enum:
+      - error
+      - info
+      title: ActionMessageType
     type_commons_Action:
       type: object
       properties:
@@ -732,6 +540,198 @@ components:
       required:
       - label
       title: Action
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons_InputConstraint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_InputConstraintType'
+      required:
+      - type
+      title: InputConstraint
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_documents_ListDocumentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_documents_Document'
+      required:
+      - data
+      title: ListDocumentsResponse
+    type_documents_DocumentConfig:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        treatments:
+          type: array
+          items:
+            type: string
+          description: Certain treatments will cause your Document to look or behave differently.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Action'
+      required:
+      - title
+      - body
+      title: DocumentConfig
+    type_documents_Document:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        treatments:
+          type: array
+          items:
+            type: string
+          description: Certain treatments will cause your Document to look or behave differently.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Action'
+        id:
+          $ref: '#/components/schemas/type_commons_DocumentId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons_SpaceId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
+        createdAt:
+          type: string
+          format: date-time
+          description: Date the document was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date the document was last updated
+        createdFrom:
+          $ref: '#/components/schemas/type_commons_DocumentId'
+          description: The document id of the template that was used to create this document
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time the document template configuration was propagated to this document
+      required:
+      - title
+      - body
+      - id
+      - createdAt
+      - updatedAt
+      description: A document (markdown components) belong to a space
+      title: Document
+    type_commons_ActionConstraint:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasAllValid
+            description: 'Discriminator value: hasAllValid'
+          ignoreSelection:
+            type: boolean
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasSelection
+            description: 'Discriminator value: hasSelection'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasData
+            description: 'Discriminator value: hasData'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasColumnEnabled
+            description: 'Discriminator value: hasColumnEnabled'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionConstraint
+    type_commons_InputField:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key for a Field.
+        label:
+          type: string
+          description: Visible name of a Field.
+        description:
+          type: string
+          description: Brief description below the name of the Field.
+        type:
+          type: string
+          description: Field Types inform the user interface how to sort and display data.
+        defaultValue:
+          description: Default value for a Field.
+        config:
+          $ref: '#/components/schemas/type_commons_InputConfig'
+          description: Additional configuration for enum Fields.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputConstraint'
+          description: Indicate additional validations that will be applied to the Field.
+      required:
+      - key
+      - label
+      - type
+      title: InputField
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons_ActionMode:
+      type: string
+      enum:
+      - foreground
+      - background
+      - toolbarBlocking
+      description: Foreground actions will prevent interacting with the resource until complete
+      title: ActionMode
   securitySchemes:
     default:
       type: http

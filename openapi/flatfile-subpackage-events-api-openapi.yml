@@ -247,43 +247,22 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_spaces_EventToken:
-      type: object
-      properties:
-        accountId:
-          $ref: '#/components/schemas/type_commons_AccountId'
-          description: The ID of the Account.
-        subscribeKey:
-          type: string
-          description: The id of the event bus to subscribe to
-        ttl:
-          type: integer
-          description: Time to live in minutes
-        token:
-          type: string
-          description: This should be your API key.
-      description: Properties used to allow users to connect to the event bus
-      title: EventToken
-    type_commons_SheetId:
+    type_commons_SnapshotId:
       type: string
-      description: Sheet ID
-      title: SheetId
-    type_events_EventAttributes:
-      type: object
-      properties:
-        targetUpdatedAt:
-          type: string
-          format: date-time
-          description: Date the related entity was last updated
-        progress:
-          $ref: '#/components/schemas/type_events_Progress'
-          description: The progress of the event within a collection of iterable events
-      description: The attributes of the event
-      title: EventAttributes
-    type_commons_DataClipId:
+      description: Snapshot ID
+      title: SnapshotId
+    type_commons_CommitId:
       type: string
-      description: Data Clip ID
-      title: DataClipId
+      description: Commit ID
+      title: CommitId
+    type_commons_WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_commons_DocumentId:
+      type: string
+      description: Document ID
+      title: DocumentId
     type_events_Domain:
       type: string
       enum:
@@ -304,6 +283,14 @@ components:
       - thread
       description: The domain of the event
       title: Domain
+    type_events_EventResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_events_Event'
+      required:
+      - data
+      title: EventResponse
     type_events_Progress:
       type: object
       properties:
@@ -318,18 +305,75 @@ components:
           description: The percent complete of the event group
       description: The progress of the event within a collection of iterable events
       title: Progress
-    type_commons_SpaceId:
+    type_commons_FileId:
       type: string
-      description: Space ID
-      title: SpaceId
+      description: File ID
+      title: FileId
+    type_commons_AppId:
+      type: string
+      description: App ID
+      title: AppId
+    type_commons_SheetId:
+      type: string
+      description: Sheet ID
+      title: SheetId
+    type_commons_ActionId:
+      type: string
+      description: Action ID
+      title: ActionId
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_ThreadId:
+      type: string
+      description: Thread ID
+      title: ThreadId
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_spaces_EventTokenResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_spaces_EventToken'
+      required:
+      - data
+      title: EventTokenResponse
+    type_events_ListAllEventsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_events_Event'
+      required:
+      - data
+      title: ListAllEventsResponse
+    type_commons_ProgramId:
+      type: string
+      description: Mapping Program ID
+      title: ProgramId
     type_events_SheetSlug:
       type: string
       description: Sheet Slug
       title: SheetSlug
-    type_events_ActionName:
+    type_commons_EventId:
       type: string
-      description: Name of an action
-      title: ActionName
+      description: Event ID
+      title: EventId
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
     type_events_Event:
       oneOf:
       - type: object
@@ -4512,10 +4556,208 @@ components:
         propertyName: topic
       description: An event that tracks an activity within an environment
       title: Event
-    type_commons_AppId:
+    type_events_ActionName:
       type: string
-      description: App ID
-      title: AppId
+      description: Name of an action
+      title: ActionName
+    type_events_CreateEventConfig:
+      type: object
+      properties:
+        domain:
+          $ref: '#/components/schemas/type_events_Domain'
+          description: The domain of the event
+        context:
+          $ref: '#/components/schemas/type_events_Context'
+          description: The context of the event
+        attributes:
+          $ref: '#/components/schemas/type_events_EventAttributes'
+          description: The attributes of the event
+        callbackUrl:
+          type: string
+          description: The callback url to acknowledge the event
+        dataUrl:
+          type: string
+          description: The url to retrieve the data associated with the event
+        target:
+          type: string
+        origin:
+          $ref: '#/components/schemas/type_events_Origin'
+        namespaces:
+          type: array
+          items:
+            type: string
+        topic:
+          $ref: '#/components/schemas/type_events_EventTopic'
+        payload:
+          type: object
+          additionalProperties:
+            description: Any type
+        deletedAt:
+          type: string
+          format: date-time
+          description: Date the event was deleted
+      required:
+      - domain
+      - context
+      - topic
+      - payload
+      description: Properties used to create a new event
+      title: CreateEventConfig
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_VersionId:
+      type: string
+      description: Version ID
+      title: VersionId
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_events_EventAttributes:
+      type: object
+      properties:
+        targetUpdatedAt:
+          type: string
+          format: date-time
+          description: Date the related entity was last updated
+        progress:
+          $ref: '#/components/schemas/type_events_Progress'
+          description: The progress of the event within a collection of iterable events
+      description: The attributes of the event
+      title: EventAttributes
+    type_events_EventContextSlugs:
+      type: object
+      properties:
+        space:
+          type: string
+          description: The slug of the space
+        workbook:
+          type: string
+          description: The slug of the workbook
+        sheet:
+          type: string
+          description: The slug of the sheet
+      title: EventContextSlugs
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_spaces_EventToken:
+      type: object
+      properties:
+        accountId:
+          $ref: '#/components/schemas/type_commons_AccountId'
+          description: The ID of the Account.
+        subscribeKey:
+          type: string
+          description: The id of the event bus to subscribe to
+        ttl:
+          type: integer
+          description: Time to live in minutes
+        token:
+          type: string
+          description: This should be your API key.
+      description: Properties used to allow users to connect to the event bus
+      title: EventToken
+    type_commons_DataClipId:
+      type: string
+      description: Data Clip ID
+      title: DataClipId
+    type_commons_JobId:
+      type: string
+      description: Pipeline Job ID
+      title: JobId
+    type_events_Context:
+      type: object
+      properties:
+        namespaces:
+          type: array
+          items:
+            type: string
+          description: The namespaces of the event
+        slugs:
+          $ref: '#/components/schemas/type_events_EventContextSlugs'
+          description: The slugs of related resources
+        actionName:
+          $ref: '#/components/schemas/type_events_ActionName'
+        accountId:
+          $ref: '#/components/schemas/type_commons_AccountId'
+        environmentId:
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons_SpaceId'
+        workbookId:
+          $ref: '#/components/schemas/type_commons_WorkbookId'
+        sheetId:
+          $ref: '#/components/schemas/type_commons_SheetId'
+        sheetSlug:
+          $ref: '#/components/schemas/type_events_SheetSlug'
+        snapshotId:
+          $ref: '#/components/schemas/type_commons_SnapshotId'
+        versionId:
+          $ref: '#/components/schemas/type_commons_VersionId'
+          description: Deprecated, use `commitId` instead.
+        commitId:
+          $ref: '#/components/schemas/type_commons_CommitId'
+        jobId:
+          $ref: '#/components/schemas/type_commons_JobId'
+        programId:
+          $ref: '#/components/schemas/type_commons_ProgramId'
+        fileId:
+          $ref: '#/components/schemas/type_commons_FileId'
+        documentId:
+          $ref: '#/components/schemas/type_commons_DocumentId'
+        precedingEventId:
+          $ref: '#/components/schemas/type_commons_EventId'
+        actorId:
+          type: string
+          description: Can be a UserId, GuestId, or AgentId
+        appId:
+          $ref: '#/components/schemas/type_commons_AppId'
+        actionId:
+          $ref: '#/components/schemas/type_commons_ActionId'
+        dataClipId:
+          $ref: '#/components/schemas/type_commons_DataClipId'
+        threadId:
+          $ref: '#/components/schemas/type_commons_ThreadId'
+        filters:
+          type: object
+          additionalProperties:
+            type: string
+        entityId:
+          type: string
+      required:
+      - accountId
+      - environmentId
+      description: The context of the event
+      title: Context
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_events_Origin:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+      description: The origin resource of the event
+      title: Origin
     type_events_EventTopic:
       type: string
       enum:
@@ -4603,248 +4845,6 @@ components:
       - thread:deleted
       description: The topic of the event
       title: EventTopic
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_SnapshotId:
-      type: string
-      description: Snapshot ID
-      title: SnapshotId
-    type_events_Origin:
-      type: object
-      properties:
-        id:
-          type: string
-        slug:
-          type: string
-      description: The origin resource of the event
-      title: Origin
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_events_EventResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_events_Event'
-      required:
-      - data
-      title: EventResponse
-    type_events_ListAllEventsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_events_Event'
-      required:
-      - data
-      title: ListAllEventsResponse
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_commons_WorkbookId:
-      type: string
-      description: Workbook ID
-      title: WorkbookId
-    type_commons_DocumentId:
-      type: string
-      description: Document ID
-      title: DocumentId
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_commons_FileId:
-      type: string
-      description: File ID
-      title: FileId
-    type_events_EventContextSlugs:
-      type: object
-      properties:
-        space:
-          type: string
-          description: The slug of the space
-        workbook:
-          type: string
-          description: The slug of the workbook
-        sheet:
-          type: string
-          description: The slug of the sheet
-      title: EventContextSlugs
-    type_commons_JobId:
-      type: string
-      description: Pipeline Job ID
-      title: JobId
-    type_spaces_EventTokenResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_spaces_EventToken'
-      required:
-      - data
-      title: EventTokenResponse
-    type_commons_ProgramId:
-      type: string
-      description: Mapping Program ID
-      title: ProgramId
-    type_events_CreateEventConfig:
-      type: object
-      properties:
-        domain:
-          $ref: '#/components/schemas/type_events_Domain'
-          description: The domain of the event
-        context:
-          $ref: '#/components/schemas/type_events_Context'
-          description: The context of the event
-        attributes:
-          $ref: '#/components/schemas/type_events_EventAttributes'
-          description: The attributes of the event
-        callbackUrl:
-          type: string
-          description: The callback url to acknowledge the event
-        dataUrl:
-          type: string
-          description: The url to retrieve the data associated with the event
-        target:
-          type: string
-        origin:
-          $ref: '#/components/schemas/type_events_Origin'
-        namespaces:
-          type: array
-          items:
-            type: string
-        topic:
-          $ref: '#/components/schemas/type_events_EventTopic'
-        payload:
-          type: object
-          additionalProperties:
-            description: Any type
-        deletedAt:
-          type: string
-          format: date-time
-          description: Date the event was deleted
-      required:
-      - domain
-      - context
-      - topic
-      - payload
-      description: Properties used to create a new event
-      title: CreateEventConfig
-    type_commons_ThreadId:
-      type: string
-      description: Thread ID
-      title: ThreadId
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
-    type_commons_EventId:
-      type: string
-      description: Event ID
-      title: EventId
-    type_commons_ActionId:
-      type: string
-      description: Action ID
-      title: ActionId
-    type_commons_VersionId:
-      type: string
-      description: Version ID
-      title: VersionId
-    type_commons_CommitId:
-      type: string
-      description: Commit ID
-      title: CommitId
-    type_events_Context:
-      type: object
-      properties:
-        namespaces:
-          type: array
-          items:
-            type: string
-          description: The namespaces of the event
-        slugs:
-          $ref: '#/components/schemas/type_events_EventContextSlugs'
-          description: The slugs of related resources
-        actionName:
-          $ref: '#/components/schemas/type_events_ActionName'
-        accountId:
-          $ref: '#/components/schemas/type_commons_AccountId'
-        environmentId:
-          $ref: '#/components/schemas/type_commons_EnvironmentId'
-        spaceId:
-          $ref: '#/components/schemas/type_commons_SpaceId'
-        workbookId:
-          $ref: '#/components/schemas/type_commons_WorkbookId'
-        sheetId:
-          $ref: '#/components/schemas/type_commons_SheetId'
-        sheetSlug:
-          $ref: '#/components/schemas/type_events_SheetSlug'
-        snapshotId:
-          $ref: '#/components/schemas/type_commons_SnapshotId'
-        versionId:
-          $ref: '#/components/schemas/type_commons_VersionId'
-          description: Deprecated, use `commitId` instead.
-        commitId:
-          $ref: '#/components/schemas/type_commons_CommitId'
-        jobId:
-          $ref: '#/components/schemas/type_commons_JobId'
-        programId:
-          $ref: '#/components/schemas/type_commons_ProgramId'
-        fileId:
-          $ref: '#/components/schemas/type_commons_FileId'
-        documentId:
-          $ref: '#/components/schemas/type_commons_DocumentId'
-        precedingEventId:
-          $ref: '#/components/schemas/type_commons_EventId'
-        actorId:
-          type: string
-          description: Can be a UserId, GuestId, or AgentId
-        appId:
-          $ref: '#/components/schemas/type_commons_AppId'
-        actionId:
-          $ref: '#/components/schemas/type_commons_ActionId'
-        dataClipId:
-          $ref: '#/components/schemas/type_commons_DataClipId'
-        threadId:
-          $ref: '#/components/schemas/type_commons_ThreadId'
-        filters:
-          type: object
-          additionalProperties:
-            type: string
-        entityId:
-          type: string
-      required:
-      - accountId
-      - environmentId
-      description: The context of the event
-      title: Context
   securitySchemes:
     default:
       type: http

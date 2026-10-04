@@ -78,16 +78,6 @@ components:
       - metadata
       description: An entitlement belonging to a resource
       title: Entitlement
-    type_entitlements_ListEntitlementsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_entitlements_Entitlement'
-      required:
-      - data
-      title: ListEntitlementsResponse
     type_commons_Error:
       type: object
       properties:
@@ -98,6 +88,16 @@ components:
       required:
       - message
       title: Error
+    type_entitlements_ListEntitlementsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_entitlements_Entitlement'
+      required:
+      - data
+      title: ListEntitlementsResponse
   securitySchemes:
     default:
       type: http

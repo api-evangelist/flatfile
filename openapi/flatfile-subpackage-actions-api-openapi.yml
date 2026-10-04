@@ -219,102 +219,6 @@ paths:
                 $ref: '#/components/schemas/type_commons_Success'
 components:
   schemas:
-    type_commons_InputConstraintType:
-      type: string
-      enum:
-      - required
-      title: InputConstraintType
-    type_commons_Guardrail:
-      type: object
-      properties:
-        content:
-          type: string
-          description: Markdown guardrail for this action
-      required:
-      - content
-      title: Guardrail
-    type_commons_ActionConstraint:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasAllValid
-            description: 'Discriminator value: hasAllValid'
-          ignoreSelection:
-            type: boolean
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasSelection
-            description: 'Discriminator value: hasSelection'
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasData
-            description: 'Discriminator value: hasData'
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - hasColumnEnabled
-            description: 'Discriminator value: hasColumnEnabled'
-        required:
-        - type
-      discriminator:
-        propertyName: type
-      title: ActionConstraint
-    type_commons_InputFormType:
-      type: string
-      enum:
-      - simple
-      title: InputFormType
-    type_commons_InputForm:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_InputFormType'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputField'
-      required:
-      - type
-      - fields
-      title: InputForm
-    type_commons_InputConfig:
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_InputEnumPropertyOption'
-      required:
-      - options
-      title: InputConfig
-    type_commons_ActionMessage:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_ActionMessageType'
-        content:
-          type: string
-      required:
-      - type
-      - content
-      title: ActionMessage
     type_commons_ActionMount:
       oneOf:
       - type: object
@@ -377,95 +281,35 @@ components:
       discriminator:
         propertyName: type
       title: ActionMount
-    type_commons_SpaceId:
+    type_commons_InputFormType:
       type: string
-      description: Space ID
-      title: SpaceId
-    type_actions_APIActionsResponse:
+      enum:
+      - simple
+      title: InputFormType
+    type_commons_ActionId:
+      type: string
+      description: Action ID
+      title: ActionId
+    type_commons_ActionSchedule:
+      type: string
+      enum:
+      - weekly
+      - daily
+      - hourly
+      title: ActionSchedule
+    type_commons_InputForm:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_APIAction'
-      required:
-      - data
-      title: APIActionsResponse
-    type_commons_InputField:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Unique key for a Field.
-        label:
-          type: string
-          description: Visible name of a Field.
-        description:
-          type: string
-          description: Brief description below the name of the Field.
         type:
-          type: string
-          description: Field Types inform the user interface how to sort and display data.
-        defaultValue:
-          description: Default value for a Field.
-        config:
-          $ref: '#/components/schemas/type_commons_InputConfig'
-          description: Additional configuration for enum Fields.
-        constraints:
+          $ref: '#/components/schemas/type_commons_InputFormType'
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons_InputConstraint'
-          description: Indicate additional validations that will be applied to the Field.
+            $ref: '#/components/schemas/type_commons_InputField'
       required:
-      - key
-      - label
       - type
-      title: InputField
-    type_actions_APIActionResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_APIAction'
-      required:
-      - data
-      title: APIActionResponse
-    type_actions_APIActionConfigs:
-      type: array
-      items:
-        $ref: '#/components/schemas/type_commons_APIActionConfig'
-      title: APIActionConfigs
-    type_commons_InputEnumPropertyOption:
-      type: object
-      properties:
-        label:
-          type: string
-          description: A visual label for this option, defaults to value if not provided
-        description:
-          type: string
-          description: A short description for this option
-        color:
-          type: string
-          description: An optional color to assign this option
-        icon:
-          type: string
-          description: A reference pointer to a previously registered icon
-        meta:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: An arbitrary JSON object to be associated with this option and made available to hooks
-        value:
-          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
-      required:
-      - value
-      title: InputEnumPropertyOption
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
+      - fields
+      title: InputForm
     type_commons_SuccessData:
       type: object
       properties:
@@ -474,201 +318,6 @@ components:
       required:
       - success
       title: SuccessData
-    type_commons_ActionSchedule:
-      type: string
-      enum:
-      - weekly
-      - daily
-      - hourly
-      title: ActionSchedule
-    type_commons_ActionMode:
-      type: string
-      enum:
-      - foreground
-      - background
-      - toolbarBlocking
-      description: Foreground actions will prevent interacting with the resource until complete
-      title: ActionMode
-    type_commons_ActionUpdate:
-      type: object
-      properties:
-        slug:
-          type: string
-          description: '**This is deprecated. Use `operation` instead.**'
-        operation:
-          type: string
-          description: This will become the job operation that is triggered
-        mode:
-          $ref: '#/components/schemas/type_commons_ActionMode'
-          description: Foreground and toolbarBlocking action mode will prevent interacting with the resource until complete
-        tooltip:
-          type: string
-          description: A tooltip that appears when hovering the action button
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ActionMessage'
-        type:
-          type: string
-          description: '**This is deprecated.**'
-        description:
-          type: string
-          description: The text that appears in the dialog after the action is clicked.
-        schedule:
-          $ref: '#/components/schemas/type_commons_ActionSchedule'
-          description: Determines if the action should happen on a regular cadence.
-        primary:
-          type: boolean
-          description: A primary action will be more visibly present, whether in Sheet or Workbook.
-        confirm:
-          type: boolean
-          description: Whether to show a modal to confirm the action
-        icon:
-          type: string
-          description: Icon will work on primary actions. It will only accept an already existing Flatfile design system icon.
-        requireAllValid:
-          type: boolean
-          description: '**This is deprecated. Use `constraints` instead.**'
-        requireSelection:
-          type: boolean
-          description: '**This is deprecated. Use `constraints` instead.**'
-        inputForm:
-          $ref: '#/components/schemas/type_commons_InputForm'
-          description: Adds an input form for this action after it is clicked.
-        constraints:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ActionConstraint'
-          description: A limitation or restriction on the action.
-        mount:
-          $ref: '#/components/schemas/type_commons_ActionMount'
-        guide:
-          $ref: '#/components/schemas/type_commons_Guide'
-        guardrail:
-          $ref: '#/components/schemas/type_commons_Guardrail'
-        createdFrom:
-          $ref: '#/components/schemas/type_commons_ActionId'
-          description: The action that this action was cloned from
-        lastPropagatedAt:
-          type: string
-          format: date-time
-          description: The last time this action was propagated to a workbook
-        deletedAt:
-          type: string
-          format: date-time
-          description: The time this action was deleted
-        invalidConditionalMessaging:
-          type: boolean
-          description: When enabled, shows dynamic confirmation messages based on record validation status instead of the static description
-        validRecordsMessage:
-          type: string
-          description: Custom message to show when all records are valid (only used when invalidConditionalMessaging is true)
-        invalidRecordsMessage:
-          type: string
-          description: Custom message to show when there are invalid records (only used when invalidConditionalMessaging is true)
-        label:
-          type: string
-      title: ActionUpdate
-    type_commons_ActionMessageType:
-      type: string
-      enum:
-      - error
-      - info
-      title: ActionMessageType
-    type_commons_InputConstraint:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_InputConstraintType'
-      required:
-      - type
-      title: InputConstraint
-    type_commons_APIActionConfig:
-      type: object
-      properties:
-        slug:
-          type: string
-          description: '**This is deprecated. Use `operation` instead.**'
-        operation:
-          type: string
-          description: This will become the job operation that is triggered
-        mode:
-          $ref: '#/components/schemas/type_commons_ActionMode'
-          description: Foreground and toolbarBlocking action mode will prevent interacting with the resource until complete
-        tooltip:
-          type: string
-          description: A tooltip that appears when hovering the action button
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ActionMessage'
-        type:
-          type: string
-          description: '**This is deprecated.**'
-        description:
-          type: string
-          description: The text that appears in the dialog after the action is clicked.
-        schedule:
-          $ref: '#/components/schemas/type_commons_ActionSchedule'
-          description: Determines if the action should happen on a regular cadence.
-        primary:
-          type: boolean
-          description: A primary action will be more visibly present, whether in Sheet or Workbook.
-        confirm:
-          type: boolean
-          description: Whether to show a modal to confirm the action
-        icon:
-          type: string
-          description: Icon will work on primary actions. It will only accept an already existing Flatfile design system icon.
-        requireAllValid:
-          type: boolean
-          description: '**This is deprecated. Use `constraints` instead.**'
-        requireSelection:
-          type: boolean
-          description: '**This is deprecated. Use `constraints` instead.**'
-        inputForm:
-          $ref: '#/components/schemas/type_commons_InputForm'
-          description: Adds an input form for this action after it is clicked.
-        constraints:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ActionConstraint'
-          description: A limitation or restriction on the action.
-        mount:
-          $ref: '#/components/schemas/type_commons_ActionMount'
-        guide:
-          $ref: '#/components/schemas/type_commons_Guide'
-        guardrail:
-          $ref: '#/components/schemas/type_commons_Guardrail'
-        createdFrom:
-          $ref: '#/components/schemas/type_commons_ActionId'
-          description: The action that this action was cloned from
-        lastPropagatedAt:
-          type: string
-          format: date-time
-          description: The last time this action was propagated to a workbook
-        deletedAt:
-          type: string
-          format: date-time
-          description: The time this action was deleted
-        invalidConditionalMessaging:
-          type: boolean
-          description: When enabled, shows dynamic confirmation messages based on record validation status instead of the static description
-        validRecordsMessage:
-          type: string
-          description: Custom message to show when all records are valid (only used when invalidConditionalMessaging is true)
-        invalidRecordsMessage:
-          type: string
-          description: Custom message to show when there are invalid records (only used when invalidConditionalMessaging is true)
-        label:
-          type: string
-          description: The text on the Button itself
-        targetId:
-          type: string
-      required:
-      - label
-      - targetId
-      title: APIActionConfig
     type_commons_APIAction:
       type: object
       properties:
@@ -766,10 +415,73 @@ components:
       - updatedAt
       - createdAt
       title: APIAction
-    type_commons_ActionId:
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_InputConstraintType:
       type: string
-      description: Action ID
-      title: ActionId
+      enum:
+      - required
+      title: InputConstraintType
+    type_commons_Guardrail:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Markdown guardrail for this action
+      required:
+      - content
+      title: Guardrail
+    type_commons_InputEnumPropertyOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: A visual label for this option, defaults to value if not provided
+        description:
+          type: string
+          description: A short description for this option
+        color:
+          type: string
+          description: An optional color to assign this option
+        icon:
+          type: string
+          description: A reference pointer to a previously registered icon
+        meta:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: An arbitrary JSON object to be associated with this option and made available to hooks
+        value:
+          description: The value or ID of this option. This value will be sent in egress. The type is a string | integer | boolean.
+      required:
+      - value
+      title: InputEnumPropertyOption
+    type_commons_ActionMessage:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_ActionMessageType'
+        content:
+          type: string
+      required:
+      - type
+      - content
+      title: ActionMessage
+    type_commons_InputConfig:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputEnumPropertyOption'
+      required:
+      - options
+      title: InputConfig
     type_commons_Guide:
       type: object
       properties:
@@ -779,6 +491,294 @@ components:
       required:
       - content
       title: Guide
+    type_commons_ActionMessageType:
+      type: string
+      enum:
+      - error
+      - info
+      title: ActionMessageType
+    type_actions_APIActionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_APIAction'
+      required:
+      - data
+      title: APIActionResponse
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons_InputConstraint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_InputConstraintType'
+      required:
+      - type
+      title: InputConstraint
+    type_actions_APIActionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_APIAction'
+      required:
+      - data
+      title: APIActionsResponse
+    type_commons_ActionConstraint:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasAllValid
+            description: 'Discriminator value: hasAllValid'
+          ignoreSelection:
+            type: boolean
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasSelection
+            description: 'Discriminator value: hasSelection'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasData
+            description: 'Discriminator value: hasData'
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - hasColumnEnabled
+            description: 'Discriminator value: hasColumnEnabled'
+        required:
+        - type
+      discriminator:
+        propertyName: type
+      title: ActionConstraint
+    type_commons_ActionUpdate:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: '**This is deprecated. Use `operation` instead.**'
+        operation:
+          type: string
+          description: This will become the job operation that is triggered
+        mode:
+          $ref: '#/components/schemas/type_commons_ActionMode'
+          description: Foreground and toolbarBlocking action mode will prevent interacting with the resource until complete
+        tooltip:
+          type: string
+          description: A tooltip that appears when hovering the action button
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ActionMessage'
+        type:
+          type: string
+          description: '**This is deprecated.**'
+        description:
+          type: string
+          description: The text that appears in the dialog after the action is clicked.
+        schedule:
+          $ref: '#/components/schemas/type_commons_ActionSchedule'
+          description: Determines if the action should happen on a regular cadence.
+        primary:
+          type: boolean
+          description: A primary action will be more visibly present, whether in Sheet or Workbook.
+        confirm:
+          type: boolean
+          description: Whether to show a modal to confirm the action
+        icon:
+          type: string
+          description: Icon will work on primary actions. It will only accept an already existing Flatfile design system icon.
+        requireAllValid:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        requireSelection:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        inputForm:
+          $ref: '#/components/schemas/type_commons_InputForm'
+          description: Adds an input form for this action after it is clicked.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ActionConstraint'
+          description: A limitation or restriction on the action.
+        mount:
+          $ref: '#/components/schemas/type_commons_ActionMount'
+        guide:
+          $ref: '#/components/schemas/type_commons_Guide'
+        guardrail:
+          $ref: '#/components/schemas/type_commons_Guardrail'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons_ActionId'
+          description: The action that this action was cloned from
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time this action was propagated to a workbook
+        deletedAt:
+          type: string
+          format: date-time
+          description: The time this action was deleted
+        invalidConditionalMessaging:
+          type: boolean
+          description: When enabled, shows dynamic confirmation messages based on record validation status instead of the static description
+        validRecordsMessage:
+          type: string
+          description: Custom message to show when all records are valid (only used when invalidConditionalMessaging is true)
+        invalidRecordsMessage:
+          type: string
+          description: Custom message to show when there are invalid records (only used when invalidConditionalMessaging is true)
+        label:
+          type: string
+      title: ActionUpdate
+    type_commons_APIActionConfig:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: '**This is deprecated. Use `operation` instead.**'
+        operation:
+          type: string
+          description: This will become the job operation that is triggered
+        mode:
+          $ref: '#/components/schemas/type_commons_ActionMode'
+          description: Foreground and toolbarBlocking action mode will prevent interacting with the resource until complete
+        tooltip:
+          type: string
+          description: A tooltip that appears when hovering the action button
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ActionMessage'
+        type:
+          type: string
+          description: '**This is deprecated.**'
+        description:
+          type: string
+          description: The text that appears in the dialog after the action is clicked.
+        schedule:
+          $ref: '#/components/schemas/type_commons_ActionSchedule'
+          description: Determines if the action should happen on a regular cadence.
+        primary:
+          type: boolean
+          description: A primary action will be more visibly present, whether in Sheet or Workbook.
+        confirm:
+          type: boolean
+          description: Whether to show a modal to confirm the action
+        icon:
+          type: string
+          description: Icon will work on primary actions. It will only accept an already existing Flatfile design system icon.
+        requireAllValid:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        requireSelection:
+          type: boolean
+          description: '**This is deprecated. Use `constraints` instead.**'
+        inputForm:
+          $ref: '#/components/schemas/type_commons_InputForm'
+          description: Adds an input form for this action after it is clicked.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ActionConstraint'
+          description: A limitation or restriction on the action.
+        mount:
+          $ref: '#/components/schemas/type_commons_ActionMount'
+        guide:
+          $ref: '#/components/schemas/type_commons_Guide'
+        guardrail:
+          $ref: '#/components/schemas/type_commons_Guardrail'
+        createdFrom:
+          $ref: '#/components/schemas/type_commons_ActionId'
+          description: The action that this action was cloned from
+        lastPropagatedAt:
+          type: string
+          format: date-time
+          description: The last time this action was propagated to a workbook
+        deletedAt:
+          type: string
+          format: date-time
+          description: The time this action was deleted
+        invalidConditionalMessaging:
+          type: boolean
+          description: When enabled, shows dynamic confirmation messages based on record validation status instead of the static description
+        validRecordsMessage:
+          type: string
+          description: Custom message to show when all records are valid (only used when invalidConditionalMessaging is true)
+        invalidRecordsMessage:
+          type: string
+          description: Custom message to show when there are invalid records (only used when invalidConditionalMessaging is true)
+        label:
+          type: string
+          description: The text on the Button itself
+        targetId:
+          type: string
+      required:
+      - label
+      - targetId
+      title: APIActionConfig
+    type_commons_InputField:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique key for a Field.
+        label:
+          type: string
+          description: Visible name of a Field.
+        description:
+          type: string
+          description: Brief description below the name of the Field.
+        type:
+          type: string
+          description: Field Types inform the user interface how to sort and display data.
+        defaultValue:
+          description: Default value for a Field.
+        config:
+          $ref: '#/components/schemas/type_commons_InputConfig'
+          description: Additional configuration for enum Fields.
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_InputConstraint'
+          description: Indicate additional validations that will be applied to the Field.
+      required:
+      - key
+      - label
+      - type
+      title: InputField
+    type_actions_APIActionConfigs:
+      type: array
+      items:
+        $ref: '#/components/schemas/type_commons_APIActionConfig'
+      title: APIActionConfigs
+    type_commons_ActionMode:
+      type: string
+      enum:
+      - foreground
+      - background
+      - toolbarBlocking
+      description: Foreground actions will prevent interacting with the resource until complete
+      title: ActionMode
   securitySchemes:
     default:
       type: http

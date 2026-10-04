@@ -192,12 +192,24 @@ paths:
                 $ref: '#/components/schemas/type_commons_Success'
 components:
   schemas:
-    type_assistant_PromptTypeEnum:
-      type: string
-      enum:
-      - AI_ASSIST
-      - CONSTRAINT_GENERATION
-      title: PromptTypeEnum
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
     type_assistant_Prompt:
       type: object
       properties:
@@ -236,80 +248,12 @@ components:
       - createdAt
       - updatedAt
       title: Prompt
-    type_commons_Pagination:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_commons_EnvironmentId:
+    type_assistant_PromptTypeEnum:
       type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_assistant_PromptsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_assistant_Prompt'
-      required:
-      - data
-      title: PromptsResponse
-    type_assistant_PromptPatch:
-      type: object
-      properties:
-        prompt:
-          type: string
-      required:
-      - prompt
-      description: Update a prompts
-      title: PromptPatch
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_commons_PromptId:
-      type: string
-      description: Prompt ID
-      title: PromptId
-    type_assistant_PromptResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_assistant_Prompt'
-      required:
-      - data
-      title: PromptResponse
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
+      enum:
+      - AI_ASSIST
+      - CONSTRAINT_GENERATION
+      title: PromptTypeEnum
     type_assistant_PromptCreate:
       type: object
       properties:
@@ -328,10 +272,6 @@ components:
       - spaceId
       description: Create a prompts
       title: PromptCreate
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
     type_assistant_PromptTypeQueryEnum:
       type: string
       enum:
@@ -339,6 +279,66 @@ components:
       - AI_ASSIST
       - CONSTRAINT_GENERATION
       title: PromptTypeQueryEnum
+    type_assistant_PromptsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_assistant_Prompt'
+      required:
+      - data
+      title: PromptsResponse
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_assistant_PromptPatch:
+      type: object
+      properties:
+        prompt:
+          type: string
+      required:
+      - prompt
+      description: Update a prompts
+      title: PromptPatch
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_PromptId:
+      type: string
+      description: Prompt ID
+      title: PromptId
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_assistant_PromptResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_assistant_Prompt'
+      required:
+      - data
+      title: PromptResponse
   securitySchemes:
     default:
       type: http

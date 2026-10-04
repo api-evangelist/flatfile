@@ -240,155 +240,14 @@ paths:
                 $ref: '#/components/schemas/type_commons_Success'
 components:
   schemas:
-    type_commons_SheetId:
+    type_commons_CommitId:
       type: string
-      description: Sheet ID
-      title: SheetId
-    type_views_ViewUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-        config:
-          $ref: '#/components/schemas/type_views_ViewConfig'
-      required:
-      - config
-      title: ViewUpdate
-    type_commons_RecordId:
+      description: Commit ID
+      title: CommitId
+    type_commons_FilterField:
       type: string
-      description: Record ID
-      title: RecordId
-    type_views_ViewCreate:
-      type: object
-      properties:
-        sheetId:
-          $ref: '#/components/schemas/type_commons_SheetId'
-        name:
-          type: string
-        config:
-          $ref: '#/components/schemas/type_views_ViewConfig'
-      required:
-      - sheetId
-      - name
-      - config
-      title: ViewCreate
-    type_commons_ViewId:
-      type: string
-      description: View ID
-      title: ViewId
-    type_views_ViewResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_views_View'
-      required:
-      - data
-      title: ViewResponse
-    type_commons_SearchValue:
-      type: string
-      description: Search for the given value, returning matching rows. For exact matches, wrap the value in double quotes ("Bob"). To search for null values, send empty double quotes ("")
-      title: SearchValue
-    type_commons_Filter:
-      type: string
-      enum:
-      - valid
-      - error
-      - all
-      - none
-      description: Options to filter records
-      title: Filter
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_views_View:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_ViewId'
-          description: The ID of the view
-        sheetId:
-          $ref: '#/components/schemas/type_commons_SheetId'
-          description: The associated sheet ID of the view
-        name:
-          type: string
-          description: The name of the view
-        config:
-          $ref: '#/components/schemas/type_views_ViewConfig'
-          description: The view filters of the view
-        createdBy:
-          type: string
-          description: ID of the actor who created the view
-      required:
-      - id
-      - sheetId
-      - name
-      - config
-      - createdBy
-      description: A view
-      title: View
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
-    type_commons_SortField:
-      type: string
-      description: Name of field by which to sort records
-      title: SortField
-    type_commons_Pagination:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_views_ListViewsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/type_commons_Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_views_View'
-      required:
-      - data
-      title: ListViewsResponse
-    type_commons_SortDirection:
-      type: string
-      enum:
-      - asc
-      - desc
-      description: Sort direction - asc (ascending) or desc (descending)
-      title: SortDirection
+      description: Use this to narrow the valid/error filter results to a specific field
+      title: FilterField
     type_views_ViewConfig:
       type: object
       properties:
@@ -446,10 +305,149 @@ components:
           description: An FFQL query used to filter the result set
       description: The configuration of a view. Filters, sorting, and search query.
       title: ViewConfig
-    type_commons_FilterField:
+    type_views_ListViewsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/type_commons_Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_views_View'
+      required:
+      - data
+      title: ListViewsResponse
+    type_commons_SheetId:
       type: string
-      description: Use this to narrow the valid/error filter results to a specific field
-      title: FilterField
+      description: Sheet ID
+      title: SheetId
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_Filter:
+      type: string
+      enum:
+      - valid
+      - error
+      - all
+      - none
+      description: Options to filter records
+      title: Filter
+    type_views_ViewResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_views_View'
+      required:
+      - data
+      title: ViewResponse
+    type_commons_ViewId:
+      type: string
+      description: View ID
+      title: ViewId
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_SearchField:
+      type: string
+      description: Use this to narrow the searchValue results to a specific field
+      title: SearchField
+    type_commons_SortField:
+      type: string
+      description: Name of field by which to sort records
+      title: SortField
+    type_commons_RecordId:
+      type: string
+      description: Record ID
+      title: RecordId
+    type_commons_SortDirection:
+      type: string
+      enum:
+      - asc
+      - desc
+      description: Sort direction - asc (ascending) or desc (descending)
+      title: SortDirection
+    type_commons_EventId:
+      type: string
+      description: Event ID
+      title: EventId
+    type_views_ViewUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        config:
+          $ref: '#/components/schemas/type_views_ViewConfig'
+      required:
+      - config
+      title: ViewUpdate
+    type_views_View:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_ViewId'
+          description: The ID of the view
+        sheetId:
+          $ref: '#/components/schemas/type_commons_SheetId'
+          description: The associated sheet ID of the view
+        name:
+          type: string
+          description: The name of the view
+        config:
+          $ref: '#/components/schemas/type_views_ViewConfig'
+          description: The view filters of the view
+        createdBy:
+          type: string
+          description: ID of the actor who created the view
+      required:
+      - id
+      - sheetId
+      - name
+      - config
+      - createdBy
+      description: A view
+      title: View
+    type_commons_VersionId:
+      type: string
+      description: Version ID
+      title: VersionId
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
     type_commons_Error:
       type: object
       properties:
@@ -460,22 +458,24 @@ components:
       required:
       - message
       title: Error
-    type_commons_EventId:
+    type_commons_SearchValue:
       type: string
-      description: Event ID
-      title: EventId
-    type_commons_VersionId:
-      type: string
-      description: Version ID
-      title: VersionId
-    type_commons_CommitId:
-      type: string
-      description: Commit ID
-      title: CommitId
-    type_commons_SearchField:
-      type: string
-      description: Use this to narrow the searchValue results to a specific field
-      title: SearchField
+      description: Search for the given value, returning matching rows. For exact matches, wrap the value in double quotes ("Bob"). To search for null values, send empty double quotes ("")
+      title: SearchValue
+    type_views_ViewCreate:
+      type: object
+      properties:
+        sheetId:
+          $ref: '#/components/schemas/type_commons_SheetId'
+        name:
+          type: string
+        config:
+          $ref: '#/components/schemas/type_views_ViewConfig'
+      required:
+      - sheetId
+      - name
+      - config
+      title: ViewCreate
   securitySchemes:
     default:
       type: http

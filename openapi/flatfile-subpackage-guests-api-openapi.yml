@@ -435,20 +435,233 @@ paths:
                 $ref: '#/components/schemas/type_guests_Invite'
 components:
   schemas:
-    type_commons_ActorIdUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_UserId'
-      - $ref: '#/components/schemas/type_commons_AgentId'
-      - $ref: '#/components/schemas/type_commons_GuestId'
-      title: ActorIdUnion
+    type_commons_WorkbookId:
+      type: string
+      description: Workbook ID
+      title: WorkbookId
+    type_commons_ActorRoleId:
+      type: string
+      description: Actor Role ID
+      title: ActorRoleId
+    type_roles_AssignRoleResponseData:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons_ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: AssignRoleResponseData
+    type_guests_Invite:
+      type: object
+      properties:
+        guestId:
+          $ref: '#/components/schemas/type_commons_GuestId'
+        spaceId:
+          $ref: '#/components/schemas/type_commons_SpaceId'
+        fromName:
+          type: string
+          description: The name of the person or company sending the invitation
+        message:
+          type: string
+          description: Message to send with the invite
+      required:
+      - guestId
+      - spaceId
+      title: Invite
     type_commons_SheetId:
       type: string
       description: Sheet ID
       title: SheetId
+    type_guests_ListGuestsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests_Guest'
+      required:
+      - data
+      title: ListGuestsResponse
+    type_roles_ActorRoleResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_ActorRoleId'
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        actorId:
+          $ref: '#/components/schemas/type_commons_ActorIdUnion'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - roleId
+      - actorId
+      - resourceId
+      - createdAt
+      - updatedAt
+      title: ActorRoleResponse
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_guests_GuestConfigUpdate:
+      type: object
+      properties:
+        environmentId:
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
+        email:
+          type: string
+        name:
+          type: string
+        spaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests_GuestSpace'
+      description: Properties used to update an existing guest
+      title: GuestConfigUpdate
+    type_commons_GuestId:
+      type: string
+      description: Guest ID
+      title: GuestId
+    type_roles_AssignRoleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_roles_AssignRoleResponseData'
+      required:
+      - data
+      title: AssignRoleResponse
+    type_commons_Success:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
+    type_commons_UserId:
+      type: string
+      description: User ID
+      title: UserId
+    type_guests_GuestWorkbook:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_WorkbookId'
+      required:
+      - id
+      title: GuestWorkbook
+    type_guests_GuestConfig:
+      type: object
+      properties:
+        environmentId:
+          $ref: '#/components/schemas/type_commons_EnvironmentId'
+        email:
+          type: string
+        name:
+          type: string
+        spaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests_GuestSpace'
+      required:
+      - environmentId
+      - email
+      - name
+      - spaces
+      description: Configurations for the guests
+      title: GuestConfig
+    type_commons_RoleId:
+      type: string
+      description: Role ID
+      title: RoleId
     type_commons_AgentId:
       type: string
       description: Agent ID
       title: AgentId
+    type_guests_GuestToken:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The token used to authenticate the guest
+        valid:
+          type: boolean
+      required:
+      - token
+      - valid
+      title: GuestToken
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
+    type_roles_ResourceIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_AccountId'
+      - $ref: '#/components/schemas/type_commons_EnvironmentId'
+      - $ref: '#/components/schemas/type_commons_SpaceId'
+      title: ResourceIdUnion
+    type_guests_GuestSpace:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/type_commons_SpaceId'
+        workbooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests_GuestWorkbook'
+        sheets:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_guests_GuestSheet'
+        lastAccessed:
+          type: string
+          format: date-time
+      required:
+      - id
+      title: GuestSpace
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_roles_AssignActorRoleRequest:
+      type: object
+      properties:
+        roleId:
+          $ref: '#/components/schemas/type_commons_RoleId'
+        resourceId:
+          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
+      required:
+      - roleId
+      - resourceId
+      title: AssignActorRoleRequest
     type_guests_GuestSheet:
       type: object
       properties:
@@ -457,6 +670,28 @@ components:
       required:
       - id
       title: GuestSheet
+    type_guests_GuestResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_guests_Guest'
+      required:
+      - data
+      title: GuestResponse
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_roles_ListActorRolesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles_ActorRoleResponse'
+      required:
+      - data
+      title: ListActorRolesResponse
     type_guests_Guest:
       type: object
       properties:
@@ -489,119 +724,6 @@ components:
       - createdAt
       - updatedAt
       title: Guest
-    type_roles_AssignActorRoleRequest:
-      type: object
-      properties:
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-      required:
-      - roleId
-      - resourceId
-      title: AssignActorRoleRequest
-    type_roles_ResourceIdUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_AccountId'
-      - $ref: '#/components/schemas/type_commons_EnvironmentId'
-      - $ref: '#/components/schemas/type_commons_SpaceId'
-      title: ResourceIdUnion
-    type_guests_GuestConfig:
-      type: object
-      properties:
-        environmentId:
-          $ref: '#/components/schemas/type_commons_EnvironmentId'
-        email:
-          type: string
-        name:
-          type: string
-        spaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_guests_GuestSpace'
-      required:
-      - environmentId
-      - email
-      - name
-      - spaces
-      description: Configurations for the guests
-      title: GuestConfig
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_guests_ListGuestsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_guests_Guest'
-      required:
-      - data
-      title: ListGuestsResponse
-    type_roles_AssignRoleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_roles_AssignRoleResponseData'
-      required:
-      - data
-      title: AssignRoleResponse
-    type_guests_Invite:
-      type: object
-      properties:
-        guestId:
-          $ref: '#/components/schemas/type_commons_GuestId'
-        spaceId:
-          $ref: '#/components/schemas/type_commons_SpaceId'
-        fromName:
-          type: string
-          description: The name of the person or company sending the invitation
-        message:
-          type: string
-          description: Message to send with the invite
-      required:
-      - guestId
-      - spaceId
-      title: Invite
-    type_guests_GuestTokenResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_guests_GuestToken'
-      required:
-      - data
-      title: GuestTokenResponse
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_roles_ListActorRolesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_roles_ActorRoleResponse'
-      required:
-      - data
-      title: ListActorRolesResponse
     type_commons_Errors:
       type: object
       properties:
@@ -612,140 +734,6 @@ components:
       required:
       - errors
       title: Errors
-    type_roles_AssignRoleResponseData:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_ActorRoleId'
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        actorId:
-          $ref: '#/components/schemas/type_commons_ActorIdUnion'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - roleId
-      - actorId
-      - resourceId
-      - createdAt
-      - updatedAt
-      title: AssignRoleResponseData
-    type_guests_GuestConfigUpdate:
-      type: object
-      properties:
-        environmentId:
-          $ref: '#/components/schemas/type_commons_EnvironmentId'
-        email:
-          type: string
-        name:
-          type: string
-        spaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_guests_GuestSpace'
-      description: Properties used to update an existing guest
-      title: GuestConfigUpdate
-    type_commons_WorkbookId:
-      type: string
-      description: Workbook ID
-      title: WorkbookId
-    type_commons_UserId:
-      type: string
-      description: User ID
-      title: UserId
-    type_roles_ActorRoleResponse:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_ActorRoleId'
-        roleId:
-          $ref: '#/components/schemas/type_commons_RoleId'
-        actorId:
-          $ref: '#/components/schemas/type_commons_ActorIdUnion'
-        resourceId:
-          $ref: '#/components/schemas/type_roles_ResourceIdUnion'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - roleId
-      - actorId
-      - resourceId
-      - createdAt
-      - updatedAt
-      title: ActorRoleResponse
-    type_guests_GuestResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_guests_Guest'
-      required:
-      - data
-      title: GuestResponse
-    type_commons_ActorRoleId:
-      type: string
-      description: Actor Role ID
-      title: ActorRoleId
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
-    type_guests_GuestSpace:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/type_commons_SpaceId'
-        workbooks:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_guests_GuestWorkbook'
-        sheets:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_guests_GuestSheet'
-        lastAccessed:
-          type: string
-          format: date-time
-      required:
-      - id
-      title: GuestSpace
-    type_guests_GuestToken:
-      type: object
-      properties:
-        token:
-          type: string
-          description: The token used to authenticate the guest
-        valid:
-          type: boolean
-      required:
-      - token
-      - valid
-      title: GuestToken
-    type_commons_RoleId:
-      type: string
-      description: Role ID
-      title: RoleId
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
     type_guests_CreateGuestResponse:
       type: object
       properties:
@@ -756,18 +744,30 @@ components:
       required:
       - data
       title: CreateGuestResponse
-    type_commons_GuestId:
-      type: string
-      description: Guest ID
-      title: GuestId
-    type_guests_GuestWorkbook:
+    type_guests_GuestTokenResponse:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/type_commons_WorkbookId'
+        data:
+          $ref: '#/components/schemas/type_guests_GuestToken'
       required:
-      - id
-      title: GuestWorkbook
+      - data
+      title: GuestTokenResponse
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons_ActorIdUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_UserId'
+      - $ref: '#/components/schemas/type_commons_AgentId'
+      - $ref: '#/components/schemas/type_commons_GuestId'
+      title: ActorIdUnion
   securitySchemes:
     default:
       type: http

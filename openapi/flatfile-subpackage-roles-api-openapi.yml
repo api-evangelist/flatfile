@@ -47,10 +47,10 @@ components:
       required:
       - data
       title: ListRolesResponse
-    type_commons_RoleId:
+    type_commons_AccountId:
       type: string
-      description: Role ID
-      title: RoleId
+      description: Account ID
+      title: AccountId
     type_roles_RoleResponse:
       type: object
       properties:
@@ -73,10 +73,10 @@ components:
       - createdAt
       - updatedAt
       title: RoleResponse
-    type_commons_AccountId:
+    type_commons_RoleId:
       type: string
-      description: Account ID
-      title: AccountId
+      description: Role ID
+      title: RoleId
   securitySchemes:
     default:
       type: http

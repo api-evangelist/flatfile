@@ -25,3 +25,16 @@ plans:
   price_text: Talk to sales
   period: none
   included_quota: Pricing based on your team's project volume; unlimited users (not charged by seat)
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Flatfile Projects
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none

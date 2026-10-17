@@ -37,20 +37,14 @@ paths:
                 $ref: '#/components/schemas/type_roles_ListRolesResponse'
 components:
   schemas:
-    type_roles_ListRolesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_roles_RoleResponse'
-      required:
-      - data
-      title: ListRolesResponse
     type_commons_AccountId:
       type: string
       description: Account ID
       title: AccountId
+    type_commons_RoleId:
+      type: string
+      description: Role ID
+      title: RoleId
     type_roles_RoleResponse:
       type: object
       properties:
@@ -73,10 +67,16 @@ components:
       - createdAt
       - updatedAt
       title: RoleResponse
-    type_commons_RoleId:
-      type: string
-      description: Role ID
-      title: RoleId
+    type_roles_ListRolesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_roles_RoleResponse'
+      required:
+      - data
+      title: ListRolesResponse
   securitySchemes:
     default:
       type: http

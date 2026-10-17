@@ -297,32 +297,13 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons_Pagination:
+    type_commons_Success:
       type: object
       properties:
-        currentPage:
-          type: integer
-          description: current page of results
-        pageCount:
-          type: integer
-          description: total number of pages of results
-        totalCount:
-          type: integer
-          description: total available results
-      required:
-      - currentPage
-      - pageCount
-      - totalCount
-      description: pagination info
-      title: Pagination
-    type_canvas-areas_CanvasAreaVisibility:
-      type: string
-      enum:
-      - visible
-      - hidden
-      - optional
-      - skeleton
-      title: CanvasAreaVisibility
+        data:
+          $ref: '#/components/schemas/type_commons_SuccessData'
+      description: Informs whether or not a request was successful
+      title: Success
     type_canvas-areas_CanvasAreaPosition:
       type: string
       enum:
@@ -332,14 +313,10 @@ components:
       - middle
       - bottom
       title: CanvasAreaPosition
-    type_canvas-areas_CanvasAreaResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_canvas-areas_CanvasArea'
-      required:
-      - data
-      title: CanvasAreaResponse
+    type_commons_CanvasAreaId:
+      type: string
+      description: Canvas Area ID
+      title: CanvasAreaId
     type_canvas-areas_ListCanvasAreasResponse:
       type: object
       properties:
@@ -352,47 +329,13 @@ components:
       required:
       - data
       title: ListCanvasAreasResponse
-    type_commons_CanvasAreaId:
+    type_canvas-areas_CanvasAreaLayout:
       type: string
-      description: Canvas Area ID
-      title: CanvasAreaId
-    type_commons_CanvasId:
-      type: string
-      description: Canvas ID
-      title: CanvasId
-    type_commons_Success:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_SuccessData'
-      description: Informs whether or not a request was successful
-      title: Success
-    type_commons_EnvironmentId:
-      type: string
-      description: Environment ID
-      title: EnvironmentId
-    type_commons_SpaceId:
-      type: string
-      description: Space ID
-      title: SpaceId
-    type_commons_SuccessData:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessData
-    type_commons_Error:
-      type: object
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-      title: Error
+      enum:
+      - split
+      - drawer
+      - modal
+      title: CanvasAreaLayout
     type_commons_Errors:
       type: object
       properties:
@@ -403,13 +346,18 @@ components:
       required:
       - errors
       title: Errors
-    type_canvas-areas_CanvasAreaLayout:
+    type_commons_SuccessData:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessData
+    type_commons_CanvasId:
       type: string
-      enum:
-      - split
-      - drawer
-      - modal
-      title: CanvasAreaLayout
+      description: Canvas ID
+      title: CanvasId
     type_canvas-areas_CanvasArea:
       type: object
       properties:
@@ -479,6 +427,58 @@ components:
       - file
       - iframe
       title: CanvasAreaType
+    type_canvas-areas_CanvasAreaResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_canvas-areas_CanvasArea'
+      required:
+      - data
+      title: CanvasAreaResponse
+    type_commons_Error:
+      type: object
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+      title: Error
+    type_commons_Pagination:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: current page of results
+        pageCount:
+          type: integer
+          description: total number of pages of results
+        totalCount:
+          type: integer
+          description: total available results
+      required:
+      - currentPage
+      - pageCount
+      - totalCount
+      description: pagination info
+      title: Pagination
+    type_commons_EnvironmentId:
+      type: string
+      description: Environment ID
+      title: EnvironmentId
+    type_commons_SpaceId:
+      type: string
+      description: Space ID
+      title: SpaceId
+    type_canvas-areas_CanvasAreaVisibility:
+      type: string
+      enum:
+      - visible
+      - hidden
+      - optional
+      - skeleton
+      title: CanvasAreaVisibility
   securitySchemes:
     default:
       type: http

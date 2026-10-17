@@ -55,16 +55,6 @@ paths:
                 $ref: '#/components/schemas/type_commons_Errors'
 components:
   schemas:
-    type_commons_Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_Error'
-      required:
-      - errors
-      title: Errors
     type_entitlements_Entitlement:
       type: object
       properties:
@@ -78,6 +68,16 @@ components:
       - metadata
       description: An entitlement belonging to a resource
       title: Entitlement
+    type_commons_Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_Error'
+      required:
+      - errors
+      title: Errors
     type_commons_Error:
       type: object
       properties:

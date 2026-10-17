@@ -112,10 +112,6 @@ components:
       - updatedAt
       description: An account
       title: Account
-    type_commons_AccountId:
-      type: string
-      description: Account ID
-      title: AccountId
     type_commons_AppId:
       type: string
       description: App ID
@@ -137,6 +133,10 @@ components:
       required:
       - data
       title: AccountResponse
+    type_commons_AccountId:
+      type: string
+      description: Account ID
+      title: AccountId
   securitySchemes:
     default:
       type: http

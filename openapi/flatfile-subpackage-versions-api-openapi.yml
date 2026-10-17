@@ -48,6 +48,10 @@ paths:
                   description: Deprecated, creating or updating a group of records together will automatically generate a commitId to group those record changes together.
 components:
   schemas:
+    type_commons_VersionId:
+      type: string
+      description: Version ID
+      title: VersionId
     type_versions_Version:
       type: object
       properties:
@@ -60,10 +64,6 @@ components:
       type: string
       description: Sheet ID
       title: SheetId
-    type_commons_VersionId:
-      type: string
-      description: Version ID
-      title: VersionId
     type_versions_VersionResponse:
       type: object
       properties:
